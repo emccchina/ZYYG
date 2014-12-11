@@ -1,0 +1,314 @@
+//
+//  ShopingCartVC.m
+//  ZYYG
+//
+//  Created by EMCC on 14/11/19.
+//  Copyright (c) 2014年 EMCC. All rights reserved.
+//
+
+#import "ShopingCartVC.h"
+#import "CartCell.h"
+#import "ArtDetailVC.h"
+#import "PayForArtVC.h"
+
+@interface ShopingCartVC()
+<UITableViewDataSource, UITableViewDelegate>
+{
+    BOOL            _selectedButState;//底部选择按钮状态
+    BOOL            _type;          //0  结算，   1删除
+    NSInteger       _selectedAccount;//选中了几个
+    NSMutableArray  *_shopCart;//购物车列表
+    NSMutableDictionary  *_selectDict;//选中的row
+    NSString        *selectProductID;//选中的，查看详情跳到详情页面
+    CGFloat         totalPriceCount;
+}
+
+@property (weak, nonatomic) IBOutlet UITableView *cartTB;
+@property (weak, nonatomic) IBOutlet UIButton *selectedGoodBut;//选中
+@property (weak, nonatomic) IBOutlet UIButton *settleAccountBut;//结算
+@property (weak, nonatomic) IBOutlet UILabel *priceLab;
+@property (weak, nonatomic) IBOutlet UILabel *totalPrice;
+
+@end
+@implementation ShopingCartVC
+
+static NSString *cartCell = @"CartCell";
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+//    self.navigationItem.rightBarButtonItem
+    _shopCart = [[NSMutableArray alloc] init];
+    _selectDict = [[NSMutableDictionary alloc] init];
+    self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"删除" target:self action:@selector(doRightItem:)];
+    [self changeType];
+    self.cartTB.delegate = self;
+    self.cartTB.dataSource = self;
+    
+    [self.cartTB registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
+    
+    self.settleAccountBut.layer.cornerRadius = 2;
+    [self addheadRefresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    _type = 0;
+    [self restoreData];
+    [self requestshopCart];
+}
+
+- (void)doRightItem:(UIBarButtonItem*)item
+{
+    _type = !_type;
+    [self restoreData];
+}
+
+//还原数据，viewdidAppear  导航栏右键 重新请求 都会触发此事件
+- (void)restoreData
+{
+    _selectedAccount = 0;
+    [_selectDict removeAllObjects];
+    [self changeType];
+    totalPriceCount = 0;
+    [self settleButEnable:NO];
+    [self changeSelectedGoodsButState:NO];
+    [self.cartTB reloadData];
+}
+
+- (void)settleButEnable:(BOOL)enable
+{
+    if (_type) {
+        enable = YES;
+    }
+    self.settleAccountBut.enabled = enable;
+    self.settleAccountBut.layer.backgroundColor = enable ? kRedColor.CGColor : kLightGrayColor.CGColor;
+}
+
+- (void)changeType
+{
+    self.navigationItem.rightBarButtonItem.title = _type ? @"取消" : @"删除";
+    self.priceLab.hidden = _type;
+    self.totalPrice.hidden = _type;
+    [self.selectedGoodBut setTitle:(_type ? @"全选" : @"") forState:UIControlStateNormal];
+    [self changeSettleAccount:NO price:0];
+}
+- (void)addheadRefresh
+{
+    [self.cartTB addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        [self requestshopCart];
+    }];
+}
+
+- (void)requestCartFinised:(NSArray*)carts
+{
+    [_shopCart removeAllObjects];
+    [_shopCart addObjectsFromArray:carts];
+    [self restoreData];
+}
+
+- (void)requestFinished
+{
+    [self dismissIndicatorView];
+    [self.cartTB headerEndRefreshingWithResult:JHRefreshResultSuccess];
+}
+- (void)requestshopCart
+{
+    if (![[UserInfo shareUserInfo] isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@ShoopCart.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self requestFinished];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [self requestCartFinised:result[@"data"]];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
+}
+
+- (void)requestDeleteCart
+{
+    if (!_selectDict.count) {
+        [self showAlertView:@"请选择"];
+        return;
+    }
+    NSMutableString *productString = [NSMutableString string];
+    NSArray *selectKey = [_selectDict allKeys];
+    for (NSNumber *number in selectKey) {
+        NSDictionary *dict = _shopCart[[number integerValue]];
+        if ([number isEqual:[selectKey lastObject]]) {
+            [productString appendString:[NSString stringWithFormat:@"%@", [dict safeObjectForKey:@"product_id"]]];
+        }else{
+            [productString appendString:[NSString stringWithFormat:@"%@,", [dict safeObjectForKey:@"product_id"]]];
+        }
+    }
+    NSLog(@"product string %@", productString);
+    
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@DelCart.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",productString,@"product_id", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self requestFinished];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [self requestFinishedDelete];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
+}
+
+- (void)requestFinishedDelete
+{
+    NSArray *selectKey = [_selectDict allKeys];
+    for (NSNumber *number in selectKey) {
+        [_shopCart removeObjectAtIndex:[number integerValue]];
+    }
+    [_selectDict removeAllObjects];
+    [self.cartTB reloadData];
+}
+
+- (void)changeSettleAccount:(BOOL)selected price:(CGFloat)price
+{
+    if (!selected) {
+        _selectedAccount -= (_selectedAccount > 0 ? 1 : 0);
+        totalPriceCount -= (totalPriceCount>0) ? price : 0;
+    }else{
+        _selectedAccount++;
+        totalPriceCount += price;
+    }
+    NSString *title = (_type ? [NSString stringWithFormat:@"确认删除%ld", (long)_selectedAccount] : [NSString stringWithFormat:@"去结算%ld", (long)_selectedAccount]);
+    [self.settleAccountBut setTitle:title forState:UIControlStateNormal];
+    self.priceLab.text = [NSString stringWithFormat:@"￥ %.2f",totalPriceCount];
+    
+}
+
+- (void)changeSelectedGoodsButState:(BOOL)selected
+{
+    UIImage *image = selected ? [UIImage imageNamed:@"frameSelected"] : [UIImage imageNamed:@"frameUnSelected"];
+    [self.selectedGoodBut setImage:image forState:UIControlStateNormal];
+    [self settleButEnable:_type ? YES : selected];
+}
+
+- (IBAction)selectedGoodsButPressed:(id)sender
+{
+    if (!_selectDict.count && !_type) {
+        [self showAlertView:@"请选择"];
+        return;
+    }
+    _selectedButState = !_selectedButState;
+    [self changeSelectedGoodsButState:_selectedButState];
+    if (_type) {
+        [_selectDict removeAllObjects];
+        if (_selectedButState){
+            for (int i = 0; i < _shopCart.count; i++) {
+                [_selectDict setObject:@(1) forKey:@(i)];
+            }
+        }
+        [self.cartTB reloadData];
+    }
+}
+- (IBAction)toSettleAccount:(id)sender {
+    if (_type) {
+        [self requestDeleteCart];
+        return;
+    }
+    [self performSegueWithIdentifier:@"ToPaySegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController *destVC = segue.destinationViewController;
+    destVC.hidesBottomBarWhenPushed = YES;
+    if ([(PayForArtVC*)destVC respondsToSelector:@selector(setProducts:)]) {
+        NSMutableArray* products = [NSMutableArray array];
+        NSArray *keys = [_selectDict allKeys];
+        for (NSNumber *number in keys) {
+            [products addObject:_shopCart[[number integerValue]]];
+        }
+        [(PayForArtVC*)destVC setProducts:(NSArray*)products];
+    }
+}
+
+- (void)presentDetailVC:(id)info
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
+    UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
+    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
+        [detailVC setValue:@(1) forKey:@"hiddenBottom"];
+    }
+    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
+        [detailVC setValue:selectProductID forKey:@"productID"];
+    }
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark - UITableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _shopCart.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 143;
+}
+
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableDictionary *dict = _shopCart[indexPath.row];
+    CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
+    [cell.iconImage setImageWithURL:[NSURL URLWithString:dict[@"ImageUrl"]]];
+    cell.LTLab.text = [dict safeObjectForKey:@"Title"];
+    cell.RSecondLab.text = [dict safeObjectForKey:@"product_id"];
+    cell.RThirdLab.text = [dict safeObjectForKey:@"size"];
+    cell.RBLab.text = [dict safeObjectForKey:@"Money"];
+    cell.selectState = [[_selectDict safeObjectForKey:@(indexPath.row)] integerValue];
+    cell.cellType = NO;
+    cell.doSelected = ^(NSIndexPath *cellIndexPath, BOOL selected){
+        [_selectDict setObject:@(selected) forKey:@(indexPath.row)];
+        [self changeSettleAccount:selected price:[[dict safeObjectForKey:@"Money"] floatValue]];
+    };
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSMutableDictionary *dict = _shopCart[indexPath.row];
+    selectProductID = [dict safeObjectForKey:@"product_id"];
+    [self presentDetailVC:nil];
+    
+}
+
+
+@end

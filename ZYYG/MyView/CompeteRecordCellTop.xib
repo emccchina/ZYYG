@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CompeteRecordCellTop">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="交易状态:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yR6-VQ-bNA" userLabel="交易状态:">
+                    <rect key="frame" x="10" y="5" width="60" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tv8-fr-wck">
+                    <rect key="frame" x="70" y="5" width="80" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="起拍价:$1000009" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-1G-sai">
+                    <rect key="frame" x="440" y="5" width="160" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="EWs-1G-sai" secondAttribute="trailing" constant="1" id="G4B-3h-Qfc"/>
+                <constraint firstItem="yR6-VQ-bNA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="JT3-ti-4wa"/>
+                <constraint firstItem="tv8-fr-wck" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="PFJ-Zh-YIt"/>
+                <constraint firstItem="yR6-VQ-bNA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="TAo-k1-I8O"/>
+                <constraint firstItem="EWs-1G-sai" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="bC8-cO-z3c"/>
+                <constraint firstItem="tv8-fr-wck" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="70" id="sjS-1U-FRF"/>
+            </constraints>
+            <connections>
+                <outlet property="orderType" destination="tv8-fr-wck" id="YQ0-Rw-uxZ"/>
+            </connections>
+        </view>
+    </objects>
+</document>

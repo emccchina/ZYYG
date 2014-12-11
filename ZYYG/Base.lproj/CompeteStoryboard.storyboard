@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gze-A2-NNp">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <scenes>
+        <!--线上竞价-->
+        <scene sceneID="Htc-Xl-vBI">
+            <objects>
+                <viewController id="CSi-CW-fxe" customClass="CompeteVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pCt-Gd-PPh"/>
+                        <viewControllerLayoutGuide type="bottom" id="2uG-sx-cvx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eZ9-B0-13g">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zB6-jf-Ybg" customClass="HMSegmentedControl">
+                                <rect key="frame" x="0.0" y="64" width="600" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oRH-xe-MgU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zB6-jf-Ybg" firstAttribute="leading" secondItem="eZ9-B0-13g" secondAttribute="leading" id="9JH-Rw-kgG"/>
+                            <constraint firstItem="zB6-jf-Ybg" firstAttribute="top" secondItem="pCt-Gd-PPh" secondAttribute="bottom" id="Esq-Jf-K9i"/>
+                            <constraint firstAttribute="trailing" secondItem="zB6-jf-Ybg" secondAttribute="trailing" id="ghh-VX-1IB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="线上竞价" id="SK2-Al-yyk"/>
+                    <connections>
+                        <outlet property="segment" destination="zB6-jf-Ybg" id="lrM-ij-JW8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D7s-gR-932" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="864"/>
+        </scene>
+        <!--My Navigation Controller-->
+        <scene sceneID="gcZ-GP-rPl">
+            <objects>
+                <navigationController id="gze-A2-NNp" customClass="MyNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qtM-fY-GLg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="CSi-CW-fxe" kind="relationship" relationship="rootViewController" id="fm6-D4-0Qv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="omS-5Y-Fsx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="294" y="864"/>
+        </scene>
+    </scenes>
+</document>

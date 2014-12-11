@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>节省流量设置</string>
+			<key>segueString</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>自动下载图片</string>
+			<key>segueString</key>
+			<string>autoDownload</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>使用帮助</string>
+			<key>segueString</key>
+			<string>help</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>意见反馈</string>
+			<key>segueString</key>
+			<string>feedback</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>检测更新</string>
+			<key>segueString</key>
+			<string>checkUpdate</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>关于我们</string>
+			<key>segueString</key>
+			<string>aboutUs</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>给我评分</string>
+			<key>segueString</key>
+			<string>scaleMark</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>修改密码</string>
+			<key>segueString</key>
+			<string>updatePassword</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>清除缓存</string>
+			<key>segueString</key>
+			<string>clearCache</string>
+		</dict>
+	</array>
+</array>
+</plist>

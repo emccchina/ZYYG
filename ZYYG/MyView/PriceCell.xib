@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PriceCell">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="URO-i2-wmZ" userLabel="LeftBut">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="599"/>
+                        <state key="normal" title="Button" image="RMB">
+                            <color key="titleColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="leftButPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cVh-br-Iht"/>
+                        </connections>
+                    </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxr-wl-kBg" userLabel="RightBut">
+                        <rect key="frame" x="301" y="0.0" width="299" height="599"/>
+                        <state key="normal" title="Button" image="RMB">
+                            <color key="titleColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="rightButPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xfD-7F-cV9"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="URO-i2-wmZ" firstAttribute="width" secondItem="Cxr-wl-kBg" secondAttribute="width" id="1Yt-FJ-biw"/>
+                    <constraint firstItem="URO-i2-wmZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5vb-TC-YPm"/>
+                    <constraint firstItem="Cxr-wl-kBg" firstAttribute="leading" secondItem="URO-i2-wmZ" secondAttribute="trailing" constant="1" id="9CB-iu-JAm"/>
+                    <constraint firstItem="URO-i2-wmZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FfL-DU-sIo"/>
+                    <constraint firstItem="Cxr-wl-kBg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="HHG-a2-all"/>
+                    <constraint firstAttribute="bottom" secondItem="Cxr-wl-kBg" secondAttribute="bottom" id="MEd-R5-L6A"/>
+                    <constraint firstAttribute="bottom" secondItem="URO-i2-wmZ" secondAttribute="bottom" id="WCm-xI-1Ys"/>
+                    <constraint firstAttribute="trailing" secondItem="Cxr-wl-kBg" secondAttribute="trailing" id="u9Y-6T-Dvc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="leftBut" destination="URO-i2-wmZ" id="SKm-nm-h9a"/>
+                <outlet property="rightBut" destination="Cxr-wl-kBg" id="G3i-rI-J6P"/>
+            </connections>
+            <point key="canvasLocation" x="653" y="485"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="RMB" width="25" height="25"/>
+    </resources>
+</document>
