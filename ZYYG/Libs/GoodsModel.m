@@ -30,6 +30,20 @@
     return goods;
 }
 
+- (void)goodsModelFromCollect:(NSDictionary *)dict
+{
+    self.picURL = [dict safeObjectForKey:@"ImageUrl"];
+    self.GoodsCode = [dict safeObjectForKey:@"GoodsCode"];
+    self.CollectCode = [dict safeObjectForKey:@"CollectCode"];
+    self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
+    self.ArtName = [dict safeObjectForKey:@"ArtName"];
+    self.SaleChannel = [dict safeObjectForKey:@"SaleChannel"];
+    self.CreateTime = [dict safeObjectForKey:@"CreateTime"];
+    self.UpShelfTime = [dict safeObjectForKey:@"UpShelfTime"];
+    self.Nstatus = [dict safeObjectForKey:@"Nstatus"];
+    
+}
+
 - (void)goodsModelFromCart:(NSDictionary *)dict
 {
     self.ArtName = dict[@"Title"];

@@ -25,9 +25,19 @@
 @property (nonatomic, assign) NSNumber      *IsCollect;//是否收藏 1标示收藏 0表示没收藏
 @property (nonatomic, strong) NSString      *LimitedSale;//限量
 @property (nonatomic, strong) NSString      *SpecDesc;//尺寸
-@property (nonatomic, strong) NSString      *picURL;
+@property (nonatomic, strong) NSString      *picURL;//默认图片
+@property (nonatomic, strong) NSString      *CollectCode;//收藏编号
+@property (nonatomic, strong) NSString      *SaleChannel;//商品种类
+@property (nonatomic, strong) NSString      *CreateTime;//创建时间
+@property (nonatomic, strong) NSString      *UpShelfTime;//创建时间
+@property (nonatomic, strong) NSString      *Nstatus;//在售状态
+
+
+
+
 +(id)goodsModelWith:(NSDictionary *)dict;
 
 - (void)goodsModelFromCart:(NSDictionary*)dict;//购物车解析
-- (void)goodsModelFromHomePage:(NSDictionary*)dict;//
+- (void)goodsModelFromHomePage:(NSDictionary*)dict;//首页解析
+- (void)goodsModelFromCollect:(NSDictionary *)dict;//我的收藏解析
 @end
