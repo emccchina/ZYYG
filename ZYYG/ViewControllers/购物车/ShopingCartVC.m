@@ -10,7 +10,7 @@
 #import "CartCell.h"
 #import "ArtDetailVC.h"
 #import "PayForArtVC.h"
-
+#import "GoodsModel.h"
 @interface ShopingCartVC()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -41,12 +41,12 @@ static NSString *cartCell = @"CartCell";
     _shopCart = [[NSMutableArray alloc] init];
     _selectDict = [[NSMutableDictionary alloc] init];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"删除" target:self action:@selector(doRightItem:)];
-    [self changeType];
     self.cartTB.delegate = self;
     self.cartTB.dataSource = self;
     
     [self.cartTB registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
-    
+    _type = 0;
+    [self restoreData];
     self.settleAccountBut.layer.cornerRadius = 2;
     [self addheadRefresh];
 }
@@ -54,9 +54,15 @@ static NSString *cartCell = @"CartCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _type = 0;
-    [self restoreData];
-    [self requestshopCart];
+    
+    if (![UserInfo shareUserInfo].cartsArr) {
+        [self requestshopCart];
+    }else{
+        [_shopCart removeAllObjects];
+        [_shopCart addObjectsFromArray:[UserInfo shareUserInfo].cartsArr];
+        [self.cartTB reloadData];
+    }
+    
 }
 
 - (void)doRightItem:(UIBarButtonItem*)item
@@ -103,9 +109,13 @@ static NSString *cartCell = @"CartCell";
 
 - (void)requestCartFinised:(NSArray*)carts
 {
+    [[UserInfo shareUserInfo] parseCartArr:carts];
     [_shopCart removeAllObjects];
-    [_shopCart addObjectsFromArray:carts];
+    [_shopCart addObjectsFromArray:[UserInfo shareUserInfo].cartsArr];
     [self restoreData];
+    if (_shopCart.count == 0) {
+        [self showAlertView:@"购物车中无商品"];
+    }
 }
 
 - (void)requestFinished
@@ -150,11 +160,11 @@ static NSString *cartCell = @"CartCell";
     NSMutableString *productString = [NSMutableString string];
     NSArray *selectKey = [_selectDict allKeys];
     for (NSNumber *number in selectKey) {
-        NSDictionary *dict = _shopCart[[number integerValue]];
+         GoodsModel*model = _shopCart[[number integerValue]];
         if ([number isEqual:[selectKey lastObject]]) {
-            [productString appendString:[NSString stringWithFormat:@"%@", [dict safeObjectForKey:@"product_id"]]];
+            [productString appendString:[NSString stringWithFormat:@"%@", model.GoodsCode]];
         }else{
-            [productString appendString:[NSString stringWithFormat:@"%@,", [dict safeObjectForKey:@"product_id"]]];
+            [productString appendString:[NSString stringWithFormat:@"%@,", model.GoodsCode]];
         }
     }
     NSLog(@"product string %@", productString);
@@ -185,7 +195,9 @@ static NSString *cartCell = @"CartCell";
     NSArray *selectKey = [_selectDict allKeys];
     for (NSNumber *number in selectKey) {
         [_shopCart removeObjectAtIndex:[number integerValue]];
+        [[UserInfo shareUserInfo].cartsArr removeObjectAtIndex:[number integerValue]];
     }
+    
     [_selectDict removeAllObjects];
     [self.cartTB reloadData];
 }
@@ -285,18 +297,18 @@ static NSString *cartCell = @"CartCell";
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableDictionary *dict = _shopCart[indexPath.row];
+    GoodsModel *model = _shopCart[indexPath.row];
     CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
-    [cell.iconImage setImageWithURL:[NSURL URLWithString:dict[@"ImageUrl"]]];
-    cell.LTLab.text = [dict safeObjectForKey:@"Title"];
-    cell.RSecondLab.text = [dict safeObjectForKey:@"product_id"];
-    cell.RThirdLab.text = [dict safeObjectForKey:@"size"];
-    cell.RBLab.text = [dict safeObjectForKey:@"Money"];
+    [cell.iconImage setImageWithURL:[NSURL URLWithString:model.picURL]];
+    cell.LTLab.text = model.ArtName;
+    cell.RSecondLab.text = model.GoodsCode;
+    cell.RThirdLab.text = model.SpecDesc;
+    cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f", model.AppendPrice];
     cell.selectState = [[_selectDict safeObjectForKey:@(indexPath.row)] integerValue];
     cell.cellType = NO;
     cell.doSelected = ^(NSIndexPath *cellIndexPath, BOOL selected){
         [_selectDict setObject:@(selected) forKey:@(indexPath.row)];
-        [self changeSettleAccount:selected price:[[dict safeObjectForKey:@"Money"] floatValue]];
+        [self changeSettleAccount:selected price:model.AppendPrice];
     };
     return cell;
 }
@@ -304,8 +316,8 @@ static NSString *cartCell = @"CartCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSMutableDictionary *dict = _shopCart[indexPath.row];
-    selectProductID = [dict safeObjectForKey:@"product_id"];
+    GoodsModel*model = _shopCart[indexPath.row];
+    selectProductID = model.GoodsCode;
     [self presentDetailVC:nil];
     
 }

@@ -13,7 +13,7 @@
 #import "PopView.h"
 #import "ArtDetailVC.h"
 #import <CommonCrypto/CommonDigest.h>
-
+#import "GoodsModel.h"
 #import "FMDatabase.h"
 
 @interface FairPriceVC()
@@ -120,6 +120,18 @@
     }];
 }
 
+- (void)parseGoodsInfo:(NSArray*)goodsArr
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSDictionary *dict in goodsArr) {
+        GoodsModel *model = [[GoodsModel alloc] init];
+        [model goodsModelFromHomePage:dict];
+        [array addObject:model];
+    }
+    [goods removeAllObjects];
+    [goods addObjectsFromArray:array];
+}
+
 - (void)requestFinished
 {
     [self dismissIndicatorView];
@@ -141,7 +153,8 @@
             [images removeAllObjects];
             [goods removeAllObjects];
             [images addObjectsFromArray:result[@"Banners"]];
-            [goods addObjectsFromArray:result[@"Product_List"]];
+//            [goods addObjectsFromArray:result[@"Product_List"]];
+            [self parseGoodsInfo:result[@"Product_List"]];
             [self.dataTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -212,21 +225,21 @@
         return cell;
     }else{
         GoodsShowCell *cell = (GoodsShowCell*)[tableView dequeueReusableCellWithIdentifier:@"myCell" forIndexPath:indexPath];
-        NSDictionary *goodsDetialLeft = goods[indexPath.row*2];
+        GoodsModel *goodsDetialLeft = goods[indexPath.row*2];
         if (goodsDetialLeft && ![goodsDetialLeft isKindOfClass:[NSNull class]]) {
-            cell.LTLab.text = [goodsDetialLeft safeObjectForKey:@"Product_Name"];
-            cell.LMLab.text = [goodsDetialLeft safeObjectForKey:@"Special_Id"];
-            cell.LBLab.text = [NSString stringWithFormat:@"￥%@",[goodsDetialLeft safeObjectForKey:@"Product_Price"]];
-            [cell.leftImage setImageWithURL:[NSURL URLWithString:goodsDetialLeft[@"Pic_Url"]]];
+            cell.LTLab.text = goodsDetialLeft.GoodsName;//[goodsDetialLeft safeObjectForKey:@"Product_Name"];
+            cell.LMLab.text = goodsDetialLeft.ArtName;//[goodsDetialLeft safeObjectForKey:@"Special_Id"];
+            cell.LBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialLeft.AppendPrice];//[goodsDetialLeft safeObjectForKey:@"Product_Price"]
+            [cell.leftImage setImageWithURL:[NSURL URLWithString:goodsDetialLeft.picURL]];
         }
         if (goods.count > indexPath.row*2+1) {
-            NSDictionary* goodsDetialRight = goods[indexPath.row*2+1];
+            GoodsModel* goodsDetialRight = goods[indexPath.row*2+1];
             if (goodsDetialRight && ![goodsDetialRight isKindOfClass:[NSNull class]]) {
                 cell.showRight = YES;
-                cell.RTLab.text = [goodsDetialRight safeObjectForKey:@"Product_Name"];
-                cell.RMLab.text = [goodsDetialRight safeObjectForKey:@"Special_Id"];
-                cell.RBLab.text = [NSString stringWithFormat:@"￥%@",[goodsDetialRight safeObjectForKey:@"Product_Price"]];
-                [cell.rightImage setImageWithURL:[NSURL URLWithString:goodsDetialRight[@"Pic_Url"]]];
+                cell.RTLab.text = goodsDetialRight.GoodsName;//[goodsDetialRight safeObjectForKey:@"Product_Name"];
+                cell.RMLab.text = goodsDetialRight.ArtName;//[goodsDetialRight safeObjectForKey:@"Special_Id"];
+                cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialRight.AppendPrice];//[goodsDetialRight safeObjectForKey:@"Product_Price"]
+                [cell.rightImage setImageWithURL:[NSURL URLWithString:goodsDetialRight.picURL]];
             }else{
                 cell.showRight = NO;
             }
@@ -241,7 +254,7 @@
 #pragma mark - GoodsShowCellDelegate
 - (void)imageViewPressed:(NSIndexPath *)indexPath position:(BOOL)position
 {
-    selectedProductID = goods[indexPath.row][@"Product_Id"];
+    selectedProductID = [goods[indexPath.row*2+position] GoodsCode];
     [self performSegueWithIdentifier:@"showArtDetail" sender:self];
 }
 

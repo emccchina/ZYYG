@@ -29,4 +29,24 @@
     goods.SpecDesc=[dict safeObjectForKey:@"SpecDesc"] ;//尺寸
     return goods;
 }
+
+- (void)goodsModelFromCart:(NSDictionary *)dict
+{
+    self.ArtName = dict[@"Title"];
+    self.GoodsCode = dict[@"product_id"];
+    self.SpecDesc = dict[@"size"];
+    self.AppendPrice = [dict[@"Money"] floatValue];
+    self.picURL = dict[@"ImageUrl"];
+}
+
+- (void)goodsModelFromHomePage:(NSDictionary *)dict
+{
+    self.ArtName = dict[@"Special_Id"];
+    self.GoodsCode = dict[@"Product_Id"];
+    self.GoodsName = dict[@"Product_Name"];
+    self.SpecDesc = dict[@"size"];
+    self.AppendPrice = [dict[@"Product_Price"] floatValue];
+    self.picURL = dict[@"Pic_Url"];
+}
+
 @end

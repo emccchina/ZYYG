@@ -11,7 +11,7 @@
 #import "ChooseVC.h"
 #import "AdressVC.h"
 #import "AdressModel.h"
-
+#import "GoodsModel.h"
 @interface PayForArtVC ()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -47,11 +47,11 @@ static NSString *cartCell = @"CartCell";
     [_orderDict setObject:([UserInfo shareUserInfo].nickName ? :@"个人") forKey:@"InvoiceTitle"];
     [_orderDict setObject:@"10" forKey:@"InvoiceType"];//10 普通发票， 20 增值税发票
     NSMutableString *productIDs = [NSMutableString string];
-    for (NSDictionary *dict in self.products) {
-        if ([dict isEqual:[self.products lastObject]]) {
-            [productIDs appendString:[NSString stringWithFormat:@"%@", dict[@"product_id"]]];
+    for (GoodsModel *model in self.products) {
+        if ([model isEqual:[self.products lastObject]]) {
+            [productIDs appendString:[NSString stringWithFormat:@"%@", model.GoodsCode]];
         }else{
-            [productIDs appendString:[NSString stringWithFormat:@"%@,", dict[@"product_id"]]];
+            [productIDs appendString:[NSString stringWithFormat:@"%@,", model.GoodsCode]];
         }
     }
     [_orderDict setObject:productIDs forKey:@"product_id"];
@@ -145,11 +145,11 @@ static NSString *cartCell = @"CartCell";
 
 - (void)requestSubmitOrder
 {
-    if (!_orderDict[@"address_id"]) {
+    UserInfo *userInfo = [UserInfo shareUserInfo];
+    if (!userInfo.addressManager) {
         [self showAlertView:@"请输入地址"];
         return;
     }
-    UserInfo *userInfo = [UserInfo shareUserInfo];
     [_orderDict setObject:userInfo.addressManager.defaultAddressCode forKey:@"address_id"];
     [_orderDict setObject:@"" forKey:@"RegAccount"];
     [_orderDict setObject:@"" forKey:@"RegAddress"];
@@ -169,7 +169,7 @@ static NSString *cartCell = @"CartCell";
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-            
+            [UserInfo shareUserInfo].cartsArr = nil;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
@@ -309,12 +309,12 @@ static NSString *cartCell = @"CartCell";
                 return cell;
             }else{
                 CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
-                NSDictionary *dict = self.products[indexPath.row-1];
-                [cell.iconImage setImageWithURL:[NSURL URLWithString:dict[@"ImageUrl"]]];
-                cell.LTLab.text = [dict safeObjectForKey:@"Title"];
-                cell.RSecondLab.text = [dict safeObjectForKey:@"product_id"];
-                cell.RThirdLab.text = [dict safeObjectForKey:@"size"];
-                cell.RBLab.text = [dict safeObjectForKey:@"Money"];
+                GoodsModel*model = self.products[indexPath.row-1];
+                [cell.iconImage setImageWithURL:[NSURL URLWithString:model.picURL]];
+                cell.LTLab.text = model.ArtName;
+                cell.RSecondLab.text = model.GoodsCode;
+                cell.RThirdLab.text = model.SpecDesc;
+                cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f", model.AppendPrice];
                 cell.cellType = YES;
                 return cell;
             }

@@ -61,6 +61,7 @@
 		94D89EDC1A220D900074B874 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED41A220D900074B874 /* Main.storyboard */; };
 		94D89EDD1A220D900074B874 /* PersonCenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED61A220D900074B874 /* PersonCenterStoryboard.storyboard */; };
 		94D89EDE1A220D900074B874 /* ShopCartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED81A220D900074B874 /* ShopCartStoryboard.storyboard */; };
+		F70B08181A39817A00006E31 /* CartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F70B08171A39817A00006E31 /* CartManager.m */; };
 		F71B22A41A393A590012F570 /* AdressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F71B22A31A393A590012F570 /* AdressModel.m */; };
 		F729B0191A36C55C0001FD39 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F729B0181A36C55C0001FD39 /* MyButton.m */; };
 		F7675C351A2DBE450008C220 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C341A2DBE440008C220 /* LoginVC.m */; };
@@ -279,6 +280,8 @@
 		94D89ED51A220D900074B874 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94D89ED71A220D900074B874 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PersonCenterStoryboard.storyboard; sourceTree = "<group>"; };
 		94D89ED91A220D900074B874 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShopCartStoryboard.storyboard; sourceTree = "<group>"; };
+		F70B08161A39817A00006E31 /* CartManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartManager.h; sourceTree = "<group>"; };
+		F70B08171A39817A00006E31 /* CartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartManager.m; sourceTree = "<group>"; };
 		F71B22A21A393A590012F570 /* AdressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdressModel.h; sourceTree = "<group>"; };
 		F71B22A31A393A590012F570 /* AdressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressModel.m; sourceTree = "<group>"; };
 		F729B0171A36C55C0001FD39 /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
@@ -974,6 +977,8 @@
 				F9BEC5111A36E39700BA931D /* GoodsModel.m */,
 				F71B22A21A393A590012F570 /* AdressModel.h */,
 				F71B22A31A393A590012F570 /* AdressModel.m */,
+				F70B08161A39817A00006E31 /* CartManager.h */,
+				F70B08171A39817A00006E31 /* CartManager.m */,
 			);
 			name = MyModel;
 			path = ZYYG/Libs;
@@ -1200,6 +1205,7 @@
 				F9BC26861A2E9F1E006894C6 /* CompeteRecordVC.m in Sources */,
 				F7DF47D01A259785006EB419 /* CustomModel.m in Sources */,
 				940178691A21CCE400697D14 /* CompeteVC.m in Sources */,
+				F70B08181A39817A00006E31 /* CartManager.m in Sources */,
 				940178671A21CCE400697D14 /* PersonCenterVC.m in Sources */,
 				F7DF47CC1A25794F006EB419 /* SpreadCell.m in Sources */,
 				940178A51A21CE0000697D14 /* UIRefreshControl+AFNetworking.m in Sources */,

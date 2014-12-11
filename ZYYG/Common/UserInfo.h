@@ -31,11 +31,11 @@
 @property (nonatomic, strong) NSString          *zipCode;
 
 @property (nonatomic, strong) AddressManager    *addressManager;
-
+@property (nonatomic, strong) NSMutableArray    *cartsArr;//购物车数组
 - (BOOL)isLogin;//是否登录
 
 -(UserInfo *)setParams:(UserInfo *)user parmas:(NSDictionary *)dict;
 
 - (void)parseAddressArr:(NSArray*)arr;
-
+- (void)parseCartArr:(NSArray*)arr;
 @end

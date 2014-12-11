@@ -7,6 +7,7 @@
 //
 
 #import "UserInfo.h"
+#import "GoodsModel.h"
 
 @implementation UserInfo
 
@@ -70,6 +71,17 @@
     }
     manager.addresses = addresses;
     self.addressManager = manager;
+}
+
+- (void)parseCartArr:(NSArray *)arr
+{
+    NSMutableArray* array = [NSMutableArray array];
+    for (NSDictionary *dict in arr) {
+        GoodsModel *model = [[GoodsModel alloc] init];
+        [model goodsModelFromCart:dict];
+        [array addObject:model];
+    }
+    self.cartsArr = array;
 }
 
 @end

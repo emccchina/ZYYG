@@ -25,5 +25,9 @@
 @property (nonatomic, assign) NSNumber      *IsCollect;//是否收藏 1标示收藏 0表示没收藏
 @property (nonatomic, strong) NSString      *LimitedSale;//限量
 @property (nonatomic, strong) NSString      *SpecDesc;//尺寸
+@property (nonatomic, strong) NSString      *picURL;
 +(id)goodsModelWith:(NSDictionary *)dict;
+
+- (void)goodsModelFromCart:(NSDictionary*)dict;//购物车解析
+- (void)goodsModelFromHomePage:(NSDictionary*)dict;//
 @end
