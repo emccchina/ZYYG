@@ -18,5 +18,5 @@
 @property (nonatomic, strong) NSString          *OrderStatus;
 @property (nonatomic, strong) NSMutableArray    *Goods;
 
-//+(id)orderModelWithDict:(NSDictionary *)dict;
++(id)orderModelWithDict:(NSDictionary *)dict;
 @end

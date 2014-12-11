@@ -25,7 +25,7 @@
         <!--购物车-->
         <scene sceneID="wzf-bx-85A">
             <objects>
-                <viewController id="YRf-wZ-tvB" customClass="ShopingCartVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShoppingCart" id="YRf-wZ-tvB" customClass="ShopingCartVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cFL-nd-EHi"/>
                         <viewControllerLayoutGuide type="bottom" id="O5M-MN-fdD"/>
