@@ -27,21 +27,21 @@
 
 -(UserInfo *)setParams:(UserInfo *)user parmas:(NSDictionary *)dict
 {
-    user.userKey=dict[@"key"];
-    user.headImage=dict[@"headImage"];
-    user.useName=dict[@"email"];
-    user.realName=dict[@"RealName"];
-    user.nickName=dict[@"Nickname"];
-    user.gender=dict[@"gender"];
-    user.industry=dict[@"Industry"];
-    user.income=dict[@"Income"];
-    user.mobile=dict[@"Mobile"];
-    user.email=dict[@"Email"];
-    user.provideCode=dict[@"ProvideCode"];
-    user.cityCode=dict[@"CityCode"];
-    user.aeraCode=dict[@"AeraCode"];
-    user.detailAddress=dict[@"detailAddr"];
-    user.zipCode=dict[@"PostCode"];
+    user.userKey=[dict safeObjectForKey:@"key"];
+    user.headImage=[dict safeObjectForKey:@"headImage"];
+    user.useName=[dict safeObjectForKey:@"email"];
+    user.realName=[dict safeObjectForKey:@"RealName"];
+    user.nickName=[dict safeObjectForKey:@"Nickname"];
+    user.gender=[dict safeObjectForKey:@"gender"];
+    user.industry=[dict safeObjectForKey:@"Industry"];
+    user.income=[dict safeObjectForKey:@"Income"];
+    user.mobile=[dict safeObjectForKey:@"Mobile"];
+    user.email=[dict safeObjectForKey:@"email"];
+    user.provideCode=[dict safeObjectForKey:@"ProvideCode"];
+    user.cityCode=[dict safeObjectForKey:@"CityCode"];
+    user.aeraCode=[dict safeObjectForKey:@"AeraCode"];
+    user.detailAddress=[dict safeObjectForKey:@"detailAddr"];
+    user.zipCode=[dict safeObjectForKey:@"PostCode"];
     return user;
 }
 

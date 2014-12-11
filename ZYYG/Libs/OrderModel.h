@@ -10,13 +10,13 @@
 
 @interface OrderModel : NSObject
 
-
 @property (nonatomic, strong) NSString          *OrderCode;
+@property (nonatomic, strong) NSString          *OrderType;
 @property (nonatomic, strong) NSString          *CreateTime;
-@property (nonatomic, assign) NSInteger         *GoodsTotal;
+@property (nonatomic, assign) NSString          *GoodsTotal;
 @property (nonatomic, strong) NSString          *OrderMoney;
 @property (nonatomic, strong) NSString          *OrderStatus;
-@property (nonatomic, strong) NSArray           *Goods;
+@property (nonatomic, strong) NSMutableArray    *Goods;
 
 +(id)orderModelWithDict:(NSDictionary *)dict;
 @end

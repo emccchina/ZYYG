@@ -10,14 +10,14 @@
 	<string>ZYYG</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7E3C8339865633037F34FE48E37B81A328FB7921</key>
+		<key>B8EA2902DB4D6CE430F5E422B129579BD7006B66</key>
 		<string>https://github.com/emccchina/ZYYG.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ZYYG.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7E3C8339865633037F34FE48E37B81A328FB7921</key>
+		<key>B8EA2902DB4D6CE430F5E422B129579BD7006B66</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7E3C8339865633037F34FE48E37B81A328FB7921</string>
+	<string>B8EA2902DB4D6CE430F5E422B129579BD7006B66</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7E3C8339865633037F34FE48E37B81A328FB7921</string>
+			<string>B8EA2902DB4D6CE430F5E422B129579BD7006B66</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ZYYG</string>
 		</dict>

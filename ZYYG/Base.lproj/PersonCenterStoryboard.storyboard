@@ -302,10 +302,10 @@
             </objects>
             <point key="canvasLocation" x="1664" y="-937"/>
         </scene>
-        <!--保证金-->
+        <!--我的账户-->
         <scene sceneID="IXs-6l-eSn">
             <objects>
-                <viewController id="xiK-2U-C01" userLabel="保证金" customClass="MarginMoneyVC" sceneMemberID="viewController">
+                <viewController id="xiK-2U-C01" userLabel="我的账户" customClass="MarginMoneyVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ydP-fR-wgo"/>
                         <viewControllerLayoutGuide type="bottom" id="tXN-ve-VP0"/>
@@ -327,7 +327,7 @@
                             <constraint firstItem="3r3-9S-cib" firstAttribute="top" secondItem="9VC-5f-GoQ" secondAttribute="top" id="pvy-TB-LNy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="保证金" id="CiO-to-Kgn"/>
+                    <navigationItem key="navigationItem" title="我的账户" id="CiO-to-Kgn"/>
                     <connections>
                         <outlet property="marginMoneyTableView" destination="3r3-9S-cib" id="Mxr-Iz-BcR"/>
                     </connections>

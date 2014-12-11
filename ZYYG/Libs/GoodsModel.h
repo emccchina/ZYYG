@@ -19,7 +19,8 @@
 @property (nonatomic, strong) NSString      *CategoryName;//分类名称
 @property (nonatomic, strong) NSString      *CreationStyle;//创作风格
 @property (nonatomic, assign) NSNumber      *GoodsNum;//商品数量
-@property (nonatomic, strong) NSArray      *ImageUrl;//图片路径
+@property (nonatomic, strong) NSString      *defaultImageUrl;//默认的图片
+@property (nonatomic, strong) NSMutableArray       *ImageUrl;//图片路径
 @property (nonatomic, strong) NSString      *Intro;//商品简介
 @property (nonatomic, assign) NSNumber      *IsCollect;//是否收藏 1标示收藏 0表示没收藏
 @property (nonatomic, strong) NSString      *LimitedSale;//限量

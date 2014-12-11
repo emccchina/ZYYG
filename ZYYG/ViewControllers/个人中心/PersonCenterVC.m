@@ -14,7 +14,7 @@
 {
     NSMutableArray *personDataArray;
     UserInfo *user;
-
+    
 }
 
 static NSString *topCell = @"topCell";
@@ -24,6 +24,7 @@ static NSString *listCell = @"listCell";
 {
     [super viewDidLoad];
     user=[UserInfo shareUserInfo];
+    [self requestPersonCenter:0];
     //初始化数据
     personDataArray =[NSMutableArray array];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"PersonCenter" ofType:@"plist"];
@@ -39,16 +40,23 @@ static NSString *listCell = @"listCell";
         [personDataArray addObject:dmArray];
     }
     NSLog(@"个人中心");
-    //指定代理 
+    //指定代理
     self.PersonTableView.delegate = self;
     self.PersonTableView.dataSource = self;
     //    [self performSelector:@selector(showDeta) withObject:nil afterDelay:3];
 }
 
 
-- (void)requestFinished
+- (void)requestPersonCenter:(NSInteger)number
 {
-    [self dismissIndicatorView];
+    user=[UserInfo shareUserInfo];
+    if (![user isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    
+    [self.PersonTableView reloadData];
+    
 }
 #pragma mark - tableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -86,8 +94,15 @@ static NSString *listCell = @"listCell";
 {
     if (indexPath.section == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:topCell forIndexPath:indexPath];
+        
         UIImageView *viewBG = (UIImageView *)[cell viewWithTag:2];
-        [viewBG setImageWithURL:[NSURL URLWithString:user.headImage]];
+        NSString *imageUrl=user.headImage;
+        if (imageUrl && ![@"" isEqual:imageUrl]) {
+            [viewBG setImageWithURL:[NSURL URLWithString:imageUrl]];
+        }else{
+            [viewBG setImage:[UIImage imageNamed:@"avatar.png"]];
+        }
+        
         
         UILabel *nameLabel = (UILabel*)[cell viewWithTag:3];
         nameLabel.text = user.nickName;
@@ -111,11 +126,11 @@ static NSString *listCell = @"listCell";
             count.layer.cornerRadius=8;
             count.textColor=[UIColor whiteColor];
             count.layer.backgroundColor=kRedColor.CGColor;
-//            count.text = model.count;
+            //            count.text = model.count;
         }
-
+        
         UIImageView *footerImage = (UIImageView *)[cell viewWithTag:4];
-         [footerImage setImage:[UIImage imageNamed:model.footerImage]];
+        [footerImage setImage:[UIImage imageNamed:model.footerImage]];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;

@@ -33,6 +33,7 @@
             </constraints>
             <connections>
                 <outlet property="goodsSum" destination="GhN-tH-bYi" id="RTL-9V-cHD"/>
+                <outlet property="priceSum" destination="YRy-0I-1vh" id="uAK-Vl-XFd"/>
             </connections>
         </view>
     </objects>
