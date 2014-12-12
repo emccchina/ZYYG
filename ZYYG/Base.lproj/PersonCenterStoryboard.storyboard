@@ -306,7 +306,7 @@
         <!--编辑资料-->
         <scene sceneID="g8e-rh-aGa">
             <objects>
-                <viewController id="U9G-KL-rtY" userLabel="编辑资料" customClass="EditPersonVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditPersonVC" id="U9G-KL-rtY" userLabel="编辑资料" customClass="EditPersonVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dQ5-6m-0eb"/>
                         <viewControllerLayoutGuide type="bottom" id="xAh-HC-bkH"/>
@@ -319,7 +319,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="textFieldCell" selectionStyle="default" indentationWidth="10" id="Ayo-Uz-nQG">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="textFieldCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="textFieldCell" id="Ayo-Uz-nQG">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ayo-Uz-nQG" id="yWm-RP-nXh">
@@ -365,6 +365,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="编辑个人资料" id="egS-JK-11N" userLabel="个人资料"/>
+                    <connections>
+                        <outlet property="editPersonTableView" destination="ZWa-82-Nst" id="OsK-7N-HTU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcY-hw-dfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

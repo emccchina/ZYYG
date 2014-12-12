@@ -6,8 +6,13 @@
 //  Copyright (c) 2014年 wu. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface EditPersonVC : UIViewController
+@interface EditPersonVC : BaseViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+
+@property (nonatomic, strong) NSString      *editType;//隐藏底部的购物车view
+@property (nonatomic, strong) NSString      *textValue;//
+@property (weak, nonatomic) IBOutlet UITableView *editPersonTableView;
+
 
 @end

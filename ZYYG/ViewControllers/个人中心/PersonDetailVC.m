@@ -8,6 +8,7 @@
 
 #import "PersonDetailVC.h"
 #import "UserInfo.h"
+#import "EditPersonVC.h"
 
 @interface PersonDetailVC ()
 {
@@ -112,23 +113,62 @@
     return cell;
 }
 
-#pragma mark -textField
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [textField resignFirstResponder];
-    NSLog(@"fffffff");
-    return YES;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.row) {
+        case 0:
+            [self presentDetailVC:@"头像" val:@"头像"];
+            break;
+        case 1:
+            [self presentDetailVC:@"昵称" val:user.nickName];
+            break;
+        case 2:
+            [self presentDetailVC:@"真实姓名" val:user.realName];
+            break;
+        case 3:
+            [self presentDetailVC:@"性别" val:([user.gender isEqual:@"0" ]? @"女":@"男")];
+            break;
+        case 4:
+            [self presentDetailVC:@"年收入" val:user.income];
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            [self presentDetailVC:@"所在地" val:[NSString stringWithFormat:@"%@+%@+%@" ,user.provideCode,user.cityCode,user.aeraCode]];
+            break;
+        case 8:
+            [self presentDetailVC:@"详细地址" val:user.detailAddress];
+            break;
+        case 9:
+            [self presentDetailVC:@"邮编" val:user.zipCode];
+            break;
+        default:
+            break;
+    }
+    
+}
+- (void)presentDetailVC:(id)editype  val:(id)textValue
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PersonCenterStoryboard" bundle:nil];
+    UIViewController* editVC = [storyboard instantiateViewControllerWithIdentifier:@"EditPersonVC"];
+    if ([(EditPersonVC *)editVC respondsToSelector:@selector(setEditType:)]) {
+        [editVC setValue:editype forKey:@"editType"];
+    }
+    if ([(EditPersonVC *)editVC respondsToSelector:@selector(setTextValue:)]) {
+        [editVC setValue:textValue forKey:@"textValue"];
+    }
+    editVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    NSLog(@"bbbbb");
-}
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    NSLog(@"nnnnnn");
-}
+
+
+
+
 /*
 #pragma mark - Navigation
 

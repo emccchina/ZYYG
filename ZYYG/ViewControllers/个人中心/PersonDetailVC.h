@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface PersonDetailVC : BaseViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface PersonDetailVC : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *personDetailTableView;
 @end
