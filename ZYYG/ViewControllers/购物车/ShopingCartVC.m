@@ -55,7 +55,7 @@ static NSString *cartCell = @"CartCell";
 {
     [super viewWillAppear:animated];
     
-    if (![UserInfo shareUserInfo].cartsArr) {
+    if (![UserInfo shareUserInfo].cartsArr || ![UserInfo shareUserInfo].cartsArr.count) {
         [self requestshopCart];
     }else{
         [_shopCart removeAllObjects];

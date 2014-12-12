@@ -36,7 +36,9 @@
 {
     _collectState = collectState;
     UIColor *color = collectState ? kRedColor : kLightGrayColor;
+    UIImage *image = collectState ? [UIImage imageNamed:@"collectRed"] : [UIImage imageNamed:@"collectGray"];
     [self.rightBut setTitleColor:color forState:UIControlStateNormal];
+    [self.rightBut setImage:image forState:UIControlStateNormal];
 }
 
 - (IBAction)collectPressed:(id)sender {

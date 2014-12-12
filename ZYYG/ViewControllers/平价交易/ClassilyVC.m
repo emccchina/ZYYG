@@ -66,13 +66,14 @@ static NSString *priceCell      = @"PriceCell";
         [weakSelf presentSearchResultVC:weakPop.titles[row]];
     };
     
-    
+    [self requestD];
 }
 
 - (BOOL)readTitlesFromFile
 {
     _titles = [NSArray arrayWithContentsOfFile:[Utities filePathName:kClassifyArr]];
     if (_titles.count) {
+        NSLog(@"%@", _titles);
         return YES;
     }
     return NO;
@@ -90,6 +91,26 @@ static NSString *priceCell      = @"PriceCell";
     _classfilyType = !_classfilyType;
     _popView.hidden = _classfilyType;
     [self.classfilyTB reloadData];
+}
+
+- (void)requestD
+{
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"http://www.zemcc.net/Mobile/TypeGoodsList.ashx?type=1&value=1411040759494340&num=20&page=1"];
+    NSLog(@"url %@", url);
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self dismissIndicatorView];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+           
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+    }];
 }
 
 - (void)requestClassify

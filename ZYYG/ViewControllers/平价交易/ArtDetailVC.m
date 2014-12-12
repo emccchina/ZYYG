@@ -68,7 +68,7 @@ static NSString *spreadCell = @"SpreadCell";
     [self setCountLabCount:0];
     
     NSLog(@"product id %@", self.productID);
-    [self requestDetialInfo];
+    
     
 }
 
@@ -81,6 +81,7 @@ static NSString *spreadCell = @"SpreadCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self requestDetialInfo];
     self.tabBarController.tabBar.hidden = YES;
 }
 
@@ -129,7 +130,10 @@ static NSString *spreadCell = @"SpreadCell";
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@Detail.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.productID,@"product_id", nil];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"product_id", nil];
+    if ([[UserInfo shareUserInfo] isLogin]) {
+        [dict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
+    }
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self dismissIndicatorView];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
@@ -286,6 +290,7 @@ static NSString *spreadCell = @"SpreadCell";
                 CollectCell *cell = (CollectCell*)[tableView dequeueReusableCellWithIdentifier:collectCell forIndexPath:indexPath];
                 cell.spread = YES;
                 NSNumber *colloct =goods.IsCollect;
+                NSLog(@"%@", colloct);
                 cell.collectState = [colloct integerValue];
                 cell.topLab.text =goods.GoodsName;
                 cell.botLab.text = @"价格:";
