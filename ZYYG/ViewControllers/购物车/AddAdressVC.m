@@ -76,19 +76,30 @@
         [provices addObject:@[@(proviceID), proviceName]];
     }
     areaArr = [[NSArray alloc] initWithArray:provices];
+    [self restorePlaceArr];
+    if (!self.address) {
+        [self setModelAreaID];
+    }
+}
+
+- (void)restorePlaceArr
+{
     [selectAreaArr addObject:areaArr[0]];
     cityArr = [self arrayFromDB:kCityAdress upName:kProvinceAdress key:[(NSNumber*)(areaArr[0][0]) intValue]];
     [selectAreaArr addObject:cityArr[0]];
     townArr = [self arrayFromDB:kTownAdress upName:kCityAdress key:[(NSNumber*)(cityArr[0][0]) integerValue]];
     [selectAreaArr addObject:townArr[0]];
-//    [self setModelAreaID];
 }
 
 - (void)setModelAreaID
 {
     addressMode.provinceID = selectAreaArr[0][0];
+    addressMode.provinceName = selectAreaArr[0][1];
     addressMode.cityID = selectAreaArr[1][0];
+    addressMode.cityName = selectAreaArr[1][1];
     addressMode.townID = selectAreaArr[2][0];
+    addressMode.townName = selectAreaArr[2][1];
+    [self restorePlaceArr];
 }
 
 - (NSArray*)arrayFromDB:(NSString*)tableName upName:(NSString*)upName key:(NSInteger)key
