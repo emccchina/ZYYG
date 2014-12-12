@@ -80,6 +80,11 @@ static NSString *goodsCell = @"GoodsCell";
     
 }
 
+- (void)back
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
     
