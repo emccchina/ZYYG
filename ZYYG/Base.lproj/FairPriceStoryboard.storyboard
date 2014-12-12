@@ -177,6 +177,7 @@
                         <outlet property="chooseView" destination="lfk-lD-Nf3" id="e2z-lr-SK3"/>
                         <outlet property="resultTB" destination="aJi-fo-qSM" id="FdA-hF-Jhm"/>
                         <segue destination="edJ-3y-Kze" kind="show" identifier="ChooseSegue" id="lK2-p0-UIb"/>
+                        <segue destination="1xU-3h-eV7" kind="show" identifier="showArtDetail" id="CCc-AN-ob5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="num-ZG-tfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -484,4 +485,7 @@
     <resources>
         <image name="ShoppingGray" width="25" height="20"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CCc-AN-ob5"/>
+    </inferredMetricsTieBreakers>
 </document>

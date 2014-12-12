@@ -63,4 +63,14 @@
     self.picURL = dict[@"Pic_Url"];
 }
 
+- (void)goodsModelFromSearch:(NSDictionary *)dict
+{
+    self.ArtName = dict[@"ArtName"];
+    self.GoodsCode = dict[@"GoodsCode"];
+    self.GoodsName = dict[@"GoodsName"];
+//    self.SpecDesc = dict[@"size"];
+    self.AppendPrice = [dict[@"Price"] floatValue];
+    self.picURL = dict[@"ImgUrl"];
+}
+
 @end

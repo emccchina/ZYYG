@@ -158,10 +158,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [dataArra removeObjectAtIndex:indexPath.row];
-        // Delete the row from the data source.
-//        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        [self.adressTB reloadData];
         [self requestForDeleteAddress:indexPath];
     }
 }

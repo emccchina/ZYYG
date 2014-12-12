@@ -11,6 +11,8 @@
 #import "HMSegmentedControl.h"
 #import "ChooseView.h"
 #import "SearchVC.h"
+#import "GoodsModel.h"
+#import "ArtDetailVC.h"
 
 @interface SearchReusltVC ()
 <UITableViewDataSource, UITableViewDelegate, GoodsShowCellDelegate, UISearchBarDelegate>
@@ -19,6 +21,9 @@
     NSMutableArray     *chooseArr;//筛选
     NSArray             *chooseTitles;
     NSInteger           _selectedIndex;//选择的第几个
+    SelectInfo          *_selectInfo;
+    NSMutableArray      *results;
+    NSString           *selectedProductID;
 }
 @property (weak, nonatomic) IBOutlet UITableView *resultTB;
 @property (weak, nonatomic) IBOutlet ChooseView *chooseView;
@@ -33,6 +38,7 @@ static NSString *goodsCell = @"GoodsCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
+    results = [[NSMutableArray alloc] init];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doRightButton:)];
     [self navBarAddTextField];
     self.resultTB.delegate = self;
@@ -49,6 +55,8 @@ static NSString *goodsCell = @"GoodsCell";
         }
         
     }];
+    
+    [self requestForResult];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -96,6 +104,13 @@ static NSString *goodsCell = @"GoodsCell";
         }];
     }
     
+    destVC.hidesBottomBarWhenPushed = YES;
+    if ([(ArtDetailVC*)destVC respondsToSelector:@selector(setProductID:)]) {
+        [destVC setValue:selectedProductID forKey:@"productID"];
+    }
+    
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -108,6 +123,43 @@ static NSString *goodsCell = @"GoodsCell";
     searchBar.placeholder = @"请输入关键字";
     self.navigationItem.titleView = searchBar;
 }
+
+- (void)parseRequestResults:(NSArray*)arr
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSDictionary *dict in arr) {
+        GoodsModel *model = [[GoodsModel alloc] init];
+        [model goodsModelFromSearch:dict];
+        [array addObject:model];
+    }
+    [results removeAllObjects];
+    [results addObjectsFromArray:array];
+}
+
+- (void)requestForResult
+{
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@TypeGoodsList.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [_selectInfo createURLDict];
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self dismissIndicatorView];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [self parseRequestResults:result[@"Goods"]];
+            [self.resultTB reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+}
+
+
+
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
@@ -133,7 +185,7 @@ static NSString *goodsCell = @"GoodsCell";
 #pragma mark - UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 30;
+    return (results.count + 1)/2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -165,12 +217,32 @@ static NSString *goodsCell = @"GoodsCell";
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GoodsShowCell *cell = (GoodsShowCell*)[tableView dequeueReusableCellWithIdentifier:goodsCell forIndexPath:indexPath];
-    cell.LTLab.text = @"lt";
-    cell.LMLab.text = @"lm";
-    cell.LBLab.text = @"lb";
     cell.delegate = self;
-    [cell.leftImage setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"]];
+    GoodsModel *modelLeft = results[indexPath.row*2];
+    cell.LTLab.text = modelLeft.GoodsName;
+    cell.LMLab.text = modelLeft.ArtName;
+    cell.LBLab.text = [NSString stringWithFormat:@"￥%.2f", modelLeft.AppendPrice];
+    [cell.leftImage setImageWithURL:[NSURL URLWithString:modelLeft.picURL]];
+    if (results.count > indexPath.row*2+1) {
+        cell.showRight = YES;
+        GoodsModel* modelRight = results[indexPath.row*2+1];
+        cell.showRight = YES;
+        cell.RTLab.text = modelRight.GoodsName;
+        cell.RMLab.text = modelRight.ArtName;
+        cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f",modelRight.AppendPrice];//[goodsDetialRight safeObjectForKey:@"Product_Price"]
+        [cell.rightImage setImageWithURL:[NSURL URLWithString:modelRight.picURL]];
+    }else{
+        cell.showRight = NO;
+    }
+    
     return cell;
+}
+
+#pragma mark - GoodsShowCellDelegate
+- (void)imageViewPressed:(NSIndexPath *)indexPath position:(BOOL)position
+{
+    selectedProductID = [results[indexPath.row*2+position] GoodsCode];
+    [self performSegueWithIdentifier:@"showArtDetail" sender:self];
 }
 
 

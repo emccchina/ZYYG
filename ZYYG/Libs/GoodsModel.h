@@ -35,9 +35,10 @@
 
 
 
-+(id)goodsModelWith:(NSDictionary *)dict;
++(id)goodsModelWith:(NSDictionary *)dict;//详情页面
 
 - (void)goodsModelFromCart:(NSDictionary*)dict;//购物车解析
 - (void)goodsModelFromHomePage:(NSDictionary*)dict;//首页解析
 - (void)goodsModelFromCollect:(NSDictionary *)dict;//我的收藏解析
+- (void)goodsModelFromSearch:(NSDictionary *)dict;//搜索结果解析
 @end

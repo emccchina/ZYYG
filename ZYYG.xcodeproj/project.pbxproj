@@ -63,6 +63,7 @@
 		94D89EDE1A220D900074B874 /* ShopCartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED81A220D900074B874 /* ShopCartStoryboard.storyboard */; };
 		F70B08181A39817A00006E31 /* CartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F70B08171A39817A00006E31 /* CartManager.m */; };
 		F71B22A41A393A590012F570 /* AdressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F71B22A31A393A590012F570 /* AdressModel.m */; };
+		F72976851A3AC14200CD9E22 /* SelectInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F72976841A3AC14200CD9E22 /* SelectInfo.m */; };
 		F729B0191A36C55C0001FD39 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F729B0181A36C55C0001FD39 /* MyButton.m */; };
 		F7675C351A2DBE450008C220 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C341A2DBE440008C220 /* LoginVC.m */; };
 		F7675C381A2DBE610008C220 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C371A2DBE610008C220 /* RegisterVC.m */; };
@@ -70,6 +71,7 @@
 		F76A4DEE1A2C38B10005FF46 /* AddAdressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A4DED1A2C38B10005FF46 /* AddAdressVC.m */; };
 		F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302B1A26D64A00DB0EDC /* SearchVC.m */; };
 		F791302F1A26F42500DB0EDC /* SearchReusltVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302E1A26F42500DB0EDC /* SearchReusltVC.m */; };
+		F7BAE0EE1A3A8D8900155CD6 /* ClassifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BAE0ED1A3A8D8900155CD6 /* ClassifyModel.m */; };
 		F7BBA58F1A2806F9009DF9F2 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BBA58D1A2806F9009DF9F2 /* CartCell.m */; };
 		F7BBA5901A2806F9009DF9F2 /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */; };
 		F7BE24361A314255001EA855 /* MoreStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7BE24341A314255001EA855 /* MoreStoryboard.storyboard */; };
@@ -102,6 +104,7 @@
 		F7E905EF1A26B683001117EE /* ClassifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E905ED1A26B683001117EE /* ClassifyCell.xib */; };
 		F7E905F61A26C2F4001117EE /* PriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E905F41A26C2F4001117EE /* PriceCell.m */; };
 		F7E905F71A26C2F4001117EE /* PriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E905F51A26C2F4001117EE /* PriceCell.xib */; };
+		F7E97E611A3AB7300090752B /* Price.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7E97E601A3AB7300090752B /* Price.plist */; };
 		F7EC68A41A2BF136000B289D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EC68A31A2BF136000B289D /* Default-568h@2x.png */; };
 		F7EC68C11A2BF5DA000B289D /* JHRefreshAmazingAniView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68AA1A2BF5DA000B289D /* JHRefreshAmazingAniView.m */; };
 		F7EC68C21A2BF5DA000B289D /* JHRefreshAniBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68AC1A2BF5DA000B289D /* JHRefreshAniBaseView.m */; };
@@ -284,6 +287,8 @@
 		F70B08171A39817A00006E31 /* CartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartManager.m; sourceTree = "<group>"; };
 		F71B22A21A393A590012F570 /* AdressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdressModel.h; sourceTree = "<group>"; };
 		F71B22A31A393A590012F570 /* AdressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressModel.m; sourceTree = "<group>"; };
+		F72976831A3AC14200CD9E22 /* SelectInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectInfo.h; sourceTree = "<group>"; };
+		F72976841A3AC14200CD9E22 /* SelectInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInfo.m; sourceTree = "<group>"; };
 		F729B0171A36C55C0001FD39 /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
 		F729B0181A36C55C0001FD39 /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
 		F7675C331A2DBE440008C220 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = ZYYG/ViewControllers/LoginVC.h; sourceTree = SOURCE_ROOT; };
@@ -298,6 +303,8 @@
 		F791302B1A26D64A00DB0EDC /* SearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		F791302D1A26F42500DB0EDC /* SearchReusltVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchReusltVC.h; sourceTree = "<group>"; };
 		F791302E1A26F42500DB0EDC /* SearchReusltVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchReusltVC.m; sourceTree = "<group>"; };
+		F7BAE0EC1A3A8D8900155CD6 /* ClassifyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyModel.h; sourceTree = "<group>"; };
+		F7BAE0ED1A3A8D8900155CD6 /* ClassifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyModel.m; sourceTree = "<group>"; };
 		F7BBA58C1A2806F9009DF9F2 /* CartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartCell.h; sourceTree = "<group>"; };
 		F7BBA58D1A2806F9009DF9F2 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartCell.m; sourceTree = "<group>"; };
 		F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
@@ -347,6 +354,7 @@
 		F7E905F31A26C2F4001117EE /* PriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCell.h; sourceTree = "<group>"; };
 		F7E905F41A26C2F4001117EE /* PriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCell.m; sourceTree = "<group>"; };
 		F7E905F51A26C2F4001117EE /* PriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceCell.xib; sourceTree = "<group>"; };
+		F7E97E601A3AB7300090752B /* Price.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Price.plist; sourceTree = "<group>"; };
 		F7EC68A31A2BF136000B289D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		F7EC68A91A2BF5DA000B289D /* JHRefreshAmazingAniView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHRefreshAmazingAniView.h; sourceTree = "<group>"; };
 		F7EC68AA1A2BF5DA000B289D /* JHRefreshAmazingAniView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHRefreshAmazingAniView.m; sourceTree = "<group>"; };
@@ -576,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				F7C095B91A382D280077EB47 /* adress.db */,
+				F7E97E601A3AB7300090752B /* Price.plist */,
 				F7C8D5071A3809C6009F36B3 /* fmdb */,
 				F7C8D4F51A37D1A8009F36B3 /* Citys */,
 				F7EC68CF1A2C0851000B289D /* TSPopover */,
@@ -979,6 +988,10 @@
 				F71B22A31A393A590012F570 /* AdressModel.m */,
 				F70B08161A39817A00006E31 /* CartManager.h */,
 				F70B08171A39817A00006E31 /* CartManager.m */,
+				F7BAE0EC1A3A8D8900155CD6 /* ClassifyModel.h */,
+				F7BAE0ED1A3A8D8900155CD6 /* ClassifyModel.m */,
+				F72976831A3AC14200CD9E22 /* SelectInfo.h */,
+				F72976841A3AC14200CD9E22 /* SelectInfo.m */,
 			);
 			name = MyModel;
 			path = ZYYG/Libs;
@@ -1080,6 +1093,7 @@
 				94D89EDD1A220D900074B874 /* PersonCenterStoryboard.storyboard in Resources */,
 				F966EDD61A35A46800D2994A /* MyAccountCell.xib in Resources */,
 				94D89EDE1A220D900074B874 /* ShopCartStoryboard.storyboard in Resources */,
+				F7E97E611A3AB7300090752B /* Price.plist in Resources */,
 				F9DC702A1A31A43B006AE19C /* SettingsList.plist in Resources */,
 				F7EC68C41A2BF5DA000B289D /* JHRefresh.bundle in Resources */,
 				F7C8D4FA1A37D1A8009F36B3 /* erp_district_code.xml in Resources */,
@@ -1165,6 +1179,7 @@
 				F966EDD91A35AA4E00D2994A /* MyAccountCell.m in Sources */,
 				94D89EC21A21FDA70074B874 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				F9BC26921A2EA5E8006894C6 /* MyLetterVC.m in Sources */,
+				F72976851A3AC14200CD9E22 /* SelectInfo.m in Sources */,
 				F9BEC5121A36E39700BA931D /* GoodsModel.m in Sources */,
 				940178581A21CCE400697D14 /* CycleScrollView.m in Sources */,
 				940178A21A21CE0000697D14 /* UIButton+AFNetworking.m in Sources */,
@@ -1228,6 +1243,7 @@
 				F9BEC50F1A36E1D800BA931D /* OrderModel.m in Sources */,
 				9401785D1A21CCE400697D14 /* ImageScrollCell.m in Sources */,
 				F93099521A2DB4B40054FFC1 /* RecommendedListCell.m in Sources */,
+				F7BAE0EE1A3A8D8900155CD6 /* ClassifyModel.m in Sources */,
 				940178591A21CCE400697D14 /* NSTimer+Addition.m in Sources */,
 				F7E905F61A26C2F4001117EE /* PriceCell.m in Sources */,
 				F7F626E61A30399600CD2340 /* FileManager.m in Sources */,

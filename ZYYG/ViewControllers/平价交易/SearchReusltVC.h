@@ -7,17 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
-@interface SelectInfo : NSObject
-@property (nonatomic, copy) NSString *type;
-@property (nonatomic, copy) NSString *value;
-@property (nonatomic, copy) NSString *number;
-@property (nonatomic, copy) NSString *page;
-@end
-
-@implementation SelectInfo
-
-@end
+#import "SelectInfo.h"
 
 @interface SearchReusltVC : BaseViewController
 

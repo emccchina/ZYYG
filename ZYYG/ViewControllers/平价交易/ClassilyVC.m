@@ -11,7 +11,8 @@
 #import "ClassifyCell.h"
 #import "PriceCell.h"
 #import "PopView.h"
-
+#import "ClassifyModel.h"
+#import "SearchReusltVC.h"
 @interface ClassilyVC ()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -20,8 +21,10 @@
     HMSegmentedControl *segmentedControl1;// table view title
     PopView     *_popView;
     NSArray     *_detaitArr;
-    NSArray     *_titles;
+    NSMutableArray     *_titles;//左边的TB
+    NSMutableArray      *_details;//右边的TB
     NSInteger   _selectedIndex;
+    SelectInfo *selectInfo;
 }
 @property (weak, nonatomic) IBOutlet UITableView *classfilyTB;
 
@@ -35,13 +38,15 @@ static NSString *priceCell      = @"PriceCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    
-    _priceArray = @[@"500-1000", @"1000-2000", @"2000-3000", @"3000-5000", @"5000-9999", @"10000-19999", @"2万-3万", @"3万-5万", @"5万-10万", @"10万-30万", @"30万-100万", @"100万-500万", @"500万以上"];
+    _selectedIndex = 0;
+    _titles = [[NSMutableArray alloc] init];
+    _details = [[NSMutableArray alloc] init];
+    NSString *pathPrice = [[NSBundle mainBundle] pathForResource:@"Price" ofType:@"plist"];
+    _priceArray = [[NSArray alloc] initWithContentsOfFile:pathPrice];
     
     self.classfilyTB.delegate = self;
     self.classfilyTB.dataSource = self;
     self.classfilyTB.bounces = NO;
-//    [self.classfilyTB registerNib:[UINib nibWithNibName:@"ClassifyCell" bundle:nil] forCellReuseIdentifier:classfilyCell];
     [self.classfilyTB registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:priceCell];
     
     CGRect rect = self.classfilyTB.frame;
@@ -56,27 +61,68 @@ static NSString *priceCell      = @"PriceCell";
         NSLog(@"request classify");
         [self requestClassify];
     }
-    NSArray *array = _titles.count ? _titles[0][@"Childs"] : nil;
+    NSArray *array = _details.count ? _details[0] : nil;
     __weak ClassilyVC *weakSelf = self;
     
     _popView = [[PopView alloc] initWithFrame:rect titles:array];
     [self.view addSubview:_popView];
-    __weak PopView *weakPop = _popView;
     _popView.selectedFinsied = ^(NSInteger row){
-        [weakSelf presentSearchResultVC:weakPop.titles[row]];
+        [weakSelf presentSearchResultVC:row];
     };
-    
-    [self requestD];
 }
 
 - (BOOL)readTitlesFromFile
 {
-    _titles = [NSArray arrayWithContentsOfFile:[Utities filePathName:kClassifyArr]];
-    if (_titles.count) {
-        NSLog(@"%@", _titles);
+    NSArray *arr = [NSArray arrayWithContentsOfFile:[Utities filePathName:kClassifyArr]];
+    if (arr.count) {
+//        NSLog(@"%@", arr);
+        [self parseTitles:arr];
         return YES;
     }
     return NO;
+}
+
+- (ClassifyModel*)classifyWithDict:(NSDictionary*)dict
+{
+    ClassifyModel *model = [[ClassifyModel alloc] init];
+    [model classifyModelFromDict:dict];
+    return model;
+}
+
+- (void)parseTitles:(NSArray*)arr
+{
+    NSArray *array0 = [arr sortedArrayUsingFunction:soredArray context:NULL];
+    NSMutableArray *arrayDetail = [NSMutableArray array];
+    NSMutableArray *arrayTitle = [NSMutableArray array];
+    for (NSDictionary *dict in array0) {
+        NSMutableArray *array2 = [NSMutableArray array];
+        ClassifyModel *model = [self classifyWithDict:dict];
+        [array2 addObject:model];
+        [arrayTitle addObject:model];
+        NSArray *childs =  dict[@"Childs"];
+        NSArray *childsSorted = [childs sortedArrayUsingFunction:soredArray context:NULL];
+        for (NSDictionary *childDict in childsSorted) {
+            ClassifyModel *modelChild = [self classifyWithDict:childDict];
+            [array2 addObject:modelChild];
+        }
+        [arrayDetail addObject:array2];
+    }
+    [_titles removeAllObjects];
+    [_titles addObjectsFromArray:arrayTitle];
+    [_details removeAllObjects];
+    [_details addObjectsFromArray:arrayDetail];
+    NSLog(@"_titles %@", _titles);
+}
+
+NSInteger soredArray(id model1, id model2, void *context)
+{
+    NSInteger index1 = [[(NSDictionary*)model1 objectForKey:@"index"] integerValue];
+    NSInteger index2 = [[(NSDictionary*)model2 objectForKey:@"index"] integerValue];
+    if (index1 < index2) {
+        return  NSOrderedAscending;
+    }else{
+        return NSOrderedDescending;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -93,26 +139,6 @@ static NSString *priceCell      = @"PriceCell";
     [self.classfilyTB reloadData];
 }
 
-- (void)requestD
-{
-    [self showIndicatorView:kNetworkConnecting];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"http://www.zemcc.net/Mobile/TypeGoodsList.ashx?type=1&value=1411040759494340&num=20&page=1"];
-    NSLog(@"url %@", url);
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self dismissIndicatorView];
-        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        id result = [self parseResults:responseObject];
-        if (result) {
-           
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self dismissIndicatorView];
-        [self showAlertView:kNetworkNotConnect];
-    }];
-}
-
 - (void)requestClassify
 {
     [self showIndicatorView:kNetworkConnecting];
@@ -125,10 +151,11 @@ static NSString *priceCell      = @"PriceCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            _titles = result[@"Category"];
-            [_titles writeToFile:[Utities filePathName:kClassifyArr] atomically:YES];
-            [_popView setTitles:_titles[0][@"Childs"]];
+            NSArray *arr = result[@"Category"];
+            [arr writeToFile:[Utities filePathName:kClassifyArr] atomically:YES];
+            [self parseTitles:arr];
             [self.classfilyTB reloadData];
+            [_popView setTitles:_details[0]];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self dismissIndicatorView];
@@ -137,10 +164,26 @@ static NSString *priceCell      = @"PriceCell";
     
 }
 
-- (void)presentSearchResultVC:(NSDictionary*)search
+- (void)presentSearchResultVC:(NSInteger)searchRow
 {
-    NSLog(@"search id %@", search);
+    selectInfo = [[SelectInfo alloc] init];
+    if (_classfilyType) {
+        NSArray *array = _priceArray[searchRow];
+        selectInfo.price = array[2];
+    }else{
+        ClassifyModel *mode = _details[_selectedIndex][searchRow];
+        selectInfo.categaryCode = mode.code;
+    }
     [self performSegueWithIdentifier:@"ClassifySearch" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    SearchReusltVC *deatVC = (SearchReusltVC*)[segue destinationViewController];
+    if ([deatVC respondsToSelector:@selector(setSelectInfo:)]) {
+        [deatVC setSelectInfo:selectInfo];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -192,21 +235,22 @@ static NSString *priceCell      = @"PriceCell";
     if (!_classfilyType) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:classfilyCell forIndexPath:indexPath];
         cell.backgroundColor = (_selectedIndex == indexPath.row ? kBGGrayColor : [UIColor whiteColor]);
-        cell.textLabel.text = [_titles[indexPath.row] safeObjectForKey:@"Name"];
+        cell.textLabel.text = [(ClassifyModel*)(_titles[indexPath.row]) name];
         return cell;
     }else{
         PriceCell *cell = (PriceCell *)[tableView dequeueReusableCellWithIdentifier:priceCell forIndexPath:indexPath];
-        NSString *leftTitle = _priceArray[indexPath.row*2];
-        NSString *rightTitle = nil;
-        if ((indexPath.row+1)*2 < _priceArray.count) {
-            rightTitle = _priceArray[(indexPath.row +1)*2];
+        NSArray *leftTitle = _priceArray[indexPath.row*2];
+//        NSLog(@"row %d", indexPath.row*2);
+        NSArray *rightTitle = nil;
+        if ((indexPath.row*2+1) < _priceArray.count) {
+            rightTitle = _priceArray[(indexPath.row*2+1)];
             cell.rightBut.hidden = NO;
         }
         cell.indexPath = indexPath;
-        [cell.leftBut setTitle:leftTitle forState:UIControlStateNormal];
-        [cell.rightBut setTitle:rightTitle forState:UIControlStateNormal];
-        cell.buttonSeleced = ^(NSInteger bugTag, NSIndexPath* cellIndexPath){
-            [self presentSearchResultVC:nil];
+        [cell.leftBut setTitle:leftTitle[2] forState:UIControlStateNormal];
+        [cell.rightBut setTitle:rightTitle[2] forState:UIControlStateNormal];
+        cell.buttonSeleced = ^(NSInteger butTag, NSIndexPath* cellIndexPath){
+            [self presentSearchResultVC:cellIndexPath.row*2+butTag];
         };
         return cell;
     }
@@ -218,11 +262,11 @@ static NSString *priceCell      = @"PriceCell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (!_classfilyType) {
-        [_popView setTitles:_titles[indexPath.row][@"Childs"]];
+        [_popView setTitles:_details[indexPath.row]];
         _selectedIndex  = indexPath.row;
         [self.classfilyTB reloadData];
     }else{
-        [self presentSearchResultVC:nil];
+        [self presentSearchResultVC:0];
     }
 }
 

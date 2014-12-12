@@ -7,7 +7,7 @@
 //
 
 #import "PopView.h"
-
+#import "ClassifyModel.h"
 @implementation PopView
 
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)newTitles
@@ -71,7 +71,7 @@
     }
     if (_type) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = _titles[indexPath.row];
+        cell.textLabel.text = [(ClassifyModel*)(_titles[indexPath.row]) name];
         cell.textLabel.textColor = kBlackColor;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }else{
@@ -86,11 +86,12 @@
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [imageV setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"]];
-        }else{
+        }
+        else{
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.textColor = kBlackColor;
-            cell.textLabel.text = _titles[indexPath.row-1][@"Name"];
+            cell.textLabel.text = (indexPath.row == 1 ? @"全部" : [(ClassifyModel*)(_titles[indexPath.row-1]) name]);
         
         }
     }
@@ -105,7 +106,7 @@
         return;
     }
     if (self.selectedFinsied) {
-        self.selectedFinsied(indexPath.row);
+        self.selectedFinsied(indexPath.row-1);
     }
 }
 /*

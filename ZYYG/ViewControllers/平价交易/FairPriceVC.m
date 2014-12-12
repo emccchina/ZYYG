@@ -10,7 +10,6 @@
 #import "ImageScrollCell.h"
 #import "GoodsShowCell.h"
 #import "TSPopoverController.h"
-#import "PopView.h"
 #import "ArtDetailVC.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "GoodsModel.h"
