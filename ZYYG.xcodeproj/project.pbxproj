@@ -143,6 +143,7 @@
 		F93099581A2DB6AE0054FFC1 /* PersonCenter.plist in Resources */ = {isa = PBXBuildFile; fileRef = F93099571A2DB6AE0054FFC1 /* PersonCenter.plist */; };
 		F966EDD61A35A46800D2994A /* MyAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F966EDD51A35A46800D2994A /* MyAccountCell.xib */; };
 		F966EDD91A35AA4E00D2994A /* MyAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F966EDD81A35AA4E00D2994A /* MyAccountCell.m */; };
+		F993D4581A3ACC100050FD79 /* EditPersonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F993D4571A3ACC100050FD79 /* EditPersonVC.m */; };
 		F9A2EF511A358BB600070BFF /* PersonDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2EF501A358BB600070BFF /* PersonDetailVC.m */; };
 		F9AB0D931A2FEF4100EFEDC5 /* CompeteRecordCellTop.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0D921A2FEF4100EFEDC5 /* CompeteRecordCellTop.m */; };
 		F9AB0D951A2FEF5B00EFEDC5 /* CompeteRecordCellTop.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AB0D941A2FEF5B00EFEDC5 /* CompeteRecordCellTop.xib */; };
@@ -425,6 +426,8 @@
 		F966EDD51A35A46800D2994A /* MyAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAccountCell.xib; sourceTree = "<group>"; };
 		F966EDD71A35AA4E00D2994A /* MyAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountCell.h; sourceTree = "<group>"; };
 		F966EDD81A35AA4E00D2994A /* MyAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountCell.m; sourceTree = "<group>"; };
+		F993D4561A3ACC100050FD79 /* EditPersonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonVC.h; sourceTree = "<group>"; };
+		F993D4571A3ACC100050FD79 /* EditPersonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonVC.m; sourceTree = "<group>"; };
 		F9A2EF4F1A358BB600070BFF /* PersonDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDetailVC.h; sourceTree = "<group>"; };
 		F9A2EF501A358BB600070BFF /* PersonDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDetailVC.m; sourceTree = "<group>"; };
 		F9AB0D911A2FEF4100EFEDC5 /* CompeteRecordCellTop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompeteRecordCellTop.h; sourceTree = "<group>"; };
@@ -723,6 +726,8 @@
 				F9AB0D991A3030C100EFEDC5 /* OrderDetailVC.m */,
 				F9A2EF4F1A358BB600070BFF /* PersonDetailVC.h */,
 				F9A2EF501A358BB600070BFF /* PersonDetailVC.m */,
+				F993D4561A3ACC100050FD79 /* EditPersonVC.h */,
+				F993D4571A3ACC100050FD79 /* EditPersonVC.m */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -1211,6 +1216,7 @@
 				F7F928E11A354917000BAE49 /* NSDictionary+safeObjectForKey.m in Sources */,
 				F7C215FC1A2EB80200C011AE /* ChooseView.m in Sources */,
 				94D89EBD1A21FDA70074B874 /* JGProgressHUDAnimation.m in Sources */,
+				F993D4581A3ACC100050FD79 /* EditPersonVC.m in Sources */,
 				F7675C351A2DBE450008C220 /* LoginVC.m in Sources */,
 				F7F30D551A232A1600EF2580 /* ArtInfoCell.m in Sources */,
 				F7EC68DE1A2C0851000B289D /* TSPopoverTouchView.m in Sources */,

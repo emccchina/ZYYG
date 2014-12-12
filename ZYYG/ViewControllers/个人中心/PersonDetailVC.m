@@ -63,6 +63,7 @@
         case 1:
             cell.textLabel.text=@"昵称";
             cell.detailTextLabel.text=user.nickName;
+            
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         case 2:
@@ -111,6 +112,23 @@
     return cell;
 }
 
+#pragma mark -textField
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    NSLog(@"fffffff");
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    NSLog(@"bbbbb");
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"nnnnnn");
+}
 /*
 #pragma mark - Navigation
 
