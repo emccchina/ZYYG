@@ -47,7 +47,7 @@ static NSString *spreadCell = @"SpreadCell";
     CGFloat TBBottom = self.hiddenBottom ? 0 : 50;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
     
-    self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"登录" target:self action:@selector(doRightButton:)];
+//    self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"登录" target:self action:@selector(doRightButton:)];
     
     self.bottomView.hidden = self.hiddenBottom;
     

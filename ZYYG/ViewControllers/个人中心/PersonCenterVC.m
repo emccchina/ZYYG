@@ -46,6 +46,17 @@ static NSString *listCell = @"listCell";
     //    [self performSelector:@selector(showDeta) withObject:nil afterDelay:3];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.PersonTableView reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController *destVC = [segue destinationViewController];
+    destVC.hidesBottomBarWhenPushed = YES;
+}
 
 - (void)requestPersonCenter:(NSInteger)number
 {
@@ -54,9 +65,6 @@ static NSString *listCell = @"listCell";
         [Utities presentLoginVC:self];
         return;
     }
-    
-    [self.PersonTableView reloadData];
-    
 }
 #pragma mark - tableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -94,7 +102,6 @@ static NSString *listCell = @"listCell";
 {
     if (indexPath.section == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:topCell forIndexPath:indexPath];
-        
         UIImageView *viewBG = (UIImageView *)[cell viewWithTag:2];
         NSString *imageUrl=user.headImage;
         if (imageUrl && ![@"" isEqual:imageUrl]) {

@@ -186,7 +186,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     OrderModel *order=orderArray[indexPath.section];
-    if (indexPath.row != 0 || indexPath.row != order.Goods.count+1 || indexPath.row != order.Goods.count+2) {
+    if (indexPath.row != 0 && indexPath.row != order.Goods.count+1 && indexPath.row != order.Goods.count+2) {
         GoodsModel *goods=order.Goods[indexPath.row-1];
         [self presentDetailVC:goods.GoodsCode];
         
