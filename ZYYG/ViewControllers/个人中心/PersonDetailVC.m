@@ -51,8 +51,12 @@
     UITableViewCell *imageCell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"imageCell"];
     switch (indexPath.row) {
         case 0:
-            [imageCell.imageView setImageWithURL:[NSURL URLWithString:user.headImage]];
-            imageCell.detailTextLabel.text=@"头像";
+            if(user.headImage &&![@"" isEqualToString:user.headImage]){
+                [imageCell.imageView setImageWithURL:[NSURL URLWithString:user.headImage]];
+            }else{
+                [imageCell.imageView setImage:[UIImage imageNamed:@"avatar.png"]];
+            }
+            imageCell.textLabel.text=@"头像";
             imageCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return imageCell;
             break;

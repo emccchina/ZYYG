@@ -123,13 +123,58 @@
     cell.collectionLabel.hidden=NO;
    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL]];
     cell.goodsName.text=goods.GoodsName;
-    cell.fristLabel.text=goods.ArtName;
-    cell.secondLabel.text=goods.UpShelfTime;
-    cell.collectionLabel.text=goods.Nstatus;
+    cell.fristLabel.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
+    cell.secondLabel.text=[NSString stringWithFormat:@"停售日期:%@",goods.UpShelfTime];
+    cell.collectionLabel.text=[NSString stringWithFormat:@"状态:%@",goods.Nstatus];
     return cell;
    
     
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //        [dataArra removeObjectAtIndex:indexPath.row];
+        // Delete the row from the data source.
+        //        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //        [self.adressTB reloadData];
+        [self requestForDeleteCollect:indexPath];
+    }
+}
+
+- (void)requestForDeleteCollect:(NSIndexPath*)indexPath
+{
+    GoodsModel *collect=collections[indexPath.row];
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@Delfavorite.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",collect.GoodsCode,@"product_id", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            //                [self.adressTB reloadData];
+            if([@"0" isEqualToString:[result safeObjectForKey:@"errno"]])
+            {
+                [self showAlertView:@"已取消收藏"];
+                [collections removeObject:collect];
+            }else{
+                [self showAlertView:@"取消收藏失败"];
+            }
+            [self.myCollectionTableView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
+}
+
 /*
 #pragma mark - Navigation
 

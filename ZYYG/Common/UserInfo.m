@@ -41,8 +41,8 @@
     user.provideCode=[dict safeObjectForKey:@"ProvideCode"];
     user.cityCode=[dict safeObjectForKey:@"CityCode"];
     user.aeraCode=[dict safeObjectForKey:@"AeraCode"];
-    user.detailAddress=[dict safeObjectForKey:@"detailAddr"];
-    user.zipCode=[dict safeObjectForKey:@"PostCode"];
+    user.detailAddress=[dict safeObjectForKey:@"DetailAddr"];
+    user.zipCode=[dict safeObjectForKey:@"Postcode"];
     return user;
 }
 
