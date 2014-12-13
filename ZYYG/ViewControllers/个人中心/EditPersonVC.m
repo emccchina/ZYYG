@@ -44,7 +44,7 @@
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:1];
     titleLabel.text=[self editType];
     UITextField *textField=(UITextField *)[cell viewWithTag:2];
-    [textField ]
+
     textField.text=[self textValue];
     return cell;
 }
