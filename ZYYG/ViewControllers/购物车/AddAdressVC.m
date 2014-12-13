@@ -105,7 +105,7 @@
 - (NSArray*)arrayFromDB:(NSString*)tableName upName:(NSString*)upName key:(NSInteger)key
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%d", tableName, upName, key];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", tableName, upName, (long)key];
     FMResultSet *s = [dataBase executeQuery:sql];
     while ([s next]) {
         //retrieve values for each record

@@ -52,59 +52,59 @@
 //    [self writeArr];
 }
 
-- (void)writeArr
-{
-    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *dbPath   = [docsPath stringByAppendingPathComponent:@"adress.db"];
-    FMDatabase *db     = [FMDatabase databaseWithPath:dbPath];
-    [db open];
-//    BOOL success = [db open];
-    NSString *sql = [NSString stringWithFormat:@"create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text);"
-                     "create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text, %@_zipCode text, %@_id text);"
-                     "create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text, %@_id text);"
-                     , kProvinceAdress, kProvinceAdress, kProvinceAdress, kCityAdress, kCityAdress,kCityAdress, kCityAdress, kProvinceAdress, kTownAdress, kTownAdress, kTownAdress, kCityAdress];
-    BOOL success = [db executeStatements:sql];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"erp_province_code" ofType:@"json"];
-    NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    id ss = [NSJSONSerialization JSONObjectWithData:[s dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    NSArray *provinces = ss[@"RECORDS"];
-    
-    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"erp_city_code" ofType:@"json"];
-    NSString *s1 = [NSString stringWithContentsOfFile:path1 encoding:NSUTF8StringEncoding error:nil];
-    id ss1 = [NSJSONSerialization JSONObjectWithData:[s1 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    NSArray *provinces1 = ss1[@"RECORDS"];
-    
-    NSString *path2 = [[NSBundle mainBundle] pathForResource:@"erp_district_code" ofType:@"json"];
-    NSString *s2 = [NSString stringWithContentsOfFile:path2 encoding:NSUTF8StringEncoding error:nil];
-    id ss2 = [NSJSONSerialization JSONObjectWithData:[s2 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    NSArray *provinces2 = ss2[@"RECORDS"];
-    
-    if (success) {
-        int i = 0;
-        for (NSDictionary *dict in provinces) {
-            
-            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name) values ('%d', '%@');", kProvinceAdress, kProvinceAdress, kProvinceAdress, [dict[@"PROVINCE_ID"] integerValue], dict[@"PROVINCE_NAME"]];
-            [db executeStatements:string withResultBlock:^int(NSDictionary *resultsDictionary) {
-                NSLog(@"%d", [resultsDictionary[@"count"] integerValue]);
-                return NO;
-            }];
-        }
-       
-        for (NSDictionary *dict in provinces1) {
-            i++;
-            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name, %@_zipCode, %@_id) values ('%d', '%@', '%@', '%d');", kCityAdress, kCityAdress, kCityAdress, kCityAdress,kProvinceAdress, [dict[@"CITY_ID"] integerValue], dict[@"CITY_NAME"], dict[@"ZIPCODE"], [dict[@"PROVINCE_ID"] integerValue]];
-            [db executeStatements:string];
-        }
-        
-        for (NSDictionary *dict in provinces2) {
-            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name, %@_id) values ('%d', '%@', '%d');", kTownAdress, kTownAdress, kTownAdress, kCityAdress, [dict[@"DISTRICT_ID"] integerValue], dict[@"DISTRICT_NAME"], [dict[@"CITY_ID"] integerValue]];
-            [db executeStatements:string];
-        }
-         NSLog(@"%ld", (long)i);
-    }
-    
-}
+//- (void)writeArr
+//{
+//    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+//    NSString *dbPath   = [docsPath stringByAppendingPathComponent:@"adress.db"];
+//    FMDatabase *db     = [FMDatabase databaseWithPath:dbPath];
+//    [db open];
+////    BOOL success = [db open];
+//    NSString *sql = [NSString stringWithFormat:@"create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text);"
+//                     "create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text, %@_zipCode text, %@_id text);"
+//                     "create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text, %@_id text);"
+//                     , kProvinceAdress, kProvinceAdress, kProvinceAdress, kCityAdress, kCityAdress,kCityAdress, kCityAdress, kProvinceAdress, kTownAdress, kTownAdress, kTownAdress, kCityAdress];
+//    BOOL success = [db executeStatements:sql];
+//    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"erp_province_code" ofType:@"json"];
+//    NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+//    id ss = [NSJSONSerialization JSONObjectWithData:[s dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+//    NSArray *provinces = ss[@"RECORDS"];
+//    
+//    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"erp_city_code" ofType:@"json"];
+//    NSString *s1 = [NSString stringWithContentsOfFile:path1 encoding:NSUTF8StringEncoding error:nil];
+//    id ss1 = [NSJSONSerialization JSONObjectWithData:[s1 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+//    NSArray *provinces1 = ss1[@"RECORDS"];
+//    
+//    NSString *path2 = [[NSBundle mainBundle] pathForResource:@"erp_district_code" ofType:@"json"];
+//    NSString *s2 = [NSString stringWithContentsOfFile:path2 encoding:NSUTF8StringEncoding error:nil];
+//    id ss2 = [NSJSONSerialization JSONObjectWithData:[s2 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+//    NSArray *provinces2 = ss2[@"RECORDS"];
+//    
+//    if (success) {
+//        int i = 0;
+//        for (NSDictionary *dict in provinces) {
+//            
+//            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name) values ('%d', '%@');", kProvinceAdress, kProvinceAdress, kProvinceAdress, [dict[@"PROVINCE_ID"] integerValue], dict[@"PROVINCE_NAME"]];
+//            [db executeStatements:string withResultBlock:^int(NSDictionary *resultsDictionary) {
+//                NSLog(@"%d", [resultsDictionary[@"count"] integerValue]);
+//                return NO;
+//            }];
+//        }
+//       
+//        for (NSDictionary *dict in provinces1) {
+//            i++;
+//            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name, %@_zipCode, %@_id) values ('%d', '%@', '%@', '%d');", kCityAdress, kCityAdress, kCityAdress, kCityAdress,kProvinceAdress, [dict[@"CITY_ID"] integerValue], dict[@"CITY_NAME"], dict[@"ZIPCODE"], [dict[@"PROVINCE_ID"] integerValue]];
+//            [db executeStatements:string];
+//        }
+//        
+//        for (NSDictionary *dict in provinces2) {
+//            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name, %@_id) values ('%d', '%@', '%d');", kTownAdress, kTownAdress, kTownAdress, kCityAdress, [dict[@"DISTRICT_ID"] integerValue], dict[@"DISTRICT_NAME"], [dict[@"CITY_ID"] integerValue]];
+//            [db executeStatements:string];
+//        }
+//         NSLog(@"%ld", (long)i);
+//    }
+//    
+//}
 
 - (void)viewDidLayoutSubviews
 {
