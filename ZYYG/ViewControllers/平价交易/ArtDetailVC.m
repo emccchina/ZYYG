@@ -12,15 +12,18 @@
 #import "ArtInfoCell.h"
 #import "SpreadCell.h"
 #import "GoodsModel.h"
+#import "AppDelegate.h"
+#import "KDPreView.h"
 
 @interface ArtDetailVC ()
-<UITableViewDataSource, UITableViewDelegate>
+<UITableViewDataSource, UITableViewDelegate, CycleScrollViewDatasource, CycleScrollViewDelegate>
 {
     BOOL                _spreadArtist;//艺术家简介展开
     BOOL                _spreadArt;//作品简介展开
     BOOL                _spreadCertification;//证书展开
     GoodsModel          *goods;
 //    NSMutableDictionary  *detailDict;//
+    CycleScrollView     *scrollview;
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
 @property (weak, nonatomic) IBOutlet UIButton *addCartBut;
@@ -70,6 +73,18 @@ static NSString *spreadCell = @"SpreadCell";
     NSLog(@"product id %@", self.productID);
     
     
+}
+
+- (void)addScrollForImageToWindow:(NSArray*)images
+{
+    if (!scrollview) {
+        UIWindow *window = [(AppDelegate*)[UIApplication sharedApplication].delegate window];
+        scrollview = [[CycleScrollView alloc] initWithFrame:self.navigationController.view.bounds];
+        scrollview.delegate = self;
+        scrollview.datasource = self;
+        [window addSubview:scrollview];
+    }
+    scrollview.hidden = NO;
 }
 
 - (void)setCountLabCount:(NSInteger)count
@@ -205,7 +220,28 @@ static NSString *spreadCell = @"SpreadCell";
         
     }];
 }
+#pragma mark - scrollview cycle
+- (NSInteger)numberOfPages
+{
+    return goods.ImageUrl.count;
+}
 
+- (UIView *)pageAtIndex:(NSInteger)index
+{
+    CGRect rect = scrollview.bounds;
+    KDPreView *imageView = [[KDPreView alloc] initWithFrame:rect];
+    if (goods.ImageUrl.count > index) {
+        NSString *url =  goods.ImageUrl[index];
+        imageView.imageURL = url;
+        [imageView imageShow];
+    }
+    return imageView;
+}
+
+- (void)didClickPage:(CycleScrollView *)csView atIndex:(NSInteger)index
+{
+    scrollview.hidden = YES;
+}
 
 #pragma mark - UITableView
 
@@ -285,6 +321,9 @@ static NSString *spreadCell = @"SpreadCell";
                 cell.style = 1;
                 cell.images = goods.ImageUrl;
                 [cell reloadScrollViewData];
+                cell.click = ^(){
+                    [self addScrollForImageToWindow:goods.ImageUrl];
+                };
                 return cell;
             }else{
                 CollectCell *cell = (CollectCell*)[tableView dequeueReusableCellWithIdentifier:collectCell forIndexPath:indexPath];

@@ -12,6 +12,7 @@
 <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *nearestSearch;
+    UISearchBar     *searchBar;
 }
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UILabel *searchLab;
@@ -45,9 +46,15 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [searchBar resignFirstResponder];
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
     [nearestSearch writeToFile:[Utities filePathName:kNearestSearch] atomically:YES];
 }
 
@@ -73,10 +80,31 @@
 
 - (void)navBarAddTextField
 {
-    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    searchBar = [[UISearchBar alloc] init];
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入关键字";
     self.navigationItem.titleView = searchBar;
+    [searchBar becomeFirstResponder];
+}
+
+- (void)requestForType
+{
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@index.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self dismissIndicatorView];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

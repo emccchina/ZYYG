@@ -51,7 +51,9 @@
 - (void)didClickPage:(CycleScrollView *)csView atIndex:(NSInteger)index
 {
     if (self.style) {
-        
+        if (self.click) {
+            self.click();
+        }
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:[NSString stringWithFormat:@"当前点击第%ld个页面",(long)index]
@@ -60,6 +62,7 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
+    
 }
 
 @end

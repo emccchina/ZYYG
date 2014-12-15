@@ -78,6 +78,7 @@
 		F7BE243A1A3144EE001EA855 /* CustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE24391A3144EE001EA855 /* CustomVC.m */; };
 		F7BE243D1A314538001EA855 /* TalkBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE243C1A314538001EA855 /* TalkBuyVC.m */; };
 		F7BE80DA1A3E6DDF0053C5CA /* AdressTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */; };
+		F7BE80DE1A3EE5610053C5CA /* KDPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE80DD1A3EE5610053C5CA /* KDPreView.m */; };
 		F7C095BA1A382D280077EB47 /* adress.db in Resources */ = {isa = PBXBuildFile; fileRef = F7C095B91A382D280077EB47 /* adress.db */; };
 		F7C215FC1A2EB80200C011AE /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C215FB1A2EB80200C011AE /* ChooseView.m */; };
 		F7C216011A2EE77A00C011AE /* SearchFrameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C216001A2EE77A00C011AE /* SearchFrameVC.m */; };
@@ -320,6 +321,8 @@
 		F7BE243C1A314538001EA855 /* TalkBuyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkBuyVC.m; sourceTree = "<group>"; };
 		F7BE80D81A3E6DDF0053C5CA /* AdressTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdressTextField.h; sourceTree = "<group>"; };
 		F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressTextField.m; sourceTree = "<group>"; };
+		F7BE80DC1A3EE5610053C5CA /* KDPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDPreView.h; sourceTree = "<group>"; };
+		F7BE80DD1A3EE5610053C5CA /* KDPreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDPreView.m; sourceTree = "<group>"; };
 		F7C095B91A382D280077EB47 /* adress.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = adress.db; sourceTree = "<group>"; };
 		F7C215FA1A2EB80200C011AE /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
 		F7C215FB1A2EB80200C011AE /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
@@ -600,6 +603,7 @@
 			children = (
 				F7C095B91A382D280077EB47 /* adress.db */,
 				F7E97E601A3AB7300090752B /* Price.plist */,
+				F7BE80DB1A3EE5610053C5CA /* zoomScrollview */,
 				F7C8D5071A3809C6009F36B3 /* fmdb */,
 				F7C8D4F51A37D1A8009F36B3 /* Citys */,
 				F7EC68CF1A2C0851000B289D /* TSPopover */,
@@ -884,6 +888,15 @@
 				F7BE243C1A314538001EA855 /* TalkBuyVC.m */,
 			);
 			path = "更多";
+			sourceTree = "<group>";
+		};
+		F7BE80DB1A3EE5610053C5CA /* zoomScrollview */ = {
+			isa = PBXGroup;
+			children = (
+				F7BE80DC1A3EE5610053C5CA /* KDPreView.h */,
+				F7BE80DD1A3EE5610053C5CA /* KDPreView.m */,
+			);
+			path = zoomScrollview;
 			sourceTree = "<group>";
 		};
 		F7C8D4F51A37D1A8009F36B3 /* Citys */ = {
@@ -1268,6 +1281,7 @@
 				F7EC68DD1A2C0851000B289D /* TSPopoverPopoverView.m in Sources */,
 				F9BC268F1A2EA5CB006894C6 /* MyCollectionVC.m in Sources */,
 				F7EC68DC1A2C0851000B289D /* TSPopoverController.m in Sources */,
+				F7BE80DE1A3EE5610053C5CA /* KDPreView.m in Sources */,
 				F9B1A5EF1A3BE546006244F4 /* LetterModel.m in Sources */,
 				9401789B1A21CE0000697D14 /* AFURLResponseSerialization.m in Sources */,
 				F9BEC50F1A36E1D800BA931D /* OrderModel.m in Sources */,

@@ -187,7 +187,7 @@
         <!--Search FrameVC-->
         <scene sceneID="aIk-R7-yxg">
             <objects>
-                <viewController id="WrX-yK-LL0" customClass="SearchFrameVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchFrameVC" id="WrX-yK-LL0" customClass="SearchFrameVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9wQ-JZ-cru"/>
                         <viewControllerLayoutGuide type="bottom" id="UDe-Lc-nZW"/>

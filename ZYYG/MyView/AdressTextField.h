@@ -28,4 +28,6 @@ typedef void (^AdressFinished)(AdressTextField *textField);//省 市 区 的数�
 @property (nonatomic, strong) NSArray *city;
 @property (nonatomic, strong) NSArray *town;
 @property (nonatomic, copy) AdressFinished editFinished;
+
+
 @end

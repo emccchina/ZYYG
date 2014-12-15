@@ -13,6 +13,7 @@
 #import "SearchVC.h"
 #import "GoodsModel.h"
 #import "ArtDetailVC.h"
+#import "SearchFrameVC.h"
 
 @interface SearchReusltVC ()
 <UITableViewDataSource, UITableViewDelegate, GoodsShowCellDelegate, UISearchBarDelegate>
@@ -113,7 +114,10 @@ static NSString *goodsCell = @"GoodsCell";
     if ([(ArtDetailVC*)destVC respondsToSelector:@selector(setProductID:)]) {
         [destVC setValue:selectedProductID forKey:@"productID"];
     }
-    
+    if ([destVC isKindOfClass:[SearchFrameVC class]]) {
+        SearchFrameVC *vc = (SearchFrameVC*)destVC;
+        [vc setSearchType:1];
+    }
     
     
 }
@@ -166,7 +170,12 @@ static NSString *goodsCell = @"GoodsCell";
 
 
 #pragma mark - UISearchBarDelegate
-
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"searchFrameVC"];
+    [self.navigationController pushViewController:vc animated:NO];
+    return NO;
+}
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     NSLog(@"begin");

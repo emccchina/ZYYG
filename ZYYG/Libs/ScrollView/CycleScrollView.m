@@ -28,27 +28,15 @@
 {
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     [self addSubview:self.scrollView];
-//    [self.scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
-    //    self.scrollView.backgroundColor = [UIColor cyanColor];
-//    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.scrollView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-//    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.scrollView attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-//    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.scrollView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
-//    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.scrollView attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
     
     _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds)-30, CGRectGetWidth(self.bounds), 30)];
     [self addSubview:_pageControl];
     _pageControl.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-//    [_pageControl setTranslatesAutoresizingMaskIntoConstraints:NO];
     _pageControl.userInteractionEnabled = NO;
-    
-//    [_pageControl addConstraint:[NSLayoutConstraint constraintWithItem:_pageControl attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:30]];
-//    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_pageControl attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-//    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_pageControl attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
-//    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_pageControl attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -89,14 +77,6 @@
         return;
     }
     _pageControl.numberOfPages = _totalPages;
-//    NSLog(@"page control size %@ , %@", NSStringFromCGRect(_pageControl.frame), NSStringFromCGSize([_pageControl sizeForNumberOfPages:_totalPages]));
-//    if (CGRectGetWidth(_pageControl.frame) > 0) {
-//        CGRect rect = _pageControl.frame;
-//        rect.size.width = [_pageControl sizeForNumberOfPages:_totalPages].width + 10;
-//        rect.origin.x += 10;
-//        _pageControl.frame = rect;
-//    }
-    
     [self loadData];
 }
 
