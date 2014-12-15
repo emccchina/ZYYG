@@ -17,6 +17,7 @@
     NSMutableArray *letterArray;
     UserInfo *user;
     NSInteger selectedIndex;
+    BOOL state;
 }
 
 @end
@@ -28,7 +29,7 @@ static NSString *letterCell = @"letterCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
-   
+    state=YES;
     letterArray =[NSMutableArray array];
     self.myLetterTableView.delegate=self;
     self.myLetterTableView.dataSource=self;
@@ -39,12 +40,14 @@ static NSString *letterCell = @"letterCell";
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
     if (1==(long)segmentedControl.selectedSegmentIndex) {
+        state=NO;
         [self requestLetterList:0 pageNumber:1];
     }else{
         [self requestLetterList:1 pageNumber:1];
+        state=YES;
     }
     
-//    [self.myLetterTableView reloadData];
+    //    [self.myLetterTableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -76,7 +79,7 @@ static NSString *letterCell = @"letterCell";
             for (int i=0; i<letters.count; i++) {
                 LetterModel *letter =[LetterModel letterFromDict:letters[i]];
                 [letterArray addObject:letter];
-                   NSLog(@"站内信读取成功");
+                NSLog(@"站内信读取成功");
             }
             [self.myLetterTableView reloadData];
         }
@@ -138,41 +141,107 @@ static NSString *letterCell = @"letterCell";
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    
     selectedIndex=indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self performSegueWithIdentifier:@"ReadLetter" sender:self];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-     LetterModel *letter=letterArray[selectedIndex];
+    NSLog(@"传送站内信内容点击");
+    LetterModel *letter=letterArray[selectedIndex];
+    if (state) {
+        [self requestReadLetter:letter.LetterCode];
+    }
     UIViewController *vc = segue.destinationViewController;
     vc.hidesBottomBarWhenPushed = YES;
     if ([(ReadLetterVC*)vc respondsToSelector:@selector(setLetter:)]) {
         [vc setValue:letter forKey:@"letter"];
     }
     
+    
 }
 
-//- (void)readLetterVC:(id)letter
-//{
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PersonCenterStoryboard" bundle:nil];
-//    UIViewController* readVC = [storyboard instantiateViewControllerWithIdentifier:@"ReadLetterVC"];
-//    if ([(ReadLetterVC *)readVC respondsToSelector:@selector(setLetter:)]) {
-//        [readVC setValue:letter forKey:@"letter"];
-//    }
-//        readVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:readVC animated:YES];
-//}
+
+-(void)requestReadLetter:(NSString *)letterCode
+{
+    user=[UserInfo shareUserInfo];
+    if (![user isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@SaveMessage.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",letterCode,@"LetterCode",@"1",@"IsReaded",@"0",@"Nstatus", nil];
+    NSLog(@"%@",letterCode);
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [self.myLetterTableView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //        [dataArra removeObjectAtIndex:indexPath.row];
+        // Delete the row from the data source.
+        //        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //        [self.adressTB reloadData];
+        [self requestForDeleteLetter:indexPath];
+    }
+}
+
+- (void)requestForDeleteLetter:(NSIndexPath*)indexPath
+{
+    LetterModel *letter=letterArray[indexPath.row];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@SaveMessage.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSString *isread;
+    if (state) {
+        isread=@"1";
+    }else{
+        isread=@"0";
+    }
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",letter.LetterCode,@"LetterCode",isread,@"IsReaded",@"-1",@"Nstatus", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            if (state) {
+                [self requestLetterList:1 pageNumber:1];
+            }else{
+                [self requestLetterList:0 pageNumber:1];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showAlertView:kNetworkNotConnect];
+    }];
+    
+}
+
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

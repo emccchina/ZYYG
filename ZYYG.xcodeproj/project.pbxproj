@@ -170,6 +170,7 @@
 		F9BEC5121A36E39700BA931D /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BEC5111A36E39700BA931D /* GoodsModel.m */; };
 		F9DC702A1A31A43B006AE19C /* SettingsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9DC70291A31A43B006AE19C /* SettingsList.plist */; };
 		F9DC702D1A31AC11006AE19C /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DC702C1A31AC11006AE19C /* SettingModel.m */; };
+		F9FE8FD71A3EE41200EDA45F /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE8FD61A3EE41200EDA45F /* AccountModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -477,6 +478,8 @@
 		F9DC70291A31A43B006AE19C /* SettingsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingsList.plist; sourceTree = "<group>"; };
 		F9DC702B1A31AC11006AE19C /* SettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModel.h; sourceTree = "<group>"; };
 		F9DC702C1A31AC11006AE19C /* SettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModel.m; sourceTree = "<group>"; };
+		F9FE8FD51A3EE41200EDA45F /* AccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
+		F9FE8FD61A3EE41200EDA45F /* AccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1012,6 +1015,8 @@
 				F72976841A3AC14200CD9E22 /* SelectInfo.m */,
 				F9B1A5ED1A3BE546006244F4 /* LetterModel.h */,
 				F9B1A5EE1A3BE546006244F4 /* LetterModel.m */,
+				F9FE8FD51A3EE41200EDA45F /* AccountModel.h */,
+				F9FE8FD61A3EE41200EDA45F /* AccountModel.m */,
 			);
 			name = MyModel;
 			path = ZYYG/Libs;
@@ -1254,6 +1259,7 @@
 				94D89ECF1A220A050074B874 /* HeadTableView.m in Sources */,
 				F7EC68DB1A2C0851000B289D /* TSActionSheet.m in Sources */,
 				F7DF47D31A25AF6F006EB419 /* ArtDetailVC.m in Sources */,
+				F9FE8FD71A3EE41200EDA45F /* AccountModel.m in Sources */,
 				F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */,
 				9401789C1A21CE0000697D14 /* AFURLSessionManager.m in Sources */,
 				F7EC68C21A2BF5DA000B289D /* JHRefreshAniBaseView.m in Sources */,

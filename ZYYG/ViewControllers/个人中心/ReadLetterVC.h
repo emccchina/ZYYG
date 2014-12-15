@@ -11,10 +11,10 @@
 
 @interface ReadLetterVC : BaseViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *from;
-@property (weak, nonatomic) IBOutlet UILabel *title;
-@property (weak, nonatomic) IBOutlet UILabel *createTime;
-@property (weak, nonatomic) IBOutlet UILabel *content;
+@property (weak, nonatomic) IBOutlet UILabel *letterFrom;
+@property (weak, nonatomic) IBOutlet UILabel *letterTitle;
+@property (weak, nonatomic) IBOutlet UILabel *letterCreateTime;
+@property (weak, nonatomic) IBOutlet UILabel *letterContent;
 @property (nonatomic, strong)  LetterModel *letter;
 @property (nonatomic, strong)  NSString *letterCode;
 

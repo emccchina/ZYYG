@@ -15,11 +15,12 @@
 @implementation ReadLetterVC
 
 - (void)viewDidLoad {
-     NSLog(@"%@",self.letter.Title);
     [super viewDidLoad];
     [self showBackItem];
-    NSLog(@"%@",self.letter.Title);
-//    [self readLetter:[self letter]];
+    
+    self.letterContent.numberOfLines = 0;
+    self.letterTitle.numberOfLines = 0;
+    [self readLetter:[self letter]];
     
     // Do any additional setup after loading the view.
 }
@@ -31,21 +32,21 @@
 
 -(void)readLetter:(LetterModel*)letter
 {
-    self.from.text=letter.SendName;
-    self.title.text=letter.Title;
-    self.createTime.text=letter.AuditTime;
-    self.content.text=letter.LetterContent;
+    self.letterFrom.text=letter.SendName;
+    self.letterTitle.text=letter.Title;
+    self.letterCreateTime.text=letter.AuditTime;
+    self.letterContent.text=letter.LetterContent;
     self.letterCode=letter.LetterCode;
     
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
