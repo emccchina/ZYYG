@@ -77,6 +77,7 @@
 		F7BE24361A314255001EA855 /* MoreStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7BE24341A314255001EA855 /* MoreStoryboard.storyboard */; };
 		F7BE243A1A3144EE001EA855 /* CustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE24391A3144EE001EA855 /* CustomVC.m */; };
 		F7BE243D1A314538001EA855 /* TalkBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE243C1A314538001EA855 /* TalkBuyVC.m */; };
+		F7BE80DA1A3E6DDF0053C5CA /* AdressTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */; };
 		F7C095BA1A382D280077EB47 /* adress.db in Resources */ = {isa = PBXBuildFile; fileRef = F7C095B91A382D280077EB47 /* adress.db */; };
 		F7C215FC1A2EB80200C011AE /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C215FB1A2EB80200C011AE /* ChooseView.m */; };
 		F7C216011A2EE77A00C011AE /* SearchFrameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C216001A2EE77A00C011AE /* SearchFrameVC.m */; };
@@ -316,6 +317,8 @@
 		F7BE24391A3144EE001EA855 /* CustomVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVC.m; sourceTree = "<group>"; };
 		F7BE243B1A314538001EA855 /* TalkBuyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkBuyVC.h; sourceTree = "<group>"; };
 		F7BE243C1A314538001EA855 /* TalkBuyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkBuyVC.m; sourceTree = "<group>"; };
+		F7BE80D81A3E6DDF0053C5CA /* AdressTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdressTextField.h; sourceTree = "<group>"; };
+		F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressTextField.m; sourceTree = "<group>"; };
 		F7C095B91A382D280077EB47 /* adress.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = adress.db; sourceTree = "<group>"; };
 		F7C215FA1A2EB80200C011AE /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
 		F7C215FB1A2EB80200C011AE /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
@@ -623,6 +626,8 @@
 			children = (
 				F7DF47CE1A259785006EB419 /* CustomModel.h */,
 				F7DF47CF1A259785006EB419 /* CustomModel.m */,
+				F7BE80D81A3E6DDF0053C5CA /* AdressTextField.h */,
+				F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */,
 				F7EC68CC1A2BF97E000B289D /* PopView.h */,
 				F7EC68CD1A2BF97E000B289D /* PopView.m */,
 				F7C215FA1A2EB80200C011AE /* ChooseView.h */,
@@ -1209,6 +1214,7 @@
 				F9BC26A51A2EE913006894C6 /* OrderListCellGoods.m in Sources */,
 				F7F71D551A28383200AEE6BA /* PayForArtVC.m in Sources */,
 				940178A41A21CE0000697D14 /* UIProgressView+AFNetworking.m in Sources */,
+				F7BE80DA1A3E6DDF0053C5CA /* AdressTextField.m in Sources */,
 				940178551A21CCE400697D14 /* Utities.m in Sources */,
 				940178541A21CCE400697D14 /* UserInfo.m in Sources */,
 				940178001A21CBEA00697D14 /* AppDelegate.m in Sources */,
