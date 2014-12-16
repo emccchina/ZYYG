@@ -132,6 +132,7 @@
                 <outlet property="RBLab" destination="jpV-1Q-6r0" id="uGG-gN-yGb"/>
                 <outlet property="RSecondLab" destination="xZY-zo-Tw6" id="P7u-Wb-M6o"/>
                 <outlet property="RThirdLab" destination="zgA-PL-WB4" id="XI4-9C-NdG"/>
+                <outlet property="bottomLab" destination="rkM-lZ-7xU" id="E7L-LH-ec3"/>
                 <outlet property="bottomView" destination="bPq-0h-8co" id="lkU-xd-TnC"/>
                 <outlet property="iconImage" destination="nCE-SU-AB5" id="kZV-wE-4BI"/>
                 <outlet property="selectBut" destination="nWN-eq-k33" id="gEt-No-3D1"/>

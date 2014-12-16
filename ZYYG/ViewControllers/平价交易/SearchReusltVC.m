@@ -279,6 +279,7 @@ static NSString *goodsCell = @"GoodsCell";
 {
     GoodsShowCell *cell = (GoodsShowCell*)[tableView dequeueReusableCellWithIdentifier:goodsCell forIndexPath:indexPath];
     cell.delegate = self;
+    cell.indexPath = indexPath;
     GoodsModel *modelLeft = results[indexPath.row*2];
     cell.LTLab.text = modelLeft.GoodsName;
     cell.LMLab.text = modelLeft.ArtName;

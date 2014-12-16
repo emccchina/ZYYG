@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSString      *Nstatus;//在售状态
 
 
-
+@property (nonatomic, strong) NSString      *addCartCount;
 
 +(id)goodsModelWith:(NSDictionary *)dict;//详情页面
 

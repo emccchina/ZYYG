@@ -25,6 +25,7 @@ typedef void (^DoSelected)(NSIndexPath *indexPath, BOOL selected);
 @property (weak, nonatomic) IBOutlet UILabel *RThirdLab;
 @property (weak, nonatomic) IBOutlet UILabel *RBLab;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UILabel *bottomLab;
 
 @property (nonatomic, assign) BOOL          cellType;//是否显示出 按钮 底部的已购买label  0显示， 1隐藏
 

@@ -76,8 +76,8 @@ static NSString *cartCell = @"CartCell";
 {
     _selectedAccount = 0;
     [_selectDict removeAllObjects];
-    [self changeType];
     totalPriceCount = 0;
+    [self changeType];
     [self settleButEnable:NO];
     [self changeSelectedGoodsButState:NO];
     [self.cartTB reloadData];
@@ -304,6 +304,7 @@ static NSString *cartCell = @"CartCell";
     cell.RSecondLab.text = model.GoodsCode;
     cell.RThirdLab.text = model.SpecDesc;
     cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f", model.AppendPrice];
+    cell.bottomLab.text = [NSString stringWithFormat:@"此艺术品已被%@人加入购物车", model.addCartCount];
     cell.selectState = [[_selectDict safeObjectForKey:@(indexPath.row)] integerValue];
     cell.cellType = NO;
     cell.doSelected = ^(NSIndexPath *cellIndexPath, BOOL selected){

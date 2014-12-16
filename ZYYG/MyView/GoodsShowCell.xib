@@ -23,7 +23,7 @@
                             <constraint firstAttribute="width" secondItem="jzk-aS-fhD" secondAttribute="height" id="ndL-8g-hP3"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJ3-jD-za1" userLabel="RightImage">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJ3-jD-za1" userLabel="RightImage">
                         <rect key="frame" x="305" y="13" width="287" height="287"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
