@@ -43,6 +43,19 @@
     [self.chooseTB reloadData];
 }
 
+- (void)setDetails:(NSArray *)details
+{
+    _details = details;
+    [self.chooseTB reloadData];
+}
+
+- (void)reloadTitles:(NSArray *)titles details:(NSArray *)details
+{
+    _titles = titles;
+    _details = details;
+    [self.chooseTB reloadData];
+}
+
 #pragma mark - touch
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -83,12 +96,13 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chooseCell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"chooseCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"chooseCell"];
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.titles[indexPath.row][@"Title"];
-    
+    cell.detailTextLabel.text = [self.details[indexPath.row] isKindOfClass:[NSDictionary class]] ? self.details[indexPath.row][@"Name"] : @"";
+    NSLog(@"%d %@",[self.details[indexPath.row] isKindOfClass:[NSDictionary class]],self.details[indexPath.row]);
     return cell;
     
 }

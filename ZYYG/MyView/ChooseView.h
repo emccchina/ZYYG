@@ -15,10 +15,13 @@ typedef void (^ChooseViewFinised) (id selected);
 <UITableViewDataSource, UITableViewDelegate>
 {
     NSArray     *_titles;
+    NSArray     *_details;
     BOOL        _sell;//是否已售
 }
 @property (strong, nonatomic) IBOutlet UITableView *chooseTB;
 @property (nonatomic, copy)   ChooseViewFinised     chooseFinised;
 @property (strong, nonatomic) NSArray  *titles;
+@property (strong, nonatomic) NSArray   *details;
+- (void)reloadTitles:(NSArray*)titles details:(NSArray*)details;//重新载入
 
 @end

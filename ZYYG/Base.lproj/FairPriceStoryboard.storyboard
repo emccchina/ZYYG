@@ -408,27 +408,21 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5v-DM-YRi">
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7W-MB-5GM">
-                                        <rect key="frame" x="60" y="10" width="95" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7W-MB-5GM">
+                                        <rect key="frame" x="20" y="10" width="95" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="95" id="57f-wJ-Egv"/>
                                         </constraints>
-                                        <state key="normal">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="加入购物车">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="加入购物车">
+                                            <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="addToCartPressed:" destination="1xU-3h-eV7" eventType="touchUpInside" id="XVR-l5-dfn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73j-bi-oxE">
-                                        <rect key="frame" x="180" y="18" width="25" height="22"/>
+                                        <rect key="frame" x="140" y="18" width="25" height="22"/>
                                         <state key="normal" image="ShoppingGray">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -437,7 +431,7 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktH-j7-YGf">
-                                        <rect key="frame" x="199" y="10" width="16" height="16"/>
+                                        <rect key="frame" x="159" y="10" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ktH-j7-YGf" secondAttribute="height" id="xH6-E8-JZv"/>
                                         </constraints>
@@ -449,7 +443,7 @@
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="ktH-j7-YGf" firstAttribute="leading" secondItem="m7W-MB-5GM" secondAttribute="trailing" constant="44" id="6iv-gu-eyS"/>
-                                    <constraint firstItem="m7W-MB-5GM" firstAttribute="leading" secondItem="H5v-DM-YRi" secondAttribute="leading" constant="60" id="8Oe-sx-JFR"/>
+                                    <constraint firstItem="m7W-MB-5GM" firstAttribute="leading" secondItem="H5v-DM-YRi" secondAttribute="leading" constant="20" id="8Oe-sx-JFR"/>
                                     <constraint firstItem="73j-bi-oxE" firstAttribute="top" secondItem="H5v-DM-YRi" secondAttribute="top" constant="18" id="8wd-QV-lqZ"/>
                                     <constraint firstItem="ktH-j7-YGf" firstAttribute="top" secondItem="H5v-DM-YRi" secondAttribute="top" constant="10" id="egj-cv-wIJ"/>
                                     <constraint firstItem="m7W-MB-5GM" firstAttribute="top" secondItem="H5v-DM-YRi" secondAttribute="top" constant="10" id="fuQ-1U-3ky"/>

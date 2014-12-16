@@ -19,10 +19,12 @@
 <UITableViewDataSource, UITableViewDelegate, GoodsShowCellDelegate, UISearchBarDelegate>
 {
     HMSegmentedControl *segmentedControl1;// table view title
-    NSInteger           _selectedIndex;//选择的第几个
-    SelectInfo          *_selectInfo;
-    NSMutableArray      *results;
-    NSString           *selectedProductID;
+    SelectInfo          *_selectInfo;//查询条件
+    NSMutableArray      *results;//查询结果
+    NSString           *selectedProductID;//跳到详情页面
+    NSDictionary        *selectType;//选择的跳到SearchVC
+    NSArray             *searchCondition;//筛选条件 是否已经存在， 不存在请求
+    NSMutableArray      *details;//已经选择的条件,显示在chooseview 上的
 }
 @property (weak, nonatomic) IBOutlet UITableView *resultTB;
 @property (weak, nonatomic) IBOutlet ChooseView *chooseView;
@@ -40,11 +42,12 @@ static NSString *goodsCell = @"GoodsCell";
     results = [[NSMutableArray alloc] init];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doRightButton:)];
     [self navBarAddTextField];
+    details = [[NSMutableArray alloc] init];
     self.resultTB.delegate = self;
     self.resultTB.dataSource = self;
     [self.resultTB registerNib:[UINib nibWithNibName:@"GoodsShowCell" bundle:nil] forCellReuseIdentifier:goodsCell];
     [self.chooseView setChooseFinised:^(id selected){
-        if ([selected isKindOfClass:[NSNumber class]]) {
+        if ([selected isKindOfClass:[NSDictionary class]]) {
             [self presentSearchVC:selected];
         }else if ([selected isKindOfClass:[UIEvent class]]){
             [self doRightButton:nil];
@@ -61,9 +64,17 @@ static NSString *goodsCell = @"GoodsCell";
 }
 - (void)doRightButton:(UIBarButtonItem*)item
 {
-    if (!self.chooseView.hidden) {
+    if (!self.chooseView.hidden) {//隐藏 同时 筛选
+        [self presentChooseView:nil];
+        [self requestForResult];
         return;
     }
+    
+    if (searchCondition && searchCondition.count) {
+        [self presentChooseView:searchCondition];
+        return;
+    }
+    
     [self requestForSearchItem];
     
 }
@@ -73,7 +84,7 @@ static NSString *goodsCell = @"GoodsCell";
     self.chooseView.hidden = !self.chooseView.hidden;
     NSString *titleItem = self.chooseView.hidden ? @"筛选" : @"确定";
     self.navigationItem.rightBarButtonItem.title = titleItem;
-    [self.chooseView setTitles:arr];
+    [self.chooseView reloadTitles:arr details:details];
     if (!self.chooseView.hidden) {
         self.chooseView.alpha = 0;
         [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -96,7 +107,7 @@ static NSString *goodsCell = @"GoodsCell";
 
 - (void)presentSearchVC:(id)selected
 {
-    _selectedIndex = [selected   integerValue];
+    selectType = selected;
     [self performSegueWithIdentifier:@"ChooseSegue" sender:self];
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -104,9 +115,14 @@ static NSString *goodsCell = @"GoodsCell";
     UIViewController* destVC = segue.destinationViewController;
     if ([destVC isKindOfClass:[SearchVC class]]) {
         SearchVC *search = (SearchVC*)destVC;
-        [search setValue:@(_selectedIndex) forKey:@"searchType"];
-        [search setChooseFinished:^(NSInteger type, id content){
-           
+        [search setTitles:selectType];
+//        [search setValue:@(_selectedIndex) forKey:@"searchType"];
+        [search setChooseFinished:^(NSString *type, id content){
+            NSLog(@"id content %@, %@",type, content);
+            NSInteger index = [searchCondition indexOfObject:selectType];
+            [details replaceObjectAtIndex:index withObject:content];
+            [_selectInfo setInfoWithType:type content:content];
+            [self.chooseView reloadTitles:searchCondition details:details];
         }];
     }
     
@@ -135,13 +151,18 @@ static NSString *goodsCell = @"GoodsCell";
 
 - (void)parseRequestResults:(NSArray*)arr
 {
+    [results removeAllObjects];
+    if (!arr.count) {
+        [self showAlertView:@"没有相关艺术品，请改变条件"];
+        return;
+    }
     NSMutableArray *array = [NSMutableArray array];
     for (NSDictionary *dict in arr) {
         GoodsModel *model = [[GoodsModel alloc] init];
         [model goodsModelFromSearch:dict];
         [array addObject:model];
     }
-    [results removeAllObjects];
+    
     [results addObjectsFromArray:array];
 }
 
@@ -183,9 +204,11 @@ static NSString *goodsCell = @"GoodsCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-//            [self parseRequestResults:result[@"Goods"]];
-//            [self.resultTB reloadData];
-            [self presentChooseView:result[@"SearchItems"]];
+            searchCondition = result[@"SearchItems"];
+            for (int i = 0; i < searchCondition.count; i++) {
+                [details addObject:@""];
+            }
+            [self presentChooseView:searchCondition];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self dismissIndicatorView];

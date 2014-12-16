@@ -8,6 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+#define kAttributeCode          @"attribute"
+#define kAuthorCode             @"author"
+#define kStyleCode              @"creationStyle"
+#define kMakeStyleCode          @"firingMode"
+#define kHeightCode             @"height"
+#define kCountoyCode            @"nationality"
+#define kPrice1Code             @"price1"
+#define kPrice2Code             @"price2"
+#define kSpec1Code              @"spec1"
+#define kSpec2Cpde              @"spec2"
+#define kSpeciesCode            @"species"
+#define kVersionsCode           @"versionNumber"
+
+
 @interface SelectInfo : NSObject
 @property (nonatomic, strong) NSString *categaryCode;//
 @property (nonatomic, strong) NSString *price;
@@ -24,7 +38,10 @@
 @property (nonatomic, assign) NSInteger shotQuantity;
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, assign) NSInteger page;
-
+@property (nonatomic, strong) NSString  *attrible;
+@property (nonatomic, strong) NSString *makeStyle;
 - (NSDictionary*)createURLDict;
+
+- (void)setInfoWithType:(NSString*)type content:(NSDictionary*)content;
 
 @end

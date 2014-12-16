@@ -8,27 +8,19 @@
 
 #import "SearchVC.h"
 #import "HMSegmentedControl.h"
-
+#import "SelectInfo.h"
+//#import "pinyin.h"
 @interface SearchVC ()
 <UITableViewDataSource, UITableViewDelegate>
 {
-    NSInteger        _searchType; //0:价格区间   1:制作风格  2：尺寸
-    NSArray         *_priceArray;   //价格 array
-    NSArray         *_makeStyleArray;//制作风格
-    NSArray         *_sizeArray;//尺寸
-    NSArray         *_artistArr;//艺术家
-//    NSMutableDictionary *_searchResultDict;//选择结果
-    HMSegmentedControl *segmentedControl1;// table view title
-    
+    NSMutableArray *tbArr;
+    NSMutableArray *sliderTitles;
 }
 @property (weak, nonatomic) IBOutlet UITableView *searchTB;
 @end
 
 @implementation SearchVC
 
-#define kPrice                  @"price"
-#define kStyle                  @"style"
-#define kSize                   @"size"
 
 static NSString *searchCell = @"SearchCell";
 
@@ -36,106 +28,114 @@ static NSString *searchCell = @"SearchCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    _priceArray = @[@"500-1000", @"1000-2000", @"2000-3000", @"3000-5000", @"5000-9999", @"10000-19999", @"2万-3万", @"3万-5万", @"5万-10万", @"10万-30万", @"30万-100万", @"100万-500万", @"500万以上"];
-    _makeStyleArray = @[@"水墨", @"工笔", @"其他"];
-    _sizeArray = @[@"2平尺以下", @"2——4平尺", @"4——8平尺", @"8——12平尺", @"12平尺以上"];
-//    _searchResultDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"-1",  kPrice, @"-1", kStyle, @"-1", kSize, nil];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"area" ofType:@"plist"];
-    NSArray *arts = [NSArray arrayWithContentsOfFile:path];
-    NSMutableArray *arr = [NSMutableArray array];
-    for (NSDictionary *dict in arts) {
-        NSString *name = dict[@"state"];
-        [arr addObject:name];
+    if (!self.titles) {
+        return;
     }
-    _artistArr = [arr sortedArrayUsingFunction:nickNameSort context:nil];
-//    NSMutableArray *arr2 = [NSMutableArray array];
-//    for (NSString *nickName in _artistArr) {
-//        [arr2 addObject:[nickName substringToIndex:1]];
-//    }
-//    NSLog(@"first leter %@", arr2);
+    self.title = self.titles[@"Title"];
+    tbArr = [[NSMutableArray alloc] init];
     self.searchTB.delegate = self;
     self.searchTB.dataSource = self;
     [self.searchTB registerClass:[UITableViewCell class] forCellReuseIdentifier:searchCell];
+    
+    [self showIndicatorView:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [tbArr addObjectsFromArray:[self getTBArr]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissIndicatorView];
+            [self.searchTB reloadData];
+        });
+    });
+
+}
+//汉字转拼音
+- (NSString *) phonetic:(NSString*)sourceString {
+    NSMutableString *source = [sourceString mutableCopy];
+    CFStringTransform((__bridge CFMutableStringRef)source, NULL, kCFStringTransformMandarinLatin, NO);
+    CFStringTransform((__bridge CFMutableStringRef)source, NULL, kCFStringTransformStripDiacritics, NO);
+    return source;
 }
 
-NSInteger nickNameSort(NSString *user1, NSString *user2, void *context) {
-    return  [user1 localizedCompare:user2];
+NSInteger soredArray1(id model1, id model2, void *context)
+{
+    return [model1 localizedStandardCompare:model2];
+}
+
+- (NSMutableArray*)getTBArr
+{
+    NSMutableArray *array = [NSMutableArray array];
+    NSMutableDictionary* title = [NSMutableDictionary dictionary];
+    if ([self.titles[@"Code"] isEqualToString:kAuthorCode]) {
+        sliderTitles = [[NSMutableArray alloc] init];
+        NSArray *contactArr = self.titles[@"TypeInfo"];
+        for (NSDictionary *dict in contactArr) {
+            NSString *firstLetter = [[self phonetic:dict[@"Name"]] substringToIndex:1];
+//            NSLog(@"%@", firstLetter);
+            NSMutableArray *letterArray = title[firstLetter];
+            if (letterArray) {
+                [letterArray addObject:dict];
+            }else{
+                letterArray = [NSMutableArray arrayWithObject:dict];
+            }
+            [title setObject:letterArray forKey:firstLetter];
+        }
+        NSArray *keys = [title allKeys];
+        NSArray *sortKeys = [keys sortedArrayUsingFunction:soredArray1 context:NULL];
+        for (NSString *key in sortKeys) {
+            NSString *upKey = [key uppercaseString];
+            [sliderTitles addObject:upKey];
+            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:upKey,@"title",title[key], @"row", nil];
+            [array addObject:dict];
+        }
+    }else{
+        [title setObject:@"title" forKey:@"title"];
+        [title setObject:self.titles[@"TypeInfo"] forKey:@"row"];
+        [array addObject:title];
+    }
+    return array;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-    _searchType = segmentedControl1.selectedSegmentIndex;
-    [self.searchTB reloadData];
-    
 }
 
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return tbArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    switch (_searchType) {
-        case 3:
-            return _priceArray.count;
-        case 2:
-            return _makeStyleArray.count;
-        case 1:
-            return _sizeArray.count;
-        case 0:
-            return _artistArr.count;
-        default:
-            return 0;
-            break;
-    }
-
+    return [tbArr[section][@"row"] count];
 }
 
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([self.titles[@"Code"] isEqualToString:kAuthorCode]) {
+        return tbArr[section][@"title"];
+    }
+    return nil;
+}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *dict = tbArr[indexPath.section][@"row"][indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCell forIndexPath:indexPath];
     cell.textLabel.textColor = kBlackColor;
-    NSNumber *selectIndex = nil;
-    switch (_searchType) {
-        case 3:{
-            cell.textLabel.text = _priceArray[indexPath.row];
-        }
-            break;
-        case 2:{
-            cell.textLabel.text = _makeStyleArray[indexPath.row];
-            break;
-        }
-        case 1:{
-            cell.textLabel.text = _sizeArray[indexPath.row];
-        }
-            break;
-        case 0:{
-            cell.textLabel.text = _artistArr[indexPath.row];
-        }break;
-        default:
-            break;
-    }
-    
-    if (selectIndex && [selectIndex integerValue] == indexPath.row) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }else{
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    cell.textLabel.text = dict[@"Name"];
     return cell;
 }
 
@@ -143,22 +143,20 @@ NSInteger nickNameSort(NSString *user1, NSString *user2, void *context) {
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.chooseFinished) {
-        self.chooseFinished(self.searchType, @(indexPath.row));
+        self.chooseFinished(self.titles[@"Code"], tbArr[indexPath.section][@"row"][indexPath.row]);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSArray*)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    if (self.searchType == 0) {
-        NSMutableArray* array = [NSMutableArray array];
-        for (int i = 0; i < 26; i++) {
-            [array addObject:[NSString stringWithFormat:@"%c", 'A'+i]];
-        }
-        return array;
-    }
-    return nil;
-    
+    return sliderTitles;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    NSLog(@"%d", index);
+    return index;
 }
 
 /*

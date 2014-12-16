@@ -46,6 +46,7 @@ static NSString *priceCell      = @"PriceCell";
     
     self.classfilyTB.delegate = self;
     self.classfilyTB.dataSource = self;
+    self.classfilyTB.backgroundColor = kBGGrayColor;
     self.classfilyTB.bounces = NO;
     [self.classfilyTB registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:priceCell];
     
@@ -205,7 +206,7 @@ NSInteger soredArray(id model1, id model2, void *context)
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return _classfilyType ? 50 : 44;
+    return _classfilyType ? 60 : 44;
     
 }
 
@@ -234,7 +235,7 @@ NSInteger soredArray(id model1, id model2, void *context)
 {
     if (!_classfilyType) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:classfilyCell forIndexPath:indexPath];
-        cell.backgroundColor = (_selectedIndex == indexPath.row ? kBGGrayColor : [UIColor whiteColor]);
+        cell.backgroundColor = (_selectedIndex == indexPath.row ? [UIColor whiteColor] : kBGGrayColor);
         cell.textLabel.text = [(ClassifyModel*)(_titles[indexPath.row]) name];
         return cell;
     }else{

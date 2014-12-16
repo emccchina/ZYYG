@@ -62,8 +62,7 @@ static NSString *spreadCell = @"SpreadCell";
     [self.detailTB registerNib:[UINib nibWithNibName:@"SpreadCell" bundle:nil] forCellReuseIdentifier:spreadCell];
     
     self.addCartBut.layer.cornerRadius = 3;
-    self.addCartBut.layer.borderWidth = 1;
-    self.addCartBut.layer.borderColor = kBlackColor.CGColor;
+    self.addCartBut.layer.backgroundColor = kRedColor.CGColor;
     
     CGFloat width = CGRectGetWidth(self.countLab.frame);
     self.countLab.layer.cornerRadius = width/2;

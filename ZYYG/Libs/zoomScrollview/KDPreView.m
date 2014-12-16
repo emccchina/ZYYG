@@ -97,7 +97,7 @@
 	// 设置伸缩比例
     CGFloat minScale;
 
-	CGFloat maxScale = 2.0;
+	CGFloat maxScale = 5.0;
 
     
     CGFloat  scaleWidth = imageWidth/boundsWidth;

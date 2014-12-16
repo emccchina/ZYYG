@@ -30,6 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
+    self.title = @"注册";
     self.accountTF.delegate = self;
     self.passwordTF.delegate = self;
     self.passwordAgainTF.delegate = self;

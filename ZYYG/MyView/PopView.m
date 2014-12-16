@@ -20,7 +20,7 @@
         myTableView.layer.cornerRadius = 3;
         myTableView.delegate = self;
         myTableView.dataSource = self;
-        myTableView.backgroundColor = kBGGrayColor;
+        myTableView.backgroundColor = [UIColor whiteColor];
         [self addSubview:myTableView];
     }
     return self;
@@ -95,7 +95,7 @@
         
         }
     }
-    cell.backgroundColor = kBGGrayColor;
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 

@@ -57,6 +57,52 @@
     if (self.page) {
         [dict setObject:@(self.page) forKey:@"page"];
     }
+    
+    if (self.makeStyle) {
+        [dict setObject:self.makeStyle forKey:@"FiringMode"];
+    }
+    
+    if (self.attrible) {
+        [dict setObject:self.attrible forKey:@"Attributes"];
+    }
+    
+    if (!dict.count) {
+        return nil;
+    }
     return dict;
+}
+
+
+- (void)setInfoWithType:(NSString*)type content:(NSDictionary*)content
+{
+    NSString *code = content[@"Code"];
+    if (!code) {
+        return;
+    }
+    if ([type isEqualToString:kAttributeCode]) {
+        self.attrible = code;
+    }else if ([type isEqualToString:kAuthorCode]){
+        self.artorName = code;
+    }else if ([type isEqualToString:kStyleCode]){
+        self.sytle = code;
+    }else if ([type isEqualToString:kMakeStyleCode]){
+        self.makeStyle = code;
+    }else if ([type isEqualToString:kHeightCode]){
+        self.height = code;
+    }else if ([type isEqualToString:kCountoyCode]){
+        self.country = code;
+    }else if ([type isEqualToString:kPrice1Code]){
+        self.price = code;
+    }else if ([type isEqualToString:kPrice2Code]){
+        self.price = code;
+    }else if ([type isEqualToString:kSpec1Code]){
+        self.size = code;
+    }else if ([type isEqualToString:kSpec2Cpde]){
+        self.squareFoot = code;
+    }else if ([type isEqualToString:kSpeciesCode]){
+        self.species = code;
+    }else if ([type isEqualToString:kVersionsCode]){
+        self.versionNumber = code;
+    }
 }
 @end

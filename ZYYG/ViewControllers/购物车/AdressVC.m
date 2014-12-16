@@ -59,7 +59,7 @@
 }
 - (IBAction)cellButtonCilck:(id)sender {
     MyButton *button = (MyButton*)sender;
-    NSLog(@"%d", [(NSIndexPath*)button.mark row]);
+//    NSLog(@"%d", [(NSIndexPath*)button.mark row]);
     _selectedIndex = [(NSIndexPath*)button.mark row];
     [self.adressTB reloadData];
 }

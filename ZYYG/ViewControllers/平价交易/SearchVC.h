@@ -8,11 +8,12 @@
 
 #import "BaseViewController.h"
 
-typedef void (^ChooseFactorFinised) (NSInteger type, id content);
+typedef void (^ChooseFactorFinised) (NSString *type, id content);
 
 //分类后面显示商品的搜索
 @interface SearchVC : BaseViewController
 
 @property (nonatomic, assign) NSInteger         searchType;//0艺术家   1尺寸  2国籍  3价格
 @property (nonatomic, copy)   ChooseFactorFinised       chooseFinished;
+@property (nonatomic, strong) NSDictionary           *titles;
 @end
