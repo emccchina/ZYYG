@@ -72,5 +72,12 @@
     self.AppendPrice = [dict[@"Price"] floatValue];
     self.picURL = dict[@"ImgUrl"];
 }
+- (void)goodsModelFromOrder:(NSDictionary *)dict
+{
+    self.GoodsCode = [dict safeObjectForKey:@"Code"];
+    self.GoodsName = [dict safeObjectForKey:@"Title"];
+    self.AppendPrice = [[dict safeObjectForKey:@"Price"] floatValue];
+    self.picURL = [dict safeObjectForKey:@"Title"];
+}
 
 @end

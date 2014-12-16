@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UITableView *orderDetailTableView;
 @property (weak, nonatomic) IBOutlet UIButton *checkDelivery;
 @property (weak, nonatomic) IBOutlet UIButton *confirmDelivery;
+@property (retain, nonatomic)  NSString *orderCode;
 @end

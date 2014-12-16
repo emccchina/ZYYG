@@ -58,6 +58,15 @@
     return (NSDictionary*)dict;
 }
 
+-(void)addressFromOrder:(NSDictionary *)dict
+{
+    self.name = [dict safeObjectForKey:@"Consignee"];
+    self.defaultAdress = [dict safeObjectForKey:@"Address"];
+    self.zipCode = [dict safeObjectForKey:@"Postcode"];
+    self.mobile = [dict safeObjectForKey:@"Tel"];
+    
+}
+
 @end
 
 @implementation AddressManager

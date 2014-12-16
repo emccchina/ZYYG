@@ -7,8 +7,11 @@
 //
 
 #import "BaseViewController.h"
-
+#import "HMSegmentedControl.h"
 @interface MarginMoneyVC : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *maybeMoney;
+@property (weak, nonatomic) IBOutlet UILabel *frozen;
+@property (weak, nonatomic) IBOutlet HMSegmentedControl *segView;
 @property (weak, nonatomic) IBOutlet UITableView *marginMoneyTableView;
 @end

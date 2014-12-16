@@ -29,6 +29,9 @@
 - (void)setModel:(NSDictionary*)dict;
 
 - (NSDictionary*)getDict:(BOOL)state;//获取提交地址的字典  state， 是否默认
+
+-(void)addressFromOrder:(NSDictionary *)dict;
+
 @end
 
 

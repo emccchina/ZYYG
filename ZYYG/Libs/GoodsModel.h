@@ -41,4 +41,5 @@
 - (void)goodsModelFromHomePage:(NSDictionary*)dict;//首页解析
 - (void)goodsModelFromCollect:(NSDictionary *)dict;//我的收藏解析
 - (void)goodsModelFromSearch:(NSDictionary *)dict;//搜索结果解析
+- (void)goodsModelFromOrder:(NSDictionary *)dict;//搜索结果解析
 @end

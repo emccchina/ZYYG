@@ -169,6 +169,7 @@
 		F9BC26AB1A2EE945006894C6 /* OrderListCellBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26AA1A2EE945006894C6 /* OrderListCellBottom.m */; };
 		F9BEC50F1A36E1D800BA931D /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BEC50E1A36E1D800BA931D /* OrderModel.m */; };
 		F9BEC5121A36E39700BA931D /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BEC5111A36E39700BA931D /* GoodsModel.m */; };
+		F9D1C78A1A4021F4001FF43B /* InvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D1C7891A4021F4001FF43B /* InvoiceModel.m */; };
 		F9DC702A1A31A43B006AE19C /* SettingsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9DC70291A31A43B006AE19C /* SettingsList.plist */; };
 		F9DC702D1A31AC11006AE19C /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DC702C1A31AC11006AE19C /* SettingModel.m */; };
 		F9FE8FD71A3EE41200EDA45F /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE8FD61A3EE41200EDA45F /* AccountModel.m */; };
@@ -478,6 +479,8 @@
 		F9BEC50E1A36E1D800BA931D /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		F9BEC5101A36E39700BA931D /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
 		F9BEC5111A36E39700BA931D /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
+		F9D1C7881A4021F4001FF43B /* InvoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceModel.h; sourceTree = "<group>"; };
+		F9D1C7891A4021F4001FF43B /* InvoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceModel.m; sourceTree = "<group>"; };
 		F9DC70291A31A43B006AE19C /* SettingsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingsList.plist; sourceTree = "<group>"; };
 		F9DC702B1A31AC11006AE19C /* SettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModel.h; sourceTree = "<group>"; };
 		F9DC702C1A31AC11006AE19C /* SettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModel.m; sourceTree = "<group>"; };
@@ -1030,6 +1033,8 @@
 				F9B1A5EE1A3BE546006244F4 /* LetterModel.m */,
 				F9FE8FD51A3EE41200EDA45F /* AccountModel.h */,
 				F9FE8FD61A3EE41200EDA45F /* AccountModel.m */,
+				F9D1C7881A4021F4001FF43B /* InvoiceModel.h */,
+				F9D1C7891A4021F4001FF43B /* InvoiceModel.m */,
 			);
 			name = MyModel;
 			path = ZYYG/Libs;
@@ -1208,6 +1213,7 @@
 				94D89EC11A21FDA70074B874 /* JGProgressHUDIndicatorView.m in Sources */,
 				940178981A21CE0000697D14 /* AFSecurityPolicy.m in Sources */,
 				940178951A21CE0000697D14 /* AFHTTPRequestOperationManager.m in Sources */,
+				F9D1C78A1A4021F4001FF43B /* InvoiceModel.m in Sources */,
 				940178941A21CE0000697D14 /* AFHTTPRequestOperation.m in Sources */,
 				F7C8D5141A3809C6009F36B3 /* FMDatabaseAdditions.m in Sources */,
 				F7EC68CB1A2BF5DA000B289D /* UIView+JHExtension.m in Sources */,

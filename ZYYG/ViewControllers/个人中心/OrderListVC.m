@@ -15,12 +15,13 @@
 #import "OrderModel.h"
 #import "UserInfo.h"
 #import "GoodsModel.h"
-#import "ArtDetailVC.h"
+#import "OrderDetailVC.h"
 
 @interface OrderListVC ()
 {
     NSMutableArray *orderArray;
     UserInfo *user;
+    OrderModel *currentOrder;
 }
 @property (retain, nonatomic) IBOutlet HMSegmentedControl *segmentView;
 @end
@@ -102,19 +103,6 @@
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
 
-- (void)presentDetailVC:(id)info
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
-    UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
-        [detailVC setValue:@(1) forKey:@"hiddenBottom"];
-    }
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
-        [detailVC setValue:(NSString*)info forKey:@"productID"];
-    }
-    detailVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
 
 
 #pragma mark - tableView
@@ -162,7 +150,7 @@
         return topCell;
     }else if(indexPath.row == (order.Goods.count+1)){
         OrderListCellSum *sumCell=(OrderListCellSum*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellSum" forIndexPath:indexPath];
-        sumCell.goodsSum.text =[NSString stringWithFormat:@"共计(%d)商品",order.Goods.count];
+        sumCell.goodsSum.text =[NSString stringWithFormat:@"共计(%lu)商品",(unsigned long)order.Goods.count];
         sumCell.priceSum.text=[NSString stringWithFormat:@"实付:￥%@",order.OrderMoney];
         return sumCell;
     }else if(indexPath.row == (order.Goods.count+2)){
@@ -185,14 +173,28 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    OrderModel *order=orderArray[indexPath.section];
-    if (indexPath.row != 0 && indexPath.row != order.Goods.count+1 && indexPath.row != order.Goods.count+2) {
-        GoodsModel *goods=order.Goods[indexPath.row-1];
-        [self presentDetailVC:goods.GoodsCode];
-        
+    currentOrder=orderArray[indexPath.section];
+    if (indexPath.row != 0 && indexPath.row != currentOrder.Goods.count+1 && indexPath.row != currentOrder.Goods.count+2) {
+        [self performSegueWithIdentifier:@"OrderDetail" sender:self];
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"查看订单详细");
+    if(currentOrder){
+        NSString *orderCode=currentOrder.OrderCode;
+        UIViewController *vc = segue.destinationViewController;
+        vc.hidesBottomBarWhenPushed = YES;
+        if ([(OrderDetailVC*)vc respondsToSelector:@selector(setOrderCode:)]) {
+            [vc setValue:orderCode forKey:@"orderCode"];
+        }
+    }else{
+        NSLog(@"选择某一行");
+    }
+    
+    
+}
 /*
  #pragma mark - Navigation
  

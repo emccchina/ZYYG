@@ -7,10 +7,21 @@
 //
 
 #import "OrderDetailVC.h"
-#import "CartCell.h"
+#import "OrderListCellGoods.h"
+#import "GoodsModel.h"
+#import "AdressModel.h"
+#import "OrderModel.h"
+#import "InvoiceModel.h"
+#import "ArtDetailVC.h"
 
 @interface OrderDetailVC ()
-
+{
+    UserInfo *user;
+    OrderModel *order;
+    AdressModel *addr;
+    InvoiceModel *invoice;
+    
+}
 @end
 
 @implementation OrderDetailVC
@@ -19,26 +30,22 @@
 static NSString *nomalCell = @"nomalCell";
 static NSString *adressCell = @"AdressCell";
 static NSString *ticketCell = @"TicketCell";
-static NSString *cartCell = @"CartCell";
+static NSString *cartCell = @"OrderListCellGoods";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    addr=[[AdressModel alloc] init];
     // Do any additional setup after loading the view.
     [self showBackItem];
     self.orderDetailTableView.delegate = self;
     self.orderDetailTableView.dataSource = self;
-    [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
+    [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"OrderListCellGoods" bundle:nil] forCellReuseIdentifier:cartCell];
     
     self.confirmDelivery.layer.cornerRadius = 3;
     self.checkDelivery.layer.cornerRadius = 3;
     self.confirmDelivery.layer.backgroundColor = kRedColor.CGColor;
     self.checkDelivery.layer.backgroundColor = kRedColor.CGColor;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
+    [self requestLetterList:self.orderCode];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,18 +53,62 @@ static NSString *cartCell = @"CartCell";
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)requestLetterList:(NSString *)orderCode
+{
+    user=[UserInfo shareUserInfo];
+    if (![user isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@OrderDetail.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",orderCode,@"OrderCode", nil];
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [addr addressFromOrder:result[@"Addr"]];
+            invoice =[InvoiceModel invoiceWithDict:result[@"Invoice"]];
+            order = [OrderModel orderModelWithDict:result];
+            NSLog(@"订单商品解析完成");
+            [self.orderDetailTableView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+}
+
+- (void)requestFinished
+{
+    [self dismissIndicatorView];
+}
+
+
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    if (section == 1){
-        return 4;
-    }
+    if (section == 1)        return order.Goods.count+1;
+    else if(section ==4)     return 2;
     return 1;
 }
 
@@ -66,12 +117,17 @@ static NSString *cartCell = @"CartCell";
     switch (indexPath.section) {
         case 0:
             return 100;
+            break;
         case 1:
             return indexPath.row == 0 ? 44 : 100;
-       
+            break;
+        case 4:
+            return 100;
+            break;
         default:
             return 44;
             break;
+            
     }
 }
 
@@ -80,7 +136,6 @@ static NSString *cartCell = @"CartCell";
     switch (section) {
         case 0:
             return 0.5;
-            
         default:
             return 5;
             break;
@@ -98,9 +153,9 @@ static NSString *cartCell = @"CartCell";
             viewBG.layer.borderColor = [UIColor colorWithRed:255.0/255.0 green:223.0/255.0 blue:175.0/255.0 alpha:1.0].CGColor;
             viewBG.layer.borderWidth = 10;
             UILabel *topLabel = (UILabel*)[cell viewWithTag:2];
-            topLabel.text = @"张三  1398998898";
+            topLabel.text =[NSString stringWithFormat:@"%@   %@",addr.name,addr.mobile];
             UILabel *bottomLabel = (UILabel*)[cell viewWithTag:3];
-            bottomLabel.text = @"北京是首体南路9号";
+            bottomLabel.text = addr.defaultAdress;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             break;
@@ -108,15 +163,17 @@ static NSString *cartCell = @"CartCell";
             if (indexPath.row == 0) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
                 cell.textLabel.text = @"商品清单";
-                cell.detailTextLabel.text = @"";
+                cell.detailTextLabel.text = order.OrderType;
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
             }else{
-                CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
-                [cell.iconImage setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"]];
-                cell.selectState = NO;
-                cell.cellType = YES;
+                GoodsModel *goods=order.Goods[indexPath.row -1];
+                OrderListCellGoods *cell = (OrderListCellGoods*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
+                [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl]];
+                cell.goodsName.text=goods.GoodsName;
+                cell.goodsPrice.text=[NSString stringWithFormat:@"￥%.2f", goods.AppendPrice];
+                cell.goodsCount.text=@"1";
                 return cell;
             }
          }
@@ -156,9 +213,9 @@ static NSString *cartCell = @"CartCell";
                 UILabel *topLabel = (UILabel*)[cell viewWithTag:1];
                 UILabel *midLabel = (UILabel*)[cell viewWithTag:2];
                 UILabel *botLabel = (UILabel*)[cell viewWithTag:3];
-                topLabel.text = @"发票类型：普通发票";
-                midLabel.text = @"发票抬头：个人";
-                botLabel.text = @"发票内容：办公用品";
+                topLabel.text =[NSString stringWithFormat:@"发票类型：%@",invoice.InvoiceType];
+                midLabel.text = [NSString stringWithFormat:@"发票抬头：%@",invoice.InvoiceTitle];
+                botLabel.text = [NSString stringWithFormat:@"发票内容：%@",invoice.InvoiceTaxNo];
                 return cell;
             }
             break;
@@ -167,32 +224,35 @@ static NSString *cartCell = @"CartCell";
         default:
             break;
     }
-    return nil;
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"detail"];
+    return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.section) {
-        case 0:{//地址
-            [self performSegueWithIdentifier:@"AdressSegue" sender:self];
-        }
-            break;
-        case 1://选择页面
-        case 2:{
-                 }break;
-        case 3:{//发票信息
-                 }break;
-        case 4:{//商品详情
-            
-        }
-        default:
-            break;
+    if (indexPath.section ==1 && indexPath.row!=0) {
+        GoodsModel *goods=order.Goods[indexPath.row-1];
+        [self presentDetailVC:goods.GoodsCode];
     }
-    
+   
 }
 
+
+- (void)presentDetailVC:(id)info
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
+    UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
+    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
+        [detailVC setValue:@(1) forKey:@"hiddenBottom"];
+    }
+    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
+        [detailVC setValue:(NSString*)info forKey:@"productID"];
+    }
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
 
 /*
 #pragma mark - Navigation

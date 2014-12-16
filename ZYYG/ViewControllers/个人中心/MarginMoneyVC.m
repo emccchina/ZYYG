@@ -10,6 +10,7 @@
 #import "MyAccountCell.h"
 #import "AccountModel.h"
 
+
 @interface MarginMoneyVC ()
 {
     NSMutableArray *accountArray;
@@ -28,14 +29,40 @@
     self.marginMoneyTableView.dataSource = self;
     [self.marginMoneyTableView registerNib:[UINib nibWithNibName:@"MyAccountCell" bundle:nil] forCellReuseIdentifier:@"MyAccountCell"];
     [self requestAccountList:@"-1" pageNumber:@"1"];
+    [self segViewInit] ;
     // Do any additional setup after loading the view.
     
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)segViewInit
+{
+    self.segView.sectionTitles=@[@"全部", @"收入", @"支出"];
+    self.segView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    self.segView.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    self.segView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    self.segView.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    [self.segView addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+     NSLog(@"不晓得成功没");
+   
+}
+
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedContr {
+    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedContr.selectedSegmentIndex);
+    if(segmentedContr.selectedSegmentIndex==1){
+        [self requestAccountList:@"1" pageNumber:@"1" ];
+    }else if(segmentedContr.selectedSegmentIndex==2){
+        [self requestAccountList:@"0" pageNumber:@"1" ];
+    }else{
+        [self requestAccountList:@"-1" pageNumber:@"1" ];
+    }
+    
+}
+
+
 
 
 -(void)requestAccountList:(NSString *)dr  pageNumber:(NSString *)num
@@ -59,6 +86,10 @@
         if (result) {
             [accountArray removeAllObjects];
             NSArray *accounts=result[@"data"];
+            NSString *MaybeMoney=result[@"MaybeMoney"];
+            self.maybeMoney.text=[NSString stringWithFormat:@"$%@",MaybeMoney];
+            NSString *Frozen=result[@"Frozen"];
+            self.frozen.text=[NSString stringWithFormat:@"$%@",Frozen];
             for (int i=0; i<accounts.count; i++) {
                 AccountModel *account =[AccountModel accountWithDict:accounts[i]];
                 [accountArray addObject:account];
@@ -78,14 +109,6 @@
 }
 
 #pragma mark -tableView
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return @"本月";
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 30;
-}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return accountArray.count;
