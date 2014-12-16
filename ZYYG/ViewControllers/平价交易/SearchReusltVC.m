@@ -19,8 +19,6 @@
 <UITableViewDataSource, UITableViewDelegate, GoodsShowCellDelegate, UISearchBarDelegate>
 {
     HMSegmentedControl *segmentedControl1;// table view title
-    NSMutableArray     *chooseArr;//筛选
-    NSArray             *chooseTitles;
     NSInteger           _selectedIndex;//选择的第几个
     SelectInfo          *_selectInfo;
     NSMutableArray      *results;
@@ -45,9 +43,6 @@ static NSString *goodsCell = @"GoodsCell";
     self.resultTB.delegate = self;
     self.resultTB.dataSource = self;
     [self.resultTB registerNib:[UINib nibWithNibName:@"GoodsShowCell" bundle:nil] forCellReuseIdentifier:goodsCell];
-    chooseTitles = @[@"艺术家", @"尺寸", @"国籍", @"价格"];
-    chooseArr = [NSMutableArray arrayWithArray:chooseTitles];
-    [self.chooseView setTitles:chooseArr];
     [self.chooseView setChooseFinised:^(id selected){
         if ([selected isKindOfClass:[NSNumber class]]) {
             [self presentSearchVC:selected];
@@ -66,9 +61,19 @@ static NSString *goodsCell = @"GoodsCell";
 }
 - (void)doRightButton:(UIBarButtonItem*)item
 {
+    if (!self.chooseView.hidden) {
+        return;
+    }
+    [self requestForSearchItem];
+    
+}
+
+- (void)presentChooseView:(NSArray*)arr
+{
     self.chooseView.hidden = !self.chooseView.hidden;
     NSString *titleItem = self.chooseView.hidden ? @"筛选" : @"确定";
     self.navigationItem.rightBarButtonItem.title = titleItem;
+    [self.chooseView setTitles:arr];
     if (!self.chooseView.hidden) {
         self.chooseView.alpha = 0;
         [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -77,8 +82,6 @@ static NSString *goodsCell = @"GoodsCell";
             
         }];
     }
-    
-    
 }
 
 - (void)back
@@ -103,10 +106,7 @@ static NSString *goodsCell = @"GoodsCell";
         SearchVC *search = (SearchVC*)destVC;
         [search setValue:@(_selectedIndex) forKey:@"searchType"];
         [search setChooseFinished:^(NSInteger type, id content){
-            NSString *title = chooseTitles[type];
-            NSString *newTitle = [NSString stringWithFormat:@"%@ %@",title, content];
-            [chooseArr replaceObjectAtIndex:type withObject:newTitle];
-            [self.chooseView setTitles:chooseArr];
+           
         }];
     }
     
@@ -167,7 +167,31 @@ static NSString *goodsCell = @"GoodsCell";
     }];
 }
 
-
+- (void)requestForSearchItem
+{
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@SearchItems.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = nil;
+    if (_selectInfo.categaryCode) {
+        dict = @{@"CategoryCode":(_selectInfo.categaryCode?:@"")};
+    }
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self dismissIndicatorView];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+//            [self parseRequestResults:result[@"Goods"]];
+//            [self.resultTB reloadData];
+            [self presentChooseView:result[@"SearchItems"]];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+}
 
 #pragma mark - UISearchBarDelegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar

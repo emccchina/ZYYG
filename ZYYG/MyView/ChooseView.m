@@ -87,7 +87,7 @@
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = self.titles[indexPath.row];
+    cell.textLabel.text = self.titles[indexPath.row][@"Title"];
     
     return cell;
     
@@ -98,7 +98,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (self.chooseFinised) {
-        self.chooseFinised(@(indexPath.row));
+        self.chooseFinised(self.titles[indexPath.row]);
     }
 }
 

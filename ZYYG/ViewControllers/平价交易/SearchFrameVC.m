@@ -114,20 +114,20 @@
 
 #pragma mark - UISearchBarDelegate
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar1
 {
     NSLog(@"begin");
     searchBar.showsCancelButton = YES;
    
 }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar1
 {
     NSLog(@"end");
     searchBar.showsCancelButton = NO;
     
 }
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar1
 {
     NSLog(@"click");
     [searchBar resignFirstResponder];
@@ -136,7 +136,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar1
 {
     [searchBar resignFirstResponder];
 }
