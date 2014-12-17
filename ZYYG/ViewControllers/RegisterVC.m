@@ -85,7 +85,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@reg.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
-    NSLog(@"url %@, %@, %d", url, password, password.length);
+//    NSLog(@"url %@, %@, %d", url, password, password.length);
     NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.accountTF.text, @"username",password, @"pass",self.emailTF.text, @"email", nil];
     [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);

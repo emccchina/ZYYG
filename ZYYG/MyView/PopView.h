@@ -17,7 +17,7 @@ typedef void (^SelectPopViewFinished) (NSInteger row);
     NSArray             *_titles;
     NSInteger           _type;
 }
-@property (nonatomic, assign) NSInteger                 type;//0 分类中带图片的   1 不带图片
+@property (nonatomic, assign) NSInteger                 type;//0 分类中带图片的   1 不带图片,在window上显示的appdelegate
 @property (nonatomic, strong) NSArray                   *titles;
 @property (nonatomic, copy) SelectPopViewFinished       selectedFinsied;
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray*)newTitles;

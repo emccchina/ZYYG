@@ -25,6 +25,7 @@
     NSDictionary        *selectType;//选择的跳到SearchVC
     NSArray             *searchCondition;//筛选条件 是否已经存在， 不存在请求
     NSMutableArray      *details;//已经选择的条件,显示在chooseview 上的
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 @property (weak, nonatomic) IBOutlet UITableView *resultTB;
 @property (weak, nonatomic) IBOutlet ChooseView *chooseView;
@@ -46,6 +47,7 @@ static NSString *goodsCell = @"GoodsCell";
     self.resultTB.delegate = self;
     self.resultTB.dataSource = self;
     [self.resultTB registerNib:[UINib nibWithNibName:@"GoodsShowCell" bundle:nil] forCellReuseIdentifier:goodsCell];
+    [self addheadRefresh];
     [self.chooseView setChooseFinised:^(id selected){
         if ([selected isKindOfClass:[NSDictionary class]]) {
             [self presentSearchVC:selected];
@@ -69,8 +71,10 @@ static NSString *goodsCell = @"GoodsCell";
         [self requestForResult];
         return;
     }
-    
+    [_selectInfo recoverInfo];
     if (searchCondition && searchCondition.count) {
+        
+        [self recoverDetails];
         [self presentChooseView:searchCondition];
         return;
     }
@@ -100,9 +104,36 @@ static NSString *goodsCell = @"GoodsCell";
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (void)addheadRefresh
+{
+    [self.resultTB addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        refreshFooter = YES;
+        [self requestForResult];
+    }];
+}
+
+- (void)recoverDetails
+{
+    [details removeAllObjects];
+    for (int i = 0; i < searchCondition.count; i++) {
+        [details addObject:@""];
+    }
+}
+
+- (void)requestFinished
+{
+    if (!refreshFooter) {
+        [self.resultTB setContentOffset:CGPointZero];
+    }
+    refreshFooter = NO;
+    [self dismissIndicatorView];
+    [self.resultTB footerEndRefreshing];
+}
+
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-    
+    NSLog(@"Selected index %ld", (long)segmentedControl.selectedSegmentIndex);
+    [_selectInfo setSorteType:segmentedControl.selectedSegmentIndex];
+    [self requestForResult];
 }
 
 - (void)presentSearchVC:(id)selected
@@ -151,9 +182,11 @@ static NSString *goodsCell = @"GoodsCell";
 
 - (void)parseRequestResults:(NSArray*)arr
 {
-    [results removeAllObjects];
+    if (!refreshFooter) {
+        [results removeAllObjects];
+    }
     if (!arr.count) {
-        [self showAlertView:@"没有相关艺术品，请改变条件"];
+        [self showAlertView:!refreshFooter ? @"没有相关艺术品，请改变条件" : @"没有更多了"];
         return;
     }
     NSMutableArray *array = [NSMutableArray array];
@@ -168,6 +201,7 @@ static NSString *goodsCell = @"GoodsCell";
 
 - (void)requestForResult
 {
+    _selectInfo.page = (!refreshFooter ? 1 : (results.count-1)/20 + 2);
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -175,15 +209,15 @@ static NSString *goodsCell = @"GoodsCell";
     NSLog(@"url %@", url);
     NSDictionary *dict = [_selectInfo createURLDict];
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self dismissIndicatorView];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
             [self parseRequestResults:result[@"Goods"]];
             [self.resultTB reloadData];
         }
+        [self requestFinished];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self dismissIndicatorView];
+        [self requestFinished];
         [self showAlertView:kNetworkNotConnect];
     }];
 }
@@ -205,9 +239,7 @@ static NSString *goodsCell = @"GoodsCell";
         id result = [self parseResults:responseObject];
         if (result) {
             searchCondition = result[@"SearchItems"];
-            for (int i = 0; i < searchCondition.count; i++) {
-                [details addObject:@""];
-            }
+            [self recoverDetails];
             [self presentChooseView:searchCondition];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -264,7 +296,7 @@ static NSString *goodsCell = @"GoodsCell";
     if (segmentedControl1) {
         return segmentedControl1;
     }
-    segmentedControl1 = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"价格", @"时间", @"待售",@"已售"]];
+    segmentedControl1 = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"价格", @"时间", @"待售", @"已售"]];
     segmentedControl1.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     segmentedControl1.frame = CGRectMake(0, 40 + 100, 320, 40);
     segmentedControl1.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);

@@ -23,6 +23,7 @@
 
 
 @interface SelectInfo : NSObject
+
 @property (nonatomic, strong) NSString *categaryCode;//
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *size;
@@ -40,8 +41,15 @@
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString  *attrible;
 @property (nonatomic, strong) NSString *makeStyle;
+
+@property (nonatomic, assign) BOOL      sell;//0待售 1已售
+
+- (void)recoverInfo;//筛选 复原
+
 - (NSDictionary*)createURLDict;
 
 - (void)setInfoWithType:(NSString*)type content:(NSDictionary*)content;
+
+- (void)setSorteType:(NSInteger)type;//0价格  1时间   2待售 3已售
 
 @end

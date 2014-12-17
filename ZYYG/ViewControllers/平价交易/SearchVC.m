@@ -155,7 +155,7 @@ NSInteger soredArray1(id model1, id model2, void *context)
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
-    NSLog(@"%d", index);
+//    NSLog(@"%d", index);
     return index;
 }
 

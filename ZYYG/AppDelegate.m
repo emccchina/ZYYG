@@ -76,7 +76,7 @@
 
 - (void)showPopView
 {
-    NSArray *titles = @[@"艺术领域", @"价格分类"];
+    NSArray *titles = @[@"私人定制", @"私人洽购"];
     UITabBarController *VC = (UITabBarController*)self.window.rootViewController;
     NSLog(@"tabbar.frame %@, %f, %f", NSStringFromCGRect(VC.tabBar.frame), VC.tabBar.itemWidth, VC.tabBar.itemSpacing);
     CGRect rect = VC.tabBar.frame;

@@ -9,6 +9,63 @@
 #import "SelectInfo.h"
 
 @implementation SelectInfo
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self recoverInfo];
+    }
+    return self;
+}
+
+- (void)recoverInfo
+{
+    self.price = nil;
+    self.size = nil;
+    self.squareFoot = nil;
+    self.sytle = nil;
+    self.artorName = nil;
+    self.country = nil;
+    self.height = nil;
+    self.versionNumber = nil;
+    self.species = nil;
+    self.shotPrice = 0;
+    self.shotDate = 0;
+    self.shotQuantity = 0;
+    self.num = 20;
+    self.page = 1;
+}
+
+- (void)setSorteType:(NSInteger)type
+{
+    switch (type) {
+        case 0:{
+            self.shotPrice = (self.shotPrice == 1 ? 2 : 1);
+            self.shotDate = 0;
+            self.shotQuantity = 0;
+        }
+            break;
+        case 1:{
+            self.shotPrice = 0;
+            self.shotDate = (self.shotDate == 1 ? 2 : 1);
+            self.shotQuantity = 0;
+        }
+            break;
+        case 2:{
+        }
+        case 3:{
+            self.shotPrice = 0;
+            self.shotDate = 0;
+            self.shotQuantity = (self.shotQuantity == 1 ? 2:1);
+
+        }break;
+            
+        default:
+            break;
+    }
+}
+
 - (NSDictionary*)createURLDict
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];

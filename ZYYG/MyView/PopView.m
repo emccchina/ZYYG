@@ -71,7 +71,7 @@
     }
     if (_type) {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = [(ClassifyModel*)(_titles[indexPath.row]) name];
+        cell.textLabel.text = _titles[indexPath.row];
         cell.textLabel.textColor = kBlackColor;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }else{
@@ -106,7 +106,7 @@
         return;
     }
     if (self.selectedFinsied) {
-        self.selectedFinsied(indexPath.row-1);
+        self.selectedFinsied(_type ? indexPath.row : indexPath.row-1);
     }
 }
 /*
