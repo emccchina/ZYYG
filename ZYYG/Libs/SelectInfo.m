@@ -132,7 +132,7 @@
 
 - (void)setInfoWithType:(NSString*)type content:(NSDictionary*)content
 {
-    NSString *code = content[@"Code"];
+    NSString *code = content[@"Name"];
     if (!code) {
         return;
     }
