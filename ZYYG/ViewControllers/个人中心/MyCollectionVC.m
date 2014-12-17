@@ -11,6 +11,8 @@
 #import "HMSegmentedControl.h"
 #import "UserInfo.h"
 #import "GoodsModel.h"
+#import "ArtDetailVC.h"
+
 @interface MyCollectionVC ()
 {
 //    HMSegmentedControl *segmentView;// table view title
@@ -130,6 +132,25 @@
    
     
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GoodsModel *goods=collections[indexPath.row];
+    [self presentDetailVC:goods.GoodsCode];
+}
+
+- (void)presentDetailVC:(id)info
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
+    UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
+    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
+        [detailVC setValue:@(1) forKey:@"hiddenBottom"];
+    }
+    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
+        [detailVC setValue:(NSString*)info forKey:@"productID"];
+    }
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -174,6 +195,9 @@
         
     }];
 }
+
+
+
 
 /*
 #pragma mark - Navigation

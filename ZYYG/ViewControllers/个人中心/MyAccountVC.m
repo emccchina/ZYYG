@@ -6,12 +6,12 @@
 //  Copyright (c) 2014年 wu. All rights reserved.
 //
 
-#import "MarginMoneyVC.h"
+#import "MyAccountVC.h"
 #import "MyAccountCell.h"
 #import "AccountModel.h"
 
 
-@interface MarginMoneyVC ()
+@interface MyAccountVC ()
 {
     NSMutableArray *accountArray;
     UserInfo *user;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation MarginMoneyVC
+@implementation MyAccountVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -22,6 +22,11 @@
     NSMutableArray *orderArray;
     UserInfo *user;
     OrderModel *currentOrder;
+    NSString *orderType;
+    NSString *orderState;
+    NSInteger pageSize;
+    NSInteger pageNum;
+    
 }
 @property (retain, nonatomic) IBOutlet HMSegmentedControl *segmentView;
 @end
@@ -32,7 +37,12 @@
     [super viewDidLoad];
     [self showBackItem];
     orderArray=[NSMutableArray array];
-    [self requestOrderList:0 ];
+    [orderArray removeAllObjects];
+    orderType =@"0"; //平价订单
+    orderState=@""; // 20 :已支付,30:已发货,40:已签收,50:已取消,-1删除,10:审核,0:创建
+    pageSize=5;
+    pageNum=1;
+    [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     
     self.orderListTabelView.delegate = self;
     self.orderListTabelView.dataSource = self;
@@ -41,28 +51,64 @@
     [self.orderListTabelView registerNib:[UINib nibWithNibName:@"OrderListCellSum" bundle:nil] forCellReuseIdentifier:@"OrderListCellSum"];
     [self.orderListTabelView registerNib:[UINib nibWithNibName:@"OrderListCellBottom" bundle:nil] forCellReuseIdentifier:@"OrderListCellBottom"];
     
-    
-    self.segmentView.font=[UIFont fontWithName:@"Helvetica" size:14.0];
-    self.segmentView.sectionTitles = @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"];
+    self.segmentView.font = [UIFont fontWithName:@"Helvetica" size:14.0];
+    self.segmentView.sectionTitles = @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"];//  @"", @"0",@"20", @"30" ,@"40"
     self.segmentView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     self.segmentView.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
     self.segmentView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     self.segmentView.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     [self.segmentView addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     
-    
-    
-    
+    [self addFootRefresh];
     NSLog(@"交易订单");
     
     // Do any additional setup after loading the view.
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(void)requestOrderList:(NSInteger)orderType
+- (void)addFootRefresh
+{
+    [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        pageNum=pageNum+1;
+        [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+    }];
+}
+
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+    [orderArray removeAllObjects];
+   //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
+    pageNum=0;
+    if (0==segmentedControl.selectedSegmentIndex) {
+        orderState=@"";
+    }else if(1==segmentedControl.selectedSegmentIndex) {
+        orderState=@"0";
+    }else if(2==segmentedControl.selectedSegmentIndex) {
+        orderState=@"20";
+    }else if(3==segmentedControl.selectedSegmentIndex) {
+        orderState=@"30";
+    }else if(4==segmentedControl.selectedSegmentIndex) {
+        orderState=@"40";
+    }else{
+        orderState=@"";
+    }
+    [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+
+}
+
+
+
+//key
+//status
+//type
+//num
+//page
+
+-(void)requestOrderList:(NSString *)ortype ordState:(NSString *)orstate ordSize:(NSInteger )size  ordNum:(NSInteger )num
 {
     user=[UserInfo shareUserInfo];
     if (![user isLogin]) {
@@ -74,12 +120,13 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@OrderList.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",ortype, @"type",orstate, @"status",[NSString stringWithFormat:@"%d",size] , @"num", [NSString stringWithFormat:@"%d",num] , @"page" ,nil];
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
+            
             NSArray *orders=result[@"Orders"];
             for (int i=0; i<orders.count; i++) {
                 OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
@@ -97,11 +144,11 @@
 - (void)requestFinished
 {
     [self dismissIndicatorView];
+    [self.orderListTabelView footerEndRefreshing];
+
 }
 
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-}
+
 
 
 
@@ -147,15 +194,19 @@
         OrderListCellTop   *topCell=(OrderListCellTop*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellTop" forIndexPath:indexPath];
         topCell.orderNO.text=order.OrderCode;
         topCell.orderType.text=order.OrderType;
+        topCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return topCell;
     }else if(indexPath.row == (order.Goods.count+1)){
         OrderListCellSum *sumCell=(OrderListCellSum*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellSum" forIndexPath:indexPath];
         sumCell.goodsSum.text =[NSString stringWithFormat:@"共计(%lu)商品",(unsigned long)order.Goods.count];
         sumCell.priceSum.text=[NSString stringWithFormat:@"实付:￥%@",order.OrderMoney];
+        sumCell.selectionStyle=UITableViewCellSelectionStyleNone;
+        
         return sumCell;
     }else if(indexPath.row == (order.Goods.count+2)){
         OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellBottom" forIndexPath:indexPath];
         bootomCell.cancelTime.text=order.CreateTime;
+        bootomCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return bootomCell;
     }else {
         GoodsModel *goods=order.Goods[indexPath.row-1];
@@ -195,6 +246,8 @@
     
     
 }
+
+
 /*
  #pragma mark - Navigation
  

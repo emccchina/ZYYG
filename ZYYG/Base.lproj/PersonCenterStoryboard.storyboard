@@ -380,7 +380,7 @@
         <!--我的账户-->
         <scene sceneID="IXs-6l-eSn">
             <objects>
-                <viewController id="xiK-2U-C01" userLabel="我的账户" customClass="MarginMoneyVC" sceneMemberID="viewController">
+                <viewController id="xiK-2U-C01" userLabel="我的账户" customClass="MyAccountVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ydP-fR-wgo"/>
                         <viewControllerLayoutGuide type="bottom" id="tXN-ve-VP0"/>

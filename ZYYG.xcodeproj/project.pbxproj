@@ -154,7 +154,7 @@
 		F9B1A5F21A3C1A7F006244F4 /* ReadLetterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B1A5F11A3C1A7F006244F4 /* ReadLetterVC.m */; };
 		F9BC26831A2E95BB006894C6 /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26821A2E95BB006894C6 /* OrderListVC.m */; };
 		F9BC26861A2E9F1E006894C6 /* CompeteRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26851A2E9F1E006894C6 /* CompeteRecordVC.m */; };
-		F9BC26891A2EA263006894C6 /* MarginMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26881A2EA263006894C6 /* MarginMoneyVC.m */; };
+		F9BC26891A2EA263006894C6 /* MyAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26881A2EA263006894C6 /* MyAccountVC.m */; };
 		F9BC268C1A2EA41A006894C6 /* RecommendedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC268B1A2EA41A006894C6 /* RecommendedVC.m */; };
 		F9BC268F1A2EA5CB006894C6 /* MyCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC268E1A2EA5CB006894C6 /* MyCollectionVC.m */; };
 		F9BC26921A2EA5E8006894C6 /* MyLetterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26911A2EA5E8006894C6 /* MyLetterVC.m */; };
@@ -453,8 +453,8 @@
 		F9BC26821A2E95BB006894C6 /* OrderListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListVC.m; sourceTree = "<group>"; };
 		F9BC26841A2E9F1E006894C6 /* CompeteRecordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompeteRecordVC.h; sourceTree = "<group>"; };
 		F9BC26851A2E9F1E006894C6 /* CompeteRecordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompeteRecordVC.m; sourceTree = "<group>"; };
-		F9BC26871A2EA263006894C6 /* MarginMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginMoneyVC.h; sourceTree = "<group>"; };
-		F9BC26881A2EA263006894C6 /* MarginMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginMoneyVC.m; sourceTree = "<group>"; };
+		F9BC26871A2EA263006894C6 /* MyAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountVC.h; sourceTree = "<group>"; };
+		F9BC26881A2EA263006894C6 /* MyAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountVC.m; sourceTree = "<group>"; };
 		F9BC268A1A2EA41A006894C6 /* RecommendedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedVC.h; sourceTree = "<group>"; };
 		F9BC268B1A2EA41A006894C6 /* RecommendedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedVC.m; sourceTree = "<group>"; };
 		F9BC268D1A2EA5CB006894C6 /* MyCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionVC.h; sourceTree = "<group>"; };
@@ -733,8 +733,8 @@
 				F9BC26821A2E95BB006894C6 /* OrderListVC.m */,
 				F9BC26841A2E9F1E006894C6 /* CompeteRecordVC.h */,
 				F9BC26851A2E9F1E006894C6 /* CompeteRecordVC.m */,
-				F9BC26871A2EA263006894C6 /* MarginMoneyVC.h */,
-				F9BC26881A2EA263006894C6 /* MarginMoneyVC.m */,
+				F9BC26871A2EA263006894C6 /* MyAccountVC.h */,
+				F9BC26881A2EA263006894C6 /* MyAccountVC.m */,
 				F9BC268A1A2EA41A006894C6 /* RecommendedVC.h */,
 				F9BC268B1A2EA41A006894C6 /* RecommendedVC.m */,
 				F9BC268D1A2EA5CB006894C6 /* MyCollectionVC.h */,
@@ -1249,7 +1249,7 @@
 				9401789F1A21CE0000697D14 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				940178A11A21CE0000697D14 /* UIAlertView+AFNetworking.m in Sources */,
 				F7C8D5171A3809C6009F36B3 /* FMResultSet.m in Sources */,
-				F9BC26891A2EA263006894C6 /* MarginMoneyVC.m in Sources */,
+				F9BC26891A2EA263006894C6 /* MyAccountVC.m in Sources */,
 				F76A4DEE1A2C38B10005FF46 /* AddAdressVC.m in Sources */,
 				94D89EBC1A21FDA70074B874 /* JGProgressHUD.m in Sources */,
 				F7C8D5131A3809C6009F36B3 /* FMDatabase.m in Sources */,

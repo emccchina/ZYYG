@@ -28,8 +28,10 @@
 }
 
 - (IBAction)cancelOrder:(UIButton *)sender {
+    NSLog(@"取消订单");
 }
 
 - (IBAction)payOrder:(UIButton *)sender {
+    NSLog(@"支付订单");
 }
 @end

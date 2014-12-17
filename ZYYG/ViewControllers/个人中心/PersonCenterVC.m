@@ -74,13 +74,10 @@ static NSString *listCell = @"listCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat hight=15;
+    CGFloat hight=5;
     if (section==0) {
         return 1;
-    }else if (section==1) {
-        hight=30;
     }
-    
     return hight;
 }
 
