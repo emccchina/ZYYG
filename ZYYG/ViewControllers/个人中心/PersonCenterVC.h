@@ -12,5 +12,6 @@
 @interface PersonCenterVC : BaseViewController
 <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *PersonTableView;
+- (IBAction)loginPress:(UIButton *)sender;
 
 @end
