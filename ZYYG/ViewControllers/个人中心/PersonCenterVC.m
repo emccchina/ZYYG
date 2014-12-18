@@ -66,6 +66,8 @@ static NSString *listCell = @"listCell";
         return;
     }
 }
+- (IBAction)doHeadBut:(id)sender {
+}
 #pragma mark - tableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
