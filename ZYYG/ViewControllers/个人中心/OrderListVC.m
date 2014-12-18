@@ -33,6 +33,11 @@
 
 @implementation OrderListVC
 
+static NSString *orderTopCell = @"OrderListTopCell";
+static NSString *orderGoodsCell = @"OrderListGoodsCell";
+static NSString *orderSumCell = @"OrderListSumCell";
+static NSString *orderBottomCell = @"OrderListBottomCell";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
@@ -46,10 +51,6 @@
     
     self.orderListTabelView.delegate = self;
     self.orderListTabelView.dataSource = self;
-    [self.orderListTabelView registerNib:[UINib nibWithNibName:@"OrderListCellTop" bundle:nil] forCellReuseIdentifier:@"OrderListCellTop"];
-    [self.orderListTabelView registerNib:[UINib nibWithNibName:@"OrderListCellGoods" bundle:nil] forCellReuseIdentifier:@"OrderListCellGoods"];
-    [self.orderListTabelView registerNib:[UINib nibWithNibName:@"OrderListCellSum" bundle:nil] forCellReuseIdentifier:@"OrderListCellSum"];
-    [self.orderListTabelView registerNib:[UINib nibWithNibName:@"OrderListCellBottom" bundle:nil] forCellReuseIdentifier:@"OrderListCellBottom"];
     
     self.segmentView.font = [UIFont fontWithName:@"Helvetica" size:14.0];
     self.segmentView.sectionTitles = @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"];//  @"", @"0",@"20", @"30" ,@"40"
@@ -72,9 +73,10 @@
 
 - (void)addFootRefresh
 {
+    [orderArray removeAllObjects];
     [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        pageNum=pageNum+1;
-        [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+       NSInteger newSize=((pageNum+1)*pageSize);
+        [self requestOrderList:orderType ordState:orderState ordSize:newSize ordNum:pageNum];
     }];
 }
 
@@ -126,8 +128,12 @@
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            
+            NSLog(@"%@",result);
             NSArray *orders=result[@"Orders"];
+            if (!orders ||orders.count<1) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无该状态订单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
             for (int i=0; i<orders.count; i++) {
                 OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
                 NSLog(@"订单读取成功");
@@ -191,26 +197,26 @@
 {
     OrderModel *order=orderArray[indexPath.section];
     if(indexPath.row ==0){
-        OrderListCellTop   *topCell=(OrderListCellTop*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellTop" forIndexPath:indexPath];
+        OrderListCellTop   *topCell=(OrderListCellTop*)[tableView dequeueReusableCellWithIdentifier:orderTopCell forIndexPath:indexPath];
         topCell.orderNO.text=order.OrderCode;
         topCell.orderType.text=order.OrderType;
         topCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return topCell;
     }else if(indexPath.row == (order.Goods.count+1)){
-        OrderListCellSum *sumCell=(OrderListCellSum*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellSum" forIndexPath:indexPath];
+        OrderListCellSum *sumCell=(OrderListCellSum*)[tableView dequeueReusableCellWithIdentifier:orderSumCell forIndexPath:indexPath];
         sumCell.goodsSum.text =[NSString stringWithFormat:@"共计(%lu)商品",(unsigned long)order.Goods.count];
         sumCell.priceSum.text=[NSString stringWithFormat:@"实付:￥%@",order.OrderMoney];
         sumCell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         return sumCell;
     }else if(indexPath.row == (order.Goods.count+2)){
-        OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellBottom" forIndexPath:indexPath];
+        OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
         bootomCell.cancelTime.text=order.CreateTime;
         bootomCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return bootomCell;
     }else {
         GoodsModel *goods=order.Goods[indexPath.row-1];
-        OrderListCellGoods   *goodsCell=(OrderListCellGoods*)[tableView dequeueReusableCellWithIdentifier:@"OrderListCellGoods" forIndexPath:indexPath];
+        OrderListCellGoods   *goodsCell=(OrderListCellGoods*)[tableView dequeueReusableCellWithIdentifier:orderGoodsCell forIndexPath:indexPath];
         [goodsCell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl]];
         goodsCell.goodsName.text=goods.GoodsName;
         goodsCell.goodsCount.text=@"1";

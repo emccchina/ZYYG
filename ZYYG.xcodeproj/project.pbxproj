@@ -579,10 +579,6 @@
 		F9BC268F1A2EA5CB006894C6 /* MyCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC268E1A2EA5CB006894C6 /* MyCollectionVC.m */; };
 		F9BC26921A2EA5E8006894C6 /* MyLetterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26911A2EA5E8006894C6 /* MyLetterVC.m */; };
 		F9BC26951A2EA9CE006894C6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26941A2EA9CE006894C6 /* SettingsVC.m */; };
-		F9BC26971A2EDB6E006894C6 /* OrderListCellTop.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BC26961A2EDB6E006894C6 /* OrderListCellTop.xib */; };
-		F9BC269B1A2EDFD6006894C6 /* OrderListCellGoods.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BC269A1A2EDFD6006894C6 /* OrderListCellGoods.xib */; };
-		F9BC269D1A2EE19C006894C6 /* OrderListCellSum.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BC269C1A2EE19C006894C6 /* OrderListCellSum.xib */; };
-		F9BC269F1A2EE2EE006894C6 /* OrderListCellBottom.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BC269E1A2EE2EE006894C6 /* OrderListCellBottom.xib */; };
 		F9BC26A21A2EE8ED006894C6 /* OrderListCellTop.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26A11A2EE8ED006894C6 /* OrderListCellTop.m */; };
 		F9BC26A51A2EE913006894C6 /* OrderListCellGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26A41A2EE913006894C6 /* OrderListCellGoods.m */; };
 		F9BC26A81A2EE92F006894C6 /* OrderListCellSum.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26A71A2EE92F006894C6 /* OrderListCellSum.m */; };
@@ -1304,10 +1300,6 @@
 		F9BC26911A2EA5E8006894C6 /* MyLetterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLetterVC.m; sourceTree = "<group>"; };
 		F9BC26931A2EA9CE006894C6 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
 		F9BC26941A2EA9CE006894C6 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
-		F9BC26961A2EDB6E006894C6 /* OrderListCellTop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListCellTop.xib; sourceTree = "<group>"; };
-		F9BC269A1A2EDFD6006894C6 /* OrderListCellGoods.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListCellGoods.xib; sourceTree = "<group>"; };
-		F9BC269C1A2EE19C006894C6 /* OrderListCellSum.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListCellSum.xib; sourceTree = "<group>"; };
-		F9BC269E1A2EE2EE006894C6 /* OrderListCellBottom.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListCellBottom.xib; sourceTree = "<group>"; };
 		F9BC26A01A2EE8ED006894C6 /* OrderListCellTop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCellTop.h; sourceTree = "<group>"; };
 		F9BC26A11A2EE8ED006894C6 /* OrderListCellTop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCellTop.m; sourceTree = "<group>"; };
 		F9BC26A31A2EE913006894C6 /* OrderListCellGoods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCellGoods.h; sourceTree = "<group>"; };
@@ -1541,16 +1533,12 @@
 				F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */,
 				F9BC26A01A2EE8ED006894C6 /* OrderListCellTop.h */,
 				F9BC26A11A2EE8ED006894C6 /* OrderListCellTop.m */,
-				F9BC26961A2EDB6E006894C6 /* OrderListCellTop.xib */,
 				F9BC26A31A2EE913006894C6 /* OrderListCellGoods.h */,
 				F9BC26A41A2EE913006894C6 /* OrderListCellGoods.m */,
-				F9BC269A1A2EDFD6006894C6 /* OrderListCellGoods.xib */,
 				F9BC26A61A2EE92F006894C6 /* OrderListCellSum.h */,
 				F9BC26A71A2EE92F006894C6 /* OrderListCellSum.m */,
-				F9BC269C1A2EE19C006894C6 /* OrderListCellSum.xib */,
 				F9BC26A91A2EE945006894C6 /* OrderListCellBottom.h */,
 				F9BC26AA1A2EE945006894C6 /* OrderListCellBottom.m */,
-				F9BC269E1A2EE2EE006894C6 /* OrderListCellBottom.xib */,
 				F966EDD71A35AA4E00D2994A /* MyAccountCell.h */,
 				F966EDD81A35AA4E00D2994A /* MyAccountCell.m */,
 				F966EDD51A35A46800D2994A /* MyAccountCell.xib */,
@@ -2536,7 +2524,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7D2496F1A4191FC001AAAC3 /* iphonekeyboardHN_19.png in Resources */,
-				F9BC269D1A2EE19C006894C6 /* OrderListCellSum.xib in Resources */,
 				F7D2497A1A4191FC001AAAC3 /* iphonekeyboardHN_47.png in Resources */,
 				F7D2492C1A4191FC001AAAC3 /* iphonekeyboardH_09.png in Resources */,
 				94D89EDD1A220D900074B874 /* PersonCenterStoryboard.storyboard in Resources */,
@@ -2688,7 +2675,6 @@
 				F7D249551A4191FC001AAAC3 /* keychar11_34.png in Resources */,
 				F7D249D11A4191FC001AAAC3 /* keychar31_16.png in Resources */,
 				F7D248C01A4191FC001AAAC3 /* ipad_key_123[]{[H]_65.png in Resources */,
-				F9BC26971A2EDB6E006894C6 /* OrderListCellTop.xib in Resources */,
 				F7D249841A4191FC001AAAC3 /* iphonekeyboardHN_82.png in Resources */,
 				F7D248891A4191FC001AAAC3 /* ipad_key_123[]{[S]_05.png in Resources */,
 				F7D248B51A4191FC001AAAC3 /* ipad_key_123[]{[H]_38.png in Resources */,
@@ -2732,7 +2718,6 @@
 				F7D248EB1A4191FC001AAAC3 /* ipad_key_QWE[H]_11.png in Resources */,
 				F7D248BB1A4191FC001AAAC3 /* ipad_key_123[]{[H]_55.png in Resources */,
 				F7D248C81A4191FC001AAAC3 /* ipad_key_QWE[S]_11.png in Resources */,
-				F9BC269F1A2EE2EE006894C6 /* OrderListCellBottom.xib in Resources */,
 				F7D248791A4191FC001AAAC3 /* ipad_key_[]{[H]_38.png in Resources */,
 				F7D249691A4191FC001AAAC3 /* iphonekeyboardHN_07.png in Resources */,
 				F7D249A31A4191FC001AAAC3 /* keychar21_69.png in Resources */,
@@ -2960,7 +2945,6 @@
 				F7D249261A4191FC001AAAC3 /* keychar01_71.png in Resources */,
 				F7D248811A4191FC001AAAC3 /* ipad_key_[]{[H]_59.png in Resources */,
 				F7D2487A1A4191FC001AAAC3 /* ipad_key_[]{[H]_39.png in Resources */,
-				F9BC269B1A2EDFD6006894C6 /* OrderListCellGoods.xib in Resources */,
 				F7D249101A4191FC001AAAC3 /* keychar01_13.png in Resources */,
 				F7D2496A1A4191FC001AAAC3 /* iphonekeyboardHN_09.png in Resources */,
 				F7D2490C1A4191FC001AAAC3 /* keychar01_05.png in Resources */,
