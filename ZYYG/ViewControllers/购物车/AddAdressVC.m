@@ -108,7 +108,6 @@
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", tableName, upName, (long)key];
     FMResultSet *s = [dataBase executeQuery:sql];
     while ([s next]) {
-        //retrieve values for each record
         NSInteger areaID = [s intForColumn:[NSString stringWithFormat:@"%@_id", tableName]];
         NSString  *areaName = [s stringForColumn:[NSString stringWithFormat:@"%@_name", tableName]];
         NSInteger UPID = [s intForColumn:[NSString stringWithFormat:@"%@_id", upName]];
@@ -188,9 +187,6 @@
     [topView setBarStyle:UIBarStyleDefault];
     
     UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    
-    //       UIBarButtonItem * cancelButton = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:nil];
-    
     UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doFinish)];
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace, doneButton, nil];
     
@@ -257,7 +253,6 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-//    NSLog(@"select %d, %d", row, component);
     switch (component) {
         case 0:{
             NSNumber *provinceID = areaArr[row][0];
@@ -352,9 +347,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    NSLog(@"%@", NSStringFromCGRect(cell.frame));
-    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -368,7 +360,6 @@
 {
     selectedField = textField;
     CGPoint point = [textField convertPoint:textField.frame.origin toView:self.view];
-//    NSLog(@"super view frame %@", NSStringFromCGPoint(point));
     CGFloat height = kScreenHeight;
     CGFloat space = (height - point.y - 160) - 250;
     if (space < 0) {
@@ -381,9 +372,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-//    self.view.frame = _initFrame;
     [self.writeTB setContentOffset:CGPointZero];
-    NSLog(@"text placehold %@", textField.placeholder);
     NSInteger index = [placeholderArr indexOfObject:textField.placeholder];
     switch (index) {
         case 0:

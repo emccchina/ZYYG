@@ -22,7 +22,6 @@
     BOOL                _spreadArt;//作品简介展开
     BOOL                _spreadCertification;//证书展开
     GoodsModel          *goods;
-//    NSMutableDictionary  *detailDict;//
     CycleScrollView     *scrollview;
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
@@ -45,13 +44,9 @@ static NSString *spreadCell = @"SpreadCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-//    NSLog(@"%d", self.hiddenBottom);
-//    detailDict = [[NSMutableDictionary alloc] init];
     CGFloat TBBottom = self.hiddenBottom ? 0 : 50;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
-    
-//    self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"登录" target:self action:@selector(doRightButton:)];
-    
+
     self.bottomView.hidden = self.hiddenBottom;
     
     self.detailTB.delegate = self;
@@ -155,8 +150,6 @@ static NSString *spreadCell = @"SpreadCell";
         
         if (result) {
             goods =[GoodsModel goodsModelWith:result];
-//            [detailDict removeAllObjects];
-//            [detailDict setValuesForKeysWithDictionary:result];
             [self.detailTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -207,7 +200,6 @@ static NSString *spreadCell = @"SpreadCell";
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-//            [self showAlertView:@"收藏成功"];
             goods.IsCollect = @(![goods.IsCollect integerValue]);
             [self.detailTB reloadData];
         }
@@ -268,7 +260,6 @@ static NSString *spreadCell = @"SpreadCell";
             return 110;
         case 2:{
             NSString *text =goods.AuthorIntro;
-//            [detailDict safeObjectForKey:@"AuthorIntro"];
             if (![text isKindOfClass:[NSNull class]] && ![text isEqualToString:@""] && _spreadArtist) {
                 CGSize size = [Utities sizeWithUIFont:[UIFont systemFontOfSize:17] string:text rect:CGSizeMake(CGRectGetWidth(tableView.frame) - 20, CGFLOAT_MAX)];
                 return size.height +70;
@@ -278,7 +269,6 @@ static NSString *spreadCell = @"SpreadCell";
         }
         case 3:{
             NSString *text =goods.GoodsIntro;
-//            [detailDict safeObjectForKey:@"GoodsIntro"];
             if (text && ![text isEqualToString:@""] && _spreadArt) {
                 CGSize size = [Utities sizeWithUIFont:[UIFont systemFontOfSize:17] string:text rect:CGSizeMake(CGRectGetWidth(tableView.frame) - 20, CGFLOAT_MAX)];
                 return size.height +70;
@@ -398,14 +388,5 @@ static NSString *spreadCell = @"SpreadCell";
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

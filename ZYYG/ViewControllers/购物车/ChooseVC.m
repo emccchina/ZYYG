@@ -32,7 +32,6 @@
     delivery = @[@"快递", @"上门自提"];
     NSArray *ticketType = @[@"普通发票", @"增值税发票"];
     NSArray *ticketTop = @[@"个人"];
-//    NSArray *ticketContent = @[@"图书", @"资料", @"办公用品", @"教材"];
     tickets = @[ticketType, ticketTop];
     ticketTitles = @[@"发票类型", @"发票抬头(可输入个人或单位名称)"];
     ticketResults = [NSMutableArray arrayWithObjects:@(0), @(0), nil];//第一个参数 发票类型0普通发票， 1增值税发票 ，，第二个 名称

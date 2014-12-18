@@ -48,7 +48,7 @@
     images = [[NSMutableArray alloc] init];
     goods = [[NSMutableArray alloc] init];
     [self addheadRefresh];
-
+    [self requestForHotSearch];
 //    [self writeArr];
 }
 
@@ -112,6 +112,8 @@
     
 }
 
+
+
 - (void)addheadRefresh
 {
     [self.dataTB addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
@@ -152,13 +154,33 @@
             [images removeAllObjects];
             [goods removeAllObjects];
             [images addObjectsFromArray:result[@"Banners"]];
-//            [goods addObjectsFromArray:result[@"Product_List"]];
             [self parseGoodsInfo:result[@"Product_List"]];
             [self.dataTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self requestFinished];
         [self showAlertView:kNetworkNotConnect];
+    }];
+}
+
+- (void)requestForHotSearch
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@SearchKeyList.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            NSArray *hotKeys = result[@"Keys"];
+            if (hotKeys && hotKeys.count) {
+                [hotKeys writeToFile:[Utities filePathName:kHotSearchArr] atomically:YES];
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
     }];
 }
 
@@ -226,18 +248,18 @@
         GoodsShowCell *cell = (GoodsShowCell*)[tableView dequeueReusableCellWithIdentifier:@"myCell" forIndexPath:indexPath];
         GoodsModel *goodsDetialLeft = goods[indexPath.row*2];
         if (goodsDetialLeft && ![goodsDetialLeft isKindOfClass:[NSNull class]]) {
-            cell.LTLab.text = goodsDetialLeft.GoodsName;//[goodsDetialLeft safeObjectForKey:@"Product_Name"];
-            cell.LMLab.text = goodsDetialLeft.ArtName;//[goodsDetialLeft safeObjectForKey:@"Special_Id"];
-            cell.LBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialLeft.AppendPrice];//[goodsDetialLeft safeObjectForKey:@"Product_Price"]
+            cell.LTLab.text = goodsDetialLeft.GoodsName;
+            cell.LMLab.text = goodsDetialLeft.ArtName;
+            cell.LBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialLeft.AppendPrice];
             [cell.leftImage setImageWithURL:[NSURL URLWithString:goodsDetialLeft.picURL]];
         }
         if (goods.count > indexPath.row*2+1) {
             GoodsModel* goodsDetialRight = goods[indexPath.row*2+1];
             if (goodsDetialRight && ![goodsDetialRight isKindOfClass:[NSNull class]]) {
                 cell.showRight = YES;
-                cell.RTLab.text = goodsDetialRight.GoodsName;//[goodsDetialRight safeObjectForKey:@"Product_Name"];
-                cell.RMLab.text = goodsDetialRight.ArtName;//[goodsDetialRight safeObjectForKey:@"Special_Id"];
-                cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialRight.AppendPrice];//[goodsDetialRight safeObjectForKey:@"Product_Price"]
+                cell.RTLab.text = goodsDetialRight.GoodsName;
+                cell.RMLab.text = goodsDetialRight.ArtName;
+                cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialRight.AppendPrice];
                 [cell.rightImage setImageWithURL:[NSURL URLWithString:goodsDetialRight.picURL]];
             }else{
                 cell.showRight = NO;

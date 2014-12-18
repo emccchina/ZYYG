@@ -76,7 +76,6 @@ static NSString *priceCell      = @"PriceCell";
 {
     NSArray *arr = [NSArray arrayWithContentsOfFile:[Utities filePathName:kClassifyArr]];
     if (arr.count) {
-//        NSLog(@"%@", arr);
         [self parseTitles:arr];
         return YES;
     }
@@ -241,7 +240,6 @@ NSInteger soredArray(id model1, id model2, void *context)
     }else{
         PriceCell *cell = (PriceCell *)[tableView dequeueReusableCellWithIdentifier:priceCell forIndexPath:indexPath];
         NSArray *leftTitle = _priceArray[indexPath.row*2];
-//        NSLog(@"row %d", indexPath.row*2);
         NSArray *rightTitle = nil;
         if ((indexPath.row*2+1) < _priceArray.count) {
             rightTitle = _priceArray[(indexPath.row*2+1)];

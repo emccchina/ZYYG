@@ -7,12 +7,13 @@
 //
 
 #import "SearchFrameVC.h"
-#define kNearestSearch              @"NearestSearch.text"
+#define kNearestSearch              @"NearestSearch.txt"
 @interface SearchFrameVC ()
 <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *nearestSearch;
     UISearchBar     *searchBar;
+    NSArray         *hotSearch;
 }
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UILabel *searchLab;
@@ -29,7 +30,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    
+    hotSearch = [[NSArray alloc] initWithContentsOfFile:[Utities filePathName:kHotSearchArr]];
+    if (!hotSearch || !hotSearch.count) {
+        hotSearch = @[@"暂无"];
+    }
+    for (NSString *hotKey in hotSearch) {
+        UIButton *button = (UIButton*)[self.topView viewWithTag:([hotSearch indexOfObject:hotKey]+1)];
+        button.hidden = NO;
+        [button setTitle:hotKey forState:UIControlStateNormal];
+    }
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"" target:nil action:nil];
     [self navBarAddTextField];
     [self setButFrame:self.firstBut];
@@ -44,6 +53,12 @@
     if (!nearestSearch) {
         nearestSearch = [[NSMutableArray alloc] init];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [searchBar becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -84,27 +99,7 @@
     searchBar.delegate = self;
     searchBar.placeholder = @"请输入关键字";
     self.navigationItem.titleView = searchBar;
-    [searchBar becomeFirstResponder];
-}
-
-- (void)requestForType
-{
-    [self showIndicatorView:kNetworkConnecting];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@index.ashx",kServerDomain];
-    NSLog(@"url %@", url);
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self dismissIndicatorView];
-        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        id result = [self parseResults:responseObject];
-        if (result) {
-            
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self dismissIndicatorView];
-        [self showAlertView:kNetworkNotConnect];
-    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

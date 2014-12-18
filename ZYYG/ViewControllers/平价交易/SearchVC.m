@@ -69,7 +69,6 @@ NSInteger soredArray1(id model1, id model2, void *context)
         NSArray *contactArr = self.titles[@"TypeInfo"];
         for (NSDictionary *dict in contactArr) {
             NSString *firstLetter = [[self phonetic:dict[@"Name"]] substringToIndex:1];
-//            NSLog(@"%@", firstLetter);
             NSMutableArray *letterArray = title[firstLetter];
             if (letterArray) {
                 [letterArray addObject:dict];
@@ -155,7 +154,6 @@ NSInteger soredArray1(id model1, id model2, void *context)
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
-//    NSLog(@"%d", index);
     return index;
 }
 

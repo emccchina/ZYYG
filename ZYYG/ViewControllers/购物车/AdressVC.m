@@ -59,7 +59,6 @@
 }
 - (IBAction)cellButtonCilck:(id)sender {
     MyButton *button = (MyButton*)sender;
-//    NSLog(@"%d", [(NSIndexPath*)button.mark row]);
     _selectedIndex = [(NSIndexPath*)button.mark row];
     [self.adressTB reloadData];
 }
@@ -80,9 +79,6 @@
         if (result) {
             [UserInfo shareUserInfo].addressManager.defaultAddressIndex = _selectedIndex;
             [self.navigationController popViewControllerAnimated:YES];
-//            if (self.change) {
-//                self.change(YES);
-//            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
@@ -132,7 +128,6 @@
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-//                [self.adressTB reloadData];
             [_adressesNewArr removeObjectAtIndex:index.row];
             [self.adressTB deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationFade];
         }

@@ -43,6 +43,7 @@
     user.aeraCode=[dict safeObjectForKey:@"AeraCode"];
     user.detailAddress=[dict safeObjectForKey:@"DetailAddr"];
     user.zipCode=[dict safeObjectForKey:@"Postcode"];
+    user.headerURL = [dict safeObjectForKey:@"HEAD_IMG"];
     return user;
 }
 

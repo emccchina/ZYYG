@@ -63,6 +63,7 @@
     NSLog(@"terminate");
     NSArray *array = [NSArray array];
     [array writeToFile:[Utities filePathName:kClassifyArr] atomically:YES];//清空
+    [array writeToFile:[Utities filePathName:kHotSearchArr] atomically:YES];//清空
 }
 
 
