@@ -10,9 +10,10 @@
 #import "UserInfo.h"
 #import "EditPersonVC.h"
 #import "AdressTextField.h"
+#import "FMDatabase.h"
 
 @interface PersonDetailVC ()
-<UITextFieldDelegate>
+<UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     NSMutableArray *detailArry;
     UserInfo *user;
@@ -24,6 +25,7 @@
     NSString            *provience;
     NSString            *city;
     NSString            *town;
+    NSArray             *genderArr;
 }
 
 @end
@@ -36,7 +38,7 @@
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"保存" target:self action:@selector(doRightButton:)];
     titles = @[@"昵称", @"真实姓名", @"性别", @"年收入", @"手机号", @"邮箱", @"所在地", @"详细地址", @"邮编"];
     placeholders = @[@"请输入昵称", @"请输入真实姓名", @"请选择性别", @"请输入年收入", @"请输入手机号", @"请输入邮箱", @"请输入所在地", @"请输入详细地址", @"请输入邮编"];
-    
+    genderArr = @[@"男", @"女"];
     user =[UserInfo shareUserInfo];
     infos = [[NSMutableArray alloc] init];
     [self setInfos];
@@ -46,21 +48,62 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)readAdressFromDB
+{
+    NSString *dbPath = [[NSBundle mainBundle] pathForResource:@"adress" ofType:@"db"];
+    FMDatabase *dataBase = [FMDatabase databaseWithPath:dbPath];
+    if (![dataBase open]) {
+        NSLog(@"数据库读取失败");
+        return;
+    }
+   NSString *sql1 = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", kProvinceAdress, kProvinceAdress, (long)[user.provideCode integerValue]];
+    FMResultSet *s1 = [dataBase executeQuery:sql1];
+    provience = [s1 stringForColumn:[NSString stringWithFormat:@"%@_name", kProvinceAdress]];
+    
+    NSString *sql2 = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", kCityAdress, kCityAdress, (long)[user.cityCode integerValue]];
+    FMResultSet *s2 = [dataBase executeQuery:sql2];
+    city = [s2 stringForColumn:[NSString stringWithFormat:@"%@_name", kCityAdress]];
+    
+    NSString *sql3 = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", kTownAdress, kTownAdress, (long)[user.aeraCode integerValue]];
+    FMResultSet *s3 = [dataBase executeQuery:sql3];
+    town = [s3 stringForColumn:[NSString stringWithFormat:@"%@_name", kTownAdress]];
+    
+    [dataBase close];
+    
+}
+
 - (void)setInfos
 {
     [infos addObject:user.nickName ? :@""];
     [infos addObject:user.realName ? :@""];
-    [infos addObject:user.gender ? :@""];
+    [infos addObject:[user.gender integerValue] ? @"女" :@"男"];
     [infos addObject:user.income ? :@""];
     [infos addObject:user.mobile ? :@""];
     [infos addObject:user.email ? :@""];
-//    NSMutableArray *addressString = [NSMutableArray array];
-    provience = user.provideCode ?:@"";
-    city = user.cityCode?:@"";
-    town = user.aeraCode?:@"";
+    [self readAdressFromDB];
     [infos addObject:[NSString stringWithFormat:@"%@%@%@",provience,city,town]];
     [infos addObject:user.detailAddress ? :@""];
     [infos addObject:user.zipCode ? :@""];
+}
+
+- (void)userInfoFromInfos
+{
+    user = [UserInfo shareUserInfo];
+    user.nickName = infos[0];
+    user.realName = infos[1];
+    user.gender = [infos[2] isEqualToString:@"女"] ? @"1" : @"0";
+    user.income = infos[3];
+    user.mobile = infos[4];
+    user.email = infos[5];
+    id x = infos[6];
+    if ([x isKindOfClass:[NSArray class]]) {
+        NSArray *array = (NSArray*)x;
+        user.provideCode = array[0][0];
+        user.cityCode = array[1][0];
+        user.aeraCode = array[2][0];
+    }
+    user.detailAddress = infos[7];
+    user.zipCode = infos[8];
 }
 
 - (void)areasInfos:(AdressTextField *)textField
@@ -85,7 +128,8 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:infos[0] forKey:@"Nickname"];
     [dict setObject:infos[1] forKey:@"RealName"];
-    [dict setObject:infos[2] forKey:@"Sex"];
+    NSString * gender = [infos[2] isEqualToString:@"女"] ? @"1" : @"0";
+    [dict setObject:gender forKey:@"Sex"];
     [dict setObject:infos[3] forKey:@"Income"];
     [dict setObject:infos[4] forKey:@"Mobile"];
     [dict setObject:infos[5] forKey:@"email"];
@@ -116,6 +160,7 @@
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
+            [self userInfoFromInfos];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -129,12 +174,58 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    NSLog(@"%@", infos);
+//    NSLog(@"%@", infos);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)insertAddress:(UITextField*)field
+{
+    UIToolbar * topView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30)];
+    [topView setBarStyle:UIBarStyleDefault];
+    
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doFinish)];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace, doneButton, nil];
+    
+    [topView setItems:buttonsArray];
+    [field setInputAccessoryView:topView];
+    picker = [[UIPickerView alloc] init];
+    picker.delegate = self;
+    picker.dataSource = self;
+    field.inputView = picker;
+}
+
+- (void)doFinish
+{
+    NSInteger row = [picker selectedRowInComponent:0];
+    [infos replaceObjectAtIndex:2 withObject:genderArr[row]];
+    [self.personDetailTableView reloadData];
+}
+
+#pragma mark - UIPickerView
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 2;
+    
+}
+
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return genderArr[row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
 }
 #pragma mark tableView
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -168,6 +259,9 @@
         field.placeholder = placeholders[indexPath.row];
         field.delegate = self;
         field.text = infos[indexPath.row];
+        if (indexPath.row == 2) {
+            [self insertAddress:field];
+        }
     }
     UILabel *label = (UILabel*)[cell viewWithTag:1];
     label.text = titles[indexPath.row];
@@ -210,7 +304,10 @@
     NSLog(@"nnnnnn");
     [self.personDetailTableView setContentOffset:CGPointZero];
     NSInteger index = [placeholders indexOfObject:textField.placeholder];
-    [infos replaceObjectAtIndex:index withObject:textField.text];
+    if (index != 2) {
+        [infos replaceObjectAtIndex:index withObject:textField.text];
+    }
+    
 }
 
 @end

@@ -30,6 +30,6 @@
 
 //打开相机
 - (void)presentCameraVC;
-- (void)selectImageFinished:(UIImage*)image;
+- (void)selectImageFinished:(NSData*)image;
 
 @end

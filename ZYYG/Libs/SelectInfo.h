@@ -36,7 +36,7 @@
 @property (nonatomic, strong) NSString *species;
 @property (nonatomic, assign) NSInteger  shotPrice;
 @property (nonatomic, assign) NSInteger shotDate;
-@property (nonatomic, assign) NSInteger shotQuantity;
+@property (nonatomic, assign) NSInteger shotQuantity;//库存参数:0,全部; 1,待售; 2,已售
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString  *attrible;

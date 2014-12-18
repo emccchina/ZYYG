@@ -134,10 +134,6 @@
     }];
 }
 
-//- (void)selectImageFinished:(UIImage *)image
-//{
-//    self.headImage.image = image;
-//}
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

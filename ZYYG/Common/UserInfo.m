@@ -29,7 +29,7 @@
 -(UserInfo *)setParams:(UserInfo *)user parmas:(NSDictionary *)dict
 {
     user.userKey=[dict safeObjectForKey:@"key"];
-    user.headImage=[dict safeObjectForKey:@"headImage"];
+    user.headImage=[dict safeObjectForKey:@"HEAD_IMG"];
     user.useName=[dict safeObjectForKey:@"email"];
     user.realName=[dict safeObjectForKey:@"RealName"];
     user.nickName=[dict safeObjectForKey:@"Nickname"];
@@ -43,7 +43,6 @@
     user.aeraCode=[dict safeObjectForKey:@"AeraCode"];
     user.detailAddress=[dict safeObjectForKey:@"DetailAddr"];
     user.zipCode=[dict safeObjectForKey:@"Postcode"];
-    user.headerURL = [dict safeObjectForKey:@"HEAD_IMG"];
     return user;
 }
 

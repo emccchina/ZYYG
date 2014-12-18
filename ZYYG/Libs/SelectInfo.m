@@ -57,7 +57,7 @@
         case 3:{
             self.shotPrice = 0;
             self.shotDate = 0;
-            self.shotQuantity = (self.shotQuantity == 1 ? 2:1);
+            self.shotQuantity = (type == 2 ? 1:2);
 
         }break;
             

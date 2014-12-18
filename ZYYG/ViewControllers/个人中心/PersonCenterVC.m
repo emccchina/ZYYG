@@ -14,7 +14,7 @@
 {
     NSMutableArray *personDataArray;
     UserInfo *user;
-    
+    UIImage *imagedata;
 }
 
 static NSString *topCell = @"topCell";
@@ -24,7 +24,7 @@ static NSString *listCell = @"listCell";
 {
     [super viewDidLoad];
     user=[UserInfo shareUserInfo];
-    [self requestPersonCenter:0];
+//    [self requestPersonCenter:0];
     //初始化数据
     personDataArray =[NSMutableArray array];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"PersonCenter" ofType:@"plist"];
@@ -67,6 +67,41 @@ static NSString *listCell = @"listCell";
     }
 }
 - (IBAction)doHeadBut:(id)sender {
+    if (![[UserInfo shareUserInfo] isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    [self presentCameraVC];
+  
+}
+
+- (void)selectImageFinished:(NSData *)image
+{
+    UIImage *image1 = [UIImage imageWithData:image];
+    NSLog(@"%@, %ld", NSStringFromCGSize(image1.size), (unsigned long)image.length);
+    
+    [self.PersonTableView reloadData];
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@UploadHeader.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey,@"Key",image, @"ImageDatas", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        id result = [self parseResults:responseObject];
+        if (result) {
+           imagedata = image1;
+            [self.PersonTableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
 }
 #pragma mark - tableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -114,35 +149,30 @@ static NSString *listCell = @"listCell";
         UILabel *wecomeLabel = (UILabel*)[cell viewWithTag:9];
         UIButton *loginButton = (UIButton*)[cell viewWithTag:10];
         NSString *imageUrl=user.headImage;
-        if (imageUrl && ![@"" isEqual:imageUrl]) {
+        
+        if (imageUrl) {
             [viewBG setImageWithURL:[NSURL URLWithString:imageUrl]];
         }else{
             [viewBG setImage:[UIImage imageNamed:@"avatar.png"]];
         }
-        if ([user isLogin]) {
-            self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"编辑" target:self action:@selector(doEditButton)];
-            nameLabel.text = user.nickName;
-            levelLabel.text = user.realName;
-            emailLabel.text = user.email;
-            nameLabel.hidden = NO;
-            levelLabel.hidden = NO;
-            emailLabel.hidden = NO;
-            nameTitle.hidden=NO;
-            levelTitle.hidden=NO;
-            emailTitle.hidden=NO;
-            wecomeLabel.hidden=YES;
-            loginButton.hidden=YES;
-        }else {
-            nameLabel.hidden = YES;
-            levelLabel.hidden = YES;
-            emailLabel.hidden = YES;
-            nameTitle.hidden=YES;
-            levelTitle.hidden=YES;
-            emailTitle.hidden=YES;
-            wecomeLabel.hidden=NO;
-            loginButton.hidden=NO;
-            loginButton.layer.cornerRadius=5;
+        if (imagedata) {
+            [viewBG setImage:imagedata];
         }
+        self.navigationItem.rightBarButtonItem = ([user isLogin] ? [Utities barButtonItemWithSomething:@"编辑" target:self action:@selector(doEditButton)] : nil);
+        nameLabel.text = user.nickName;
+        levelLabel.text = user.realName;
+        emailLabel.text = user.email;
+        nameLabel.hidden = ![user isLogin];
+        levelLabel.hidden = ![user isLogin];
+        emailLabel.hidden = ![user isLogin];
+        nameTitle.hidden=![user isLogin];
+        levelTitle.hidden=![user isLogin];
+        emailTitle.hidden=![user isLogin];
+        wecomeLabel.hidden=[user isLogin];
+        loginButton.hidden=[user isLogin];
+        loginButton.layer.cornerRadius=5;
+        loginButton.layer.backgroundColor = kRedColor.CGColor;
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{

@@ -42,6 +42,7 @@ static NSString *cartCell = @"CartCell";
 
     self.submitBut.layer.cornerRadius = 3;
     self.submitBut.layer.backgroundColor = kRedColor.CGColor;
+    self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice];
     _orderDict = [[NSMutableDictionary alloc] init];
     [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
     [_orderDict setObject:([UserInfo shareUserInfo].nickName ? :@"个人") forKey:@"InvoiceTitle"];

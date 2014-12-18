@@ -102,13 +102,13 @@
 
 - (void)presentCameraVC
 {
-        UIActionSheet* sheet;
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
-        }else{
-            sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
-        }
-        [sheet showInView:self.view];
+    UIActionSheet* sheet;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
+    }else{
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
+    }
+    [sheet showInView:self.view];
     
 }
 
@@ -183,6 +183,7 @@
     
 }
 
+
 #pragma mark - UIImagePickerViewControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
@@ -202,14 +203,9 @@
     }
     
     // Set desired maximum height and calculate width
-//    UIImage* imageZoom = [self imageSizeAfterZoom:image];
-//    
-//    _avatarIV.image = imageZoom;
-//    if (_photoView) {
-//        _photoView.hidden = YES;
-//    }
+    NSData* imageZoom = [self imageSizeAfterZoom:image];
     if ([self respondsToSelector:@selector(selectImageFinished:)]) {
-        [self selectImageFinished:image];
+        [self selectImageFinished:imageZoom];
     }
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -219,7 +215,55 @@
     }];
 }
 
-- (void)selectImageFinished:(UIImage *)image
+- (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size{
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    // 绘制改变大小的图片
+    //    CGFloat imageWidth = MAX(size.width, size.height);
+    //    CGFloat smaller = MIN(size.width, size.height);
+    //    [img drawInRect:CGRectMake((size.width-smaller)/2, (size.height-smaller)/2, smaller, smaller)];
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
+}
+
+
+- (NSData*)imageSizeAfterZoom:(UIImage*)image
+{
+    CGFloat width = 200;
+    CGSize imageSize = [image size];
+    CGFloat imageWidth = imageSize.width;
+    CGFloat imageHeight = imageSize.height;
+    CGSize imageSizeZoom = CGSizeZero;
+    if (imageWidth < width) {
+        imageSizeZoom = imageSize;
+    }else{
+        CGFloat scaleImage = imageWidth / width;
+        imageSizeZoom = CGSizeMake(width, imageHeight / scaleImage);
+    }
+    
+    UIImage* imageZoom = [self scaleToSize:image size:imageSizeZoom];
+    
+    NSUInteger dataLenthDefault = 600000;
+    
+    NSData* data = UIImageJPEGRepresentation(imageZoom, 1.0);
+    
+    if ([data length] > dataLenthDefault) {
+        
+        data = UIImageJPEGRepresentation(imageZoom, (CGFloat)dataLenthDefault/(CGFloat)[data length]);
+        
+    }
+    
+    return data;
+}
+
+- (void)selectImageFinished:(NSData *)image
 {
     
 }

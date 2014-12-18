@@ -29,7 +29,6 @@
 @property (nonatomic, strong) NSString          *aeraCode;
 @property (nonatomic, strong) NSString          *detailAddress;
 @property (nonatomic, strong) NSString          *zipCode;
-@property (nonatomic, strong) NSString          *headerURL;
 @property (nonatomic, strong) AddressManager    *addressManager;
 @property (nonatomic, strong) NSMutableArray    *cartsArr;//购物车数组
 - (BOOL)isLogin;//是否登录

@@ -12,5 +12,5 @@
 @interface PayForArtVC : BaseViewController
 
 @property (nonatomic, strong) NSArray *products;
-
+@property (nonatomic, assign) CGFloat   totalPrice;
 @end

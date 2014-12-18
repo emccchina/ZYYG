@@ -97,7 +97,7 @@
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="9" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎来到中艺易购500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9A-YD-sqK">
                                                     <rect key="frame" x="100" y="30" width="165" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.4976283482142857" green="0.31109673602331628" blue="0.28571775379284364" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgu-Nn-EWT">
@@ -110,10 +110,13 @@
                                                     </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Il7-Qw-Z4M">
-                                                    <rect key="frame" x="154" y="66" width="66" height="30"/>
+                                                    <rect key="frame" x="154" y="66" width="80" height="30"/>
                                                     <color key="backgroundColor" red="0.95686274510000002" green="0.89624334520000004" blue="0.77319119579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="Pfp-bp-i03"/>
+                                                    </constraints>
                                                     <state key="normal" title="登陆/注册">
-                                                        <color key="titleColor" red="0.49762834820000001" green="0.31109673599999998" blue="0.28571775379999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>

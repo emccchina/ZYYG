@@ -260,6 +260,7 @@ static NSString *cartCell = @"CartCell";
         for (NSNumber *number in keys) {
             [products addObject:_shopCart[[number integerValue]]];
         }
+        [(PayForArtVC*)destVC setTotalPrice:totalPriceCount];
         [(PayForArtVC*)destVC setProducts:(NSArray*)products];
     }
 }
