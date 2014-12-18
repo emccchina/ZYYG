@@ -60,24 +60,28 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section==0) {
-        return 1;
-
-    }else{
         return 20;
-    }
+   
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MyCollectionCell"];
     SettingModel *model=settingDataArray[indexPath.section][indexPath.row];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MyCollectionCell"];
     cell.textLabel.text=model.title;
     
     return cell;
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SettingModel *model=settingDataArray[indexPath.section][indexPath.row];
+    if ([model.segueString isEqualToString:@"updatePassword"]) {
+        [self performSegueWithIdentifier:model.segueString sender:self];
+    }
+}
 
 /*
 #pragma mark - Navigation

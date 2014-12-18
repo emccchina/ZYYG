@@ -12,5 +12,6 @@
 
 @property(nonatomic ,copy) NSString *title;
 @property(nonatomic ,copy) NSString *segueString;
+
 +(id)settongModelWithDict:(NSDictionary *)dict;
 @end

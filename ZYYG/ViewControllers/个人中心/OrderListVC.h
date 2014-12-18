@@ -12,4 +12,5 @@
 <UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *orderListTabelView;
+- (void)requestFinished;
 @end

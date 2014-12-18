@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "OrderListVC.h"
 @interface OrderListCellBottom : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *cancelTime;
+@property (weak, nonatomic) IBOutlet UILabel *redLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *cancellButton;
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
+
+@property (nonatomic,strong) NSString *orderCode;
+@property (nonatomic,strong) OrderListVC* orderlistVc;
 
 - (IBAction)cancelOrder:(UIButton *)sender;
 - (IBAction)payOrder:(UIButton *)sender;

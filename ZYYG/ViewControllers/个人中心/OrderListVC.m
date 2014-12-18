@@ -75,8 +75,8 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 {
     [orderArray removeAllObjects];
     [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-       NSInteger newSize=((pageNum+1)*pageSize);
-        [self requestOrderList:orderType ordState:orderState ordSize:newSize ordNum:pageNum];
+        pageNum=pageNum+1;
+        [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     }];
 }
 
@@ -84,7 +84,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
     [orderArray removeAllObjects];
    //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
-    pageNum=0;
+    pageNum=1;
     if (0==segmentedControl.selectedSegmentIndex) {
         orderState=@"";
     }else if(1==segmentedControl.selectedSegmentIndex) {
@@ -131,7 +131,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
             NSLog(@"%@",result);
             NSArray *orders=result[@"Orders"];
             if (!orders ||orders.count<1) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无该状态订单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新订单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }
             for (int i=0; i<orders.count; i++) {
@@ -212,6 +212,14 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(indexPath.row == (order.Goods.count+2)){
         OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
         bootomCell.cancelTime.text=order.CreateTime;
+        if ([order.OrderStatus isEqualToString:@"已取消"]) {
+            bootomCell.redLabel.text=@"该订单已经被取消无法操作";
+            bootomCell.cancellButton.hidden=YES;
+            bootomCell.payButton.hidden=YES;
+            
+        }
+        bootomCell.orderCode=order.OrderCode;
+        bootomCell.orderlistVc=self;
         bootomCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return bootomCell;
     }else {

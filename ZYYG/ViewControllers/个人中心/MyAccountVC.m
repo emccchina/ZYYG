@@ -15,6 +15,9 @@
 {
     NSMutableArray *accountArray;
     UserInfo *user;
+    NSInteger segNum;
+    NSInteger pageNum;
+    
 }
 
 @end
@@ -24,12 +27,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
+    segNum =-1;
+    pageNum=1;
     accountArray=[NSMutableArray array];
+    [accountArray removeAllObjects];
     self.marginMoneyTableView.delegate = self;
     self.marginMoneyTableView.dataSource = self;
     [self.marginMoneyTableView registerNib:[UINib nibWithNibName:@"MyAccountCell" bundle:nil] forCellReuseIdentifier:@"MyAccountCell"];
-    [self requestAccountList:@"-1" pageNumber:@"1"];
+    [self requestAccountList:segNum pageNumber:pageNum];
     [self segViewInit] ;
+    [self addFootRefresh];
     // Do any additional setup after loading the view.
     
 }
@@ -49,24 +56,37 @@
      NSLog(@"不晓得成功没");
    
 }
+- (void)addFootRefresh
+{
+    [accountArray removeAllObjects];
+    [self.marginMoneyTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        pageNum=pageNum+1;
+        [self requestAccountList:segNum pageNumber:pageNum];
+    }];
+}
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedContr {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedContr.selectedSegmentIndex);
+    [accountArray removeAllObjects];
+    pageNum=1;
     if(segmentedContr.selectedSegmentIndex==1){
-        [self requestAccountList:@"1" pageNumber:@"1" ];
-    }else if(segmentedContr.selectedSegmentIndex==2){
-        [self requestAccountList:@"0" pageNumber:@"1" ];
+        segNum =1;
+    }else if(segmentedContr.selectedSegmentIndex==pageNum){
+        segNum =0;
     }else{
-        [self requestAccountList:@"-1" pageNumber:@"1" ];
+        segNum =-1;
     }
+    [self requestAccountList:segNum pageNumber:pageNum ];
     
 }
 
 
 
 
--(void)requestAccountList:(NSString *)dr  pageNumber:(NSString *)num
+-(void)requestAccountList:(NSInteger )dr  pageNumber:(NSInteger )num
 {
+    NSString *sdr=[NSString stringWithFormat:@"%d",dr];
+    NSString *snum=[NSString stringWithFormat:@"%d",num];
     user=[UserInfo shareUserInfo];
     if (![user isLogin]) {
         [Utities presentLoginVC:self];
@@ -78,13 +98,12 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@MyAccount.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",num,@"num",dr,@"dr", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",snum,@"num",sdr,@"dr", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            [accountArray removeAllObjects];
             NSArray *accounts=result[@"data"];
             NSString *MaybeMoney=result[@"MaybeMoney"];
             self.maybeMoney.text=[NSString stringWithFormat:@"$%@",MaybeMoney];
@@ -93,7 +112,7 @@
             for (int i=0; i<accounts.count; i++) {
                 AccountModel *account =[AccountModel accountWithDict:accounts[i]];
                 [accountArray addObject:account];
-                NSLog(@"账户信息读取成功");
+                NSLog(@"账户信息读取成功 %@", account.BillCode);
             }
             [self.marginMoneyTableView reloadData];
         }
@@ -106,6 +125,7 @@
 - (void)requestFinished
 {
     [self dismissIndicatorView];
+    [self.marginMoneyTableView footerEndRefreshing];
 }
 
 #pragma mark -tableView

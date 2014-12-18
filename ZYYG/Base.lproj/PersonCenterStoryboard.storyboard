@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -467,6 +467,7 @@
                                             <outlet property="cancelTime" destination="pGD-4t-AMb" id="oNl-Vc-v6Q"/>
                                             <outlet property="cancellButton" destination="EIN-SE-97a" id="lGp-9U-6fZ"/>
                                             <outlet property="payButton" destination="rOG-3I-S0Q" id="3Qw-Ag-vvA"/>
+                                            <outlet property="redLabel" destination="p2y-qH-9ln" id="Ez7-8m-7I6"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -960,6 +961,113 @@
             </objects>
             <point key="canvasLocation" x="2589" y="1704"/>
         </scene>
+        <!--修改密码-->
+        <scene sceneID="5LG-3L-rjk">
+            <objects>
+                <viewController id="yKR-qe-5HS" customClass="UpdatePassVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x6G-Ul-Ypr"/>
+                        <viewControllerLayoutGuide type="bottom" id="oGy-K7-GLe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OLT-Gk-Dng">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tt-1P-DGJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passwordSign" translatesAutoresizingMaskIntoConstraints="NO" id="OeT-Gn-5Ts">
+                                        <rect key="frame" x="165" y="65" width="30" height="30"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入原密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SED-ti-0yX">
+                                        <rect key="frame" x="160" y="60" width="280" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="cJz-Q0-7Uz"/>
+                                            <constraint firstAttribute="height" constant="40" id="r5i-8p-LoX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passwordSign" translatesAutoresizingMaskIntoConstraints="NO" id="ZVu-zs-2uh">
+                                        <rect key="frame" x="165" y="115" width="30" height="30"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入新密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pZM-vy-0MT">
+                                        <rect key="frame" x="160" y="110" width="280" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="DTV-cu-g7q"/>
+                                            <constraint firstAttribute="width" constant="280" id="PyD-NF-sGb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passwordSign" translatesAutoresizingMaskIntoConstraints="NO" id="LhN-kR-8bj">
+                                        <rect key="frame" x="165" y="165" width="30" height="30"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="再次输入新密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RJo-gO-sy5">
+                                        <rect key="frame" x="160" y="160" width="280" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="8sl-g5-dhw"/>
+                                            <constraint firstAttribute="height" constant="40" id="d2U-Be-4DK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pvr-hy-9aS">
+                                        <rect key="frame" x="200" y="250" width="200" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="9A5-wd-6Oz"/>
+                                            <constraint firstAttribute="height" constant="45" id="s1U-90-4oB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="确认修改">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressButton:" destination="yKR-qe-5HS" eventType="touchUpInside" id="YYX-QP-9sr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="SED-ti-0yX" firstAttribute="top" secondItem="2tt-1P-DGJ" secondAttribute="top" constant="60" id="6DO-Ce-Re2"/>
+                                    <constraint firstItem="pvr-hy-9aS" firstAttribute="top" secondItem="RJo-gO-sy5" secondAttribute="bottom" constant="50" id="6qD-xa-X0w"/>
+                                    <constraint firstAttribute="centerX" secondItem="SED-ti-0yX" secondAttribute="centerX" id="AyK-6I-hQJ"/>
+                                    <constraint firstItem="pZM-vy-0MT" firstAttribute="top" secondItem="SED-ti-0yX" secondAttribute="bottom" constant="10" id="B43-9u-vQa"/>
+                                    <constraint firstAttribute="centerX" secondItem="RJo-gO-sy5" secondAttribute="centerX" id="Vc4-qj-loS"/>
+                                    <constraint firstItem="LhN-kR-8bj" firstAttribute="leading" secondItem="RJo-gO-sy5" secondAttribute="leading" constant="5" id="W3r-sR-i7w"/>
+                                    <constraint firstItem="SED-ti-0yX" firstAttribute="leading" secondItem="OeT-Gn-5Ts" secondAttribute="leading" constant="-5" id="iLp-p9-yTV"/>
+                                    <constraint firstItem="pZM-vy-0MT" firstAttribute="top" secondItem="ZVu-zs-2uh" secondAttribute="top" constant="-5" id="ihY-eB-YDk"/>
+                                    <constraint firstItem="LhN-kR-8bj" firstAttribute="top" secondItem="RJo-gO-sy5" secondAttribute="top" constant="5" id="jkp-yS-6UH"/>
+                                    <constraint firstItem="pZM-vy-0MT" firstAttribute="leading" secondItem="ZVu-zs-2uh" secondAttribute="leading" constant="-5" id="mX4-Q2-2Pb"/>
+                                    <constraint firstItem="SED-ti-0yX" firstAttribute="top" secondItem="OeT-Gn-5Ts" secondAttribute="top" constant="-5" id="rKW-Fx-ycu"/>
+                                    <constraint firstAttribute="centerX" secondItem="pZM-vy-0MT" secondAttribute="centerX" id="vWj-jO-qon"/>
+                                    <constraint firstAttribute="centerX" secondItem="pvr-hy-9aS" secondAttribute="centerX" id="wb8-g9-pHg"/>
+                                    <constraint firstItem="RJo-gO-sy5" firstAttribute="top" secondItem="pZM-vy-0MT" secondAttribute="bottom" constant="10" id="zen-SU-zlT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2tt-1P-DGJ" firstAttribute="leading" secondItem="OLT-Gk-Dng" secondAttribute="leading" id="QcG-AH-Y9t"/>
+                            <constraint firstAttribute="trailing" secondItem="2tt-1P-DGJ" secondAttribute="trailing" id="ZXG-i4-ieo"/>
+                            <constraint firstItem="2tt-1P-DGJ" firstAttribute="bottom" secondItem="oGy-K7-GLe" secondAttribute="top" id="bYf-TV-dLH"/>
+                            <constraint firstItem="2tt-1P-DGJ" firstAttribute="top" secondItem="OLT-Gk-Dng" secondAttribute="top" id="vb6-kt-gVU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="修改密码" id="xut-4f-hg4"/>
+                    <connections>
+                        <outlet property="backView" destination="2tt-1P-DGJ" id="gzt-yL-gA3"/>
+                        <outlet property="passAgain" destination="RJo-gO-sy5" id="6t2-Bh-Hwt"/>
+                        <outlet property="passNew" destination="pZM-vy-0MT" id="PJU-fv-5sl"/>
+                        <outlet property="passOld" destination="SED-ti-0yX" id="eov-sE-MGK"/>
+                        <outlet property="submitButton" destination="pvr-hy-9aS" id="3Df-ny-Vbe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uOs-lT-uir" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2589" y="2371"/>
+        </scene>
         <!--设置-->
         <scene sceneID="l8h-Ft-R5z">
             <objects>
@@ -988,6 +1096,7 @@
                     <navigationItem key="navigationItem" title="设置" id="Vss-K1-kcV"/>
                     <connections>
                         <outlet property="settingsTableView" destination="jQe-oY-Cfd" id="Nsl-Oz-jJv"/>
+                        <segue destination="yKR-qe-5HS" kind="show" identifier="updatePassword" id="pJo-dB-yrA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oz-57-96s" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1189,6 +1298,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="passwordSign" width="30" height="30"/>
         <image name="personBack" width="240" height="82"/>
     </resources>
 </document>

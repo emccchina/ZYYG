@@ -25,18 +25,6 @@
 		</dict>
 		<dict>
 			<key>headerImage</key>
-			<string>compete.png</string>
-			<key>title</key>
-			<string>竞价纪录</string>
-			<key>count</key>
-			<string>11</string>
-			<key>footerImage</key>
-			<string>left.png</string>
-			<key>segueString</key>
-			<string>BiddingRecord</string>
-		</dict>
-		<dict>
-			<key>headerImage</key>
 			<string>shoppingCart.png</string>
 			<key>title</key>
 			<string>购物车</string>

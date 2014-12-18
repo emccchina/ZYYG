@@ -585,6 +585,7 @@
 		F9BC26AB1A2EE945006894C6 /* OrderListCellBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26AA1A2EE945006894C6 /* OrderListCellBottom.m */; };
 		F9BEC50F1A36E1D800BA931D /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BEC50E1A36E1D800BA931D /* OrderModel.m */; };
 		F9BEC5121A36E39700BA931D /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BEC5111A36E39700BA931D /* GoodsModel.m */; };
+		F9C302951A42BC0100B1B53C /* UpdatePassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C302941A42BC0100B1B53C /* UpdatePassVC.m */; };
 		F9D1C78A1A4021F4001FF43B /* InvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D1C7891A4021F4001FF43B /* InvoiceModel.m */; };
 		F9DC702A1A31A43B006AE19C /* SettingsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9DC70291A31A43B006AE19C /* SettingsList.plist */; };
 		F9DC702D1A31AC11006AE19C /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DC702C1A31AC11006AE19C /* SettingModel.m */; };
@@ -1312,6 +1313,8 @@
 		F9BEC50E1A36E1D800BA931D /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		F9BEC5101A36E39700BA931D /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
 		F9BEC5111A36E39700BA931D /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
+		F9C302931A42BC0100B1B53C /* UpdatePassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePassVC.h; sourceTree = "<group>"; };
+		F9C302941A42BC0100B1B53C /* UpdatePassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassVC.m; sourceTree = "<group>"; };
 		F9D1C7881A4021F4001FF43B /* InvoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceModel.h; sourceTree = "<group>"; };
 		F9D1C7891A4021F4001FF43B /* InvoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceModel.m; sourceTree = "<group>"; };
 		F9DC70291A31A43B006AE19C /* SettingsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingsList.plist; sourceTree = "<group>"; };
@@ -1590,6 +1593,8 @@
 				F993D4571A3ACC100050FD79 /* EditPersonVC.m */,
 				F9B1A5F01A3C1A7F006244F4 /* ReadLetterVC.h */,
 				F9B1A5F11A3C1A7F006244F4 /* ReadLetterVC.m */,
+				F9C302931A42BC0100B1B53C /* UpdatePassVC.h */,
+				F9C302941A42BC0100B1B53C /* UpdatePassVC.m */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -3050,6 +3055,7 @@
 				940178681A21CCE400697D14 /* FairPriceVC.m in Sources */,
 				9401789F1A21CE0000697D14 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				940178A11A21CE0000697D14 /* UIAlertView+AFNetworking.m in Sources */,
+				F9C302951A42BC0100B1B53C /* UpdatePassVC.m in Sources */,
 				F7C8D5171A3809C6009F36B3 /* FMResultSet.m in Sources */,
 				F9BC26891A2EA263006894C6 /* MyAccountVC.m in Sources */,
 				F76A4DEE1A2C38B10005FF46 /* AddAdressVC.m in Sources */,
