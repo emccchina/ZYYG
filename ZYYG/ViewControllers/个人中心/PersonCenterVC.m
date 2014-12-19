@@ -184,10 +184,10 @@ static NSString *listCell = @"listCell";
         UILabel *title = (UILabel*)[cell viewWithTag:2];
         title.text = model.title;
         if(model.count!=nil){
-            UILabel *count = (UILabel*)[cell viewWithTag:3];
-            count.layer.cornerRadius=8;
-            count.textColor=[UIColor whiteColor];
-            count.layer.backgroundColor=kRedColor.CGColor;
+//            UILabel *count = (UILabel*)[cell viewWithTag:3];
+//            count.layer.cornerRadius=8;
+//            count.textColor=[UIColor whiteColor];
+//            count.layer.backgroundColor=kRedColor.CGColor;
             //            count.text = model.count;
         }
         

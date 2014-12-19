@@ -16,8 +16,9 @@
     HMSegmentedControl *segmentView;
     NSMutableArray *letterArray;
     UserInfo *user;
-    NSInteger selectedIndex;
-    BOOL state;
+    NSInteger selectedIndex; //选中的行
+    BOOL state; // 已读未读 标示
+    NSInteger pageNum; //页数
 }
 
 @end
@@ -30,29 +31,42 @@ static NSString *letterCell = @"letterCell";
     [super viewDidLoad];
     [self showBackItem];
     state=YES;
+    pageNum=1;
     letterArray =[NSMutableArray array];
     self.myLetterTableView.delegate=self;
     self.myLetterTableView.dataSource=self;
-    [self requestLetterList:1 pageNumber:1];
+    [self requestLetterList:1 pageNumber:pageNum];
+    [self addFootRefresh];
     // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
     if (1==(long)segmentedControl.selectedSegmentIndex) {
         state=NO;
-        [self requestLetterList:0 pageNumber:1];
+        [self requestLetterList:0 pageNumber:pageNum];
     }else{
-        [self requestLetterList:1 pageNumber:1];
+        [self requestLetterList:1 pageNumber:pageNum];
         state=YES;
     }
     
     //    [self.myLetterTableView reloadData];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)addFootRefresh
+{
+    [letterArray removeAllObjects];
+    [self.myLetterTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        pageNum=pageNum+1;
+        NSInteger letterState = state ==YES ? 1:0;
+        [self requestLetterList:letterState pageNumber:pageNum];
+    }];
 }
+
 
 
 -(void)requestLetterList:(NSInteger)letterState  pageNumber:(NSInteger)num
@@ -74,7 +88,6 @@ static NSString *letterCell = @"letterCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            [letterArray removeAllObjects];
             NSArray *letters=result[@"data"];
             for (int i=0; i<letters.count; i++) {
                 LetterModel *letter =[LetterModel letterFromDict:letters[i]];
@@ -92,6 +105,7 @@ static NSString *letterCell = @"letterCell";
 - (void)requestFinished
 {
     [self dismissIndicatorView];
+    [self.myLetterTableView footerEndRefreshing];
 }
 #pragma mark -tableView
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

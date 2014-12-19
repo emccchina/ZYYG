@@ -85,8 +85,8 @@
 
 -(void)requestAccountList:(NSInteger )dr  pageNumber:(NSInteger )num
 {
-    NSString *sdr=[NSString stringWithFormat:@"%d",dr];
-    NSString *snum=[NSString stringWithFormat:@"%d",num];
+    NSString *sdr=[NSString stringWithFormat:@"%ld",(long)dr];
+    NSString *snum=[NSString stringWithFormat:@"%ld",(long)num];
     user=[UserInfo shareUserInfo];
     if (![user isLogin]) {
         [Utities presentLoginVC:self];
