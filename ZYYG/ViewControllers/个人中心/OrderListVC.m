@@ -212,12 +212,12 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(indexPath.row == (order.Goods.count+2)){
         OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
         bootomCell.cancelTime.text=order.CreateTime;
-        if ([order.OrderStatus isEqualToString:@"已取消"]) {
-            bootomCell.redLabel.text=@"该订单已经被取消无法操作";
-            bootomCell.cancellButton.hidden=YES;
-            bootomCell.payButton.hidden=YES;
+//        if ([order.OrderStatus isEqualToString:@"已取消"]) {
+//            bootomCell.redLabel.text=@"该订单已经被取消无法操作";
+//            bootomCell.cancellButton.hidden=YES;
+//            bootomCell.payButton.hidden=YES;
             
-        }
+//        }
         bootomCell.orderCode=order.OrderCode;
         bootomCell.orderlistVc=self;
         bootomCell.selectionStyle=UITableViewCellSelectionStyleNone;

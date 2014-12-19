@@ -105,6 +105,10 @@
         id result = [self parseResults:responseObject];
         if (result) {
             NSArray *accounts=result[@"data"];
+            if (!accounts ||accounts.count<1) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新账单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
             NSString *MaybeMoney=result[@"MaybeMoney"];
             self.maybeMoney.text=[NSString stringWithFormat:@"$%@",MaybeMoney];
             NSString *Frozen=result[@"Frozen"];

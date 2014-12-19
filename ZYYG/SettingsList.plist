@@ -25,12 +25,6 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>意见反馈</string>
-			<key>segueString</key>
-			<string>feedback</string>
-		</dict>
-		<dict>
-			<key>title</key>
 			<string>检测更新</string>
 			<key>segueString</key>
 			<string>checkUpdate</string>

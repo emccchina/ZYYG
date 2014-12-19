@@ -18,6 +18,7 @@
 //    HMSegmentedControl *segmentView;// table view title
     NSMutableArray *collections;
     UserInfo *user;
+    NSInteger pageNum;
 }
 
 
@@ -29,13 +30,14 @@
     
     [super viewDidLoad];
     collections=[NSMutableArray array];
-    [self requestCollections:0];
+    pageNum=1;
+    [self requestCollections:pageNum];
     [self showBackItem];
     self.myCollectionTableView.delegate=self;
     self.myCollectionTableView.dataSource=self;
     [self.myCollectionTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
     
-   
+    [self addFootRefresh];
     // Do any additional setup after loading the view.
 }
 
@@ -50,7 +52,17 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)requestCollections:(NSInteger)collectType
+- (void)addFootRefresh
+{
+    [collections removeAllObjects];
+    [self.myCollectionTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        pageNum=pageNum+1;
+        [self requestCollections:pageNum];
+    }];
+}
+
+
+-(void)requestCollections:(NSInteger)page
 {
     user=[UserInfo shareUserInfo];
     if (![user isLogin]) {
@@ -61,14 +73,18 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@favoriteList.ashx",kServerDomain];
-    NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user.userKey, @"key", nil];
+    NSLog(@"url   %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user.userKey, @"key",[NSString stringWithFormat:@"%d",page],@"num", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
             NSArray *carray=result[@"data"];
+            if (!carray ||carray.count<1) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
             for (int i=0; i<carray.count; i++) {
                 GoodsModel *model=[[GoodsModel alloc] init];
                 [model goodsModelFromCollect:carray[i]];
@@ -85,7 +101,10 @@
 - (void)requestFinished
 {
     [self dismissIndicatorView];
+    [self.myCollectionTableView footerEndRefreshing];
 }
+
+
 
 #pragma mark -tableView
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -134,6 +153,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GoodsModel *goods=collections[indexPath.row];
     [self presentDetailVC:goods.GoodsCode];
 }
