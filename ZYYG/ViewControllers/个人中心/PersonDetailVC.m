@@ -48,6 +48,12 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 - (void)readAdressFromDB
 {
     NSString *dbPath = [[NSBundle mainBundle] pathForResource:@"adress" ofType:@"db"];
@@ -81,6 +87,8 @@
     [dataBase close];
     
 }
+
+
 
 - (void)setInfos
 {

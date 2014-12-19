@@ -113,7 +113,7 @@ static NSString *listCell = @"listCell";
 {
     CGFloat hight=5;
     if (section==0) {
-        return 1;
+        return 0.1;
     }
     return hight;
 }
@@ -126,7 +126,7 @@ static NSString *listCell = @"listCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return 125;
+        return 120;
     }else{
         return 45;
     }

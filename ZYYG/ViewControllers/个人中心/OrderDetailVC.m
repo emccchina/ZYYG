@@ -52,6 +52,12 @@ static NSString *cartCell = @"OrderListCellGoods";
     [self requestLetterList:self.orderCode];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -116,13 +122,6 @@ static NSString *cartCell = @"OrderListCellGoods";
 
 }
 
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-}
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -211,6 +210,8 @@ static NSString *cartCell = @"OrderListCellGoods";
             detail = @"到付";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
         }
             break;
@@ -222,6 +223,8 @@ static NSString *cartCell = @"OrderListCellGoods";
             detail = @"快递";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
         }
             break;
