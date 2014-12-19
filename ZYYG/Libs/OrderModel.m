@@ -21,6 +21,7 @@
     order.GoodsTotal=[dict safeObjectForKey:@"GoodsTotal"];
     order.OrderMoney=[dict safeObjectForKey:@"OrderMoney"];
     order.OrderStatus=[dict safeObjectForKey:@"OrderStatus"];
+    order.state=[dict[@"OrderStatusCode"] integerValue];
     NSMutableArray *goods=[NSMutableArray arrayWithArray:dict[@"Goods"]];
     for (int i=0; i<goods.count; i++) {
         NSDictionary *gd=goods[i];
@@ -31,8 +32,6 @@
         g.AppendPrice=[[gd safeObjectForKey:@"Price"] floatValue];
         [order.Goods addObject:g];
     }
-    
     return order;
-    
 }
 @end

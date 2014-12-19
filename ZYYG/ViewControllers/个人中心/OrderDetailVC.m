@@ -41,10 +41,14 @@ static NSString *cartCell = @"OrderListCellGoods";
     self.orderDetailTableView.dataSource = self;
     [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"OrderListCellGoods" bundle:nil] forCellReuseIdentifier:cartCell];
     
-    self.confirmDelivery.layer.cornerRadius = 3;
-    self.checkDelivery.layer.cornerRadius = 3;
     self.confirmDelivery.layer.backgroundColor = kRedColor.CGColor;
+    self.confirmDelivery.layer.cornerRadius = 3;
+    self.confirmDelivery.hidden=YES;
+    
     self.checkDelivery.layer.backgroundColor = kRedColor.CGColor;
+    self.checkDelivery.layer.cornerRadius = 3;
+    self.checkDelivery.hidden=YES;
+    
     [self requestLetterList:self.orderCode];
 }
 
@@ -76,6 +80,7 @@ static NSString *cartCell = @"OrderListCellGoods";
             [addr addressFromOrder:result[@"Addr"]];
             invoice =[InvoiceModel invoiceWithDict:result[@"Invoice"]];
             order = [OrderModel orderModelWithDict:result];
+            [self setButton:order];
             NSLog(@"订单商品解析完成");
             [self.orderDetailTableView reloadData];
         }
@@ -90,6 +95,26 @@ static NSString *cartCell = @"OrderListCellGoods";
     [self dismissIndicatorView];
 }
 
+-(void)setButton:(OrderModel *)ord
+{
+    if (0 == ord.state) {
+        //创建状态 可支付  可取消
+        
+        self.confirmDelivery.hidden=NO;
+        self.checkDelivery.hidden=NO;
+    }else if(10 == ord.state){
+    }else if(20 == ord.state){
+    }else if(30 == ord.state){
+    }else if(40 == ord.state){
+    }else if(50 == ord.state){
+        self.confirmDelivery.hidden=YES;
+        self.checkDelivery.hidden=YES;
+        
+    }else if(-1 == ord.state){
+        
+    }
+
+}
 
 
 

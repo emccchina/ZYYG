@@ -16,6 +16,7 @@
 @property (nonatomic, assign) NSString          *GoodsTotal;
 @property (nonatomic, strong) NSString          *OrderMoney;
 @property (nonatomic, strong) NSString          *OrderStatus;
+@property (nonatomic, assign) NSInteger          state;
 @property (nonatomic, strong) NSMutableArray    *Goods;
 
 +(id)orderModelWithDict:(NSDictionary *)dict;

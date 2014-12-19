@@ -128,7 +128,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            NSLog(@"%@",result);
+//            NSLog(@"%@",result);
             NSArray *orders=result[@"Orders"];
             if (!orders ||orders.count<1) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新订单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -212,12 +212,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(indexPath.row == (order.Goods.count+2)){
         OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
         bootomCell.cancelTime.text=order.CreateTime;
-//        if ([order.OrderStatus isEqualToString:@"已取消"]) {
-//            bootomCell.redLabel.text=@"该订单已经被取消无法操作";
-//            bootomCell.cancellButton.hidden=YES;
-//            bootomCell.payButton.hidden=YES;
-            
-//        }
+        [self setButton:bootomCell orderMod:order];
         bootomCell.orderCode=order.OrderCode;
         bootomCell.orderlistVc=self;
         bootomCell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -261,6 +256,26 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     
 }
 
+-(void)setButton:(OrderListCellBottom *)bottomCell orderMod:(OrderModel *)ord
+{
+    if (0 == ord.state) {
+        //创建状态 可支付  可取消
+        bottomCell.redLabel.text=@"请在订单失效之前尽快支付";
+        bottomCell.cancellButton.hidden=NO;
+        bottomCell.payButton.hidden=NO;
+    }else if(10 == ord.state){
+    }else if(20 == ord.state){
+    }else if(30 == ord.state){
+    }else if(40 == ord.state){
+    }else if(50 == ord.state){
+        bottomCell.redLabel.text=@"该订单已经被取消无法操作";
+        bottomCell.cancellButton.hidden=YES;
+        bottomCell.payButton.hidden=YES;
+    }else if(-1 == ord.state){
+        
+    }
+    
+}
 
 /*
  #pragma mark - Navigation
