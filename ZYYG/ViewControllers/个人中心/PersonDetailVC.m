@@ -56,17 +56,27 @@
         NSLog(@"数据库读取失败");
         return;
     }
-   NSString *sql1 = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", kProvinceAdress, kProvinceAdress, (long)[user.provideCode integerValue]];
-    FMResultSet *s1 = [dataBase executeQuery:sql1];
-    provience = [s1 stringForColumn:[NSString stringWithFormat:@"%@_name", kProvinceAdress]];
-    
-    NSString *sql2 = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", kCityAdress, kCityAdress, (long)[user.cityCode integerValue]];
-    FMResultSet *s2 = [dataBase executeQuery:sql2];
-    city = [s2 stringForColumn:[NSString stringWithFormat:@"%@_name", kCityAdress]];
-    
-    NSString *sql3 = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld", kTownAdress, kTownAdress, (long)[user.aeraCode integerValue]];
-    FMResultSet *s3 = [dataBase executeQuery:sql3];
-    town = [s3 stringForColumn:[NSString stringWithFormat:@"%@_name", kTownAdress]];
+    __block int areaCount = 0;
+    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld;SELECT * FROM %@ WHERE %@_id=%ld;SELECT * FROM %@ WHERE %@_id=%ld;"
+                     ,kProvinceAdress,kProvinceAdress,(long)[user.provideCode integerValue], kCityAdress, kCityAdress, (long)[user.cityCode integerValue], kTownAdress, kTownAdress, (long)[user.aeraCode integerValue]];
+    [dataBase executeStatements:sql withResultBlock:^int(NSDictionary *dictionary) {
+        NSLog(@"%@", dictionary);
+        switch (areaCount) {
+            case 0:
+                provience = dictionary[[NSString stringWithFormat:@"%@_name", kProvinceAdress]];
+                break;
+            case 1:
+                city = dictionary[[NSString stringWithFormat:@"%@_name", kCityAdress]];
+                break;
+            case 2:
+                town = dictionary[[NSString stringWithFormat:@"%@_name", kTownAdress]];
+                break;
+            default:
+                break;
+        }
+        areaCount++;
+        return 0;
+    }];
     
     [dataBase close];
     

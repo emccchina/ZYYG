@@ -161,6 +161,12 @@ static NSString *spreadCell = @"SpreadCell";
 
 - (void)requestAddCart
 {
+    NSNumber *state12 = goods.GoodsNum;
+    if (![state12 integerValue]) {
+        [self showAlertView:@"该商品已售,无法加入购物车"];
+        return;
+    }
+    
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

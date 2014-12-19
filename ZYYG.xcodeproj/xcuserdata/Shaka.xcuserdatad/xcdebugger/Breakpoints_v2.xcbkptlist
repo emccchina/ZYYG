@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/PersonDetailVC.m"
-            timestampString = "440589778.14631"
+            timestampString = "440645736.716598"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-doFinish"
             landmarkType = "5">
          </BreakpointContent>

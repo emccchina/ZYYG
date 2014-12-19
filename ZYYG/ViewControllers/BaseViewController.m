@@ -236,18 +236,17 @@
 
 - (NSData*)imageSizeAfterZoom:(UIImage*)image
 {
-    CGFloat width = 200;
+    CGFloat scaleImage = 0;
     CGSize imageSize = [image size];
     CGFloat imageWidth = imageSize.width;
     CGFloat imageHeight = imageSize.height;
     CGSize imageSizeZoom = CGSizeZero;
-    if (imageWidth < width) {
-        imageSizeZoom = imageSize;
+    if (imageWidth < imageHeight) {
+        scaleImage = imageHeight/500;
     }else{
-        CGFloat scaleImage = imageWidth / width;
-        imageSizeZoom = CGSizeMake(width, imageHeight / scaleImage);
+        scaleImage = imageWidth/500;
     }
-    
+    imageSizeZoom = CGSizeMake(imageWidth/scaleImage, imageHeight/scaleImage);
     UIImage* imageZoom = [self scaleToSize:image size:imageSizeZoom];
     
     NSUInteger dataLenthDefault = 600000;
