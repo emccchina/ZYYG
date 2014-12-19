@@ -63,6 +63,7 @@
 		94D89EDE1A220D900074B874 /* ShopCartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED81A220D900074B874 /* ShopCartStoryboard.storyboard */; };
 		F70B08181A39817A00006E31 /* CartManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F70B08171A39817A00006E31 /* CartManager.m */; };
 		F71B22A41A393A590012F570 /* AdressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F71B22A31A393A590012F570 /* AdressModel.m */; };
+		F71DC88C1A43CF9900CF74E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */; };
 		F72976851A3AC14200CD9E22 /* SelectInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F72976841A3AC14200CD9E22 /* SelectInfo.m */; };
 		F729B0191A36C55C0001FD39 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F729B0181A36C55C0001FD39 /* MyButton.m */; };
 		F7675C351A2DBE450008C220 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C341A2DBE440008C220 /* LoginVC.m */; };
@@ -711,6 +712,7 @@
 		F70B08171A39817A00006E31 /* CartManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartManager.m; sourceTree = "<group>"; };
 		F71B22A21A393A590012F570 /* AdressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdressModel.h; sourceTree = "<group>"; };
 		F71B22A31A393A590012F570 /* AdressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressModel.m; sourceTree = "<group>"; };
+		F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F72976831A3AC14200CD9E22 /* SelectInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectInfo.h; sourceTree = "<group>"; };
 		F72976841A3AC14200CD9E22 /* SelectInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInfo.m; sourceTree = "<group>"; };
 		F729B0171A36C55C0001FD39 /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
@@ -1329,6 +1331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F71DC88C1A43CF9900CF74E4 /* StoreKit.framework in Frameworks */,
 				F7D249DE1A419262001AAAC3 /* libstdc++.6.0.9.dylib in Frameworks */,
 				F7D249DC1A419257001AAAC3 /* CoreGraphics.framework in Frameworks */,
 				F7D249DA1A41924C001AAAC3 /* AudioToolbox.framework in Frameworks */,
@@ -1352,6 +1355,7 @@
 		940177EE1A21CBEA00697D14 = {
 			isa = PBXGroup;
 			children = (
+				F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */,
 				F7D249DD1A419262001AAAC3 /* libstdc++.6.0.9.dylib */,
 				F7D249DB1A419257001AAAC3 /* CoreGraphics.framework */,
 				F7D249D91A41924C001AAAC3 /* AudioToolbox.framework */,

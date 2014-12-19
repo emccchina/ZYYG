@@ -51,7 +51,8 @@
     self.SpecDesc = dict[@"size"];
     self.AppendPrice = [dict[@"Money"] floatValue];
     self.picURL = dict[@"ImageUrl"];
-    self.addCartCount = dict[@"Count"];
+    self.addCartCount = dict[@"Num"];
+    self.valid = ([dict[@"isValid"] isEqualToString:@"False"] ? NO : YES);
 }
 
 - (void)goodsModelFromHomePage:(NSDictionary *)dict

@@ -34,6 +34,7 @@
 
 
 @property (nonatomic, strong) NSString      *addCartCount;
+@property (nonatomic, assign) BOOL          valid;//失效与否
 
 +(id)goodsModelWith:(NSDictionary *)dict;//详情页面
 

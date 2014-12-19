@@ -55,13 +55,13 @@ static NSString *cartCell = @"CartCell";
 {
     [super viewWillAppear:animated];
     
-    if (![UserInfo shareUserInfo].cartsArr || ![UserInfo shareUserInfo].cartsArr.count) {
+//    if (![UserInfo shareUserInfo].cartsArr || ![UserInfo shareUserInfo].cartsArr.count) {
         [self requestshopCart];
-    }else{
-        [_shopCart removeAllObjects];
-        [_shopCart addObjectsFromArray:[UserInfo shareUserInfo].cartsArr];
-        [self.cartTB reloadData];
-    }
+//    }else{
+//        [_shopCart removeAllObjects];
+//        [_shopCart addObjectsFromArray:[UserInfo shareUserInfo].cartsArr];
+//        [self.cartTB reloadData];
+//    }
     
 }
 
@@ -308,6 +308,7 @@ static NSString *cartCell = @"CartCell";
     cell.bottomLab.text = [NSString stringWithFormat:@"此艺术品已被%@人加入购物车", model.addCartCount];
     cell.selectState = [[_selectDict safeObjectForKey:@(indexPath.row)] integerValue];
     cell.cellType = NO;
+    cell.valid = model.valid;
     cell.doSelected = ^(NSIndexPath *cellIndexPath, BOOL selected){
         [_selectDict setObject:@(selected) forKey:@(indexPath.row)];
         [self changeSettleAccount:selected price:model.AppendPrice];

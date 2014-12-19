@@ -36,8 +36,13 @@
 {
     self.selectBut.hidden = cellType;
     self.bottomView.hidden = cellType;
+    self.validLab.hidden = cellType;
 }
-
+- (void)setValid:(BOOL)valid
+{
+    self.selectBut.hidden = !valid;
+    self.validLab.hidden = valid;
+}
 - (void)setSelectState:(BOOL)selectState
 {
     _selectState = selectState;

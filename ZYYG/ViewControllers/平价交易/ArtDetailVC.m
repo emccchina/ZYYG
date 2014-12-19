@@ -257,6 +257,19 @@ static NSString *spreadCell = @"SpreadCell";
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return 0.1;
+            break;
+            
+        default:
+            return 20;
+            break;
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
@@ -296,15 +309,6 @@ static NSString *spreadCell = @"SpreadCell";
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section != 0) {
-        return 10;
-    }else
-    {
-        return 0;
-    }
-}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -17,6 +17,7 @@ typedef void (^DoSelected)(NSIndexPath *indexPath, BOOL selected);
 @property (weak, nonatomic) IBOutlet UILabel *LBLab;
 @property (weak, nonatomic) IBOutlet UILabel *LThirdLab;
 @property (weak, nonatomic) IBOutlet UILabel *LSecondLab;
+@property (weak, nonatomic) IBOutlet UILabel *validLab;
 
 @property (weak, nonatomic) IBOutlet UILabel *LTLab;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
@@ -28,7 +29,7 @@ typedef void (^DoSelected)(NSIndexPath *indexPath, BOOL selected);
 @property (weak, nonatomic) IBOutlet UILabel *bottomLab;
 
 @property (nonatomic, assign) BOOL          cellType;//是否显示出 按钮 底部的已购买label  0显示， 1隐藏
-
+@property (nonatomic, assign) BOOL          valid;//有效否
 @property (nonatomic, assign) BOOL          selectState;//是否选中
 @property (nonatomic, strong) NSIndexPath   *indexPath;
 @property (nonatomic, copy) DoSelected      doSelected;

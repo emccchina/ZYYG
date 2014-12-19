@@ -5,20 +5,6 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>节省流量设置</string>
-			<key>segueString</key>
-			<string></string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>自动下载图片</string>
-			<key>segueString</key>
-			<string>autoDownload</string>
-		</dict>
-	</array>
-	<array>
-		<dict>
-			<key>title</key>
 			<string>使用帮助</string>
 			<key>segueString</key>
 			<string>help</string>
