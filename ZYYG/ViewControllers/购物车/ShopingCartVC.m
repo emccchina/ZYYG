@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *selectedGoodBut;//选中
 @property (weak, nonatomic) IBOutlet UIButton *settleAccountBut;//结算
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
-@property (weak, nonatomic) IBOutlet UILabel *totalPrice;
 
 @end
 @implementation ShopingCartVC
@@ -96,7 +95,6 @@ static NSString *cartCell = @"CartCell";
 {
     self.navigationItem.rightBarButtonItem.title = _type ? @"取消" : @"删除";
     self.priceLab.hidden = _type;
-    self.totalPrice.hidden = _type;
     [self.selectedGoodBut setTitle:(_type ? @"全选" : @"") forState:UIControlStateNormal];
     [self changeSettleAccount:NO price:0];
 }
@@ -197,7 +195,8 @@ static NSString *cartCell = @"CartCell";
         [_shopCart removeObjectAtIndex:[number integerValue]];
         [[UserInfo shareUserInfo].cartsArr removeObjectAtIndex:[number integerValue]];
     }
-    
+    _selectedAccount = 0;
+    [self changeSettleAccount:NO price:0];
     [_selectDict removeAllObjects];
     [self.cartTB reloadData];
 }
@@ -308,7 +307,11 @@ static NSString *cartCell = @"CartCell";
     cell.bottomLab.text = [NSString stringWithFormat:@"此艺术品已被%@人加入购物车", model.addCartCount];
     cell.selectState = [[_selectDict safeObjectForKey:@(indexPath.row)] integerValue];
     cell.cellType = NO;
-    cell.valid = model.valid;
+    if (_type) {
+        cell.valid = YES;
+    }else{
+        cell.valid = model.valid;
+    }
     cell.doSelected = ^(NSIndexPath *cellIndexPath, BOOL selected){
         [_selectDict setObject:@(selected) forKey:@(indexPath.row)];
         [self changeSettleAccount:selected price:model.AppendPrice];
