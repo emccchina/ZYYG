@@ -109,7 +109,7 @@
 
 - (void)requestLogin
 {
-    if ([self.accoutTF.text isEqualToString:@""] || [self.accoutTF.text isEqualToString:@""]) {
+    if ([self.accoutTF.text isEqualToString:@""] || [self.passwordTF.text isEqualToString:@""]) {
         [self showAlertView:@"请填写用户名和密码"];
         return;
     }

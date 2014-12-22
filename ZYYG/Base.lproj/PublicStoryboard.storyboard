@@ -94,6 +94,7 @@
                                 </state>
                                 <connections>
                                     <action selector="doForgetBut:" destination="TTw-IR-ooC" eventType="touchUpInside" id="8hQ-si-4Tg"/>
+                                    <segue destination="lay-9u-MJH" kind="show" id="2zg-vV-g6r"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JiM-br-jYT">
@@ -195,10 +196,10 @@
             </objects>
             <point key="canvasLocation" x="424" y="544"/>
         </scene>
-        <!--注册帐号-->
+        <!--RegisterVC-->
         <scene sceneID="u0H-70-SeH">
             <objects>
-                <viewController title="注册帐号" id="aiS-55-0uz" customClass="RegisterVC" sceneMemberID="viewController">
+                <viewController id="aiS-55-0uz" customClass="RegisterVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dcc-4U-WjQ"/>
                         <viewControllerLayoutGuide type="bottom" id="MsC-EX-IPU"/>
@@ -210,7 +211,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cW1-HE-ha5">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sY6-sK-LUa">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入密码(大于8位)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sY6-sK-LUa">
                                         <rect key="frame" x="160" y="60" width="280" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="280" id="Z4l-IG-jB6"/>
@@ -261,7 +262,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emailSign" translatesAutoresizingMaskIntoConstraints="NO" id="jCk-d4-CUS">
                                         <rect key="frame" x="165" y="165" width="30" height="30"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VyX-Sf-khl">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VyX-Sf-khl">
                                         <rect key="frame" x="160" y="210" width="220" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="6E4-md-qOe"/>
@@ -335,12 +336,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epV-9T-tRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1517" y="201"/>
+            <point key="canvasLocation" x="2083" y="114"/>
         </scene>
-        <!--View Controller-->
+        <!--Forget PasswordVC-->
         <scene sceneID="OZc-U0-amL">
             <objects>
-                <viewController id="lay-9u-MJH" sceneMemberID="viewController">
+                <viewController id="lay-9u-MJH" customClass="ForgetPasswordVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lke-fp-S49"/>
                         <viewControllerLayoutGuide type="bottom" id="3FS-in-H08"/>
@@ -348,12 +349,67 @@
                     <view key="view" contentMode="scaleToFill" id="W5A-9k-LpV">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入邮箱" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kne-pF-SdR">
+                                <rect key="frame" x="160" y="40" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="8rG-pr-MPx"/>
+                                    <constraint firstAttribute="height" constant="40" id="BvG-3F-9Sw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwe-fm-W4a">
+                                <rect key="frame" x="160" y="160" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="V6f-2L-YJ3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="我已有验证码">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doHaveCaptcha:" destination="lay-9u-MJH" eventType="touchUpInside" id="PXR-QC-B3E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ued-Y6-80H">
+                                <rect key="frame" x="160" y="100" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="aUR-vt-imC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="获取验证码">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doGetCaptcha:" destination="lay-9u-MJH" eventType="touchUpInside" id="ajT-Ie-X2W"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="ued-Y6-80H" secondAttribute="centerX" id="19J-QX-OXL"/>
+                            <constraint firstItem="ued-Y6-80H" firstAttribute="top" secondItem="kne-pF-SdR" secondAttribute="bottom" constant="20" id="4Rx-wG-4K6"/>
+                            <constraint firstAttribute="centerX" secondItem="kne-pF-SdR" secondAttribute="centerX" id="Aed-fp-VxU"/>
+                            <constraint firstItem="Wwe-fm-W4a" firstAttribute="top" secondItem="ued-Y6-80H" secondAttribute="bottom" constant="20" id="BVV-c6-u1c"/>
+                            <constraint firstItem="ued-Y6-80H" firstAttribute="width" secondItem="kne-pF-SdR" secondAttribute="width" id="SPr-rr-3Hp"/>
+                            <constraint firstItem="Wwe-fm-W4a" firstAttribute="width" secondItem="kne-pF-SdR" secondAttribute="width" id="Zbf-9S-lu9"/>
+                            <constraint firstAttribute="centerX" secondItem="Wwe-fm-W4a" secondAttribute="centerX" id="ePZ-np-JpN"/>
+                            <constraint firstItem="kne-pF-SdR" firstAttribute="top" secondItem="lke-fp-S49" secondAttribute="bottom" constant="20" id="onA-po-THF"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTF" destination="kne-pF-SdR" id="BEA-pf-fJa"/>
+                        <outlet property="getCaptcha" destination="ued-Y6-80H" id="Lwg-dh-kZ9"/>
+                        <outlet property="haveCaptcha" destination="Wwe-fm-W4a" id="lim-cb-cTi"/>
+                        <segue destination="aiS-55-0uz" kind="show" identifier="RetakeVC" id="oSN-qe-fIW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kls-xa-v2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1498" y="1023"/>
+            <point key="canvasLocation" x="1252" y="952"/>
         </scene>
     </scenes>
     <resources>
@@ -367,4 +423,7 @@
         <image name="passwordSign" width="30" height="30"/>
         <image name="sinaLogo" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oSN-qe-fIW"/>
+    </inferredMetricsTieBreakers>
 </document>

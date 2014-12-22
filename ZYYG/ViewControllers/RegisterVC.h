@@ -10,4 +10,6 @@
 
 @interface RegisterVC : BaseViewController
 
+@property (nonatomic, assign) BOOL  typeVC;//0注册   1找回密码
+
 @end

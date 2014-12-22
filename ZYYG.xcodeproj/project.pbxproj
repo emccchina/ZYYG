@@ -83,9 +83,6 @@
 		F7C095BA1A382D280077EB47 /* adress.db in Resources */ = {isa = PBXBuildFile; fileRef = F7C095B91A382D280077EB47 /* adress.db */; };
 		F7C215FC1A2EB80200C011AE /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C215FB1A2EB80200C011AE /* ChooseView.m */; };
 		F7C216011A2EE77A00C011AE /* SearchFrameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C216001A2EE77A00C011AE /* SearchFrameVC.m */; };
-		F7C216051A2EFE1800C011AE /* LoginBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C216021A2EFE1800C011AE /* LoginBG.png */; };
-		F7C216061A2EFE1800C011AE /* LoginBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C216031A2EFE1800C011AE /* LoginBG@2x.png */; };
-		F7C216071A2EFE1800C011AE /* LoginBG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7C216041A2EFE1800C011AE /* LoginBG@3x.png */; };
 		F7C8D4F91A37D1A8009F36B3 /* erp_city_code.xml in Resources */ = {isa = PBXBuildFile; fileRef = F7C8D4F61A37D1A8009F36B3 /* erp_city_code.xml */; };
 		F7C8D4FA1A37D1A8009F36B3 /* erp_district_code.xml in Resources */ = {isa = PBXBuildFile; fileRef = F7C8D4F71A37D1A8009F36B3 /* erp_district_code.xml */; };
 		F7C8D4FB1A37D1A8009F36B3 /* erp_province_code.xml in Resources */ = {isa = PBXBuildFile; fileRef = F7C8D4F81A37D1A8009F36B3 /* erp_province_code.xml */; };
@@ -528,7 +525,6 @@
 		F7E905F61A26C2F4001117EE /* PriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E905F41A26C2F4001117EE /* PriceCell.m */; };
 		F7E905F71A26C2F4001117EE /* PriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E905F51A26C2F4001117EE /* PriceCell.xib */; };
 		F7E97E611A3AB7300090752B /* Price.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7E97E601A3AB7300090752B /* Price.plist */; };
-		F7EC68A41A2BF136000B289D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EC68A31A2BF136000B289D /* Default-568h@2x.png */; };
 		F7EC68C11A2BF5DA000B289D /* JHRefreshAmazingAniView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68AA1A2BF5DA000B289D /* JHRefreshAmazingAniView.m */; };
 		F7EC68C21A2BF5DA000B289D /* JHRefreshAniBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68AC1A2BF5DA000B289D /* JHRefreshAniBaseView.m */; };
 		F7EC68C31A2BF5DA000B289D /* JHRefreshCommonAniView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68AE1A2BF5DA000B289D /* JHRefreshCommonAniView.m */; };
@@ -547,6 +543,9 @@
 		F7EC68DE1A2C0851000B289D /* TSPopoverTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68D81A2C0851000B289D /* TSPopoverTouchView.m */; };
 		F7EC68DF1A2C0851000B289D /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68DA1A2C0851000B289D /* UIBarButtonItem+WEPopover.m */; };
 		F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */; };
+		F7F304991A47F5D200A6AD7A /* LoginBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F304961A47F5D200A6AD7A /* LoginBG.png */; };
+		F7F3049A1A47F5D200A6AD7A /* LoginBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F304971A47F5D200A6AD7A /* LoginBG@2x.png */; };
+		F7F3049B1A47F5D200A6AD7A /* LoginBG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F304981A47F5D200A6AD7A /* LoginBG@3x.png */; };
 		F7F30D431A22CFE900EF2580 /* ClassilyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F30D421A22CFE900EF2580 /* ClassilyVC.m */; };
 		F7F30D461A22D7C500EF2580 /* PublicStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7F30D441A22D7C500EF2580 /* PublicStoryboard.storyboard */; };
 		F7F30D4C1A22EF2400EF2580 /* CollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F30D4A1A22EF2400EF2580 /* CollectCell.m */; };
@@ -749,9 +748,6 @@
 		F7C215FB1A2EB80200C011AE /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
 		F7C215FF1A2EE77A00C011AE /* SearchFrameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFrameVC.h; sourceTree = "<group>"; };
 		F7C216001A2EE77A00C011AE /* SearchFrameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFrameVC.m; sourceTree = "<group>"; };
-		F7C216021A2EFE1800C011AE /* LoginBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginBG.png; path = ../LoginBG.png; sourceTree = "<group>"; };
-		F7C216031A2EFE1800C011AE /* LoginBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LoginBG@2x.png"; path = "../LoginBG@2x.png"; sourceTree = "<group>"; };
-		F7C216041A2EFE1800C011AE /* LoginBG@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LoginBG@3x.png"; path = "../LoginBG@3x.png"; sourceTree = "<group>"; };
 		F7C8D4F61A37D1A8009F36B3 /* erp_city_code.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = erp_city_code.xml; sourceTree = "<group>"; };
 		F7C8D4F71A37D1A8009F36B3 /* erp_district_code.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = erp_district_code.xml; sourceTree = "<group>"; };
 		F7C8D4F81A37D1A8009F36B3 /* erp_province_code.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = erp_province_code.xml; sourceTree = "<group>"; };
@@ -1207,7 +1203,6 @@
 		F7E905F41A26C2F4001117EE /* PriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCell.m; sourceTree = "<group>"; };
 		F7E905F51A26C2F4001117EE /* PriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceCell.xib; sourceTree = "<group>"; };
 		F7E97E601A3AB7300090752B /* Price.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Price.plist; sourceTree = "<group>"; };
-		F7EC68A31A2BF136000B289D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		F7EC68A91A2BF5DA000B289D /* JHRefreshAmazingAniView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHRefreshAmazingAniView.h; sourceTree = "<group>"; };
 		F7EC68AA1A2BF5DA000B289D /* JHRefreshAmazingAniView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHRefreshAmazingAniView.m; sourceTree = "<group>"; };
 		F7EC68AB1A2BF5DA000B289D /* JHRefreshAniBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHRefreshAniBaseView.h; sourceTree = "<group>"; };
@@ -1247,6 +1242,9 @@
 		F7EC68DA1A2C0851000B289D /* UIBarButtonItem+WEPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WEPopover.m"; sourceTree = "<group>"; };
 		F7F304931A47F21000A6AD7A /* ForgetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswordVC.h; path = ZYYG/ViewControllers/ForgetPasswordVC.h; sourceTree = SOURCE_ROOT; };
 		F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswordVC.m; path = ZYYG/ViewControllers/ForgetPasswordVC.m; sourceTree = SOURCE_ROOT; };
+		F7F304961A47F5D200A6AD7A /* LoginBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginBG.png; sourceTree = "<group>"; };
+		F7F304971A47F5D200A6AD7A /* LoginBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBG@2x.png"; sourceTree = "<group>"; };
+		F7F304981A47F5D200A6AD7A /* LoginBG@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBG@3x.png"; sourceTree = "<group>"; };
 		F7F30D411A22CFE900EF2580 /* ClassilyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassilyVC.h; sourceTree = "<group>"; };
 		F7F30D421A22CFE900EF2580 /* ClassilyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassilyVC.m; sourceTree = "<group>"; };
 		F7F30D451A22D7C500EF2580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PublicStoryboard.storyboard; sourceTree = "<group>"; };
@@ -1358,6 +1356,9 @@
 		940177EE1A21CBEA00697D14 = {
 			isa = PBXGroup;
 			children = (
+				F7F304961A47F5D200A6AD7A /* LoginBG.png */,
+				F7F304971A47F5D200A6AD7A /* LoginBG@2x.png */,
+				F7F304981A47F5D200A6AD7A /* LoginBG@3x.png */,
 				F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */,
 				F7D249DD1A419262001AAAC3 /* libstdc++.6.0.9.dylib */,
 				F7D249DB1A419257001AAAC3 /* CoreGraphics.framework */,
@@ -1370,7 +1371,6 @@
 				F93099301A2DB2EC0054FFC1 /* MyModel */,
 				940178311A21CCE400697D14 /* MyView */,
 				940178461A21CCE400697D14 /* ViewControllers */,
-				F9AB0D9B1A305CE200EFEDC5 /* images */,
 				940177F91A21CBEA00697D14 /* ZYYG */,
 				940178131A21CBEA00697D14 /* ZYYGTests */,
 				940177F81A21CBEA00697D14 /* Products */,
@@ -2445,17 +2445,6 @@
 			path = ZYYG/Libs;
 			sourceTree = "<group>";
 		};
-		F9AB0D9B1A305CE200EFEDC5 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				F7C216021A2EFE1800C011AE /* LoginBG.png */,
-				F7C216031A2EFE1800C011AE /* LoginBG@2x.png */,
-				F7C216041A2EFE1800C011AE /* LoginBG@3x.png */,
-				F7EC68A31A2BF136000B289D /* Default-568h@2x.png */,
-			);
-			path = images;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2665,6 +2654,7 @@
 				F93099491A2DB4170054FFC1 /* MarginMoneyCell.xib in Resources */,
 				F7D2490F1A4191FC001AAAC3 /* keychar01_11.png in Resources */,
 				F7D2495A1A4191FC001AAAC3 /* keychar11_39.png in Resources */,
+				F7F3049B1A47F5D200A6AD7A /* LoginBG@3x.png in Resources */,
 				F7D249571A4191FC001AAAC3 /* keychar11_36.png in Resources */,
 				F7D248921A4191FC001AAAC3 /* ipad_key_123[]{[S]_33.png in Resources */,
 				F7D249A81A4191FC001AAAC3 /* iphoneHQ_03.png in Resources */,
@@ -2743,11 +2733,11 @@
 				F7D248DD1A4191FC001AAAC3 /* ipad_key_QWE[S]_67.png in Resources */,
 				F7D249C71A4191FC001AAAC3 /* iphoneHQ_85.png in Resources */,
 				F7D249CB1A4191FC001AAAC3 /* keychar31_03.png in Resources */,
+				F7F304991A47F5D200A6AD7A /* LoginBG.png in Resources */,
 				F7D2495F1A4191FC001AAAC3 /* keychar11_55.png in Resources */,
 				F7D2483C1A4191FC001AAAC3 /* iPadNumberKeyboardView.xib in Resources */,
 				F7D248F71A4191FC001AAAC3 /* ipad_key_QWE[H]_46.png in Resources */,
 				F7D2491F1A4191FC001AAAC3 /* keychar01_51.png in Resources */,
-				F7EC68A41A2BF136000B289D /* Default-568h@2x.png in Resources */,
 				F7D248501A4191FC001AAAC3 /* ipad_key_[]{[S]_11.png in Resources */,
 				F7D248371A4191FC001AAAC3 /* APayRes.bundle in Resources */,
 				F7D248C31A4191FC001AAAC3 /* ipad_key_123[]{[H]_76.png in Resources */,
@@ -2806,7 +2796,6 @@
 				F7D248E31A4191FC001AAAC3 /* ipad_key_QWE[S]_86.png in Resources */,
 				F7D249C21A4191FC001AAAC3 /* iphoneHQ_68.png in Resources */,
 				F7D2488E1A4191FC001AAAC3 /* ipad_key_123[]{[S]_15.png in Resources */,
-				F7C216071A2EFE1800C011AE /* LoginBG@3x.png in Resources */,
 				F7D2496D1A4191FC001AAAC3 /* iphonekeyboardHN_15.png in Resources */,
 				F7D248DB1A4191FC001AAAC3 /* ipad_key_QWE[S]_65.png in Resources */,
 				F7D2490A1A4191FC001AAAC3 /* kb_bg.jpg in Resources */,
@@ -2849,7 +2838,6 @@
 				F7D2489B1A4191FC001AAAC3 /* ipad_key_123[]{[S]_42.png in Resources */,
 				F7D248661A4191FC001AAAC3 /* ipad_key_[]{[S]_65.png in Resources */,
 				F7D249831A4191FC001AAAC3 /* iphonekeyboardHN_80.png in Resources */,
-				F7C216061A2EFE1800C011AE /* LoginBG@2x.png in Resources */,
 				F7D248C21A4191FC001AAAC3 /* ipad_key_123[]{[H]_74.png in Resources */,
 				F7D249D01A4191FC001AAAC3 /* keychar31_14.png in Resources */,
 				F7D2489A1A4191FC001AAAC3 /* ipad_key_123[]{[S]_41.png in Resources */,
@@ -2883,7 +2871,6 @@
 				F7D2499F1A4191FC001AAAC3 /* keychar21_65.png in Resources */,
 				F7D249641A4191FC001AAAC3 /* keychar11_71.png in Resources */,
 				F7E905EF1A26B683001117EE /* ClassifyCell.xib in Resources */,
-				F7C216051A2EFE1800C011AE /* LoginBG.png in Resources */,
 				F7D2495C1A4191FC001AAAC3 /* keychar11_41.png in Resources */,
 				F7D249591A4191FC001AAAC3 /* keychar11_38.png in Resources */,
 				F7D249AE1A4191FC001AAAC3 /* iphoneHQ_15.png in Resources */,
@@ -2925,6 +2912,7 @@
 				F7D2485D1A4191FC001AAAC3 /* ipad_key_[]{[S]_40.png in Resources */,
 				F7D249351A4191FC001AAAC3 /* iphonekeyboardH_37.png in Resources */,
 				F7D249CC1A4191FC001AAAC3 /* keychar31_05.png in Resources */,
+				F7F3049A1A47F5D200A6AD7A /* LoginBG@2x.png in Resources */,
 				F7D248CC1A4191FC001AAAC3 /* ipad_key_QWE[S]_19.png in Resources */,
 				F7D249B61A4191FC001AAAC3 /* iphoneHQ_42.png in Resources */,
 				F7D248D01A4191FC001AAAC3 /* ipad_key_QWE[S]_38.png in Resources */,

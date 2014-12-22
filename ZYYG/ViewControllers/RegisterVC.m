@@ -7,7 +7,7 @@
 //
 
 #import "RegisterVC.h"
-
+#import "LoginVC.h"
 @interface RegisterVC ()
 <UITextFieldDelegate>
 {
@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    self.title = @"注册";
+    [self setInitState];
     self.accountTF.delegate = self;
     self.passwordTF.delegate = self;
     self.passwordAgainTF.delegate = self;
@@ -39,6 +39,16 @@
     self.emailTF.delegate = self;
     self.registerBut.layer.cornerRadius = 3;
     self.registerBut.layer.backgroundColor = kRedColor.CGColor;
+    
+    
+}
+
+- (void)setInitState
+{
+    self.title = self.typeVC ? @"找回密码" : @"注册帐号";
+    self.agreeBut.hidden = self.typeVC;
+    self.accountTF.placeholder = self.typeVC ? @"请输入验证码" : @"请输入用户名";
+    [self.registerBut setTitle:(self.typeVC ? @"确定" : @"注册") forState:UIControlStateNormal];
 }
 
 
@@ -63,6 +73,63 @@
     [self.agreeBut setImage:butImage forState:UIControlStateNormal];
 }
 - (IBAction)doRegister:(id)sender {
+    
+    if (self.typeVC) {
+        [self requestForNewPassword];
+        return;
+    }
+    [self requestRegister];
+}
+
+- (void)requestForNewPassword
+{
+    if ([self.passwordTF.text length] < 8) {
+        [self showAlertView:@"密码大于八位"];
+        return;
+    }
+    if ([self.accountTF.text isEqualToString:@""] || [self.emailTF.text isEqualToString:@""] || [self.passwordTF.text isEqualToString:@""] || [self.passwordAgainTF.text isEqualToString:@""]) {
+        [self showAlertView:@"请完善信息"];
+        return;
+    }
+    if (![self.passwordAgainTF.text isEqualToString:self.passwordTF.text]) {
+        [self showAlertView:@"两次密码不同"];
+        return;
+    }
+    
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@RetakePassWord.ashx",kServerDomain];
+    NSString *password = [Utities md5AndBase:self.passwordTF.text];
+    NSLog(@"url %@, %@, %d", url, password, password.length);
+    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.accountTF.text, @"CheckCode",password, @"PassWord",self.emailTF.text, @"Username", nil];
+    [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            NSArray *array = self.navigationController.viewControllers;
+            for (UIViewController* vc in array) {
+                if ([vc isKindOfClass:[LoginVC class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    return;
+                }
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
+}
+
+- (void)requestRegister
+{
+    if ([self.passwordTF.text length] < 8) {
+        [self showAlertView:@"密码大于八位"];
+        return;
+    }
     if (!agree) {
         [self showAlertView:@"请签署中艺易购协议协议"];
         return;
@@ -75,11 +142,7 @@
         [self showAlertView:@"两次密码不同"];
         return;
     }
-    [self requestRegister];
-}
-
-- (void)requestRegister
-{
+    
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
