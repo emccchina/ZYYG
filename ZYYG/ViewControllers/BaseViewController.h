@@ -23,7 +23,11 @@
 - (void)showBackItem;//返回按钮
 
 - (void)showAlertView:(NSString*)message;//显示弹出框
+
+- (void)showAlertViewTwoBut:(NSString *)message;
+
 - (void)doAlertView;
+- (void)doAlertViewTwo;
 
 - (id)parseResults:(id)resultResponds;
 

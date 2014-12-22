@@ -53,7 +53,7 @@ static NSString *cartCell = @"CartCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+//不要频繁请求
 //    if (![UserInfo shareUserInfo].cartsArr || ![UserInfo shareUserInfo].cartsArr.count) {
         [self requestshopCart];
 //    }else{
@@ -116,6 +116,11 @@ static NSString *cartCell = @"CartCell";
     }
 }
 
+- (void)doAlertViewTwo
+{
+    [Utities presentLoginVC:self];
+}
+
 - (void)requestFinished
 {
     [self dismissIndicatorView];
@@ -124,7 +129,8 @@ static NSString *cartCell = @"CartCell";
 - (void)requestshopCart
 {
     if (![[UserInfo shareUserInfo] isLogin]) {
-        [Utities presentLoginVC:self];
+//        [Utities presentLoginVC:self];
+        [self showAlertViewTwoBut:@"请先登录或注册"];
         return;
     }
     

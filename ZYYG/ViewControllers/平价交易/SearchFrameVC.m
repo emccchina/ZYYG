@@ -7,7 +7,7 @@
 //
 
 #import "SearchFrameVC.h"
-#define kNearestSearch              @"NearestSearch.txt"
+#define kNearestSearch              kTem@"NearestSearch.txt"
 @interface SearchFrameVC ()
 <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 {

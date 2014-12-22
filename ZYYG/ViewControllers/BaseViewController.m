@@ -24,23 +24,17 @@
 
 @implementation BaseViewController
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    UIViewController *vc = segue.destinationViewController;
-//    vc.hidesBottomBarWhenPushed = YES;
-//}
-
 - (void)showIndicatorView:(NSString*)text
 {
     if (!HUD) {
         HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
     }
     HUD.textLabel.text = text;
-    if (self.navigationController) {
-        [HUD showInView:self.navigationController.view];
-    }else{
+//    if (self.navigationController) {
+//        [HUD showInView:self.navigationController.view];
+//    }else{
         [HUD showInView:self.view];
-    }
+//    }
 }
 
 - (void)dismissIndicatorView
@@ -82,6 +76,30 @@
 {
     self.tabBarController.tabBar.hidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)showAlertViewTwoBut:(NSString *)message
+{
+    if (iPhone_iOS8) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示"
+                                                                       message:message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消"
+                                                  style:UIAlertActionStyleCancel
+                                                handler:^(UIAlertAction *action) {
+                                                    
+                                                }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                  style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction *action) {
+                                                    [self doAlertViewTwo];
+                                                }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+    }
 }
 
 - (void)showAlertView:(NSString*)message
@@ -138,10 +156,20 @@
     
 }
 
+- (void)doAlertViewTwo
+{
+    
+}
+
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self doAlertView];
+    NSLog(@"button Index click %ld", (long)buttonIndex);
+    if (buttonIndex == 0) {
+        [self doAlertView];
+    }else{
+        [self doAlertViewTwo];
+    }
 }
 
 #pragma mark - UIActionSheetDelegate

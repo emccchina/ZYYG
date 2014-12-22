@@ -35,7 +35,8 @@
 #define kTownAdress                         @"town"
 #define kCityAdress                         @"city"
 #define kProvinceAdress                     @"province"
-#define kClassifyArr                        @"classifyArr"//分类中的数组 每次关掉程序都会 清空 其他时间存储在doctment中
+#define kTem                                @"tem/"
+#define kClassifyArr                        kTem@"classifyArr"//分类中的数组 每次关掉程序都会 清空 其他时间存储在doctment中
 #define kHotSearchArr                       @"hotSearch"//热搜的数组， 在首页中请求，存入文件，每次打开程序请求一次
 #define kAccountKey                         @"account"
 #define kRememberAccount                    @"rememberAccount"

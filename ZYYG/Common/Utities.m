@@ -140,7 +140,14 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];//需要的路径
-    return [documentsDirectory stringByAppendingPathComponent:fileName];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:fileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *temDirectory = [documentsDirectory stringByAppendingPathComponent:kTem];
+    BOOL isDict = YES;
+    if (![fileManager fileExistsAtPath:temDirectory isDirectory:&isDict]) {
+        [fileManager createDirectoryAtPath:temDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return path;
 }
 
 + (void)setUserDefaults:(id)object key:(NSString*)key

@@ -64,9 +64,9 @@
         
         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
         
-        NSString *appVersion = [infoDic objectForKey:@"CFBundleVersion"];
+        NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
         
-        NSLog(@"%@,%@", appVersion, latestVersion);
+        NSLog(@"%@,%@，，，，，%@", appVersion, latestVersion, infoDic);
         if ([appVersion isEqualToString:latestVersion]) {
             return YES;
         }
@@ -90,7 +90,7 @@
             if ([self compareVersions:result]) {
                 [self showAlertView:@"已经是最新版本"];
             }else{
-                [self showAlertView:@"有新版本,是否更新"];
+                [self showAlertViewTwoBut:@"有新版本,是否更新"];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -99,7 +99,7 @@
     }];
 }
 
-- (void)doAlertView
+- (void)doAlertViewTwo
 {
     [self evaluate];
 }
@@ -135,13 +135,61 @@
     }];
 }
 
+- (IBAction)doLogoutBut:(id)sender {
+    [[UserInfo shareUserInfo] loginOut];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)deleteFailed
+{
+    [self showAlertView:@"删除失败"];
+}
+
+- (void)deleteFile
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];//需要的路径
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"tem"];
+    BOOL isDict = YES;
+    if ([fileManager fileExistsAtPath:documentsDirectory isDirectory:&isDict]) {
+        NSError *error = nil;
+        //fileList便是包含有该文件夹下所有文件的文件名及文件夹名的数组
+        NSArray* fileList = [fileManager contentsOfDirectoryAtPath:documentsDirectory error:&error];
+        //    DLog(@"%@", fileList);
+        if (error) {
+            [self deleteFailed];
+        }
+        for (NSString* pathName in fileList){
+            NSString *databaseFile = [documentsDirectory stringByAppendingPathComponent:pathName];
+            if ([fileManager isDeletableFileAtPath:databaseFile]){
+                BOOL remove = [fileManager removeItemAtPath:databaseFile error:nil];
+                if (!remove) {
+                    NSLog(@"files delete failed");
+                    [self deleteFailed];
+                    return;
+                }
+            }
+        }
+        
+        [self showAlertView:@"删除成功"];
+        
+    }else{
+        [self showAlertView:@"删除成功"];
+    }
+
+}
+
 #pragma mark -tableView
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return settingDataArray.count;
+    return settingDataArray.count+1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == settingDataArray.count) {
+        return 1;
+    }
     NSArray  *dArray=settingDataArray[section];
     return dArray.count;
     
@@ -149,23 +197,39 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-        return 20;
-   
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SettingModel *model=settingDataArray[indexPath.section][indexPath.row];
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MyCollectionCell"];
-    cell.textLabel.text=model.title;
+    if (indexPath.section == settingDataArray.count) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCell" forIndexPath:indexPath];
+//        UIButton *logoutBut= (UIButton*)[cell viewWithTag:1];
+//        logoutBut.layer.cornerRadius = 5;
+//        logoutBut.layer.backgroundColor = kRedColor.CGColor;
+        return cell;
+    }else{
+        SettingModel *model=settingDataArray[indexPath.section][indexPath.row];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingCell" forIndexPath:indexPath];
+        cell.textLabel.text=model.title;
+        return cell;
+    }
     
-    return cell;
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == settingDataArray.count) {
+        [self doLogoutBut:nil];
+        return;
+    }
     SettingModel *model=settingDataArray[indexPath.section][indexPath.row];
     if ([model.segueString isEqualToString:@"updatePassword"]) {
         [self performSegueWithIdentifier:model.segueString sender:self];
@@ -173,17 +237,10 @@
         [self requestForVersion];
     }else if ([model.segueString isEqualToString:@"scaleMark"]){
         [self evaluate];
+    }else if ([model.segueString isEqualToString:@"clearCache"]){
+        [self deleteFile];
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

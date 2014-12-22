@@ -546,6 +546,7 @@
 		F7EC68DD1A2C0851000B289D /* TSPopoverPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68D51A2C0851000B289D /* TSPopoverPopoverView.m */; };
 		F7EC68DE1A2C0851000B289D /* TSPopoverTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68D81A2C0851000B289D /* TSPopoverTouchView.m */; };
 		F7EC68DF1A2C0851000B289D /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68DA1A2C0851000B289D /* UIBarButtonItem+WEPopover.m */; };
+		F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */; };
 		F7F30D431A22CFE900EF2580 /* ClassilyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F30D421A22CFE900EF2580 /* ClassilyVC.m */; };
 		F7F30D461A22D7C500EF2580 /* PublicStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7F30D441A22D7C500EF2580 /* PublicStoryboard.storyboard */; };
 		F7F30D4C1A22EF2400EF2580 /* CollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F30D4A1A22EF2400EF2580 /* CollectCell.m */; };
@@ -1244,6 +1245,8 @@
 		F7EC68D81A2C0851000B289D /* TSPopoverTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPopoverTouchView.m; sourceTree = "<group>"; };
 		F7EC68D91A2C0851000B289D /* UIBarButtonItem+WEPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WEPopover.h"; sourceTree = "<group>"; };
 		F7EC68DA1A2C0851000B289D /* UIBarButtonItem+WEPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WEPopover.m"; sourceTree = "<group>"; };
+		F7F304931A47F21000A6AD7A /* ForgetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswordVC.h; path = ZYYG/ViewControllers/ForgetPasswordVC.h; sourceTree = SOURCE_ROOT; };
+		F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswordVC.m; path = ZYYG/ViewControllers/ForgetPasswordVC.m; sourceTree = SOURCE_ROOT; };
 		F7F30D411A22CFE900EF2580 /* ClassilyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassilyVC.h; sourceTree = "<group>"; };
 		F7F30D421A22CFE900EF2580 /* ClassilyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassilyVC.m; sourceTree = "<group>"; };
 		F7F30D451A22D7C500EF2580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PublicStoryboard.storyboard; sourceTree = "<group>"; };
@@ -2406,6 +2409,8 @@
 				F7675C341A2DBE440008C220 /* LoginVC.m */,
 				F7675C361A2DBE610008C220 /* RegisterVC.h */,
 				F7675C371A2DBE610008C220 /* RegisterVC.m */,
+				F7F304931A47F21000A6AD7A /* ForgetPasswordVC.h */,
+				F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */,
 			);
 			path = PublicVC;
 			sourceTree = "<group>";
@@ -3065,6 +3070,7 @@
 				F76A4DEE1A2C38B10005FF46 /* AddAdressVC.m in Sources */,
 				94D89EBC1A21FDA70074B874 /* JGProgressHUD.m in Sources */,
 				F7C8D5131A3809C6009F36B3 /* FMDatabase.m in Sources */,
+				F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */,
 				940177FD1A21CBEA00697D14 /* main.m in Sources */,
 				F7F928E11A354917000BAE49 /* NSDictionary+safeObjectForKey.m in Sources */,
 				F7C215FC1A2EB80200C011AE /* ChooseView.m in Sources */,

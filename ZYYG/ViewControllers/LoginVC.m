@@ -78,7 +78,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)backToContent:(id)sender {
-    [self.navigationController   popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)doRememberBut:(id)sender {
     rememberAccount = !rememberAccount;
