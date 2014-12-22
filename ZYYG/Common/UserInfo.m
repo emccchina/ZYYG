@@ -26,6 +26,27 @@
     return self.userKey ? YES : NO;
 }
 
+- (void)loginOut
+{
+    self.userKey = nil;
+    self.headImage = nil;
+    self.useName = nil;
+    self.realName = nil;
+    self.nickName = nil;
+    self.gender = nil;
+    self.industry =nil;
+    self.income = nil;
+    self.mobile = nil;
+    self.email = nil;
+    self.provideCode = nil;
+    self.cityCode = nil;
+    self.aeraCode = nil;
+    self.detailAddress = nil;
+    self.zipCode = nil;
+    self.addressManager = nil;
+    self.cartsArr = nil;
+}
+
 -(UserInfo *)setParams:(UserInfo *)user parmas:(NSDictionary *)dict
 {
     user.userKey=[dict safeObjectForKey:@"key"];

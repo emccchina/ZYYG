@@ -33,6 +33,8 @@
 @property (nonatomic, strong) NSMutableArray    *cartsArr;//购物车数组
 - (BOOL)isLogin;//是否登录
 
+- (void)loginOut;
+
 -(UserInfo *)setParams:(UserInfo *)user parmas:(NSDictionary *)dict;
 
 - (void)parseAddressArr:(NSArray*)arr;
