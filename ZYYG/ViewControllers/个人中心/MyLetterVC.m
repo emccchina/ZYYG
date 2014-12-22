@@ -53,6 +53,8 @@ static NSString *letterCell = @"letterCell";
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+    [letterArray removeAllObjects];
+    pageNum=1;
     if (1==(long)segmentedControl.selectedSegmentIndex) {
         state=NO;
         [self requestLetterList:0 pageNumber:pageNum];

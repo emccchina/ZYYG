@@ -77,7 +77,7 @@
     pageNum=1;
     if(segmentedContr.selectedSegmentIndex==1){
         segNum =1;
-    }else if(segmentedContr.selectedSegmentIndex==pageNum){
+    }else if(segmentedContr.selectedSegmentIndex==2){
         segNum =0;
     }else{
         segNum =-1;
