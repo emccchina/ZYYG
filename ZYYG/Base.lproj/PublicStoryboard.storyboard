@@ -133,7 +133,7 @@
                                 <rect key="frame" x="165" y="253" width="30" height="30"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBZ-Y8-yT1">
-                                <rect key="frame" x="20" y="20" width="44" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="2Kt-Vl-OoI"/>
                                     <constraint firstAttribute="height" constant="44" id="TH7-r8-9kC"/>
@@ -166,7 +166,7 @@
                             <constraint firstItem="Gcc-d0-6rx" firstAttribute="top" secondItem="ceC-nm-xhH" secondAttribute="bottom" constant="20" id="KP0-Nq-PqD"/>
                             <constraint firstAttribute="centerX" secondItem="kr0-Ft-WEs" secondAttribute="centerX" id="Ln3-pf-83D"/>
                             <constraint firstAttribute="centerX" secondItem="JiM-br-jYT" secondAttribute="centerX" constant="75" id="Msg-2n-bbd"/>
-                            <constraint firstItem="DBZ-Y8-yT1" firstAttribute="leading" secondItem="1fT-fC-iUg" secondAttribute="leading" constant="20" id="SFc-aO-4rG"/>
+                            <constraint firstItem="DBZ-Y8-yT1" firstAttribute="leading" secondItem="1fT-fC-iUg" secondAttribute="leading" id="SFc-aO-4rG"/>
                             <constraint firstItem="ceC-nm-xhH" firstAttribute="leading" secondItem="Gcc-d0-6rx" secondAttribute="leading" id="SIH-XF-lt0"/>
                             <constraint firstItem="ATe-0r-Svt" firstAttribute="top" secondItem="kr0-Ft-WEs" secondAttribute="bottom" constant="20" id="ZDO-Vu-15r"/>
                             <constraint firstItem="ceC-nm-xhH" firstAttribute="top" secondItem="6zM-Uo-tYQ" secondAttribute="bottom" constant="20" id="a7f-Ox-X7c"/>
