@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -132,6 +132,19 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passwordSign" translatesAutoresizingMaskIntoConstraints="NO" id="ZA1-sK-ntH">
                                 <rect key="frame" x="165" y="253" width="30" height="30"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBZ-Y8-yT1">
+                                <rect key="frame" x="20" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="2Kt-Vl-OoI"/>
+                                    <constraint firstAttribute="height" constant="44" id="TH7-r8-9kC"/>
+                                </constraints>
+                                <state key="normal" image="backSign">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToContent:" destination="TTw-IR-ooC" eventType="touchUpInside" id="2Ot-hS-NGZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -140,6 +153,7 @@
                             <constraint firstAttribute="centerX" secondItem="ATe-0r-Svt" secondAttribute="centerX" constant="25" id="3Nr-Fk-O6a"/>
                             <constraint firstItem="6zM-Uo-tYQ" firstAttribute="top" secondItem="360-c9-dn5" secondAttribute="bottom" constant="18" id="5pW-26-F5C"/>
                             <constraint firstItem="6zM-Uo-tYQ" firstAttribute="top" secondItem="ugn-Gl-AXu" secondAttribute="top" constant="-5" id="6CT-iK-wMl"/>
+                            <constraint firstItem="DBZ-Y8-yT1" firstAttribute="top" secondItem="vNs-al-PKl" secondAttribute="bottom" id="9Xc-xd-fsC"/>
                             <constraint firstAttribute="centerX" secondItem="ceC-nm-xhH" secondAttribute="centerX" id="AM4-xS-18S"/>
                             <constraint firstItem="JiM-br-jYT" firstAttribute="top" secondItem="6Gx-xn-RIB" secondAttribute="top" id="AX5-wD-gkW"/>
                             <constraint firstItem="xC5-F8-XqV" firstAttribute="leading" secondItem="ATe-0r-Svt" secondAttribute="trailing" constant="25" id="B0x-Cj-ZAb"/>
@@ -152,6 +166,7 @@
                             <constraint firstItem="Gcc-d0-6rx" firstAttribute="top" secondItem="ceC-nm-xhH" secondAttribute="bottom" constant="20" id="KP0-Nq-PqD"/>
                             <constraint firstAttribute="centerX" secondItem="kr0-Ft-WEs" secondAttribute="centerX" id="Ln3-pf-83D"/>
                             <constraint firstAttribute="centerX" secondItem="JiM-br-jYT" secondAttribute="centerX" constant="75" id="Msg-2n-bbd"/>
+                            <constraint firstItem="DBZ-Y8-yT1" firstAttribute="leading" secondItem="1fT-fC-iUg" secondAttribute="leading" constant="20" id="SFc-aO-4rG"/>
                             <constraint firstItem="ceC-nm-xhH" firstAttribute="leading" secondItem="Gcc-d0-6rx" secondAttribute="leading" id="SIH-XF-lt0"/>
                             <constraint firstItem="ATe-0r-Svt" firstAttribute="top" secondItem="kr0-Ft-WEs" secondAttribute="bottom" constant="20" id="ZDO-Vu-15r"/>
                             <constraint firstItem="ceC-nm-xhH" firstAttribute="top" secondItem="6zM-Uo-tYQ" secondAttribute="bottom" constant="20" id="a7f-Ox-X7c"/>
@@ -328,6 +343,7 @@
         <image name="accountHeader" width="30" height="30"/>
         <image name="accountSelected" width="20" height="20"/>
         <image name="accountUnselected" width="20" height="20"/>
+        <image name="backSign" width="11" height="20"/>
         <image name="emailSign" width="30" height="30"/>
         <image name="headerBig" width="100" height="100"/>
         <image name="passwordSign" width="30" height="30"/>

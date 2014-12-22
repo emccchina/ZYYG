@@ -80,7 +80,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@favoriteList.ashx",kServerDomain];
     NSLog(@"url   %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user.userKey, @"key",[NSString stringWithFormat:@"%d",page],@"num", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user.userKey, @"key",[NSString stringWithFormat:@"%ld",(long)page],@"num", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);

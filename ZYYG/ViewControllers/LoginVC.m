@@ -77,6 +77,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)backToContent:(id)sender {
+    [self.navigationController   popViewControllerAnimated:YES];
+}
 - (IBAction)doRememberBut:(id)sender {
     rememberAccount = !rememberAccount;
     [self setRememberState];
@@ -97,7 +100,7 @@
 - (IBAction)doRegisterBut:(id)sender {
 }
 - (IBAction)doForgetBut:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)doSinaBut:(id)sender {
 }
