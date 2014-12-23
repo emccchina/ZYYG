@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CycleScrollView.h"
-typedef void (^imageClick) (void);
+typedef void (^imageClick) (NSInteger index);
 //滚动的cell  展示图片
 @interface ImageScrollCell : UITableViewCell
 <CycleScrollViewDatasource, CycleScrollViewDelegate>

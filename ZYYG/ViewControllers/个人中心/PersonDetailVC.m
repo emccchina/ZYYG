@@ -65,6 +65,7 @@
     __block int areaCount = 0;
     NSString* sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@_id=%ld;SELECT * FROM %@ WHERE %@_id=%ld;SELECT * FROM %@ WHERE %@_id=%ld;"
                      ,kProvinceAdress,kProvinceAdress,(long)[user.provideCode integerValue], kCityAdress, kCityAdress, (long)[user.cityCode integerValue], kTownAdress, kTownAdress, (long)[user.aeraCode integerValue]];
+    __block BOOL success = NO;
     [dataBase executeStatements:sql withResultBlock:^int(NSDictionary *dictionary) {
         NSLog(@"%@", dictionary);
         switch (areaCount) {
@@ -81,8 +82,15 @@
                 break;
         }
         areaCount++;
+        success = YES;
         return 0;
     }];
+    
+    if (!success) {
+        provience = @"";
+        city = @"";
+        town = @"";
+    }
     
     [dataBase close];
     
@@ -158,6 +166,10 @@
         [dict setObject:array[1][0] forKey:@"CityCode"];
         [dict setObject:array[2][0] forKey:@"AeraCode"];
     
+    }else{
+        [dict setObject:user.provideCode forKey:@"ProvideCode"];
+        [dict setObject:user.cityCode forKey:@"CityCode"];
+        [dict setObject:user.aeraCode forKey:@"AeraCode"];
     }
     [dict setObject:infos[7] forKey:@"DetailAddr"];
     [dict setObject:infos[8] forKey:@"Postcode"];
@@ -277,8 +289,11 @@
         field.placeholder = placeholders[indexPath.row];
         field.delegate = self;
         field.text = infos[indexPath.row];
+        field.returnKeyType = UIReturnKeyDone;
         if (indexPath.row == 2) {
             [self insertAddress:field];
+        }else if (indexPath.row == 5){
+            field.enabled = NO;
         }
     }
     UILabel *label = (UILabel*)[cell viewWithTag:1];

@@ -171,6 +171,7 @@ static NSString *cartCell = @"CartCell";
         id result = [self parseResults:responseObject];
         if (result) {
             [UserInfo shareUserInfo].cartsArr = nil;
+            [self showAlertView:@"提交成功"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];

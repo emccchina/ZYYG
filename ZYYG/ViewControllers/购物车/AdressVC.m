@@ -34,7 +34,11 @@
     
     _selectedIndex = [UserInfo shareUserInfo].addressManager.defaultAddressIndex;
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.adressTB reloadData];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

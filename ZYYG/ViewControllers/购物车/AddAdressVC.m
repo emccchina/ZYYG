@@ -312,7 +312,7 @@
     titleLab.text = _userInfos[indexPath.row];
     UITextField *field = (UITextField*)[cell viewWithTag:2];
     field.delegate = self;
-    
+    field.returnKeyType = UIReturnKeyDone;
     switch (indexPath.row) {
         case 0:{
             field.text = addressMode ? addressMode.name : @"";
@@ -338,7 +338,8 @@
     }
     field.placeholder = placeholderArr[indexPath.row];
     if (indexPath.row == 2) {
-            }else if (indexPath.row == 1){
+    
+    }else if (indexPath.row == 1){
         
     }
     return cell;

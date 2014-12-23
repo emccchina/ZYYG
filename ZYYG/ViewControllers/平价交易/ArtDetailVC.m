@@ -320,7 +320,7 @@ static NSString *spreadCell = @"SpreadCell";
                 cell.style = 1;
                 cell.images = goods.ImageUrl;
                 [cell reloadScrollViewData];
-                cell.click = ^(){
+                cell.click = ^(NSInteger index){
                     [self addScrollForImageToWindow:goods.ImageUrl];
                 };
                 return cell;

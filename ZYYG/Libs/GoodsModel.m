@@ -47,6 +47,7 @@
 - (void)goodsModelFromCart:(NSDictionary *)dict
 {
     self.ArtName = dict[@"Title"];
+    self.GoodsName = dict[@"GoodsName"];
     self.GoodsCode = dict[@"product_id"];
     self.SpecDesc = dict[@"size"];
     self.AppendPrice = [dict[@"Money"] floatValue];

@@ -297,7 +297,7 @@ static NSString *cartCell = @"CartCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 143;
+    return 160;
 }
 
 
@@ -306,7 +306,8 @@ static NSString *cartCell = @"CartCell";
     GoodsModel *model = _shopCart[indexPath.row];
     CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
     [cell.iconImage setImageWithURL:[NSURL URLWithString:model.picURL]];
-    cell.LTLab.text = model.ArtName;
+    cell.LTLab.text = model.GoodsName;
+    cell.RTLab.text = model.ArtName;
     cell.RSecondLab.text = model.GoodsCode;
     cell.RThirdLab.text = model.SpecDesc;
     cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f", model.AppendPrice];

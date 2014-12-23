@@ -18,6 +18,7 @@ typedef void (^DoSelected)(NSIndexPath *indexPath, BOOL selected);
 @property (weak, nonatomic) IBOutlet UILabel *LThirdLab;
 @property (weak, nonatomic) IBOutlet UILabel *LSecondLab;
 @property (weak, nonatomic) IBOutlet UILabel *validLab;
+@property (weak, nonatomic) IBOutlet UILabel *RTLab;
 
 @property (weak, nonatomic) IBOutlet UILabel *LTLab;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;

@@ -209,7 +209,22 @@
 - (IBAction)doRightBut:(id)sender {
     
 }
-
+- (void)scrollviewImageClick:(NSInteger)index
+{
+    NSDictionary *dict = images[index];
+    BOOL  isLocal = [dict[@"IsLocal"] boolValue];
+    if (isLocal) {
+        NSString *URL = dict[@"Href"];
+        NSArray *stringArr = [URL componentsSeparatedByString:@"="];
+        NSString *productID = [stringArr lastObject];
+        if (productID) {
+            selectedProductID = productID;
+            [self performSegueWithIdentifier:@"showArtDetail" sender:self];
+        }
+    }else{
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:dict[@"Href"]]];
+    }
+}
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -242,6 +257,9 @@
         ImageScrollCell *cell = (ImageScrollCell*)[tableView dequeueReusableCellWithIdentifier:@"scrollCell" forIndexPath:indexPath];
         cell.style = 0;
         cell.images = images;
+        cell.click = ^(NSInteger index){
+            [self scrollviewImageClick:index];
+        };
         [cell reloadScrollViewData];
         return cell;
     }else{
