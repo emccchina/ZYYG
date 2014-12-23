@@ -46,7 +46,7 @@ static NSString *cartCell = @"CartCell";
     _orderDict = [[NSMutableDictionary alloc] init];
     [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
     [_orderDict setObject:([UserInfo shareUserInfo].nickName ? :@"个人") forKey:@"InvoiceTitle"];
-    [_orderDict setObject:@"10" forKey:@"InvoiceType"];//10 普通发票， 20 增值税发票
+    [_orderDict setObject:@"0" forKey:@"InvoiceType"];//0不开发票  10 普通发票， 20 增值税发票
     NSMutableString *productIDs = [NSMutableString string];
     for (GoodsModel *model in self.products) {
         if ([model isEqual:[self.products lastObject]]) {
@@ -73,6 +73,11 @@ static NSString *cartCell = @"CartCell";
     [self performSegueWithIdentifier:@"ToChooseSegue" sender:self];
 }
 
+- (void)presentInvoiceVC
+{
+    [self performSegueWithIdentifier:@"InvoiceVC" sender:self];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIViewController *destVC = [segue destinationViewController];
@@ -83,7 +88,6 @@ static NSString *cartCell = @"CartCell";
             [self chooseFinished:type content:conente];
         }];
     }else if ([destVC isKindOfClass:[AdressVC class]]){
-//        [(AdressVC*)destVC setAdresses:_adressArr];
         [(AdressVC*)destVC setChange:^(BOOL change){
             [self requestForAddressList];
         }];
@@ -344,8 +348,7 @@ static NSString *cartCell = @"CartCell";
             [self presentChooseVC];
         }break;
         case 3:{//发票信息
-            _toPresentType = 3;
-            [self presentChooseVC];
+            [self presentInvoiceVC];
         }break;
         case 4:{//商品详情
             

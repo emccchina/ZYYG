@@ -197,10 +197,13 @@ static NSString *cartCell = @"CartCell";
 - (void)requestFinishedDelete
 {
     NSArray *selectKey = [_selectDict allKeys];
+    NSMutableArray *selectArray = [NSMutableArray array];
     for (NSNumber *number in selectKey) {
-        [_shopCart removeObjectAtIndex:[number integerValue]];
-        [[UserInfo shareUserInfo].cartsArr removeObjectAtIndex:[number integerValue]];
+        [selectArray addObject:(_shopCart[[number integerValue]])];
     }
+    
+    [_shopCart removeObjectsInArray:selectArray];
+    [[UserInfo shareUserInfo].cartsArr removeObjectsInArray:selectArray];
     _selectedAccount = 0;
     [self changeSettleAccount:NO price:0];
     [_selectDict removeAllObjects];

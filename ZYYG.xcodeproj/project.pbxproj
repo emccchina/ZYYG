@@ -556,6 +556,7 @@
 		F7F71D551A28383200AEE6BA /* PayForArtVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F71D541A28383200AEE6BA /* PayForArtVC.m */; };
 		F7F71D5A1A2861AF00AEE6BA /* ChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F71D591A2861AF00AEE6BA /* ChooseVC.m */; };
 		F7F928E11A354917000BAE49 /* NSDictionary+safeObjectForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F928E01A354917000BAE49 /* NSDictionary+safeObjectForKey.m */; };
+		F7FEC1271A49345F00CFE9D4 /* InvoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */; };
 		F93099481A2DB4170054FFC1 /* MarginMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F93099461A2DB4170054FFC1 /* MarginMoneyCell.m */; };
 		F93099491A2DB4170054FFC1 /* MarginMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */; };
 		F930994D1A2DB42B0054FFC1 /* CompeteRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */; };
@@ -1262,6 +1263,8 @@
 		F7F71D591A2861AF00AEE6BA /* ChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseVC.m; sourceTree = "<group>"; };
 		F7F928DF1A354917000BAE49 /* NSDictionary+safeObjectForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeObjectForKey.h"; sourceTree = "<group>"; };
 		F7F928E01A354917000BAE49 /* NSDictionary+safeObjectForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safeObjectForKey.m"; sourceTree = "<group>"; };
+		F7FEC1251A49345F00CFE9D4 /* InvoiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceVC.h; sourceTree = "<group>"; };
+		F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceVC.m; sourceTree = "<group>"; };
 		F93099451A2DB4170054FFC1 /* MarginMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginMoneyCell.h; sourceTree = "<group>"; };
 		F93099461A2DB4170054FFC1 /* MarginMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginMoneyCell.m; sourceTree = "<group>"; };
 		F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarginMoneyCell.xib; sourceTree = "<group>"; };
@@ -1647,6 +1650,8 @@
 				F76A4DED1A2C38B10005FF46 /* AddAdressVC.m */,
 				F7F71D581A2861AF00AEE6BA /* ChooseVC.h */,
 				F7F71D591A2861AF00AEE6BA /* ChooseVC.m */,
+				F7FEC1251A49345F00CFE9D4 /* InvoiceVC.h */,
+				F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */,
 			);
 			path = "购物车";
 			sourceTree = "<group>";
@@ -3006,6 +3011,7 @@
 				F729B0191A36C55C0001FD39 /* MyButton.m in Sources */,
 				F9BC268C1A2EA41A006894C6 /* RecommendedVC.m in Sources */,
 				9401786A1A21CCE400697D14 /* ShopingCartVC.m in Sources */,
+				F7FEC1271A49345F00CFE9D4 /* InvoiceVC.m in Sources */,
 				F7EC68C11A2BF5DA000B289D /* JHRefreshAmazingAniView.m in Sources */,
 				94D89EBE1A21FDA70074B874 /* JGProgressHUDFadeAnimation.m in Sources */,
 				F7675C381A2DBE610008C220 /* RegisterVC.m in Sources */,
