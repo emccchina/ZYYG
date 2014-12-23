@@ -342,12 +342,13 @@ static NSString *spreadCell = @"SpreadCell";
         case 1:{
             ArtInfoCell *cell = (ArtInfoCell*)[tableView dequeueReusableCellWithIdentifier:artInfoCell forIndexPath:indexPath];
             cell.left1Lab.text = [NSString stringWithFormat:@"作者:%@",goods.ArtName];
-            cell.left2Lab.text = [NSString stringWithFormat:@"分类:%@",goods.CreationStyle];
             NSNumber *state12 = goods.GoodsNum;
-            cell.left3Lab.text = [NSString stringWithFormat:@"尺寸:%@",goods.SpecDesc ];
+            cell.left2Lab.text = [NSString stringWithFormat:@"分类:%@",goods.CategoryName];
+            cell.left3Lab.text = [NSString stringWithFormat:@"版数:%@",goods.LimitedSale];
             cell.left4Lab.text = [NSString stringWithFormat:@"编号:%@", goods.GoodsCode];
-            cell.R1Lab.text = [NSString stringWithFormat:@"分类:%@",goods.CategoryName];
-            cell.R2Lab.text = [NSString stringWithFormat:@"状态:%@", [state12 integerValue] ? @"待售" : @"已售"];
+            cell.R1Lab.text = [NSString stringWithFormat:@"状态:%@", [state12 integerValue] ? @"待售" : @"已售"];
+            cell.R2Lab.text = [NSString stringWithFormat:@"创作风格:%@",goods.CreationStyle ];
+            cell.left3Lab.text = [NSString stringWithFormat:@"尺寸:%@",goods.SpecDesc ];
             return cell;
         }
         case 2:{

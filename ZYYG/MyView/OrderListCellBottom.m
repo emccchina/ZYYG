@@ -39,22 +39,27 @@
         [Utities presentLoginVC:self.orderlistVc];
         return;
     }
-    [self.orderlistVc showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@DeleteOrder.ashx",kServerDomain];
     NSLog(@"url %@", url);
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",self.orderCode, @"order_id"  ,nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self.orderlistVc requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self.orderlistVc parseResults:responseObject];
         if (result) {
+            if([@"0" isEqualToString:result[@"errno"]]){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"订单取消成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }else{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",result[@"msg"]] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
             NSLog(@"%@",result);
-            [self.orderlistVc.orderListTabelView reloadData];
+            [self.orderlistVc.orderArray removeAllObjects];
+            [self.orderlistVc requestOrderList:@"0" ordState:@"" ordSize:5 ordNum:1];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.orderlistVc requestFinished];
         [self.orderlistVc showAlertView:kNetworkNotConnect];
     }];
 

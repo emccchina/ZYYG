@@ -19,7 +19,7 @@
 
 @interface OrderListVC ()
 {
-    NSMutableArray *orderArray;
+    
     UserInfo *user;
     OrderModel *currentOrder;
     NSString *orderType;
@@ -41,8 +41,8 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
-    orderArray=[NSMutableArray array];
-    [orderArray removeAllObjects];
+   self.orderArray=[NSMutableArray array];
+    [self.orderArray removeAllObjects];
     orderType =@"0"; //平价订单
     orderState=@""; // 20 :已支付,30:已发货,40:已签收,50:已取消,-1删除,10:审核,0:创建
     pageSize=5;
@@ -79,7 +79,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 - (void)addFootRefresh
 {
-    [orderArray removeAllObjects];
+    [self.orderArray removeAllObjects];
     [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
@@ -88,7 +88,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-    [orderArray removeAllObjects];
+    [self.orderArray removeAllObjects];
    //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
     pageNum=1;
     if (0==segmentedControl.selectedSegmentIndex) {
@@ -118,6 +118,10 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 -(void)requestOrderList:(NSString *)ortype ordState:(NSString *)orstate ordSize:(NSInteger )size  ordNum:(NSInteger )num
 {
+    orderType =ortype;
+    orderState=orstate;
+    pageSize=size;
+    pageNum=num;
     user=[UserInfo shareUserInfo];
     if (![user isLogin]) {
         [Utities presentLoginVC:self];
@@ -143,7 +147,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
             for (int i=0; i<orders.count; i++) {
                 OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
                 NSLog(@"订单读取成功");
-                [orderArray addObject:order];
+                [self.orderArray addObject:order];
             }
             [self.orderListTabelView reloadData];
         }
@@ -169,11 +173,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return orderArray.count;
+    return self.orderArray.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    OrderModel *order=orderArray[section];
+    OrderModel *order=self.orderArray[section];
     return 3+order.Goods.count;
 }
 
@@ -188,7 +192,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderModel *order=orderArray[indexPath.section];
+    OrderModel *order=self.orderArray[indexPath.section];
     CGFloat hight=100;
     if(indexPath.row ==0){
         hight=35;
@@ -201,7 +205,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderModel *order=orderArray[indexPath.section];
+    OrderModel *order=self.orderArray[indexPath.section];
     if(indexPath.row ==0){
         OrderListCellTop   *topCell=(OrderListCellTop*)[tableView dequeueReusableCellWithIdentifier:orderTopCell forIndexPath:indexPath];
         topCell.orderNO.text=order.OrderCode;
@@ -239,7 +243,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    currentOrder=orderArray[indexPath.section];
+    currentOrder=self.orderArray[indexPath.section];
     if (indexPath.row != 0 && indexPath.row != currentOrder.Goods.count+1 && indexPath.row != currentOrder.Goods.count+2) {
         [self performSegueWithIdentifier:@"OrderDetail" sender:self];
     }
