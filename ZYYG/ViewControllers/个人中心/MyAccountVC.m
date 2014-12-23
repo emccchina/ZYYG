@@ -54,6 +54,7 @@
 -(void)segViewInit
 {
     self.segView.sectionTitles=@[@"全部", @"收入", @"支出"];
+    self.segView.backgroundColor=[UIColor whiteColor];
     self.segView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     self.segView.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
     self.segView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
@@ -73,6 +74,7 @@
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedContr {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedContr.selectedSegmentIndex);
+    
     [accountArray removeAllObjects];
     pageNum=1;
     if(segmentedContr.selectedSegmentIndex==1){
@@ -139,10 +141,19 @@
 }
 
 #pragma mark -tableView
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.5;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return accountArray.count;
 }
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
