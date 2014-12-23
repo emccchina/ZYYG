@@ -12,7 +12,7 @@
 <UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *orderListTabelView;
-@property (strong, nonatomic)NSMutableArray *orderArray;
 - (void)requestFinished;
 -(void)requestOrderList:(NSString *)ortype ordState:(NSString *)orstate ordSize:(NSInteger )size  ordNum:(NSInteger )num;
+-(void)cancellOrder:(NSString *)order_id;
 @end

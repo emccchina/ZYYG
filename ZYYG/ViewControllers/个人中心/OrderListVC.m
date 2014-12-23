@@ -19,7 +19,7 @@
 
 @interface OrderListVC ()
 {
-    
+    NSMutableArray *orderArray;
     UserInfo *user;
     OrderModel *currentOrder;
     NSString *orderType;
@@ -41,8 +41,8 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
-   self.orderArray=[NSMutableArray array];
-    [self.orderArray removeAllObjects];
+    orderArray=[NSMutableArray array];
+    [orderArray removeAllObjects];
     orderType =@"0"; //平价订单
     orderState=@""; // 20 :已支付,30:已发货,40:已签收,50:已取消,-1删除,10:审核,0:创建
     pageSize=5;
@@ -79,7 +79,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 - (void)addFootRefresh
 {
-    [self.orderArray removeAllObjects];
+    [orderArray removeAllObjects];
     [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
@@ -88,7 +88,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-    [self.orderArray removeAllObjects];
+    [orderArray removeAllObjects];
    //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
     pageNum=1;
     if (0==segmentedControl.selectedSegmentIndex) {
@@ -147,7 +147,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
             for (int i=0; i<orders.count; i++) {
                 OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
                 NSLog(@"订单读取成功");
-                [self.orderArray addObject:order];
+                [orderArray addObject:order];
             }
             [self.orderListTabelView reloadData];
         }
@@ -173,11 +173,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return self.orderArray.count;
+    return orderArray.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    OrderModel *order=self.orderArray[section];
+    OrderModel *order=orderArray[section];
     return 3+order.Goods.count;
 }
 
@@ -192,7 +192,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderModel *order=self.orderArray[indexPath.section];
+    OrderModel *order=orderArray[indexPath.section];
     CGFloat hight=100;
     if(indexPath.row ==0){
         hight=35;
@@ -205,7 +205,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderModel *order=self.orderArray[indexPath.section];
+    OrderModel *order=orderArray[indexPath.section];
     if(indexPath.row ==0){
         OrderListCellTop   *topCell=(OrderListCellTop*)[tableView dequeueReusableCellWithIdentifier:orderTopCell forIndexPath:indexPath];
         topCell.orderNO.text=order.OrderCode;
@@ -243,7 +243,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    currentOrder=self.orderArray[indexPath.section];
+    currentOrder=orderArray[indexPath.section];
     if (indexPath.row != 0 && indexPath.row != currentOrder.Goods.count+1 && indexPath.row != currentOrder.Goods.count+2) {
         [self performSegueWithIdentifier:@"OrderDetail" sender:self];
     }
@@ -285,6 +285,37 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         
     }
     
+}
+
+-(void)cancellOrder:(NSString *)order_id
+{
+ 
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@DeleteOrder.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",order_id, @"order_id"  ,nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+//            if([@"0" isEqualToString:result[@"errno"]]){
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"订单取消成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alertView show];
+//            }else{
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",result[@"msg"]] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alertView show];
+//            }
+            NSLog(@"%@",result);
+            [orderArray removeAllObjects];
+            [self requestOrderList:@"0" ordState:@"" ordSize:5 ordNum:1];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",error] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+
+    }];
+
 }
 
 /*

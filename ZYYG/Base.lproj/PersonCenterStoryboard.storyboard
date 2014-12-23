@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -667,7 +667,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可用余额:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tki-TF-puf">
-                                        <rect key="frame" x="10" y="11" width="60" height="16"/>
+                                        <rect key="frame" x="10" y="5" width="60" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="fma-XT-L5o"/>
                                         </constraints>
@@ -676,13 +676,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GG4-Kg-UIs">
-                                        <rect key="frame" x="70" y="11" width="33" height="16"/>
+                                        <rect key="frame" x="70" y="5" width="33" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冻结资金:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nW7-5p-o80">
-                                        <rect key="frame" x="470" y="11" width="60" height="16"/>
+                                        <rect key="frame" x="10" y="25" width="60" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="4uk-kn-mNr"/>
                                         </constraints>
@@ -691,7 +691,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-Lx-MDZ">
-                                        <rect key="frame" x="557" y="11" width="33" height="16"/>
+                                        <rect key="frame" x="70" y="25" width="33" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -699,14 +699,14 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.89624334520000004" blue="0.77319119579999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="tki-TF-puf" firstAttribute="leading" secondItem="Gz6-EY-AMh" secondAttribute="leading" constant="10" id="64d-ED-d7a"/>
-                                    <constraint firstItem="GG4-Kg-UIs" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="11" id="7Mg-TL-vfs"/>
-                                    <constraint firstAttribute="trailing" secondItem="Gzj-Lx-MDZ" secondAttribute="trailing" constant="10" id="7bW-Sh-4Gb"/>
-                                    <constraint firstItem="GG4-Kg-UIs" firstAttribute="leading" secondItem="Gz6-EY-AMh" secondAttribute="leading" constant="70" id="KAP-1J-xKw"/>
-                                    <constraint firstItem="Gzj-Lx-MDZ" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="11" id="QAh-lR-64u"/>
-                                    <constraint firstItem="tki-TF-puf" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="11" id="XMf-pK-wgR"/>
-                                    <constraint firstAttribute="trailing" secondItem="nW7-5p-o80" secondAttribute="trailing" constant="70" id="gT0-Xb-qA8"/>
-                                    <constraint firstItem="nW7-5p-o80" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="11" id="pNy-Eu-H7Z"/>
+                                    <constraint firstItem="Gzj-Lx-MDZ" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="25" id="Gds-hV-TMT"/>
+                                    <constraint firstItem="GG4-Kg-UIs" firstAttribute="leading" secondItem="Gz6-EY-AMh" secondAttribute="leading" constant="70" id="Lbe-AN-SNk"/>
+                                    <constraint firstItem="tki-TF-puf" firstAttribute="leading" secondItem="Gz6-EY-AMh" secondAttribute="leading" constant="10" id="XSr-vD-n81"/>
+                                    <constraint firstItem="GG4-Kg-UIs" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="5" id="Xno-CM-2vH"/>
+                                    <constraint firstItem="nW7-5p-o80" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="25" id="ctJ-cD-Ps3"/>
+                                    <constraint firstItem="nW7-5p-o80" firstAttribute="leading" secondItem="Gz6-EY-AMh" secondAttribute="leading" constant="10" id="f0M-V8-Bqh"/>
+                                    <constraint firstItem="tki-TF-puf" firstAttribute="top" secondItem="Gz6-EY-AMh" secondAttribute="top" constant="5" id="flq-gy-X9R"/>
+                                    <constraint firstItem="Gzj-Lx-MDZ" firstAttribute="leading" secondItem="Gz6-EY-AMh" secondAttribute="leading" constant="70" id="lI2-KK-Z66"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPp-qk-7jU" customClass="HMSegmentedControl">

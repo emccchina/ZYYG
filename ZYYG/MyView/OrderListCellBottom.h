@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderListVC.h"
-@interface OrderListCellBottom : UITableViewCell
+@interface OrderListCellBottom : UITableViewCell<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *cancelTime;
 @property (weak, nonatomic) IBOutlet UILabel *redLabel;
