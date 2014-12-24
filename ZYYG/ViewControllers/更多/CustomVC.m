@@ -25,7 +25,7 @@
     
     self.customTableVIew.delegate=self;
     self.customTableVIew.dataSource=self;
-    
+    self.customTableVIew.backgroundColor = kRedColor;
     self.title = @"私人定制";
     NSLog(@"私人定制");
 }
