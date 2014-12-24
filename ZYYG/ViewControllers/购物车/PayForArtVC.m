@@ -161,9 +161,11 @@ static NSString *cartCell = @"CartCell";
         return;
     }
     [_orderDict setObject:userInfo.addressManager.defaultAddressCode forKey:@"address_id"];
+#ifdef DEBUG
     NSData *data = [NSJSONSerialization dataWithJSONObject:_orderDict options:NSJSONWritingPrettyPrinted error:nil];
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"%@", string);
+#endif
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

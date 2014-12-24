@@ -278,7 +278,7 @@
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(MyTextField *)textField
 {
     selectedTF = textField;
     CGPoint point = [textField convertPoint:textField.frame.origin toView:self.view];

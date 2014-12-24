@@ -42,3 +42,9 @@
 #define kAccountPassword                    @"accountPassword"
 #define kRememberAccount                    @"rememberAccount"
 #define kServerDomain                       @"http://test.zaixianchuangxin.com/mobile/"//@"http://www.zemcc.com/mobile/"
+
+#ifdef DEBUG
+#define kPayMode                             @"01"
+#else
+#define kPayMode                             @"00"
+#endif
