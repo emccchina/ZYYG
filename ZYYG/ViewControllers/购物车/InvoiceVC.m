@@ -38,7 +38,7 @@
     selectedIndex = [invoiceDict[@"InvoiceType"] integerValue]/10;
     NSDictionary *section0 = @{@"不开具发票":@[]};
     NSDictionary *section1 = @{@"普通发票":@[@"发票抬头"]};
-    NSDictionary *section2 = @{@"增值税发票":@[@"发票抬头",@"纳税人识别号",@"注册地址",@"开户银行",@"帐号",@"注册电话"]};
+    NSDictionary *section2 = @{@"增值税发票":@[@"发票抬头",@"纳税人识别号",@"注册地址",@"开户银行",@"银行帐号",@"注册电话"]};
     requestKeys = @[@"InvoiceTitle",@"InvoiceTaxNo",@"RegAddress",@"RegBank",@"RegAccount",@"RegPhone"];
     sectionTitles = @[section0, section1, section2];
     self.invoiceTB.delegate = self;
@@ -56,6 +56,17 @@
     [selectedTF resignFirstResponder];
     NSLog(@"%@", invoiceDict);
     [invoiceDict setObject:[NSString stringWithFormat:@"%ld", (long)selectedIndex*10] forKey:@"InvoiceType"];
+    if (![self judgeInvoice]) {
+        return;
+    }
+    if (self.finished) {
+        self.finished(invoiceDict);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)judgeInvoice
+{
     switch (selectedIndex) {
         case 0:{
             
@@ -64,7 +75,7 @@
             NSString *string = invoiceDict[requestKeys[0]];
             if (!string || [string isEqualToString:@""]) {
                 [self showAlertView:@"请完善信息"];
-                return;
+                return NO;
             }
         }break;
         case 2:{
@@ -72,17 +83,91 @@
                 NSString *content = invoiceDict[titleKey];
                 if (!content || [content isEqualToString:@""]) {
                     [self showAlertView:@"请完善信息"];
-                    return;
+                    return NO;
+                }
+                NSInteger index = [requestKeys indexOfObject:titleKey];
+                if (![self isValidateInfo:content index:index]){
+                    return NO;
                 }
             }
         }break;
         default:
             break;
     }
-    if (self.finished) {
-        self.finished(invoiceDict);
+    return YES;
+}
+
+- (BOOL)isValidateInfo:(NSString*)key index:(NSInteger)index
+{
+    switch (index) {
+        case 1:{//纳税人识别号
+            if (![self isValidateTaxesNumber:key]) {
+                NSLog(@"taxes number no, %@", key);
+                [self showAlertView:@"请输入有效纳税人识别号码"];
+                return NO;
+            }
+        }break;
+        case 4:{//开户银行
+            if (![self isValidateBankNumber:key]) {
+                NSLog(@"bank number no %@", key);
+                [self showAlertView:@"请输入有效银行卡号码"];
+                return NO;
+            }
+        }break;
+        case 5:{//注册电话
+            if (![self isValidateMobile:key]) {
+                NSLog(@"mobile no %@", key);
+                [self showAlertView:@"请输入有效手机号码"];
+                return NO;
+            }
+        }break;
+        default:
+            break;
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    return YES;
+}
+- (BOOL)isValidateTaxesNumber:(NSString*)number
+{
+    NSInteger length = [number length];
+    if (length < 15 || length > 18) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)isValidateBankNumber:(NSString*)number
+{
+    int oddsum = 0;
+    int evensum = 0;
+    int allsum = 0;
+    
+    for (int i = 0; i< [number length];i++) {
+        NSString *tmpString = [number substringWithRange:NSMakeRange(i, 1)];
+        int tmpVal = [tmpString intValue];
+        if((i % 2) == 0){
+            tmpVal *= 2;
+            if(tmpVal>=10)
+                tmpVal -= 9;
+            evensum += tmpVal;
+        }else{
+            oddsum += tmpVal;
+            
+        }
+    }
+    
+    allsum = oddsum + evensum;
+    
+    if((allsum % 10) == 0)
+        return YES;
+    else
+        return NO;
+}
+- (BOOL)isValidateMobile:(NSString*)mobile
+{
+    NSString *regex = @"^(13+\\d{9})$|(14+\\d{9})$|(15+\\d{9})$|(18+\\d{9})$|(17+\\d{9})$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    NSLog(@"phoneTest is %@",phoneTest);
+    return [phoneTest evaluateWithObject:mobile];
 }
 
 - (void)myButtonClick:(MyButton*)button
