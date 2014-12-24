@@ -41,9 +41,9 @@
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong) NSString  *attrible;
 @property (nonatomic, strong) NSString *makeStyle;
-
+@property (nonatomic, strong) NSString *searchKey;
 @property (nonatomic, assign) BOOL      sell;//0待售 1已售
-
+@property (nonatomic, assign) NSInteger searchType;//接口不同  0分类搜索  1关键字搜索
 - (void)recoverInfo;//筛选 复原
 
 - (NSDictionary*)createURLDict;

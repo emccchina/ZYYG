@@ -7,14 +7,11 @@
 //
 
 #import "BaseViewController.h"
-
+typedef void (^SelectInvoiceFinished)(NSDictionary* invoiceFinished);
 @interface InvoiceVC : BaseViewController
 
-@end
+@property (nonatomic, strong) NSDictionary *invoice;
 
-
-@interface InvoiceManager : NSObject
-
-@property (nonatomic, assign) NSInteger type;//0不开具发票  1普通发票   2增值税发票
+@property (nonatomic, copy) SelectInvoiceFinished finished;
 
 @end

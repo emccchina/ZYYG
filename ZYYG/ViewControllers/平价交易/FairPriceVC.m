@@ -14,6 +14,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "GoodsModel.h"
 #import "FMDatabase.h"
+#import "SearchFrameVC.h"
 
 @interface FairPriceVC()
 <GoodsShowCellDelegate, UIActionSheetDelegate>
@@ -200,6 +201,8 @@
     vc.hidesBottomBarWhenPushed = YES;
     if ([(ArtDetailVC*)vc respondsToSelector:@selector(setProductID:)]) {
         [vc setValue:selectedProductID forKey:@"productID"];
+    }else if ([vc isKindOfClass:[SearchFrameVC class]]){
+        [(SearchFrameVC*)vc setSearchType:1];
     }
     
 }

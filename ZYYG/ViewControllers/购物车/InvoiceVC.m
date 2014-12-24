@@ -8,6 +8,7 @@
 
 #import "InvoiceVC.h"
 #import "MyButton.h"
+#import "MyTextField.h"
 
 @interface InvoiceVC ()
 <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -16,6 +17,7 @@
     NSInteger   selectedIndex;//选中的section
     NSMutableDictionary *invoiceDict;//填写的发票信息
     NSArray     *requestKeys;//发送请求是的key 此处就组装好发票的dict
+    MyTextField *selectedTF;
 }
 @property (weak, nonatomic) IBOutlet UITableView *invoiceTB;
 @end
@@ -27,8 +29,13 @@
     // Do any additional setup after loading the view.
     [self showBackItem];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"保存" target:self action:@selector(doRightBut:)];
-    selectedIndex = 0;
-    invoiceDict = [[NSMutableDictionary alloc] init];
+    
+    if (self.invoice) {
+        invoiceDict = [[NSMutableDictionary alloc] initWithDictionary:self.invoice];
+    }else{
+        invoiceDict = [[NSMutableDictionary alloc] init];
+    }
+    selectedIndex = [invoiceDict[@"InvoiceType"] integerValue]/10;
     NSDictionary *section0 = @{@"不开具发票":@[]};
     NSDictionary *section1 = @{@"普通发票":@[@"发票抬头"]};
     NSDictionary *section2 = @{@"增值税发票":@[@"发票抬头",@"纳税人识别号",@"注册地址",@"开户银行",@"帐号",@"注册电话"]};
@@ -46,14 +53,43 @@
 
 - (void)doRightBut:(UIBarButtonItem*)item
 {
-    
+    [selectedTF resignFirstResponder];
+    NSLog(@"%@", invoiceDict);
+    [invoiceDict setObject:[NSString stringWithFormat:@"%ld", (long)selectedIndex*10] forKey:@"InvoiceType"];
+    switch (selectedIndex) {
+        case 0:{
+            
+        }break;
+        case 1:{
+            NSString *string = invoiceDict[requestKeys[0]];
+            if (!string || [string isEqualToString:@""]) {
+                [self showAlertView:@"请完善信息"];
+                return;
+            }
+        }break;
+        case 2:{
+            for (NSString *titleKey in requestKeys) {
+                NSString *content = invoiceDict[titleKey];
+                if (!content || [content isEqualToString:@""]) {
+                    [self showAlertView:@"请完善信息"];
+                    return;
+                }
+            }
+        }break;
+        default:
+            break;
+    }
+    if (self.finished) {
+        self.finished(invoiceDict);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)myButtonClick:(MyButton*)button
 {
     NSLog(@"%@", button.mark);
     selectedIndex = [button.mark integerValue];
-    [invoiceDict removeAllObjects];
+//    [invoiceDict removeAllObjects];
     [self.invoiceTB reloadData];
 }
 
@@ -135,8 +171,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextFieldCell" forIndexPath:indexPath];
     UILabel *label = (UILabel*)[cell viewWithTag:1];
     label.text = rowKeys[indexPath.row];
-    UITextField *tf = (UITextField*)[cell viewWithTag:2];
+    MyTextField *tf = (MyTextField*)[cell viewWithTag:2];
+    NSString *key = requestKeys[indexPath.row];
+    tf.text = invoiceDict[key];
+
     tf.delegate = self;
+    tf.mark = indexPath;
     tf.returnKeyType = UIReturnKeyDone;
     return cell;
 }
@@ -155,6 +195,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    selectedTF = textField;
     CGPoint point = [textField convertPoint:textField.frame.origin toView:self.view];
     CGFloat height = kScreenHeight;
     CGFloat space = (height - point.y - 160) - 250;
@@ -166,11 +207,21 @@
     
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(MyTextField *)textField
 {
     [self.invoiceTB setContentOffset:CGPointZero];
-//    NSInteger index = [sectionTitles ]
-    
+    NSIndexPath *mark = textField.mark;
+    if (mark) {
+        switch (mark.section) {
+            case 1:
+            case 2:{
+                NSString *key = requestKeys[mark.row];
+                [invoiceDict setObject:textField.text forKey:key];
+            }break;
+            default:
+                break;
+        }
+    }
 }
 /*
 #pragma mark - Navigation

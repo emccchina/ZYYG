@@ -557,6 +557,7 @@
 		F7F71D5A1A2861AF00AEE6BA /* ChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F71D591A2861AF00AEE6BA /* ChooseVC.m */; };
 		F7F928E11A354917000BAE49 /* NSDictionary+safeObjectForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F928E01A354917000BAE49 /* NSDictionary+safeObjectForKey.m */; };
 		F7FEC1271A49345F00CFE9D4 /* InvoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */; };
+		F7FEC12A1A4955CB00CFE9D4 /* MyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FEC1291A4955CB00CFE9D4 /* MyTextField.m */; };
 		F93099481A2DB4170054FFC1 /* MarginMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F93099461A2DB4170054FFC1 /* MarginMoneyCell.m */; };
 		F93099491A2DB4170054FFC1 /* MarginMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */; };
 		F930994D1A2DB42B0054FFC1 /* CompeteRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */; };
@@ -1265,6 +1266,8 @@
 		F7F928E01A354917000BAE49 /* NSDictionary+safeObjectForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safeObjectForKey.m"; sourceTree = "<group>"; };
 		F7FEC1251A49345F00CFE9D4 /* InvoiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceVC.h; sourceTree = "<group>"; };
 		F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceVC.m; sourceTree = "<group>"; };
+		F7FEC1281A4955CB00CFE9D4 /* MyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextField.h; sourceTree = "<group>"; };
+		F7FEC1291A4955CB00CFE9D4 /* MyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextField.m; sourceTree = "<group>"; };
 		F93099451A2DB4170054FFC1 /* MarginMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginMoneyCell.h; sourceTree = "<group>"; };
 		F93099461A2DB4170054FFC1 /* MarginMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginMoneyCell.m; sourceTree = "<group>"; };
 		F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarginMoneyCell.xib; sourceTree = "<group>"; };
@@ -1449,6 +1452,8 @@
 				F7F928E01A354917000BAE49 /* NSDictionary+safeObjectForKey.m */,
 				F729B0171A36C55C0001FD39 /* MyButton.h */,
 				F729B0181A36C55C0001FD39 /* MyButton.m */,
+				F7FEC1281A4955CB00CFE9D4 /* MyTextField.h */,
+				F7FEC1291A4955CB00CFE9D4 /* MyTextField.m */,
 				F7F626E41A30399600CD2340 /* FileManager.h */,
 				F7F626E51A30399600CD2340 /* FileManager.m */,
 			);
@@ -3112,6 +3117,7 @@
 				F7EC68C81A2BF5DA000B289D /* JHRefreshHeaderView.m in Sources */,
 				F7F71D5A1A2861AF00AEE6BA /* ChooseVC.m in Sources */,
 				940178611A21CCE400697D14 /* MyNavigationController.m in Sources */,
+				F7FEC12A1A4955CB00CFE9D4 /* MyTextField.m in Sources */,
 				940178601A21CCE400697D14 /* MybarButItem.m in Sources */,
 				F9A2EF511A358BB600070BFF /* PersonDetailVC.m in Sources */,
 				940178631A21CCE400697D14 /* MyTabbarController.m in Sources */,

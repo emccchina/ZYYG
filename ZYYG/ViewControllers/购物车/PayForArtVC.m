@@ -12,6 +12,8 @@
 #import "AdressVC.h"
 #import "AdressModel.h"
 #import "GoodsModel.h"
+#import "InvoiceVC.h"
+
 @interface PayForArtVC ()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -19,6 +21,7 @@
     NSMutableArray         *_adressArr;//
     NSMutableDictionary  *_orderDict;
     NSMutableDictionary     *_defualtAddressDict;//默认地址
+    NSDictionary            *_invoiceRequest;//发票的提交信息
 }
 @property (weak, nonatomic) IBOutlet UITableView *orderTB;
 @property (weak, nonatomic) IBOutlet UIButton *submitBut;
@@ -45,7 +48,6 @@ static NSString *cartCell = @"CartCell";
     self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice];
     _orderDict = [[NSMutableDictionary alloc] init];
     [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
-    [_orderDict setObject:([UserInfo shareUserInfo].nickName ? :@"个人") forKey:@"InvoiceTitle"];
     [_orderDict setObject:@"0" forKey:@"InvoiceType"];//0不开发票  10 普通发票， 20 增值税发票
     NSMutableString *productIDs = [NSMutableString string];
     for (GoodsModel *model in self.products) {
@@ -91,6 +93,15 @@ static NSString *cartCell = @"CartCell";
         [(AdressVC*)destVC setChange:^(BOOL change){
             [self requestForAddressList];
         }];
+    }else if ([destVC isKindOfClass:[InvoiceVC class]]){
+        if (_invoiceRequest) {
+            [(InvoiceVC*)destVC setInvoice:_invoiceRequest];
+        }
+        [(InvoiceVC*)destVC setFinished:^(NSDictionary* invoiceD){
+            [_orderDict setValuesForKeysWithDictionary:invoiceD];
+            _invoiceRequest = [[NSDictionary alloc] initWithDictionary:invoiceD];
+            [self.orderTB reloadData];
+        }];
     }
 }
 
@@ -106,12 +117,6 @@ static NSString *cartCell = @"CartCell";
         }break;
         case 2:{
             
-        }break;
-        case 3:{
-            NSArray *array = (NSArray*)content;
-            [_orderDict setObject:array[0] forKey:@"InvoiceType"];
-            [_orderDict setObject:array[1] forKey:@"InvoiceTitle"];
-            [[self orderTB] reloadData];
         }break;
         default:
             break;
@@ -156,11 +161,6 @@ static NSString *cartCell = @"CartCell";
         return;
     }
     [_orderDict setObject:userInfo.addressManager.defaultAddressCode forKey:@"address_id"];
-    [_orderDict setObject:@"" forKey:@"RegAccount"];
-    [_orderDict setObject:@"" forKey:@"RegAddress"];
-    [_orderDict setObject:@"" forKey:@"RegBank"];
-    [_orderDict setObject:@"" forKey:@"RegPhone"];
-    [_orderDict setObject:@"" forKey:@"InvoiceTaxNo"];
     NSData *data = [NSJSONSerialization dataWithJSONObject:_orderDict options:NSJSONWritingPrettyPrinted error:nil];
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"%@", string);
@@ -218,7 +218,7 @@ static NSString *cartCell = @"CartCell";
         case 3:
             return indexPath.row == 0 ? 44 : 75;
         case 4:
-            return indexPath.row == 0 ? 44 : 103;
+            return indexPath.row == 0 ? 44 : 123;
         default:
             return 44;
             break;
@@ -298,9 +298,10 @@ static NSString *cartCell = @"CartCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ticketCell forIndexPath:indexPath];
                 UILabel *topLabel = (UILabel*)[cell viewWithTag:1];
                 UILabel *midLabel = (UILabel*)[cell viewWithTag:2];
-                NSString *ticketsTitle = ([_orderDict[@"InvoiceType"] integerValue] == 10 ? @"普通发票" : @"增值税发票");
+                NSArray *invoiceType = @[@"不开发票",@"普通发票",@"增值税发票"];
+                NSString *ticketsTitle = invoiceType[[_orderDict[@"InvoiceType"] integerValue]/10];
                 topLabel.text = [NSString stringWithFormat:@"发票类型:%@", ticketsTitle];
-                midLabel.text = [NSString stringWithFormat:@"发票抬头:%@",_orderDict[@"InvoiceTitle"]];
+                midLabel.text = [NSString stringWithFormat:@"发票抬头:%@",(_orderDict[@"InvoiceTitle"] ?:@"")];
                 
                 return cell;
             }

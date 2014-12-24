@@ -161,10 +161,7 @@ static NSString *goodsCell = @"GoodsCell";
     if ([(ArtDetailVC*)destVC respondsToSelector:@selector(setProductID:)]) {
         [destVC setValue:selectedProductID forKey:@"productID"];
     }
-    if ([destVC isKindOfClass:[SearchFrameVC class]]) {
-        SearchFrameVC *vc = (SearchFrameVC*)destVC;
-        [vc setSearchType:1];
-    }
+   
     
     
 }
@@ -205,9 +202,13 @@ static NSString *goodsCell = @"GoodsCell";
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@TypeGoodsList.ashx",kServerDomain];
+    NSString *url = (_selectInfo.searchType ? [NSString stringWithFormat:@"%@SearchList.ashx",kServerDomain] : [NSString stringWithFormat:@"%@TypeGoodsList.ashx",kServerDomain]);
     NSLog(@"url %@", url);
     NSDictionary *dict = [_selectInfo createURLDict];
+#ifdef DEBUG
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+#endif
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
@@ -252,7 +253,16 @@ static NSString *goodsCell = @"GoodsCell";
 #pragma mark - UISearchBarDelegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"searchFrameVC"];
+    SearchFrameVC *vc = (SearchFrameVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"searchFrameVC"];
+    [vc setSearchType:0];
+    [vc setFinished:^(NSString* key){
+        [_selectInfo recoverInfo];
+        _selectInfo.searchKey = key;
+        _selectInfo.searchType = 1;
+        _selectInfo.categaryCode = nil;
+        [self requestForResult];
+    }];
+    
     [self.navigationController pushViewController:vc animated:NO];
     return NO;
 }

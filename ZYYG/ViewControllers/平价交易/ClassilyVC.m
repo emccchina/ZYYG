@@ -167,6 +167,7 @@ NSInteger soredArray(id model1, id model2, void *context)
 - (void)presentSearchResultVC:(NSInteger)searchRow
 {
     selectInfo = [[SelectInfo alloc] init];
+    selectInfo.searchType = 0;
     if (_classfilyType) {
         NSArray *array = _priceArray[searchRow];
         selectInfo.price = array[1];

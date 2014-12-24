@@ -7,6 +7,9 @@
 //
 
 #import "SearchFrameVC.h"
+#import "SelectInfo.h"
+#import "SearchReusltVC.h"
+
 #define kNearestSearch              kTem@"NearestSearch.txt"
 @interface SearchFrameVC ()
 <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -14,6 +17,7 @@
     NSMutableArray *nearestSearch;
     UISearchBar     *searchBar;
     NSArray         *hotSearch;
+    SelectInfo *selectInfo;
 }
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UILabel *searchLab;
@@ -101,10 +105,39 @@
     self.navigationItem.titleView = searchBar;
     
 }
+- (IBAction)doHotSearchBut:(id)sender {
+    UIButton *but = (UIButton*)sender;
+    NSInteger tag = but.tag;
+    [self selectFinished:hotSearch[tag-1]];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)selectFinished:(NSString*)key
+{
+    if (self.searchType == 1) {
+        selectInfo = [[SelectInfo alloc] init];
+        selectInfo.searchType = 1;
+        selectInfo.searchKey = key;
+        [self performSegueWithIdentifier:@"SearchFrameVC" sender:self];
+    }else if (self.searchType == 0){
+        if (self.finished) {
+            self.finished(key);
+        }
+        [self.navigationController.view.layer addAnimation:[Utities getAnimation:6] forKey:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    SearchReusltVC *deatVC = (SearchReusltVC*)[segue destinationViewController];
+    if ([deatVC respondsToSelector:@selector(setSelectInfo:)]) {
+        [deatVC setSelectInfo:selectInfo];
+    }
 }
 
 #pragma mark - UISearchBarDelegate
@@ -127,8 +160,7 @@
     NSLog(@"click");
     [searchBar resignFirstResponder];
     [nearestSearch insertObject:searchBar.text atIndex:0];
-    [self.navigationController.view.layer addAnimation:[Utities getAnimation:6] forKey:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self selectFinished:searchBar1.text];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar1
@@ -174,7 +206,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    [self selectFinished:nearestSearch[indexPath.row]];
 }
 
 

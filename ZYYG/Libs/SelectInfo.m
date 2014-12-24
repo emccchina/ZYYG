@@ -30,6 +30,9 @@
     self.height = nil;
     self.versionNumber = nil;
     self.species = nil;
+    if (!self.searchType) {
+        self.searchKey = nil;
+    }
     self.shotPrice = 0;
     self.shotDate = 0;
     self.shotQuantity = 0;
@@ -121,6 +124,10 @@
     
     if (self.attrible) {
         [dict setObject:self.attrible forKey:@"Attributes"];
+    }
+    
+    if (self.searchKey) {
+        [dict setObject:self.searchKey forKey:@"q"];
     }
     
     if (!dict.count) {
