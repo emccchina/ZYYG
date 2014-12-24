@@ -19,7 +19,9 @@
 <UITableViewDataSource, UITableViewDelegate, CycleScrollViewDatasource, CycleScrollViewDelegate>
 {
     BOOL                _spreadArtist;//艺术家简介展开
+    CGFloat             _heightArtist;
     BOOL                _spreadArt;//作品简介展开
+    CGFloat             _heightArt;
     BOOL                _spreadCertification;//证书展开
     GoodsModel          *goods;
     CycleScrollView     *scrollview;
@@ -45,6 +47,8 @@ static NSString *spreadCell = @"SpreadCell";
     // Do any additional setup after loading the view.
     [self showBackItem];
     CGFloat TBBottom = self.hiddenBottom ? 0 : 50;
+    _heightArt = 0;
+    _heightArtist = 0;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
 
     self.bottomView.hidden = self.hiddenBottom;
@@ -278,21 +282,10 @@ static NSString *spreadCell = @"SpreadCell";
         case 1:
             return 110;
         case 2:{
-            NSString *text =goods.AuthorIntro;
-            if (![text isKindOfClass:[NSNull class]] && ![text isEqualToString:@""] && _spreadArtist) {
-                CGSize size = [Utities sizeWithUIFont:[UIFont systemFontOfSize:17] string:text rect:CGSizeMake(CGRectGetWidth(tableView.frame) - 20, CGFLOAT_MAX)];
-                return size.height +70;
-            }
-            
-            return  50;
+            return  50+(_spreadArtist?_heightArtist:0);
         }
         case 3:{
-            NSString *text =goods.GoodsIntro;
-            if (text && ![text isEqualToString:@""] && _spreadArt) {
-                CGSize size = [Utities sizeWithUIFont:[UIFont systemFontOfSize:17] string:text rect:CGSizeMake(CGRectGetWidth(tableView.frame) - 20, CGFLOAT_MAX)];
-                return size.height +70;
-            }
-            return 50;
+            return 50+(_spreadArt?_heightArt:0);
         }
 //        case 4:
 //        {
@@ -356,8 +349,9 @@ static NSString *spreadCell = @"SpreadCell";
             cell.titleLab.text = @"艺术家简介";
             cell.detailLab.text =goods.AuthorIntro;
             cell.spreadState = _spreadArtist;
-            cell.reloadHeight = ^(BOOL spread){
+            cell.reloadHeight = ^(BOOL spread, CGFloat height){
                 _spreadArtist = spread;
+                _heightArtist = height;
                 [self reloadTableViewSection:indexPath.section spread:spread];
             };
             return cell;
@@ -365,12 +359,11 @@ static NSString *spreadCell = @"SpreadCell";
         case 3:{
             SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
             cell.titleLab.text = @"作品简介";
-            cell.detailLab.text =goods.GoodsIntro;
-            //            [detailDict safeObjectForKey:@"GoodsIntro"];
+            [cell.detailWebView loadHTMLString:goods.GoodsIntro baseURL:nil];
             cell.spreadState = _spreadArt;
-            cell.reloadHeight = ^(BOOL spread){
-                //                NSLog(@"spread is %d", spread);
+            cell.reloadHeight = ^(BOOL spread, CGFloat height){
                 _spreadArt = spread;
+                _heightArt = height;
                 [self reloadTableViewSection:indexPath.section spread:spread];
             };
             return cell;

@@ -66,6 +66,7 @@
 		F71DC88C1A43CF9900CF74E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */; };
 		F72976851A3AC14200CD9E22 /* SelectInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F72976841A3AC14200CD9E22 /* SelectInfo.m */; };
 		F729B0191A36C55C0001FD39 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F729B0181A36C55C0001FD39 /* MyButton.m */; };
+		F73CE7991A4A6E7300B8012A /* MyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CE7981A4A6E7300B8012A /* MyWebView.m */; };
 		F7675C351A2DBE450008C220 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C341A2DBE440008C220 /* LoginVC.m */; };
 		F7675C381A2DBE610008C220 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C371A2DBE610008C220 /* RegisterVC.m */; };
 		F76A4DEB1A2C2F120005FF46 /* AdressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A4DEA1A2C2F120005FF46 /* AdressVC.m */; };
@@ -719,6 +720,8 @@
 		F72976841A3AC14200CD9E22 /* SelectInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInfo.m; sourceTree = "<group>"; };
 		F729B0171A36C55C0001FD39 /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
 		F729B0181A36C55C0001FD39 /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
+		F73CE7971A4A6E7300B8012A /* MyWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyWebView.h; path = ZYYG/ViewControllers/MyWebView.h; sourceTree = SOURCE_ROOT; };
+		F73CE7981A4A6E7300B8012A /* MyWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyWebView.m; path = ZYYG/ViewControllers/MyWebView.m; sourceTree = SOURCE_ROOT; };
 		F7675C331A2DBE440008C220 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = ZYYG/ViewControllers/LoginVC.h; sourceTree = SOURCE_ROOT; };
 		F7675C341A2DBE440008C220 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = ZYYG/ViewControllers/LoginVC.m; sourceTree = SOURCE_ROOT; };
 		F7675C361A2DBE610008C220 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterVC.h; path = ZYYG/ViewControllers/RegisterVC.h; sourceTree = SOURCE_ROOT; };
@@ -2421,6 +2424,8 @@
 				F7675C371A2DBE610008C220 /* RegisterVC.m */,
 				F7F304931A47F21000A6AD7A /* ForgetPasswordVC.h */,
 				F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */,
+				F73CE7971A4A6E7300B8012A /* MyWebView.h */,
+				F73CE7981A4A6E7300B8012A /* MyWebView.m */,
 			);
 			path = PublicVC;
 			sourceTree = "<group>";
@@ -3067,6 +3072,7 @@
 				F7C8D5171A3809C6009F36B3 /* FMResultSet.m in Sources */,
 				F9BC26891A2EA263006894C6 /* MyAccountVC.m in Sources */,
 				F76A4DEE1A2C38B10005FF46 /* AddAdressVC.m in Sources */,
+				F73CE7991A4A6E7300B8012A /* MyWebView.m in Sources */,
 				94D89EBC1A21FDA70074B874 /* JGProgressHUD.m in Sources */,
 				F7C8D5131A3809C6009F36B3 /* FMDatabase.m in Sources */,
 				F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */,

@@ -16,6 +16,9 @@
     createTopLine
     createBottomLine
     self.detailLab.numberOfLines = 0;
+    self.detailWebView.delegate = self;
+    self.webViewHeight = 0;
+    self.detailWebView.scalesPageToFit = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -26,7 +29,7 @@
 - (IBAction)spreadButtonPressed:(id)sender {
     _spreadState = !_spreadState;
     if (self.reloadHeight) {
-        self.reloadHeight(_spreadState);
+        self.reloadHeight(_spreadState, self.webViewHeight);
     }
     
 }
@@ -34,10 +37,31 @@
 - (void)setSpreadState:(BOOL)spreadState
 {
     _spreadState = spreadState;
-    self.detailLab.hidden = !_spreadState;
+    self.detailWebView.hidden = !_spreadState;
     UIImage *image = _spreadState ? [UIImage imageNamed:@"down"] : [UIImage imageNamed:@"left"];
     [self.spreadButton setImage:image forState:UIControlStateNormal];
 }
 
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    UIScrollView* scrollView = [webView scrollView];
+    scrollView.bounces = NO;
+    scrollView.backgroundColor = [UIColor clearColor];
+    NSLog(@"%@", NSStringFromCGSize(scrollView.contentSize));
+    self.webViewHeight = scrollView.contentSize.height;
+}
+
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    
+}
 
 @end

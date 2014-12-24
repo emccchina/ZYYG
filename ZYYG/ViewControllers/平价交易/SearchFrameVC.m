@@ -122,21 +122,15 @@
         selectInfo = [[SelectInfo alloc] init];
         selectInfo.searchType = 1;
         selectInfo.searchKey = key;
-        [self performSegueWithIdentifier:@"SearchFrameVC" sender:self];
+        SearchReusltVC *resultVC = (SearchReusltVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SearchResultVC"];
+        [resultVC setSelectInfo:selectInfo];
+        [self.navigationController pushViewController:resultVC animated:YES];
     }else if (self.searchType == 0){
         if (self.finished) {
             self.finished(key);
         }
         [self.navigationController.view.layer addAnimation:[Utities getAnimation:6] forKey:nil];
         [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    SearchReusltVC *deatVC = (SearchReusltVC*)[segue destinationViewController];
-    if ([deatVC respondsToSelector:@selector(setSelectInfo:)]) {
-        [deatVC setSelectInfo:selectInfo];
     }
 }
 

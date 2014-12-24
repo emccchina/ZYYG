@@ -338,6 +338,39 @@
             </objects>
             <point key="canvasLocation" x="2083" y="114"/>
         </scene>
+        <!--My Web View-->
+        <scene sceneID="WZM-7f-5LY">
+            <objects>
+                <viewController id="XwI-ub-nkm" customClass="MyWebView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g51-Ke-DXA"/>
+                        <viewControllerLayoutGuide type="bottom" id="qgw-5Q-Wlc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="guu-5U-zRY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zc0-gn-fVC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zc0-gn-fVC" firstAttribute="top" secondItem="guu-5U-zRY" secondAttribute="top" id="ZNd-dC-muh"/>
+                            <constraint firstItem="Zc0-gn-fVC" firstAttribute="leading" secondItem="guu-5U-zRY" secondAttribute="leading" id="aQr-6u-hG6"/>
+                            <constraint firstAttribute="trailing" secondItem="Zc0-gn-fVC" secondAttribute="trailing" id="oEu-A7-OVn"/>
+                            <constraint firstAttribute="bottom" secondItem="Zc0-gn-fVC" secondAttribute="bottom" id="sfx-Zb-d7Y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myWebView" destination="Zc0-gn-fVC" id="Lw4-id-IgP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qsm-Uv-MSv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="437" y="1600"/>
+        </scene>
         <!--Forget PasswordVC-->
         <scene sceneID="OZc-U0-amL">
             <objects>

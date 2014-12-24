@@ -102,7 +102,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.titles[indexPath.row][@"Title"];
     cell.detailTextLabel.text = [self.details[indexPath.row] isKindOfClass:[NSDictionary class]] ? self.details[indexPath.row][@"Name"] : @"";
-    NSLog(@"%d %@",[self.details[indexPath.row] isKindOfClass:[NSDictionary class]],self.details[indexPath.row]);
+//    NSLog(@"%d %@",[self.details[indexPath.row] isKindOfClass:[NSDictionary class]],self.details[indexPath.row]);
     return cell;
     
 }
