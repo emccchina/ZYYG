@@ -46,34 +46,34 @@
 
 - (void)goodsModelFromCart:(NSDictionary *)dict
 {
-    self.ArtName = dict[@"Title"];
-    self.GoodsName = dict[@"GoodsName"];
-    self.GoodsCode = dict[@"product_id"];
-    self.SpecDesc = dict[@"size"];
-    self.AppendPrice = [dict[@"Money"] floatValue];
-    self.picURL = dict[@"ImageUrl"];
-    self.addCartCount = dict[@"Num"];
-    self.valid = ([dict[@"isValid"] isEqualToString:@"False"] ? NO : YES);
+    self.ArtName = [dict safeObjectForKey:@"Title"];
+    self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
+    self.GoodsCode = [dict safeObjectForKey:@"product_id"];
+    self.SpecDesc = [dict safeObjectForKey:@"size"];
+    self.AppendPrice = [[dict safeObjectForKey:@"Money"] floatValue];
+    self.picURL = [dict safeObjectForKey:@"ImageUrl"];
+    self.addCartCount = [dict safeObjectForKey:@"Num"];
+    self.valid = ([[dict safeObjectForKey:@"isValid"] isEqualToString:@"False"] ? NO : YES);
 }
 
 - (void)goodsModelFromHomePage:(NSDictionary *)dict
 {
-    self.ArtName = dict[@"Special_Id"];
-    self.GoodsCode = dict[@"Product_Id"];
-    self.GoodsName = dict[@"Product_Name"];
-    self.SpecDesc = dict[@"size"];
-    self.AppendPrice = [dict[@"Product_Price"] floatValue];
-    self.picURL = dict[@"Pic_Url"];
+    self.ArtName = [dict safeObjectForKey:@"Special_Id"];
+    self.GoodsCode = [dict safeObjectForKey:@"Product_Id"];
+    self.GoodsName = [dict safeObjectForKey:@"Product_Name"];
+    self.SpecDesc = [dict safeObjectForKey:@"size"];
+    self.AppendPrice = [[dict safeObjectForKey:@"Product_Price"] floatValue];
+    self.picURL = [dict safeObjectForKey:@"Pic_Url"];
 }
 
 - (void)goodsModelFromSearch:(NSDictionary *)dict
 {
-    self.ArtName = dict[@"ArtName"];
-    self.GoodsCode = dict[@"GoodsCode"];
-    self.GoodsName = dict[@"GoodsName"];
+    self.ArtName = [dict safeObjectForKey:@"ArtName"];
+    self.GoodsCode = [dict safeObjectForKey:@"GoodsCode"];
+    self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
 //    self.SpecDesc = dict[@"size"];
-    self.AppendPrice = [dict[@"Price"] floatValue];
-    self.picURL = dict[@"ImgUrl"];
+    self.AppendPrice = [[dict safeObjectForKey:@"Price"] floatValue];
+    self.picURL = [dict safeObjectForKey:@"ImgUrl"];
 }
 - (void)goodsModelFromOrder:(NSDictionary *)dict
 {

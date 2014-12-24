@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface CustomVC : BaseViewController
+@interface CustomVC : BaseViewController <UITableViewDataSource,UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *customTableVIew;
 @end

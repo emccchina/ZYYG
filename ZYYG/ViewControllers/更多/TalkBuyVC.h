@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface TalkBuyVC : BaseViewController
+@interface TalkBuyVC : BaseViewController <UITableViewDelegate,UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UITableView *talkBuyTableView;
 @end
