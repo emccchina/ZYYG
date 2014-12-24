@@ -37,5 +37,6 @@
 + (NSString* )md5AndBase:(NSString *)str;
 
 + (void)errorPrint:(NSError*)error vc:(UIViewController*)vc;
-
+//展示提示语
++ (void)showMessageOnWindow:(NSString*)message;
 @end

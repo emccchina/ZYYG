@@ -27,6 +27,10 @@
     // Configure the view for the selected state
 }
 - (IBAction)spreadButtonPressed:(id)sender {
+    if (self.detailWebView.isLoading) {
+       [Utities showMessageOnWindow:@"正在加载中,请稍候"];
+        return;
+    }
     _spreadState = !_spreadState;
     if (self.reloadHeight) {
         self.reloadHeight(_spreadState, self.webViewHeight);
@@ -52,6 +56,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     UIScrollView* scrollView = [webView scrollView];
+    
     scrollView.bounces = NO;
     scrollView.backgroundColor = [UIColor clearColor];
     NSLog(@"%@", NSStringFromCGSize(scrollView.contentSize));

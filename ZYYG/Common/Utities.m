@@ -8,6 +8,8 @@
 
 #import "Utities.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "JGProgressHUD.h"
+#import "AppDelegate.h"
 @implementation Utities
 
 + (CGSize)sizeWithUIFont:(UIFont*)font string:(NSString*)string
@@ -182,6 +184,23 @@
 #endif
     
 }
-
++ (void)showMessageOnWindow:(NSString*)message
+{
+    JGProgressHUD *bottomHUD = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleExtraLight];
+    bottomHUD.useProgressIndicatorView = NO;
+    bottomHUD.userInteractionEnabled = NO;
+    bottomHUD.textLabel.text = message;
+    bottomHUD.position = JGProgressHUDPositionBottomCenter;
+    bottomHUD.marginInsets = (UIEdgeInsets) {
+        .top = 0.0f,
+        .bottom = 200.0f,
+        .left = 0.0f,
+        .right = 0.0f,
+    };
+    
+    [bottomHUD showInView:[[UIApplication sharedApplication].delegate window]];
+    
+    [bottomHUD dismissAfterDelay:1.0f];
+}
 
 @end
