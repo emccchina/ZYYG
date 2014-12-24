@@ -76,7 +76,6 @@
 		F7BAE0EE1A3A8D8900155CD6 /* ClassifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BAE0ED1A3A8D8900155CD6 /* ClassifyModel.m */; };
 		F7BBA58F1A2806F9009DF9F2 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BBA58D1A2806F9009DF9F2 /* CartCell.m */; };
 		F7BBA5901A2806F9009DF9F2 /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */; };
-		F7BE24361A314255001EA855 /* MoreStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7BE24341A314255001EA855 /* MoreStoryboard.storyboard */; };
 		F7BE243A1A3144EE001EA855 /* CustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE24391A3144EE001EA855 /* CustomVC.m */; };
 		F7BE243D1A314538001EA855 /* TalkBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE243C1A314538001EA855 /* TalkBuyVC.m */; };
 		F7BE80DA1A3E6DDF0053C5CA /* AdressTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */; };
@@ -739,7 +738,6 @@
 		F7BBA58C1A2806F9009DF9F2 /* CartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartCell.h; sourceTree = "<group>"; };
 		F7BBA58D1A2806F9009DF9F2 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartCell.m; sourceTree = "<group>"; };
 		F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
-		F7BE24351A314255001EA855 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MoreStoryboard.storyboard; sourceTree = "<group>"; };
 		F7BE24381A3144EE001EA855 /* CustomVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomVC.h; sourceTree = "<group>"; };
 		F7BE24391A3144EE001EA855 /* CustomVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVC.m; sourceTree = "<group>"; };
 		F7BE243B1A314538001EA855 /* TalkBuyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkBuyVC.h; sourceTree = "<group>"; };
@@ -1404,7 +1402,6 @@
 				94D89ED61A220D900074B874 /* PersonCenterStoryboard.storyboard */,
 				94D89ED81A220D900074B874 /* ShopCartStoryboard.storyboard */,
 				F7F30D441A22D7C500EF2580 /* PublicStoryboard.storyboard */,
-				F7BE24341A314255001EA855 /* MoreStoryboard.storyboard */,
 				940177FE1A21CBEA00697D14 /* AppDelegate.h */,
 				940177FF1A21CBEA00697D14 /* AppDelegate.m */,
 				940178071A21CBEA00697D14 /* Images.xcassets */,
@@ -2711,7 +2708,6 @@
 				94D89EDA1A220D900074B874 /* CompeteStoryboard.storyboard in Resources */,
 				F7DF47CD1A25794F006EB419 /* SpreadCell.xib in Resources */,
 				F7D248D91A4191FC001AAAC3 /* ipad_key_QWE[S]_63.png in Resources */,
-				F7BE24361A314255001EA855 /* MoreStoryboard.storyboard in Resources */,
 				F7D249611A4191FC001AAAC3 /* keychar11_59.png in Resources */,
 				F7D248631A4191FC001AAAC3 /* ipad_key_[]{[S]_59.png in Resources */,
 				F7D2498E1A4191FC001AAAC3 /* keychar21_17.png in Resources */,
@@ -3204,14 +3200,6 @@
 				94D89ED91A220D900074B874 /* Base */,
 			);
 			name = ShopCartStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
-		F7BE24341A314255001EA855 /* MoreStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F7BE24351A314255001EA855 /* Base */,
-			);
-			name = MoreStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		F7F30D441A22D7C500EF2580 /* PublicStoryboard.storyboard */ = {
