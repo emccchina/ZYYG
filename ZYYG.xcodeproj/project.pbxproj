@@ -68,6 +68,7 @@
 		F7675C381A2DBE610008C220 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C371A2DBE610008C220 /* RegisterVC.m */; };
 		F76A4DEB1A2C2F120005FF46 /* AdressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A4DEA1A2C2F120005FF46 /* AdressVC.m */; };
 		F76A4DEE1A2C38B10005FF46 /* AddAdressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A4DED1A2C38B10005FF46 /* AddAdressVC.m */; };
+		F77AD84C1A4BB0B4004662E2 /* PayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F77AD84B1A4BB0B4004662E2 /* PayManager.m */; };
 		F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302B1A26D64A00DB0EDC /* SearchVC.m */; };
 		F791302F1A26F42500DB0EDC /* SearchReusltVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302E1A26F42500DB0EDC /* SearchReusltVC.m */; };
 		F7BBA58F1A2806F9009DF9F2 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BBA58D1A2806F9009DF9F2 /* CartCell.m */; };
@@ -727,6 +728,8 @@
 		F76A4DEA1A2C2F120005FF46 /* AdressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressVC.m; sourceTree = "<group>"; };
 		F76A4DEC1A2C38B10005FF46 /* AddAdressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAdressVC.h; sourceTree = "<group>"; };
 		F76A4DED1A2C38B10005FF46 /* AddAdressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAdressVC.m; sourceTree = "<group>"; };
+		F77AD84A1A4BB0B4004662E2 /* PayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayManager.h; sourceTree = "<group>"; };
+		F77AD84B1A4BB0B4004662E2 /* PayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayManager.m; sourceTree = "<group>"; };
 		F791302A1A26D64A00DB0EDC /* SearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
 		F791302B1A26D64A00DB0EDC /* SearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		F791302D1A26F42500DB0EDC /* SearchReusltVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchReusltVC.h; sourceTree = "<group>"; };
@@ -1467,6 +1470,8 @@
 				F7FEC1291A4955CB00CFE9D4 /* MyTextField.m */,
 				F7F626E41A30399600CD2340 /* FileManager.h */,
 				F7F626E51A30399600CD2340 /* FileManager.m */,
+				F77AD84A1A4BB0B4004662E2 /* PayManager.h */,
+				F77AD84B1A4BB0B4004662E2 /* PayManager.m */,
 			);
 			name = Common;
 			path = ZYYG/Common;
@@ -3145,6 +3150,7 @@
 				940178631A21CCE400697D14 /* MyTabbarController.m in Sources */,
 				940178971A21CE0000697D14 /* AFNetworkReachabilityManager.m in Sources */,
 				F930994D1A2DB42B0054FFC1 /* CompeteRecordCell.m in Sources */,
+				F77AD84C1A4BB0B4004662E2 /* PayManager.m in Sources */,
 				940178A31A21CE0000697D14 /* UIImageView+AFNetworking.m in Sources */,
 				94D89EBF1A21FDA70074B874 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				F7F30D431A22CFE900EF2580 /* ClassilyVC.m in Sources */,

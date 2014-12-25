@@ -94,7 +94,7 @@
                                 </state>
                                 <connections>
                                     <action selector="doForgetBut:" destination="TTw-IR-ooC" eventType="touchUpInside" id="8hQ-si-4Tg"/>
-                                    <segue destination="lay-9u-MJH" kind="show" id="2zg-vV-g6r"/>
+                                    <segue destination="lay-9u-MJH" kind="custom" customClass="CustomModel" id="2zg-vV-g6r"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JiM-br-jYT">
@@ -437,7 +437,7 @@
                         <outlet property="emailTF" destination="kne-pF-SdR" id="BEA-pf-fJa"/>
                         <outlet property="getCaptcha" destination="ued-Y6-80H" id="Lwg-dh-kZ9"/>
                         <outlet property="haveCaptcha" destination="Wwe-fm-W4a" id="lim-cb-cTi"/>
-                        <segue destination="aiS-55-0uz" kind="show" identifier="RetakeVC" id="oSN-qe-fIW"/>
+                        <segue destination="aiS-55-0uz" kind="custom" identifier="RetakeVC" customClass="CustomModel" id="oSN-qe-fIW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kls-xa-v2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
