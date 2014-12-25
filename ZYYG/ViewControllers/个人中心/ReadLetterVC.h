@@ -14,9 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *letterFrom;
 @property (weak, nonatomic) IBOutlet UILabel *letterTitle;
 @property (weak, nonatomic) IBOutlet UILabel *letterCreateTime;
-@property (weak, nonatomic) IBOutlet UILabel *letterContent;
+@property (weak, nonatomic) IBOutlet UIWebView *letterContent;
 @property (nonatomic, strong)  LetterModel *letter;
 @property (nonatomic, strong)  NSString *letterCode;
-
 
 @end

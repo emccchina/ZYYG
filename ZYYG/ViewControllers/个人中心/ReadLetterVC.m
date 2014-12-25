@@ -18,7 +18,6 @@
     [super viewDidLoad];
     [self showBackItem];
     
-    self.letterContent.numberOfLines = 0;
     self.letterTitle.numberOfLines = 0;
     [self readLetter:[self letter]];
     
@@ -39,10 +38,10 @@
     self.letterFrom.text=letter.SendName;
     self.letterTitle.text=letter.Title;
     self.letterCreateTime.text=letter.AuditTime;
-    self.letterContent.text=letter.LetterContent;
     self.letterCode=letter.LetterCode;
-    
+    [self.letterContent loadHTMLString:letter.LetterContent baseURL:[NSURL fileURLWithPath: [[NSBundle mainBundle]  bundlePath]]];
 }
+
 /*
  #pragma mark - Navigation
  

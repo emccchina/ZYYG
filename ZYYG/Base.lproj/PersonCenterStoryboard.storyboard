@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -891,44 +891,28 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eN8-RM-62X">
-                                <rect key="frame" x="0.0" y="110" width="600" height="489"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMS-tC-7TZ">
-                                        <rect key="frame" x="10" y="10" width="300" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="2bC-of-I9l"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="lMS-tC-7TZ" secondAttribute="trailing" constant="10" id="DWZ-Nj-ZR3"/>
-                                    <constraint firstItem="lMS-tC-7TZ" firstAttribute="top" secondItem="eN8-RM-62X" secondAttribute="top" constant="10" id="MyX-Xo-C4U"/>
-                                    <constraint firstAttribute="bottom" secondItem="lMS-tC-7TZ" secondAttribute="bottom" constant="30" id="WWs-J8-vfu"/>
-                                    <constraint firstItem="lMS-tC-7TZ" firstAttribute="leading" secondItem="eN8-RM-62X" secondAttribute="leading" constant="10" id="jo1-zN-OAS"/>
-                                </constraints>
-                            </scrollView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rGq-HW-MNa">
+                                <rect key="frame" x="0.0" y="110" width="600" height="490"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="rGq-HW-MNa" secondAttribute="trailing" id="0ZY-Hn-7HX"/>
                             <constraint firstItem="dBZ-7h-w8i" firstAttribute="top" secondItem="e0E-Aw-eRG" secondAttribute="top" constant="10" id="1Ui-h9-8Fy"/>
                             <constraint firstItem="Q7q-fU-bY5" firstAttribute="leading" secondItem="e0E-Aw-eRG" secondAttribute="leading" constant="10" id="2TH-T7-Og4"/>
-                            <constraint firstAttribute="bottom" secondItem="eN8-RM-62X" secondAttribute="bottom" constant="1" id="2yh-Pp-Ooa"/>
                             <constraint firstItem="Q7q-fU-bY5" firstAttribute="top" secondItem="e0E-Aw-eRG" secondAttribute="top" constant="30" id="3Ii-bP-Uyq"/>
                             <constraint firstItem="lA0-ms-BwR" firstAttribute="top" secondItem="e0E-Aw-eRG" secondAttribute="top" constant="65" id="8Lt-4j-46Y"/>
-                            <constraint firstItem="eN8-RM-62X" firstAttribute="top" secondItem="e0E-Aw-eRG" secondAttribute="top" constant="110" id="DiA-Au-b8C"/>
-                            <constraint firstItem="eN8-RM-62X" firstAttribute="leading" secondItem="e0E-Aw-eRG" secondAttribute="leading" id="EyD-bn-MZZ"/>
+                            <constraint firstItem="rGq-HW-MNa" firstAttribute="top" secondItem="lA0-ms-BwR" secondAttribute="bottom" constant="24" id="HZX-ho-hdJ"/>
+                            <constraint firstItem="rGq-HW-MNa" firstAttribute="bottom" secondItem="b7P-IP-Hmf" secondAttribute="top" id="Yqu-aH-Zis"/>
+                            <constraint firstItem="rGq-HW-MNa" firstAttribute="leading" secondItem="e0E-Aw-eRG" secondAttribute="leading" id="cdS-ib-IRe"/>
                             <constraint firstItem="lA0-ms-BwR" firstAttribute="leading" secondItem="e0E-Aw-eRG" secondAttribute="leading" constant="10" id="fHG-nJ-FUU"/>
-                            <constraint firstAttribute="trailing" secondItem="eN8-RM-62X" secondAttribute="trailing" id="fW3-wF-fOo"/>
                             <constraint firstItem="dBZ-7h-w8i" firstAttribute="leading" secondItem="e0E-Aw-eRG" secondAttribute="leading" constant="10" id="rGj-la-3Ej"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="站内信" id="iOi-8S-SxX"/>
                     <connections>
-                        <outlet property="letterContent" destination="lMS-tC-7TZ" id="YQ3-eO-ocs"/>
+                        <outlet property="letterContent" destination="rGq-HW-MNa" id="r4I-QP-AdD"/>
                         <outlet property="letterCreateTime" destination="Q7q-fU-bY5" id="zla-Wl-hbw"/>
                         <outlet property="letterFrom" destination="dBZ-7h-w8i" id="pdG-k5-wMS"/>
                         <outlet property="letterTitle" destination="lA0-ms-BwR" id="vdc-SE-uZr"/>
