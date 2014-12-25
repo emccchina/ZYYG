@@ -90,7 +90,7 @@
             if ([self compareVersions:result]) {
                 [self showAlertView:@"已经是最新版本"];
             }else{
-                [self showAlertViewTwoBut:@"有新版本,是否更新"];
+                [self showAlertViewTwoBut:@"温馨提示" message:@"有新版本,是否更新" actionTitle:@"确定"];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

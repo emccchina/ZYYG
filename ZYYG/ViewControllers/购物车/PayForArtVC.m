@@ -180,7 +180,7 @@ static NSString *cartCell = @"CartCell";
         if (result) {
             [UserInfo shareUserInfo].cartsArr = nil;
             _resultDict = result;
-            [self showAlertViewTwoBut:[NSString stringWithFormat:@"提交成功,订单号%@",_resultDict[@"OrderCode"]]];
+            [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"OrderMoney"]] actionTitle:@"支付"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
@@ -197,7 +197,13 @@ static NSString *cartCell = @"CartCell";
 
 - (void)doAlertViewTwo
 {
-    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:@"艺术" money:@"1"] viewController:self delegate:self mode:kPayMode];
+    CGFloat money = [_resultDict[@"OrderMoney"] floatValue];
+    NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
+    NSMutableString *names = [NSMutableString string];
+    for (NSString *name in _resultDict[@"GoodsNames"]) {
+        [names appendString:[NSString stringWithFormat:@"%@,",name]];
+    }
+    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:@"1"] viewController:self delegate:self mode:kPayMode];
 }
 
 - (IBAction)submitOrder:(id)sender {

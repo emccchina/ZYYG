@@ -24,7 +24,7 @@
 
 - (void)showAlertView:(NSString*)message;//显示弹出框
 
-- (void)showAlertViewTwoBut:(NSString *)message;
+- (void)showAlertViewTwoBut:(NSString*)title message:(NSString *)message actionTitle:(NSString*)actionTitle;
 
 - (void)doAlertView;
 - (void)doAlertViewTwo;

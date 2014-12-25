@@ -30,17 +30,18 @@
         HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
     }
     HUD.textLabel.text = text;
-//    if (self.navigationController) {
-//        [HUD showInView:self.navigationController.view];
-//    }else{
+    if (self.navigationController) {
+        [HUD showInView:self.navigationController.view];
+    }else{
         [HUD showInView:self.view];
-//    }
+    }
 }
 
 - (void)dismissIndicatorView
 {
     if (HUD) {
         [HUD dismiss];
+        [HUD removeFromSuperview];
     }
 }
 
@@ -78,10 +79,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)showAlertViewTwoBut:(NSString *)message
+- (void)showAlertViewTwoBut:(NSString*)title message:(NSString *)message actionTitle:(NSString*)actionTitle
 {
     if (iPhone_iOS8) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                        message:message
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消"
@@ -89,7 +90,7 @@
                                                 handler:^(UIAlertAction *action) {
                                                     [self doAlertView];
                                                 }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+        [alert addAction:[UIAlertAction actionWithTitle:actionTitle
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction *action) {
                                                     [self doAlertViewTwo];

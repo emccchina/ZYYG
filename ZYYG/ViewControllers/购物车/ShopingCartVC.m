@@ -130,7 +130,7 @@ static NSString *cartCell = @"CartCell";
 {
     if (![[UserInfo shareUserInfo] isLogin]) {
 //        [Utities presentLoginVC:self];
-        [self showAlertViewTwoBut:@"请先登录或注册"];
+        [self showAlertViewTwoBut:@"温馨提示" message:@"请先登录或注册" actionTitle:@"确定"];
         return;
     }
     
