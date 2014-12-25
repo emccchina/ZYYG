@@ -13,15 +13,17 @@
 #import "AdressModel.h"
 #import "GoodsModel.h"
 #import "InvoiceVC.h"
+#import "PaaCreater.h"
 
 @interface PayForArtVC ()
-<UITableViewDataSource, UITableViewDelegate>
+<UITableViewDataSource, UITableViewDelegate, APayDelegate>
 {
     NSInteger       _toPresentType;//转场页面标志  1 支付， 2 配送
     NSMutableArray         *_adressArr;//
     NSMutableDictionary  *_orderDict;
     NSMutableDictionary     *_defualtAddressDict;//默认地址
     NSDictionary            *_invoiceRequest;//发票的提交信息
+    NSDictionary            *_resultDict;
 }
 @property (weak, nonatomic) IBOutlet UITableView *orderTB;
 @property (weak, nonatomic) IBOutlet UIButton *submitBut;
@@ -177,7 +179,8 @@ static NSString *cartCell = @"CartCell";
         id result = [self parseResults:responseObject];
         if (result) {
             [UserInfo shareUserInfo].cartsArr = nil;
-            [self showAlertView:@"提交成功"];
+            _resultDict = result;
+            [self showAlertViewTwoBut:[NSString stringWithFormat:@"提交成功,订单号%@",_resultDict[@"OrderCode"]]];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
@@ -187,6 +190,16 @@ static NSString *cartCell = @"CartCell";
     }];
 }
 
+- (void)doAlertView
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)doAlertViewTwo
+{
+    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:@"艺术" money:@"1"] viewController:self delegate:self mode:kPayMode];
+}
+
 - (IBAction)submitOrder:(id)sender {
     [self requestSubmitOrder];
 }
@@ -194,6 +207,12 @@ static NSString *cartCell = @"CartCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark - payDelegate
+- (void)APayResult:(NSString*)result
+{
+    NSLog(@"%@",result);
+    [self showAlertView:[Utities doWithPayList:result]];
 }
 
 #pragma mark - UITableView

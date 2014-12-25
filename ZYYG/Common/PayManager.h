@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "APay.h"
+#import "PaaCreater.h"
+typedef void (^PayforFinished) (id result);
+@interface PayManager : UIView
+<APayDelegate>
+{
+}
 
-@interface PayManager : NSObject
+- (void)payforWithTarget:(UIViewController*)newVC orderNumber:(NSString*)orederNumber selector:(SEL)newAction;
+
+@property (nonatomic, copy) PayforFinished finished;
+@property (nonatomic, assign) UIViewController *vc;
+@property (nonatomic, assign) SEL   action;
 
 @end

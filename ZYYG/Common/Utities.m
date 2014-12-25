@@ -10,6 +10,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "JGProgressHUD.h"
 #import "AppDelegate.h"
+#import "APay.h"
+
 @implementation Utities
 
 + (CGSize)sizeWithUIFont:(UIFont*)font string:(NSString*)string
@@ -201,6 +203,26 @@
     [bottomHUD showInView:[[UIApplication sharedApplication].delegate window]];
     
     [bottomHUD dismissAfterDelay:1.0f];
+}
+
++ (NSString*)doWithPayList:(NSString *)result
+{
+    NSString *message = nil;
+    
+    NSArray *parts = [result componentsSeparatedByString:@"="];
+    NSError *error;
+    NSData *data = [[parts lastObject] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    NSInteger payResult = [dic[@"payResult"] integerValue];
+    if (payResult == APayResultSuccess) {
+        message = [NSString stringWithFormat:@"支付成功,订单号:%@",dic[@"payOrderId"]];
+    } else if (payResult == APayResultFail) {
+        message = @"支付失败";
+    } else if (payResult == APayResultCancel) {
+        message = @"支付取消";
+    }
+    
+    return message;
 }
 
 @end

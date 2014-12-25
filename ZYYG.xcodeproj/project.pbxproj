@@ -10,7 +10,6 @@
 		940177FD1A21CBEA00697D14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 940177FC1A21CBEA00697D14 /* main.m */; };
 		940178001A21CBEA00697D14 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 940177FF1A21CBEA00697D14 /* AppDelegate.m */; };
 		940178081A21CBEA00697D14 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 940178071A21CBEA00697D14 /* Images.xcassets */; };
-		9401780B1A21CBEA00697D14 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 940178091A21CBEA00697D14 /* LaunchScreen.xib */; };
 		940178171A21CBEA00697D14 /* ZYYGTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 940178161A21CBEA00697D14 /* ZYYGTests.m */; };
 		940178541A21CCE400697D14 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 940178251A21CCE400697D14 /* UserInfo.m */; };
 		940178551A21CCE400697D14 /* Utities.m in Sources */ = {isa = PBXBuildFile; fileRef = 940178271A21CCE400697D14 /* Utities.m */; };
@@ -69,6 +68,7 @@
 		F76A4DEB1A2C2F120005FF46 /* AdressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A4DEA1A2C2F120005FF46 /* AdressVC.m */; };
 		F76A4DEE1A2C38B10005FF46 /* AddAdressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A4DED1A2C38B10005FF46 /* AddAdressVC.m */; };
 		F77AD84C1A4BB0B4004662E2 /* PayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F77AD84B1A4BB0B4004662E2 /* PayManager.m */; };
+		F77AD84F1A4BBD30004662E2 /* PaaCreater.m in Sources */ = {isa = PBXBuildFile; fileRef = F77AD84E1A4BBD30004662E2 /* PaaCreater.m */; };
 		F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302B1A26D64A00DB0EDC /* SearchVC.m */; };
 		F791302F1A26F42500DB0EDC /* SearchReusltVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302E1A26F42500DB0EDC /* SearchReusltVC.m */; };
 		F7BBA58F1A2806F9009DF9F2 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BBA58D1A2806F9009DF9F2 /* CartCell.m */; };
@@ -617,7 +617,6 @@
 		940177FE1A21CBEA00697D14 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		940177FF1A21CBEA00697D14 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		940178071A21CBEA00697D14 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9401780A1A21CBEA00697D14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		940178101A21CBEA00697D14 /* ZYYGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZYYGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940178151A21CBEA00697D14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		940178161A21CBEA00697D14 /* ZYYGTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYYGTests.m; sourceTree = "<group>"; };
@@ -730,6 +729,8 @@
 		F76A4DED1A2C38B10005FF46 /* AddAdressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAdressVC.m; sourceTree = "<group>"; };
 		F77AD84A1A4BB0B4004662E2 /* PayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayManager.h; sourceTree = "<group>"; };
 		F77AD84B1A4BB0B4004662E2 /* PayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayManager.m; sourceTree = "<group>"; };
+		F77AD84D1A4BBD30004662E2 /* PaaCreater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaaCreater.h; sourceTree = "<group>"; };
+		F77AD84E1A4BBD30004662E2 /* PaaCreater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaaCreater.m; sourceTree = "<group>"; };
 		F791302A1A26D64A00DB0EDC /* SearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
 		F791302B1A26D64A00DB0EDC /* SearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		F791302D1A26F42500DB0EDC /* SearchReusltVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchReusltVC.h; sourceTree = "<group>"; };
@@ -1419,7 +1420,6 @@
 				940177FE1A21CBEA00697D14 /* AppDelegate.h */,
 				940177FF1A21CBEA00697D14 /* AppDelegate.m */,
 				940178071A21CBEA00697D14 /* Images.xcassets */,
-				940178091A21CBEA00697D14 /* LaunchScreen.xib */,
 				940177FA1A21CBEA00697D14 /* Supporting Files */,
 			);
 			path = ZYYG;
@@ -1472,6 +1472,8 @@
 				F7F626E51A30399600CD2340 /* FileManager.m */,
 				F77AD84A1A4BB0B4004662E2 /* PayManager.h */,
 				F77AD84B1A4BB0B4004662E2 /* PayManager.m */,
+				F77AD84D1A4BBD30004662E2 /* PaaCreater.h */,
+				F77AD84E1A4BBD30004662E2 /* PaaCreater.m */,
 			);
 			name = Common;
 			path = ZYYG/Common;
@@ -2847,7 +2849,6 @@
 				F7D2491E1A4191FC001AAAC3 /* keychar01_41.png in Resources */,
 				F7D248BE1A4191FC001AAAC3 /* ipad_key_123[]{[H]_61.png in Resources */,
 				F93099581A2DB6AE0054FFC1 /* PersonCenter.plist in Resources */,
-				9401780B1A21CBEA00697D14 /* LaunchScreen.xib in Resources */,
 				F7D2497D1A4191FC001AAAC3 /* iphonekeyboardHN_62.png in Resources */,
 				F7C8D4FB1A37D1A8009F36B3 /* erp_province_code.xml in Resources */,
 				F7D2487B1A4191FC001AAAC3 /* ipad_key_[]{[H]_40.png in Resources */,
@@ -3127,6 +3128,7 @@
 				F7EC68DB1A2C0851000B289D /* TSActionSheet.m in Sources */,
 				F7DF47D31A25AF6F006EB419 /* ArtDetailVC.m in Sources */,
 				F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */,
+				F77AD84F1A4BBD30004662E2 /* PaaCreater.m in Sources */,
 				9401789C1A21CE0000697D14 /* AFURLSessionManager.m in Sources */,
 				F7EC68C21A2BF5DA000B289D /* JHRefreshAniBaseView.m in Sources */,
 				F9BC26951A2EA9CE006894C6 /* SettingsVC.m in Sources */,
@@ -3180,14 +3182,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		940178091A21CBEA00697D14 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9401780A1A21CBEA00697D14 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 		94D89ED01A220D900074B874 /* CompeteStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

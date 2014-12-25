@@ -8,8 +8,8 @@
 
 #import "CompeteVC.h"
 #import "HMSegmentedControl.h"
+#import "PayManager.h"
 
-#import "APay.h"
 
 @interface CompeteVC()
 <APayDelegate>
@@ -36,7 +36,13 @@
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-//    [APay startPay:<#(NSString *)#> viewController:self delegate:self mode:kPayMode];
+    [APay startPay:[PaaCreater createrWithOrderNo:@"0987654322" productName:@"艺术" money:@"1"] viewController:self delegate:self mode:kPayMode];
+}
+
+- (void)APayResult:(NSString*)result
+{
+    NSLog(@"%@",result);
+    [self showAlertView:[Utities doWithPayList:result]];
 }
 
 @end
