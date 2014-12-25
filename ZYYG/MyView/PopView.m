@@ -72,6 +72,7 @@
     if (_type) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.text = _titles[indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:17];
         cell.textLabel.textColor = kBlackColor;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }else{

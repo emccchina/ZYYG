@@ -30,18 +30,18 @@
         HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
     }
     HUD.textLabel.text = text;
-    if (self.navigationController) {
-        [HUD showInView:self.navigationController.view];
-    }else{
+//    if (self.navigationController) {
+//        [HUD showInView:self.navigationController.view];
+//    }else{
         [HUD showInView:self.view];
-    }
+//    }
 }
 
 - (void)dismissIndicatorView
 {
     if (HUD) {
         [HUD dismiss];
-        [HUD removeFromSuperview];
+//        [HUD removeFromSuperview];
     }
 }
 
