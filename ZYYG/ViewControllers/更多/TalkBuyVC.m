@@ -11,10 +11,15 @@
 #import "GoodsModel.h"
 #import "ArtDetailVC.h"
 
+
 @interface TalkBuyVC ()
 {
-    NSMutableArray *goodsArray;
+    NSMutableArray *goodsArray;//查询结果
     NSInteger pageNum;
+   
+    NSMutableArray    *allArtist;//筛选作者名 是否已经存在， 不存在请求
+    NSString      *artistName;//已经选择的艺术家名,显示在chooseview 上的
+
 }
 
 @end
@@ -26,17 +31,18 @@
     // Do any additional setup after loading the view.
     pageNum=1;
     goodsArray=[NSMutableArray array];
+    allArtist=[NSMutableArray array];
     self.title = @"私人洽购";
     [self showBackItem];
+    self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doSelectButton:)];
     [self requestTalkBuy:pageNum];
     [self addFootRefresh];
     [self.talkBuyTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
     self.talkBuyTableView.dataSource=self;
     self.talkBuyTableView.delegate=self;
 
-    
-    
 }
+
 
 - (void)back
 {
@@ -47,6 +53,96 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)doSelectButton:(UIBarButtonItem*)item
+{
+    if (!self.choosenView.hidden) {//隐藏 同时 筛选
+        [self presentChooseView:nil];
+//        [self requestForResult];
+        return;
+    }
+//    [_selectInfo recoverInfo];
+//    if (searchCondition && searchCondition.count) {
+//        
+//        [self recoverDetails];
+//        [self presentChooseView:searchCondition];
+//        return;
+//    }
+    
+//    [self requestForSearchItem];
+    
+}
+- (void)presentChooseView:(NSArray*)arr
+{
+    self.choosenView.hidden = !self.choosenView.hidden;
+    NSString *titleItem = self.choosenView.hidden ? @"筛选" : @"确定";
+    self.navigationItem.rightBarButtonItem.title = titleItem;
+//    [self.choosenView reloadTitles:arr details:details];
+    if (!self.choosenView.hidden) {
+        self.choosenView.alpha = 0;
+        [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.choosenView.alpha = 1;
+        } completion:^(BOOL finished){
+            
+        }];
+    }
+}
+
+//- (void)requestForResult
+//{
+//    _selectInfo.page = (!refreshFooter ? 1 : (results.count-1)/20 + 2);
+//    [self showIndicatorView:kNetworkConnecting];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    NSString *url = (_selectInfo.searchType ? [NSString stringWithFormat:@"%@SearchList.ashx",kServerDomain] : [NSString stringWithFormat:@"%@TypeGoodsList.ashx",kServerDomain]);
+//    NSLog(@"url %@", url);
+//    NSDictionary *dict = [_selectInfo createURLDict];
+//#ifdef DEBUG
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+//    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//#endif
+//    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//        id result = [self parseResults:responseObject];
+//        if (result) {
+//            [self parseRequestResults:result[@"Goods"]];
+//            [self.resultTB reloadData];
+//        }
+//        [self requestFinished];
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [Utities errorPrint:error vc:self];
+//        [self requestFinished];
+//        [self showAlertView:kNetworkNotConnect];
+//    }];
+//}
+//
+//
+//- (void)requestForSearchItem
+//{
+//    [self showIndicatorView:kNetworkConnecting];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    NSString *url = [NSString stringWithFormat:@"%@SearchItems.ashx",kServerDomain];
+//    NSLog(@"url %@", url);
+//    NSDictionary *dict = nil;
+//    if (_selectInfo.categaryCode) {
+//        dict = @{@"CategoryCode":(_selectInfo.categaryCode?:@"")};
+//    }
+//    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [self dismissIndicatorView];
+//        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//        id result = [self parseResults:responseObject];
+//        if (result) {
+//            searchCondition = result[@"SearchItems"];
+//            [self recoverDetails];
+//            [self presentChooseView:searchCondition];
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [self dismissIndicatorView];
+//        [self showAlertView:kNetworkNotConnect];
+//    }];
+//}
+//
 
 - (void)addFootRefresh
 {
@@ -70,15 +166,16 @@
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            NSArray *carray=result[@"Goods"];
-            if (!carray ||carray.count<1) {
+            NSMutableArray *carray=result[@"Goods"];
+            if (!carray ||[carray isKindOfClass:[NSNull class]]|| carray.count < 1 ) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
-            }
-            for (int i=0; i<carray.count; i++) {
-                GoodsModel *model=[[GoodsModel alloc] init];
-                [model goodsModelFromSearch:carray[i]];
-                [goodsArray addObject:model];
+            }else{
+                for (int i=0; i<carray.count; i++) {
+                    GoodsModel *model=[[GoodsModel alloc] init];
+                    [model goodsModelFromSearch:carray[i]];
+                    [goodsArray addObject:model];
+                }
             }
             [self.talkBuyTableView reloadData];
         }

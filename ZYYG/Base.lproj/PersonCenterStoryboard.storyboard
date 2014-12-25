@@ -171,8 +171,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64u-wd-cE0">
-                                                    <rect key="frame" x="545" y="13" width="30" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64u-wd-cE0">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="xzx-n7-7Ib"/>
                                                     </constraints>
@@ -193,6 +192,7 @@
                                                 <constraint firstItem="Oax-7O-qbW" firstAttribute="top" secondItem="PL2-kA-YGe" secondAttribute="top" constant="13" id="AGN-nk-7fU"/>
                                                 <constraint firstItem="j9k-Pd-RKc" firstAttribute="leading" secondItem="PL2-kA-YGe" secondAttribute="leading" constant="10" id="AVf-w7-mDT"/>
                                                 <constraint firstItem="wPw-UY-45E" firstAttribute="top" secondItem="PL2-kA-YGe" secondAttribute="top" constant="15" id="EvQ-Pc-K1H"/>
+                                                <constraint firstItem="64u-wd-cE0" firstAttribute="leading" secondItem="PL2-kA-YGe" secondAttribute="leading" constant="545" id="Ls4-ca-9MV"/>
                                                 <constraint firstItem="Oax-7O-qbW" firstAttribute="leading" secondItem="PL2-kA-YGe" secondAttribute="leading" constant="50" id="Vhm-7n-LmK"/>
                                                 <constraint firstItem="j9k-Pd-RKc" firstAttribute="top" secondItem="PL2-kA-YGe" secondAttribute="top" constant="8" id="oFd-hS-s1r"/>
                                                 <constraint firstItem="64u-wd-cE0" firstAttribute="top" secondItem="PL2-kA-YGe" secondAttribute="top" constant="13" id="pmn-uP-8m9"/>
@@ -225,7 +225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VZ-Y7-BU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893" y="1956"/>
+            <point key="canvasLocation" x="893" y="1955"/>
         </scene>
         <!--交易订单-->
         <scene sceneID="BQE-D2-LvF">

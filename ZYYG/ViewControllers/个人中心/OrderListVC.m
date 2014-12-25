@@ -139,15 +139,16 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         id result = [self parseResults:responseObject];
         if (result) {
 //            NSLog(@"%@",result);
-            NSArray *orders=result[@"Orders"];
-            if (!orders ||orders.count<1) {
+            NSMutableArray *orders=result[@"Orders"];
+            if (!orders ||[orders isKindOfClass:[NSNull class]]|| orders.count<1) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新订单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
-            }
-            for (int i=0; i<orders.count; i++) {
-                OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
-                NSLog(@"订单读取成功");
-                [orderArray addObject:order];
+            }else{
+                for (int i=0; i<orders.count; i++) {
+                    OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
+                    NSLog(@"订单读取成功");
+                    [orderArray addObject:order];
+                }
             }
             [self.orderListTabelView reloadData];
         }

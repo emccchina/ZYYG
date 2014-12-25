@@ -87,6 +87,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-ld-zgG" customClass="ChooseView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -98,6 +102,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="vsa-zA-np4"/>
                     <connections>
+                        <outlet property="choosenView" destination="Tv7-ld-zgG" id="JcZ-gc-ah3"/>
                         <outlet property="talkBuyTableView" destination="Vfy-S0-dsK" id="6Vr-ZD-q02"/>
                     </connections>
                 </viewController>

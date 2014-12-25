@@ -43,6 +43,8 @@
 //    NSDictionary *dict = images[index];
 }
 
+
+
 #pragma mark -tableView
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -52,7 +54,7 @@
 {
     if(section ==0)
         return 1;
-    return 35;
+    return 20;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -65,19 +67,21 @@
 {
     if (indexPath.section == 0) {
        return CGRectGetWidth(tableView.frame) * 256 / 640;
-    }else if (indexPath.section==1 ||indexPath.section==2) {
-        return 290;
+    }else if (indexPath.section==1) {
+        return 360;
+    }else if (indexPath.section==2) {
+        return 260;
     }
     return 60;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section ==0){
+    if(section ==1){
         return @"定制方法一:";
-    }else if (section ==1) {
-        return @"定制方法二:";
     }else if (section ==2) {
+        return @"定制方法二:";
+    }else if (section ==3) {
         return @"销售经理人列表:";
     }
     return @"";
@@ -124,7 +128,8 @@
         [sCell.L1Image setImage:[UIImage imageNamed:@"custom5"]];
         [sCell.L2Image setImage:[UIImage imageNamed:@"custom6"]];
         [sCell.L3Image setImage:[UIImage imageNamed:@"custom3"]];
-        [sCell.L4Image setImage:[UIImage imageNamed:@"custom4"]];
+        sCell.L4Image.hidden=YES;
+//        [sCell.L4Image setImage:[UIImage imageNamed:@"custom4"]];
         
         sCell.tit1.text=@"定制需求";
         sCell.lab1.numberOfLines=0;
@@ -135,13 +140,17 @@
         sCell.tit3.text=@"定制化创作";
         sCell.lab3.numberOfLines=0;
         sCell.lab3.text=@"根据客户需求,艺术家着手定制化创作.";
-        sCell.tit4.text=@"交付用户";
-        sCell.lab4.numberOfLines=0;
-        sCell.lab4.text=@"经理人与客户验收并支付尾款.";
+        
+        sCell.tit4.hidden=YES;
+        sCell.lab4.hidden=YES;
+//        sCell.tit4.text=@"交付用户";
+//        sCell.lab4.numberOfLines=0;
+//        sCell.lab4.text=@"经理人与客户验收并支付尾款.";
         
         [sCell.M1Image setImage:[UIImage imageNamed:@"customnext"]];
         [sCell.M2Image setImage:[UIImage imageNamed:@"customnext"]];
-        [sCell.M3Image setImage:[UIImage imageNamed:@"customnext"]];
+        sCell.M3Image.hidden=YES;
+//        [sCell.M3Image setImage:[UIImage imageNamed:@"customnext"]];
         
         return sCell;
     }else{

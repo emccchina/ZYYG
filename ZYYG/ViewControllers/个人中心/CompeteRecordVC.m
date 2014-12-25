@@ -18,11 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCell" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCell"];
+    [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCellTop" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCellTop"];
     [self showBackItem];
     self.competeTableView.delegate = self;
     self.competeTableView.dataSource = self;
-    [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCell" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCell"];
-    [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCellTop" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCellTop"];
+    
     // Do any additional setup after loading the view.
 }
 

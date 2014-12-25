@@ -16,10 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.recommendedTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
     [self showBackItem];
     self.recommendedTableView.delegate = self;
     self.recommendedTableView.dataSource = self;
-    [self.recommendedTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
+    
     // Do any additional setup after loading the view.
 }
 

@@ -29,13 +29,14 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [self.myCollectionTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
     collections=[NSMutableArray array];
     pageNum=1;
     [self requestCollections:pageNum];
     [self showBackItem];
     self.myCollectionTableView.delegate=self;
     self.myCollectionTableView.dataSource=self;
-    [self.myCollectionTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
+    
     
     [self addFootRefresh];
     // Do any additional setup after loading the view.
@@ -87,14 +88,15 @@
         id result = [self parseResults:responseObject];
         if (result) {
             NSArray *carray=result[@"data"];
-            if (!carray ||carray.count<1) {
+            if (!carray ||[carray isKindOfClass:[NSNull class]]||carray.count<1) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
-            }
-            for (int i=0; i<carray.count; i++) {
-                GoodsModel *model=[[GoodsModel alloc] init];
-                [model goodsModelFromCollect:carray[i]];
-                [collections addObject:model];
+            }else{
+                for (int i=0; i<carray.count; i++) {
+                    GoodsModel *model=[[GoodsModel alloc] init];
+                    [model goodsModelFromCollect:carray[i]];
+                    [collections addObject:model];
+                }
             }
             [self.myCollectionTableView reloadData];
         }

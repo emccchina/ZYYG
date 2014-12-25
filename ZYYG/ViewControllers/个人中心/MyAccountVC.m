@@ -112,19 +112,20 @@
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            NSArray *accounts=result[@"data"];
-            if (!accounts ||accounts.count<1) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新账单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
-            }
             NSString *MaybeMoney=result[@"MaybeMoney"];
             self.maybeMoney.text=[NSString stringWithFormat:@"$%@",MaybeMoney];
             NSString *Frozen=result[@"Frozen"];
             self.frozen.text=[NSString stringWithFormat:@"$%@",Frozen];
-            for (int i=0; i<accounts.count; i++) {
-                AccountModel *account =[AccountModel accountWithDict:accounts[i]];
-                [accountArray addObject:account];
-                NSLog(@"账户信息读取成功 %@", account.BillCode);
+            NSArray *accounts=result[@"data"];
+            if (!accounts ||[accounts isKindOfClass:[NSNull class]]||accounts.count<1) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新账单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }else{
+                for (int i=0; i<accounts.count; i++) {
+                    AccountModel *account =[AccountModel accountWithDict:accounts[i]];
+                    [accountArray addObject:account];
+                    NSLog(@"账户信息读取成功 %@", account.BillCode);
+                }
             }
             [self.marginMoneyTableView reloadData];
         }
