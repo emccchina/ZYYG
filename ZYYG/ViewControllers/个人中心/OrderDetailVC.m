@@ -13,6 +13,7 @@
 #import "OrderModel.h"
 #import "InvoiceModel.h"
 #import "ArtDetailVC.h"
+#import "CartCell.h"
 
 @interface OrderDetailVC ()
 {
@@ -30,7 +31,7 @@
 static NSString *nomalCell = @"nomalCell";
 static NSString *adressCell = @"AdressCell";
 static NSString *ticketCell = @"TicketCell";
-static NSString *cartCell = @"OrderListCellGoods";
+static NSString *cartCell = @"CartCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +40,7 @@ static NSString *cartCell = @"OrderListCellGoods";
     [self showBackItem];
     self.orderDetailTableView.delegate = self;
     self.orderDetailTableView.dataSource = self;
-    [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"OrderListCellGoods" bundle:nil] forCellReuseIdentifier:cartCell];
+    [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
     
     self.confirmDelivery.layer.backgroundColor = kRedColor.CGColor;
     self.confirmDelivery.layer.cornerRadius = 3;
@@ -126,7 +127,7 @@ static NSString *cartCell = @"OrderListCellGoods";
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -143,10 +144,10 @@ static NSString *cartCell = @"OrderListCellGoods";
             return 100;
             break;
         case 1:
-            return indexPath.row == 0 ? 44 : 100;
+            return indexPath.row == 0 ? 44 : 125;
             break;
         case 4:
-            return 100;
+            return indexPath.row ? 100 : 44;
             break;
         default:
             return 44;
@@ -192,12 +193,19 @@ static NSString *cartCell = @"OrderListCellGoods";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
             }else{
-                GoodsModel *goods=order.Goods[indexPath.row -1];
-                OrderListCellGoods *cell = (OrderListCellGoods*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
-                [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl]];
-                cell.goodsName.text=goods.GoodsName;
-                cell.goodsPrice.text=[NSString stringWithFormat:@"￥%.2f", goods.AppendPrice];
-                cell.goodsCount.text=@"1";
+                GoodsModel *model=order.Goods[indexPath.row -1];
+                CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
+//                [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl]];
+//                cell.goodsName.text=goods.GoodsName;
+//                cell.goodsPrice.text=[NSString stringWithFormat:@"￥%.2f", goods.AppendPrice];
+//                cell.goodsCount.text=@"1";
+                [cell.iconImage setImageWithURL:[NSURL URLWithString:model.defaultImageUrl]];
+                cell.LTLab.text = model.GoodsName;
+                cell.RTLab.text = @"  ";
+                cell.RSecondLab.text = model.GoodsCode;
+                cell.RThirdLab.text = model.SpecDesc;
+                cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f", model.AppendPrice];
+                cell.cellType = YES;
                 return cell;
             }
          }
@@ -244,6 +252,7 @@ static NSString *cartCell = @"OrderListCellGoods";
                 topLabel.text =[NSString stringWithFormat:@"发票类型：%@",invoice.InvoiceType];
                 midLabel.text = [NSString stringWithFormat:@"发票抬头：%@",invoice.InvoiceTitle];
                 botLabel.text = [NSString stringWithFormat:@"发票内容：%@",invoice.InvoiceTaxNo];
+                cell.accessoryType = UITableViewCellAccessoryNone;
                 return cell;
             }
             break;
@@ -252,9 +261,7 @@ static NSString *cartCell = @"OrderListCellGoods";
         default:
             break;
     }
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"detail"];
-    return cell;
-    
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

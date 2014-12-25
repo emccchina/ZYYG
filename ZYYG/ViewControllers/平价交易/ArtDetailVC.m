@@ -347,7 +347,7 @@ static NSString *spreadCell = @"SpreadCell";
         case 2:{
             SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
             cell.titleLab.text = @"艺术家简介";
-            cell.detailLab.text =goods.AuthorIntro;
+            [cell.detailWebView loadHTMLString:goods.AuthorIntro baseURL:nil];
             cell.spreadState = _spreadArtist;
             cell.reloadHeight = ^(BOOL spread, CGFloat height){
                 _spreadArtist = spread;
