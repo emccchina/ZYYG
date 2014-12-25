@@ -308,7 +308,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //            }
             NSLog(@"%@",result);
             [orderArray removeAllObjects];
-            [self requestOrderList:@"0" ordState:@"" ordSize:5 ordNum:1];
+            [self requestOrderList:orderType ordState:orderState ordSize:5 ordNum:1];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",error] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];

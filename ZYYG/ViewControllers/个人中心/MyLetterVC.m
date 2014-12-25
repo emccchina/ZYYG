@@ -97,6 +97,10 @@ static NSString *letterCell = @"letterCell";
         id result = [self parseResults:responseObject];
         if (result) {
             NSArray *letters=result[@"data"];
+            if (!letters ||letters.count<1) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新内容!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
             for (int i=0; i<letters.count; i++) {
                 LetterModel *letter =[LetterModel letterFromDict:letters[i]];
                 [letterArray addObject:letter];
