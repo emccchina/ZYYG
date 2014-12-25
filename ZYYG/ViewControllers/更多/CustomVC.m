@@ -72,7 +72,7 @@
     }else if (indexPath.section==2) {
         return 260;
     }
-    return 60;
+    return 80;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -154,7 +154,10 @@
         
         return sCell;
     }else{
-         UITableViewCell *cell = [[UITableViewCell alloc ]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"managerCell" ];
+         UITableViewCell *cell = [[UITableViewCell alloc ]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"managerCell" ];
+        [cell.imageView setImage:[UIImage imageNamed:@"avatar.png"]];
+        cell.textLabel.text=@"职业经理人";
+        cell.detailTextLabel.text=@"13456789987";
         return cell;
     }
 }
