@@ -580,6 +580,7 @@
 		F996B8521A4AB26F00D38473 /* PersonCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F996B8441A4AB26F00D38473 /* PersonCenterModel.m */; };
 		F996B8531A4AB26F00D38473 /* SelectInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F996B8461A4AB26F00D38473 /* SelectInfo.m */; };
 		F996B8541A4AB26F00D38473 /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F996B8481A4AB26F00D38473 /* SettingModel.m */; };
+		F9A2D45F1A4CF70F0019EACE /* ChooseSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2D45E1A4CF70F0019EACE /* ChooseSingleView.m */; };
 		F9A2EF511A358BB600070BFF /* PersonDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2EF501A358BB600070BFF /* PersonDetailVC.m */; };
 		F9AB0D931A2FEF4100EFEDC5 /* CompeteRecordCellTop.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0D921A2FEF4100EFEDC5 /* CompeteRecordCellTop.m */; };
 		F9AB0D951A2FEF5B00EFEDC5 /* CompeteRecordCellTop.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AB0D941A2FEF5B00EFEDC5 /* CompeteRecordCellTop.xib */; };
@@ -1312,6 +1313,8 @@
 		F996B8461A4AB26F00D38473 /* SelectInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInfo.m; sourceTree = "<group>"; };
 		F996B8471A4AB26F00D38473 /* SettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModel.h; sourceTree = "<group>"; };
 		F996B8481A4AB26F00D38473 /* SettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModel.m; sourceTree = "<group>"; };
+		F9A2D45D1A4CF70F0019EACE /* ChooseSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSingleView.h; sourceTree = "<group>"; };
+		F9A2D45E1A4CF70F0019EACE /* ChooseSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSingleView.m; sourceTree = "<group>"; };
 		F9A2EF4F1A358BB600070BFF /* PersonDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDetailVC.h; sourceTree = "<group>"; };
 		F9A2EF501A358BB600070BFF /* PersonDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDetailVC.m; sourceTree = "<group>"; };
 		F9AB0D911A2FEF4100EFEDC5 /* CompeteRecordCellTop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompeteRecordCellTop.h; sourceTree = "<group>"; };
@@ -1524,6 +1527,8 @@
 				F7EC68CD1A2BF97E000B289D /* PopView.m */,
 				F7C215FA1A2EB80200C011AE /* ChooseView.h */,
 				F7C215FB1A2EB80200C011AE /* ChooseView.m */,
+				F9A2D45D1A4CF70F0019EACE /* ChooseSingleView.h */,
+				F9A2D45E1A4CF70F0019EACE /* ChooseSingleView.m */,
 				940178321A21CCE400697D14 /* GoodsShowCell.h */,
 				940178331A21CCE400697D14 /* GoodsShowCell.m */,
 				940178341A21CCE400697D14 /* GoodsShowCell.xib */,
@@ -3120,6 +3125,7 @@
 				940178691A21CCE400697D14 /* CompeteVC.m in Sources */,
 				940178671A21CCE400697D14 /* PersonCenterVC.m in Sources */,
 				F7DF47CC1A25794F006EB419 /* SpreadCell.m in Sources */,
+				F9A2D45F1A4CF70F0019EACE /* ChooseSingleView.m in Sources */,
 				940178A51A21CE0000697D14 /* UIRefreshControl+AFNetworking.m in Sources */,
 				940178991A21CE0000697D14 /* AFURLConnectionOperation.m in Sources */,
 				9401789A1A21CE0000697D14 /* AFURLRequestSerialization.m in Sources */,

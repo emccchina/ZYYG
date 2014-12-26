@@ -30,13 +30,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     pageNum=1;
+    artistName=@"";
     goodsArray=[NSMutableArray array];
     allArtist=[NSMutableArray array];
     self.title = @"私人洽购";
     [self showBackItem];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doSelectButton:)];
-    [self requestTalkBuy:pageNum];
+    [self requestTalkBuy:pageNum artistName:artistName];
     [self addFootRefresh];
+    [self requestForArtist];
     [self.talkBuyTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
     self.talkBuyTableView.dataSource=self;
     self.talkBuyTableView.delegate=self;
@@ -56,65 +58,64 @@
 
 - (void)doSelectButton:(UIBarButtonItem*)item
 {
-    if (!self.choosenView.hidden) {//隐藏 同时 筛选
-        [self presentChooseView:nil];
-//        [self requestForResult];
+    if (!self.chooseSingleView.hidden) {//隐藏 同时 筛选
+        [self presChooseView:nil];
+        [self requestForArtist];
         return;
+    }else{
+        [self presChooseView:allArtist];
+         return;
     }
-//    [_selectInfo recoverInfo];
-//    if (searchCondition && searchCondition.count) {
-//        
-//        [self recoverDetails];
-//        [self presentChooseView:searchCondition];
-//        return;
-//    }
-    
-//    [self requestForSearchItem];
+//    artistName=@"";
+//    pageNum=1;
+//    [self requestTalkBuy:pageNum artistName:artistName];
     
 }
-- (void)presentChooseView:(NSArray*)arr
+- (void)presChooseView:(NSMutableArray *)arr
 {
-    self.choosenView.hidden = !self.choosenView.hidden;
-    NSString *titleItem = self.choosenView.hidden ? @"筛选" : @"确定";
+    self.chooseSingleView.hidden = !self.chooseSingleView.hidden;
+    NSString *titleItem = self.chooseSingleView.hidden ? @"筛选" : @"确定";
     self.navigationItem.rightBarButtonItem.title = titleItem;
-//    [self.choosenView reloadTitles:arr details:details];
-    if (!self.choosenView.hidden) {
-        self.choosenView.alpha = 0;
+    [self.chooseSingleView reloadArtists:arr];
+    if (!self.chooseSingleView.hidden) {
+        self.chooseSingleView.alpha = 0;
         [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.choosenView.alpha = 1;
+            self.chooseSingleView.alpha = 1;
         } completion:^(BOOL finished){
             
         }];
     }
 }
 
-//- (void)requestForResult
-//{
-//    _selectInfo.page = (!refreshFooter ? 1 : (results.count-1)/20 + 2);
-//    [self showIndicatorView:kNetworkConnecting];
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString *url = (_selectInfo.searchType ? [NSString stringWithFormat:@"%@SearchList.ashx",kServerDomain] : [NSString stringWithFormat:@"%@TypeGoodsList.ashx",kServerDomain]);
-//    NSLog(@"url %@", url);
-//    NSDictionary *dict = [_selectInfo createURLDict];
-//#ifdef DEBUG
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
-//    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-//#endif
-//    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-//        id result = [self parseResults:responseObject];
-//        if (result) {
-//            [self parseRequestResults:result[@"Goods"]];
-//            [self.resultTB reloadData];
-//        }
-//        [self requestFinished];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [Utities errorPrint:error vc:self];
-//        [self requestFinished];
-//        [self showAlertView:kNetworkNotConnect];
-//    }];
-//}
+- (void)requestForArtist
+{
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@SearchItems.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"type",@"author",nil];
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [allArtist removeAllObjects];
+            NSMutableArray *rarray =result[@"SearchItems"];
+            for (NSDictionary *dict in rarray) {
+                if ([dict[@"Code"] isEqualToString:@"author"]) {
+                   NSMutableArray *darray =dict[@"TypeInfo"];
+                    [allArtist addObjectsFromArray:darray];
+                }
+            }
+            [self.chooseSingleView.chooseTB reloadData];
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+
+        [self showAlertView:kNetworkNotConnect];
+    }];
+}
 //
 //
 //- (void)requestForSearchItem
@@ -149,18 +150,18 @@
     [goodsArray removeAllObjects];
     [self.talkBuyTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
-        [self requestTalkBuy:pageNum];
+        [self requestTalkBuy:pageNum artistName:artistName];
     }];
 }
 
--(void)requestTalkBuy:(NSInteger)page
+-(void)requestTalkBuy:(NSInteger)page artistName:(NSString *)name
 {
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@PrivateSalesList.ashx",kServerDomain];
     NSLog(@"url   %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"20",@"num",[NSString stringWithFormat:@"%ld",(long)page],@"page", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"20",@"num",[NSString stringWithFormat:@"%ld",(long)page],@"page",name,@"AuthorCode", nil];
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
