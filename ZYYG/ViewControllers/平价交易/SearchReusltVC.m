@@ -242,6 +242,10 @@ static NSString *goodsCell = @"GoodsCell";
         if (result) {
             searchCondition = result[@"SearchItems"];
             [self recoverDetails];
+            if (!searchCondition.count) {
+                [self showAlertView:@"没有筛选条件"];
+                return;
+            }
             [self presentChooseView:searchCondition];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
