@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -87,7 +87,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-ld-zgG" customClass="ChooseSingleView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-ld-zgG" customClass="ChooseView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -95,14 +95,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Vfy-S0-dsK" firstAttribute="leading" secondItem="D1e-mJ-Veb" secondAttribute="leading" id="5aX-2U-ukE"/>
+                            <constraint firstItem="Tv7-ld-zgG" firstAttribute="leading" secondItem="D1e-mJ-Veb" secondAttribute="leading" id="Ec2-9k-8PZ"/>
                             <constraint firstItem="Vfy-S0-dsK" firstAttribute="top" secondItem="D1e-mJ-Veb" secondAttribute="top" id="I2x-oj-lnW"/>
+                            <constraint firstItem="C6d-Ax-e1E" firstAttribute="top" secondItem="Tv7-ld-zgG" secondAttribute="bottom" id="Vpc-2e-pbQ"/>
                             <constraint firstAttribute="trailing" secondItem="Vfy-S0-dsK" secondAttribute="trailing" id="cg9-Ns-Lhr"/>
+                            <constraint firstAttribute="trailing" secondItem="Tv7-ld-zgG" secondAttribute="trailing" id="iQ4-rZ-9Ib"/>
                             <constraint firstItem="C6d-Ax-e1E" firstAttribute="top" secondItem="Vfy-S0-dsK" secondAttribute="bottom" id="mU8-Ng-T7d"/>
+                            <constraint firstItem="Tv7-ld-zgG" firstAttribute="top" secondItem="D1e-mJ-Veb" secondAttribute="top" id="u25-q8-53u"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vsa-zA-np4"/>
                     <connections>
-                        <outlet property="chooseSingleView" destination="Tv7-ld-zgG" id="ogi-0W-TpY"/>
+                        <outlet property="chooseView" destination="Tv7-ld-zgG" id="ciK-7g-Q5B"/>
                         <outlet property="talkBuyTableView" destination="Vfy-S0-dsK" id="6Vr-ZD-q02"/>
                     </connections>
                 </viewController>

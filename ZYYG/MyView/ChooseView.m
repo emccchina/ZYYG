@@ -98,11 +98,13 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"chooseCell"];
     }
-    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = self.titles[indexPath.row][@"Title"];
-    cell.detailTextLabel.text = [self.details[indexPath.row] isKindOfClass:[NSDictionary class]] ? self.details[indexPath.row][@"Name"] : @"";
-//    NSLog(@"%d %@",[self.details[indexPath.row] isKindOfClass:[NSDictionary class]],self.details[indexPath.row]);
+    if (self.type) {
+        cell.textLabel.text = self.titles[indexPath.row][@"Name"];
+    }else{
+        cell.textLabel.text = self.titles[indexPath.row][@"Title"];
+        cell.detailTextLabel.text = [self.details[indexPath.row] isKindOfClass:[NSDictionary class]] ? self.details[indexPath.row][@"Name"] : @"";
+    }
     return cell;
     
 }

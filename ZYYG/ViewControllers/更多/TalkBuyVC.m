@@ -38,10 +38,20 @@
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doSelectButton:)];
     [self requestTalkBuy:pageNum artistName:artistName];
     [self addFootRefresh];
-    [self requestForArtist];
     [self.talkBuyTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
     self.talkBuyTableView.dataSource=self;
     self.talkBuyTableView.delegate=self;
+    
+    self.chooseView.type = 1;
+    [self.chooseView setChooseFinised:^(id selected){
+        if ([selected isKindOfClass:[NSDictionary class]]) {
+            [self presChooseView:nil];
+            [self requestTalkBuy:1 artistName:selected[@"Code"]];
+        }else if ([selected isKindOfClass:[UIEvent class]]){
+            [self doSelectButton:nil];
+        }
+        
+    }];
 
 }
 
@@ -58,29 +68,26 @@
 
 - (void)doSelectButton:(UIBarButtonItem*)item
 {
-    if (!self.chooseSingleView.hidden) {//隐藏 同时 筛选
+    if (!self.chooseView.hidden) {//隐藏 同时 筛选
         [self presChooseView:nil];
-        [self requestForArtist];
         return;
-    }else{
-        [self presChooseView:allArtist];
-         return;
     }
-//    artistName=@"";
-//    pageNum=1;
-//    [self requestTalkBuy:pageNum artistName:artistName];
-    
+    if (allArtist && allArtist.count) {
+        [self presChooseView:allArtist];
+        return;
+    }
+    [self requestForArtist];
 }
 - (void)presChooseView:(NSMutableArray *)arr
 {
-    self.chooseSingleView.hidden = !self.chooseSingleView.hidden;
-    NSString *titleItem = self.chooseSingleView.hidden ? @"筛选" : @"确定";
+    self.chooseView.hidden = !self.chooseView.hidden;
+    NSString *titleItem = self.chooseView.hidden ? @"筛选" : @"确定";
     self.navigationItem.rightBarButtonItem.title = titleItem;
-    [self.chooseSingleView reloadArtists:arr];
-    if (!self.chooseSingleView.hidden) {
-        self.chooseSingleView.alpha = 0;
+    [self.chooseView reloadTitles:arr details:nil];
+    if (!self.chooseView.hidden) {
+        self.chooseView.alpha = 0;
         [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.chooseSingleView.alpha = 1;
+            self.chooseView.alpha = 1;
         } completion:^(BOOL finished){
             
         }];
@@ -89,7 +96,6 @@
 
 - (void)requestForArtist
 {
-
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@SearchItems.ashx",kServerDomain];
@@ -99,7 +105,6 @@
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            [allArtist removeAllObjects];
             NSMutableArray *rarray =result[@"SearchItems"];
             for (NSDictionary *dict in rarray) {
                 if ([dict[@"Code"] isEqualToString:@"author"]) {
@@ -107,7 +112,7 @@
                     [allArtist addObjectsFromArray:darray];
                 }
             }
-            [self.chooseSingleView.chooseTB reloadData];
+            [self presChooseView:allArtist];
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -116,34 +121,6 @@
         [self showAlertView:kNetworkNotConnect];
     }];
 }
-//
-//
-//- (void)requestForSearchItem
-//{
-//    [self showIndicatorView:kNetworkConnecting];
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString *url = [NSString stringWithFormat:@"%@SearchItems.ashx",kServerDomain];
-//    NSLog(@"url %@", url);
-//    NSDictionary *dict = nil;
-//    if (_selectInfo.categaryCode) {
-//        dict = @{@"CategoryCode":(_selectInfo.categaryCode?:@"")};
-//    }
-//    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        [self dismissIndicatorView];
-//        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-//        id result = [self parseResults:responseObject];
-//        if (result) {
-//            searchCondition = result[@"SearchItems"];
-//            [self recoverDetails];
-//            [self presentChooseView:searchCondition];
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [self dismissIndicatorView];
-//        [self showAlertView:kNetworkNotConnect];
-//    }];
-//}
-//
 
 - (void)addFootRefresh
 {

@@ -18,6 +18,8 @@ typedef void (^ChooseViewFinised) (id selected);
     NSArray     *_details;
     BOOL        _sell;//是否已售
 }
+
+@property (nonatomic, assign) NSInteger             type;//0平价中的筛选，1洽购中的筛选
 @property (strong, nonatomic) IBOutlet UITableView *chooseTB;
 @property (nonatomic, copy)   ChooseViewFinised     chooseFinised;
 @property (strong, nonatomic) NSArray  *titles;
