@@ -229,16 +229,25 @@
         return sCell;
     }else{
         LetterModel *mana=manages[indexPath.row];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"magageCell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"magageCell"];
-        }
-        NSLog(@"%@",mana.LetterCode);
-        [cell.imageView setFrame:CGRectMake(10, 5, 70, 70)];
-        [cell.imageView setImageWithURL:[NSURL URLWithString:mana.LetterCode]];
-        cell.textLabel.text=mana.Title;
-        cell.detailTextLabel.text=mana.SendName;
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConsultantCell" forIndexPath:indexPath];
+        UIImageView *imageView = (UIImageView*)[cell viewWithTag:1];
+        [imageView setImageWithURL:[NSURL URLWithString:mana.LetterCode]];
+        UILabel *label1= (UILabel*)[cell viewWithTag:2];
+        label1.text = mana.Title;
+        UILabel* label2 = (UILabel*)[cell viewWithTag:3];
+        label2.text = mana.SendName;
+        
         return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 3) {
+        LetterModel *mana=manages[indexPath.row];
+        NSString *tel = mana.SendName;
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", tel]]];
     }
 }
 
