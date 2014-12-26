@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2cf-pz-wQJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2cf-pz-wQJ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -421,7 +421,7 @@
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7W-MB-5GM">
-                                        <rect key="frame" x="20" y="10" width="95" height="30"/>
+                                        <rect key="frame" x="480" y="10" width="95" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="95" id="57f-wJ-Egv"/>
                                         </constraints>
@@ -433,8 +433,8 @@
                                             <action selector="addToCartPressed:" destination="1xU-3h-eV7" eventType="touchUpInside" id="XVR-l5-dfn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73j-bi-oxE">
-                                        <rect key="frame" x="140" y="18" width="25" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73j-bi-oxE">
+                                        <rect key="frame" x="20" y="18" width="25" height="22"/>
                                         <state key="normal" image="ShoppingGray">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -443,7 +443,7 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktH-j7-YGf">
-                                        <rect key="frame" x="159" y="10" width="16" height="16"/>
+                                        <rect key="frame" x="575" y="10" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ktH-j7-YGf" secondAttribute="height" id="xH6-E8-JZv"/>
                                         </constraints>
@@ -454,12 +454,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="ktH-j7-YGf" firstAttribute="leading" secondItem="m7W-MB-5GM" secondAttribute="trailing" constant="44" id="6iv-gu-eyS"/>
-                                    <constraint firstItem="m7W-MB-5GM" firstAttribute="leading" secondItem="H5v-DM-YRi" secondAttribute="leading" constant="20" id="8Oe-sx-JFR"/>
                                     <constraint firstItem="73j-bi-oxE" firstAttribute="top" secondItem="H5v-DM-YRi" secondAttribute="top" constant="18" id="8wd-QV-lqZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="ktH-j7-YGf" secondAttribute="trailing" constant="9" id="Ha2-Ir-NNu"/>
+                                    <constraint firstItem="73j-bi-oxE" firstAttribute="leading" secondItem="H5v-DM-YRi" secondAttribute="leading" constant="20" id="RRo-iT-Bfl"/>
                                     <constraint firstItem="ktH-j7-YGf" firstAttribute="top" secondItem="H5v-DM-YRi" secondAttribute="top" constant="10" id="egj-cv-wIJ"/>
                                     <constraint firstItem="m7W-MB-5GM" firstAttribute="top" secondItem="H5v-DM-YRi" secondAttribute="top" constant="10" id="fuQ-1U-3ky"/>
-                                    <constraint firstItem="73j-bi-oxE" firstAttribute="leading" secondItem="m7W-MB-5GM" secondAttribute="trailing" constant="25" id="jEI-7a-tNz"/>
+                                    <constraint firstAttribute="trailing" secondItem="m7W-MB-5GM" secondAttribute="trailing" constant="25" id="l0i-qj-mNo"/>
                                 </constraints>
                             </view>
                         </subviews>

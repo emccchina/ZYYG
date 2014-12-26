@@ -18,5 +18,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *R1Lab;
 @property (weak, nonatomic) IBOutlet UILabel *R2Lab;
 @property (weak, nonatomic) IBOutlet UILabel *R3Lab;
-
 @end
