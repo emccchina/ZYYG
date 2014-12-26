@@ -77,7 +77,7 @@ static NSString *cartCell = @"CartCell";
     [_selectDict removeAllObjects];
     totalPriceCount = 0;
     [self changeType];
-    [self settleButEnable:NO];
+    [self settleButEnable:YES];
     [self changeSelectedGoodsButState:NO];
     [self.cartTB reloadData];
 }
@@ -229,28 +229,42 @@ static NSString *cartCell = @"CartCell";
 {
     UIImage *image = selected ? [UIImage imageNamed:@"frameSelected"] : [UIImage imageNamed:@"frameUnSelected"];
     [self.selectedGoodBut setImage:image forState:UIControlStateNormal];
-    [self settleButEnable:_type ? YES : selected];
+    [self settleButEnable:YES];
 }
 
 - (IBAction)selectedGoodsButPressed:(id)sender
 {
+    _selectedButState = !_selectedButState;
+    [self changeSelectedGoodsButState:_selectedButState];
+    [_selectDict removeAllObjects];
+    _selectedAccount = 0;
+    if (_selectedButState){
+        for (int i = 0; i < _shopCart.count; i++) {
+            [_selectDict setObject:@(1) forKey:@(i)];
+            ++_selectedAccount;
+        }
+        ++_selectedAccount;
+    }
+    [self changeSettleAccount:NO price:0];
+    [self.cartTB reloadData];
+
+}
+- (IBAction)toSettleAccount:(id)sender {
+    
     if (!_selectDict.count && !_type) {
         [self showAlertView:@"请选择"];
         return;
     }
-    _selectedButState = !_selectedButState;
-    [self changeSelectedGoodsButState:_selectedButState];
-    if (_type) {
-        [_selectDict removeAllObjects];
-        if (_selectedButState){
-            for (int i = 0; i < _shopCart.count; i++) {
-                [_selectDict setObject:@(1) forKey:@(i)];
-            }
+    int i = 0;
+    for (NSNumber *selected in [_selectDict allKeys]) {
+        if ([_selectDict[selected] integerValue]) {
+            i++;
         }
-        [self.cartTB reloadData];
     }
-}
-- (IBAction)toSettleAccount:(id)sender {
+    if (i==0) {
+        [self showAlertView:@"请选择"];
+        return;
+    }
     if (_type) {
         [self requestDeleteCart];
         return;
