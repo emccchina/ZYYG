@@ -10,12 +10,12 @@
 
 @interface LetterModel : NSObject
 
-@property (nonatomic, strong) NSString *AuditTime;
-@property (nonatomic, strong) NSString *LetterCode;
-@property (nonatomic, strong) NSString *Title;
-@property (nonatomic, strong) NSString *SendName;
-@property (nonatomic, strong) NSString *LetterContent;
+@property (nonatomic, strong) NSString      *AuditTime;
+@property (nonatomic, strong) NSString      *LetterCode;
+@property (nonatomic, strong) NSString      *Title;
+@property (nonatomic, strong) NSString      *SendName;
+@property (nonatomic, strong) NSString      *LetterContent;
 
 +(id)letterFromDict:(NSDictionary *)dict;
-
+-(void)initFromManager:(NSDictionary *)dict;
 @end

@@ -10,13 +10,13 @@
 
 @interface CartModel : NSObject
 
-@property (nonatomic, copy) NSString*ImageUrl;
-@property (nonatomic, copy) NSString*product_id;
-@property (nonatomic, copy) NSString*size;
-@property (nonatomic, copy) NSString*Title;
-@property (nonatomic, copy) NSString*Count;
-@property (nonatomic, copy) NSString*Num;
-@property (nonatomic, copy) NSString*Money;
+@property (nonatomic, copy) NSString    *ImageUrl;
+@property (nonatomic, copy) NSString    *product_id;
+@property (nonatomic, copy) NSString    *size;
+@property (nonatomic, copy) NSString    *Title;
+@property (nonatomic, copy) NSString    *Count;
+@property (nonatomic, copy) NSString    *Num;
+@property (nonatomic, copy) NSString    *Money;
 @property (nonatomic, assign) BOOL  selected;
 
 - (void)parseDict:(NSDictionary*)dict;

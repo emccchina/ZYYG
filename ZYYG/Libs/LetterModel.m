@@ -21,4 +21,11 @@
     
     return letter;
 }
+-(void)initFromManager:(NSDictionary *)dict
+{
+    self.Title=[dict safeObjectForKey:@"Title"];
+    self.LetterCode=[dict safeObjectForKey:@"ImageUrl"];
+    self.SendName=[dict safeObjectForKey:@"Tel"];
+    self.LetterContent=[dict safeObjectForKey:@"Url"];
+}
 @end

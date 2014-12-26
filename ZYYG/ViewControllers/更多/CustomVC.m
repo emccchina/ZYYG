@@ -9,8 +9,14 @@
 #import "CustomVC.h"
 #import "SpecialDiscuss.h"
 #import "ImageScrollCell.h"
+#import "LetterModel.h"
 
 @interface CustomVC ()
+{
+    NSMutableArray *images;
+    NSMutableArray *manages;
+    NSString        *selectedProductID;//选择的id
+}
 
 @end
 
@@ -19,7 +25,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    images = [[NSMutableArray alloc] init];
+    manages  = [[NSMutableArray alloc] init];
     [self showBackItem];
+    [self requestGoods];
+    
     [self.customTableVIew registerNib:[UINib nibWithNibName:@"SpecialDiscuss" bundle:nil] forCellReuseIdentifier:@"SpecialDiscuss"];
     [self.customTableVIew registerNib:[UINib nibWithNibName:@"ImageScrollCell" bundle:nil] forCellReuseIdentifier:@"imageCell"];
     
@@ -38,15 +48,78 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)requestGoods
+{
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@PrivateCustom.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [self parseBannerInfo:result[@"HeadList"]];
+            [self parseManageInfo:result[@"FootList"]];
+            [self.customTableVIew reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+}
+
+- (void)requestFinished
+{
+    [self dismissIndicatorView];
+    [self.customTableVIew headerEndRefreshingWithResult:JHRefreshResultSuccess];
+}
+
 - (void)scrollviewImageClick:(NSInteger)index
 {
-//    NSDictionary *dict = images[index];
+    NSDictionary *dict = images[index];
+    BOOL  isLocal = [dict[@"IsLocal"] boolValue];
+    if (isLocal) {
+        NSString *URL = dict[@"Href"];
+        NSArray *stringArr = [URL componentsSeparatedByString:@"="];
+        NSString *productID = [stringArr lastObject];
+        if (productID) {
+            selectedProductID = productID;
+            [self performSegueWithIdentifier:@"showArtDetail" sender:self];
+        }
+    }else{
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:dict[@"Href"]]];
+    }
+
 }
 
 
+- (void)parseBannerInfo:(NSMutableArray *)bannerArr
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSDictionary *dict in bannerArr) {
+        NSDictionary *newDict=[NSDictionary dictionaryWithObjectsAndKeys:dict[@"ImageUrl"],@"Url",dict[@"Url"],@"Href" ,nil];
+        [array addObject:newDict];
+    }
+    [images removeAllObjects];
+    [images addObjectsFromArray:array];
+}
+- (void)parseManageInfo:(NSMutableArray *)manageArr
+{
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSDictionary *dict in manageArr) {
+        LetterModel *model = [[LetterModel alloc] init];
+        [model initFromManager:dict];
+        [array addObject:model];
+    }
+    [manages removeAllObjects];
+    [manages addObjectsFromArray:array];
+}
 
 #pragma mark -tableView
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+
+-(NSInteger )numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 4;
 }
@@ -59,7 +132,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section==3) {
-        return 15;
+        return manages.count;
     }
     return 1;
 }
@@ -86,16 +159,17 @@
     }
     return @"";
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         ImageScrollCell *scrollCell = (ImageScrollCell*)[tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
         scrollCell.style = 0;
+        scrollCell.images = images;
         scrollCell.click = ^(NSInteger index){
             [self scrollviewImageClick:index];
         };
         [scrollCell reloadScrollViewData];
-       
         return scrollCell;
     }else if (indexPath.section==1) {
         SpecialDiscuss *sCell = (SpecialDiscuss *)[tableView dequeueReusableCellWithIdentifier:@"SpecialDiscuss" forIndexPath:indexPath];
@@ -154,10 +228,16 @@
         
         return sCell;
     }else{
-         UITableViewCell *cell = [[UITableViewCell alloc ]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"managerCell" ];
-        [cell.imageView setImage:[UIImage imageNamed:@"avatar.png"]];
-        cell.textLabel.text=@"职业经理人";
-        cell.detailTextLabel.text=@"13456789987";
+        LetterModel *mana=manages[indexPath.row];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"magageCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"magageCell"];
+        }
+        NSLog(@"%@",mana.LetterCode);
+        [cell.imageView setFrame:CGRectMake(10, 5, 70, 70)];
+        [cell.imageView setImageWithURL:[NSURL URLWithString:mana.LetterCode]];
+        cell.textLabel.text=mana.Title;
+        cell.detailTextLabel.text=mana.SendName;
         return cell;
     }
 }

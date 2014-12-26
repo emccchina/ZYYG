@@ -77,6 +77,18 @@
 	<array>
 		<dict>
 			<key>headerImage</key>
+			<string>collection.png</string>
+			<key>title</key>
+			<string>个人资料</string>
+			<key>count</key>
+			<string></string>
+			<key>footerImage</key>
+			<string>left.png</string>
+			<key>segueString</key>
+			<string>PersonDetail</string>
+		</dict>
+		<dict>
+			<key>headerImage</key>
 			<string>settings.png</string>
 			<key>title</key>
 			<string>设置</string>
