@@ -158,7 +158,7 @@ static NSString *listCell = @"listCell";
         if (imagedata) {
             [viewBG setImage:imagedata];
         }
-        self.navigationItem.rightBarButtonItem = ([user isLogin] ? [Utities barButtonItemWithSomething:@"编辑" target:self action:@selector(doEditButton)] : nil);
+//        self.navigationItem.rightBarButtonItem = ([user isLogin] ? [Utities barButtonItemWithSomething:@"编辑" target:self action:@selector(doEditButton)] : nil);
         nameLabel.text = user.nickName;
         levelLabel.text = user.realName;
         emailLabel.text = user.email;
@@ -218,8 +218,8 @@ static NSString *listCell = @"listCell";
 - (IBAction)loginPress:(UIButton *)sender {
     [Utities presentLoginVC:self];
 }
--(void)doEditButton
-{
-    [self performSegueWithIdentifier:@"PersonDetail" sender:self];
-}
+//-(void)doEditButton
+//{
+//    [self performSegueWithIdentifier:@"PersonDetail" sender:self];
+//}
 @end

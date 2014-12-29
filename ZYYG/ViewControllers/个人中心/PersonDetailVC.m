@@ -36,8 +36,8 @@
     [super viewDidLoad];
     [self showBackItem];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"保存" target:self action:@selector(doRightButton:)];
-    titles = @[@"昵称", @"真实姓名", @"性别", @"年收入", @"手机号", @"邮箱", @"所在地", @"详细地址", @"邮编"];
-    placeholders = @[@"请输入昵称", @"请输入真实姓名", @"请选择性别", @"请输入年收入", @"请输入手机号", @"请输入邮箱", @"请输入所在地", @"请输入详细地址", @"请输入邮编"];
+    titles = @[@"昵称:", @"真实姓名:", @"性别:", @"年收入:", @"手机号:", @"邮箱:", @"所在地:", @"详细地址:", @"邮编:"];
+    placeholders = @[@"请输入昵称", @"请输入真实姓名", @"请选择性别", @"请输入年收入", @"手机号不可更改", @"邮箱不可更改", @"请输入所在地", @"请输入详细地址", @"请输入邮编"];
     genderArr = @[@"男", @"女"];
     user =[UserInfo shareUserInfo];
     infos = [[NSMutableArray alloc] init];
@@ -283,6 +283,7 @@
             [self areasInfos:tf];
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }];
+         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else{
         cell=[tableView dequeueReusableCellWithIdentifier:@"PersonDetailCell" forIndexPath:indexPath];
         UITextField *field = (UITextField*)[cell viewWithTag:2];
@@ -292,14 +293,19 @@
         field.returnKeyType = UIReturnKeyDone;
         if (indexPath.row == 2) {
             [self insertAddress:field];
-        }else if (indexPath.row == 5){
+             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }else if (indexPath.row == 4||indexPath.row == 5){
             field.enabled = NO;
+            
+        }else {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+        
     }
     UILabel *label = (UILabel*)[cell viewWithTag:1];
     label.text = titles[indexPath.row];
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+   
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

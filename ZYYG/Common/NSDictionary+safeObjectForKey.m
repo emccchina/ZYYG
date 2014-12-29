@@ -9,7 +9,7 @@
 #import "NSDictionary+safeObjectForKey.h"
 
 
-#define checkNull(__X__)        (__X__) == [NSNull null] || (__X__) == nil ? @"" : [NSString stringWithFormat:@"%@", (__X__)]
+#define checkNull(__X__)        (__X__) == [NSNull null] || (__X__) == nil ? @" " : [NSString stringWithFormat:@"%@", (__X__)]
 
 
 @implementation NSDictionary (safeObjectForKey)

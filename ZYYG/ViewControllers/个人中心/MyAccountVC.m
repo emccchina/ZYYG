@@ -169,6 +169,7 @@
     cell.ReceiveNickName.text=account.ReceiveNickName;//接收方
     cell.AuditTime.text=account.AuditTime;    //生成时间
     cell.Remark.text=account.Remark;   //备注
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
     
 }
