@@ -210,6 +210,9 @@
     if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
         [detailVC setValue:(NSString*)info forKey:@"productID"];
     }
+    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setType:)]) {
+        [detailVC setValue:@(1) forKey:@"type"];
+    }
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

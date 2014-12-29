@@ -324,8 +324,8 @@ static NSString *spreadCell = @"SpreadCell";
                 NSLog(@"%@", colloct);
                 cell.collectState = [colloct integerValue];
                 cell.topLab.text =goods.GoodsName;
-                cell.botLab.text = @"价格:";
-                cell.botRightLab.text = [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
+                cell.botLab.text = self.type ? @"电话:" : @"价格:";
+                cell.botRightLab.text = self.type ? @"123456789" : [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
                 cell.colloct = ^(BOOL collect11){
                     [self requestForCollect:collect11];
                 };
@@ -389,7 +389,9 @@ static NSString *spreadCell = @"SpreadCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.section == 0 && indexPath.row == 1 && self.type) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
+    }
 }
 
 

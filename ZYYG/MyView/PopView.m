@@ -86,7 +86,9 @@
                 [imageV setContentMode:UIViewContentModeScaleAspectFit];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [imageV setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"]];
+            imageV.image = (self.titleImage ? : [UIImage  imageNamed:@"ChinesePrint"]);
+            
+//            [imageV setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"]];
         }
         else{
             cell.selectionStyle = UITableViewCellSelectionStyleGray;

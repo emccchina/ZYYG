@@ -13,4 +13,5 @@
 
 @property (nonatomic, assign) BOOL          hiddenBottom;//隐藏底部的购物车view
 @property (nonatomic, strong) NSString      *productID;//
+@property (nonatomic, assign) BOOL          type;//0一般的详情   1私人洽购里的详情
 @end

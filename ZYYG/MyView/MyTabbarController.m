@@ -28,11 +28,13 @@
     UIViewController *view4 = [self viewControllerFormStoryboard:@"ShopCartStoryboard"];
     view4.tabBarItem = [self tabBarItemWithTitle:@"购物车" image:[UIImage imageNamed:@"ShoppingGray"] selectedImage:[UIImage imageNamed:@"ShoppingRed"]];
     
-    UIViewController *view5 = [[UIViewController alloc] init];
-    view5.tabBarItem = [self tabBarItemWithTitle:@"更多" image:[UIImage imageNamed:@"moreGray"] selectedImage:[UIImage imageNamed:@"moreRed"]];
-//    UIViewController *view5 = [[UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"CustomVC"];
-//    UIViewController *view6 = [[UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"TalkBuyVC"];
-    self.viewControllers = [NSArray arrayWithObjects:view1, view3, view4,view5, nil];
+//    UIViewController *view5 = [[UIViewController alloc] init];
+//    view5.tabBarItem = [self tabBarItemWithTitle:@"更多" image:[UIImage imageNamed:@"moreGray"] selectedImage:[UIImage imageNamed:@"moreRed"]];
+    UIViewController *view5 = [[UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"CustomVC"];
+    view5.tabBarItem = [self tabBarItemWithTitle:@"私人定制" image:[UIImage imageNamed:@"privateCustomGray"] selectedImage:[UIImage imageNamed:@"privateCustomRed"]];
+    UIViewController *view6 = [[UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"TalkBuyVC"];
+    view6.tabBarItem = [self tabBarItemWithTitle:@"私人洽购" image:[UIImage imageNamed:@"privateTalkGray"] selectedImage:[UIImage imageNamed:@"privateTalkRed"]];
+    self.viewControllers = [NSArray arrayWithObjects:view1,view6,view5, view3, view4, nil];
 }
 
 - (void)viewDidLoad {

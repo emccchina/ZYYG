@@ -13,6 +13,7 @@
 #import "PopView.h"
 #import "ClassifyModel.h"
 #import "SearchReusltVC.h"
+
 @interface ClassilyVC ()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -25,6 +26,7 @@
     NSMutableArray      *_details;//右边的TB
     NSInteger   _selectedIndex;
     SelectInfo *selectInfo;
+    NSArray *titleImages;
 }
 @property (weak, nonatomic) IBOutlet UITableView *classfilyTB;
 
@@ -43,7 +45,7 @@ static NSString *priceCell      = @"PriceCell";
     _details = [[NSMutableArray alloc] init];
     NSString *pathPrice = [[NSBundle mainBundle] pathForResource:@"Price" ofType:@"plist"];
     _priceArray = [[NSArray alloc] initWithContentsOfFile:pathPrice];
-    
+    titleImages = @[@"ChinesePrint",@"oilPrint",@"modermArt",@"sculpture",@"print",@"calligraphy"];
     self.classfilyTB.delegate = self;
     self.classfilyTB.dataSource = self;
     self.classfilyTB.backgroundColor = kBGGrayColor;
@@ -262,6 +264,9 @@ NSInteger soredArray(id model1, id model2, void *context)
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (!_classfilyType) {
+        if (indexPath.row < titleImages.count) {
+            _popView.titleImage = [UIImage imageNamed:titleImages[indexPath.row]];
+        }
         [_popView setTitles:_details[indexPath.row]];
         _selectedIndex  = indexPath.row;
         [self.classfilyTB reloadData];
