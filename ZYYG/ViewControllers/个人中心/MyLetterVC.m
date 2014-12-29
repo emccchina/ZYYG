@@ -158,8 +158,12 @@ static NSString *letterCell = @"letterCell";
     LetterModel *letter=letterArray[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:letterCell forIndexPath:indexPath];
     UIImageView *headerImage = (UIImageView *)[cell viewWithTag:1];
+    if (state) {
+        [headerImage setImage:[UIImage imageNamed:@"closedletter.png"]];
+    }else{
+        [headerImage setImage:[UIImage imageNamed:@"opendletter.png"]];
+    }
     
-    [headerImage setImage:[UIImage imageNamed:@"letter.png"]];
     
     UILabel *title = (UILabel*)[cell viewWithTag:2];
     title.text = letter.Title;
