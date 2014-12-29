@@ -19,8 +19,8 @@
     UIViewController *view1 = [self viewControllerFormStoryboard:@"FairPriceStoryboard"];
     view1.tabBarItem = [self tabBarItemWithTitle:@"平价交易" image:[UIImage imageNamed:@"fairGray"] selectedImage:[UIImage imageNamed:@"fairRed"]];
     
-    UIViewController *view2 = [self viewControllerFormStoryboard:@"CompeteStoryboard"];
-    view2.tabBarItem = [self tabBarItemWithTitle:@"线上竞价" image:[UIImage imageNamed:@"completeGray"] selectedImage:[UIImage imageNamed:@"completeRed"]];
+//    UIViewController *view2 = [self viewControllerFormStoryboard:@"CompeteStoryboard"];
+//    view2.tabBarItem = [self tabBarItemWithTitle:@"线上竞价" image:[UIImage imageNamed:@"completeGray"] selectedImage:[UIImage imageNamed:@"completeRed"]];
     
     UIViewController *view3 = [self viewControllerFormStoryboard:@"PersonCenterStoryboard"];
     view3.tabBarItem = [self tabBarItemWithTitle:@"个人中心" image:[UIImage imageNamed:@"personGray"] selectedImage:[UIImage imageNamed:@"personRed"]];
@@ -32,7 +32,7 @@
     view5.tabBarItem = [self tabBarItemWithTitle:@"更多" image:[UIImage imageNamed:@"moreGray"] selectedImage:[UIImage imageNamed:@"moreRed"]];
 //    UIViewController *view5 = [[UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"CustomVC"];
 //    UIViewController *view6 = [[UIStoryboard storyboardWithName:@"MoreStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"TalkBuyVC"];
-    self.viewControllers = [NSArray arrayWithObjects:view1, view2, view3, view4,view5, nil];
+    self.viewControllers = [NSArray arrayWithObjects:view1, view3, view4,view5, nil];
 }
 
 - (void)viewDidLoad {
