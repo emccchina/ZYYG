@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--私人定制-->
@@ -62,10 +63,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="OtI-VC-SIT" secondAttribute="bottom" id="3S2-aG-ZgC"/>
                             <constraint firstItem="OtI-VC-SIT" firstAttribute="leading" secondItem="4ZR-wg-RmC" secondAttribute="leading" id="IUi-EY-wsu"/>
                             <constraint firstItem="OtI-VC-SIT" firstAttribute="top" secondItem="4ZR-wg-RmC" secondAttribute="top" id="QCz-ux-2BT"/>
                             <constraint firstAttribute="trailing" secondItem="OtI-VC-SIT" secondAttribute="trailing" id="stf-Xj-TtL"/>
-                            <constraint firstItem="jLx-5A-ym6" firstAttribute="top" secondItem="OtI-VC-SIT" secondAttribute="bottom" id="vzd-6C-lkJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gYM-6i-OaZ"/>
@@ -137,9 +138,9 @@
                             <constraint firstItem="Vfy-S0-dsK" firstAttribute="leading" secondItem="D1e-mJ-Veb" secondAttribute="leading" id="5aX-2U-ukE"/>
                             <constraint firstItem="Tv7-ld-zgG" firstAttribute="leading" secondItem="D1e-mJ-Veb" secondAttribute="leading" id="6rR-vo-UlU"/>
                             <constraint firstItem="Vfy-S0-dsK" firstAttribute="top" secondItem="D1e-mJ-Veb" secondAttribute="top" id="I2x-oj-lnW"/>
+                            <constraint firstItem="Vfy-S0-dsK" firstAttribute="bottom" secondItem="D1e-mJ-Veb" secondAttribute="bottomMargin" id="Pvc-tE-s5c"/>
                             <constraint firstAttribute="trailing" secondItem="Vfy-S0-dsK" secondAttribute="trailing" id="cg9-Ns-Lhr"/>
-                            <constraint firstItem="C6d-Ax-e1E" firstAttribute="top" secondItem="Tv7-ld-zgG" secondAttribute="bottom" id="kKq-aQ-7Wf"/>
-                            <constraint firstItem="C6d-Ax-e1E" firstAttribute="top" secondItem="Vfy-S0-dsK" secondAttribute="bottom" id="mU8-Ng-T7d"/>
+                            <constraint firstItem="C6d-Ax-e1E" firstAttribute="top" secondItem="Tv7-ld-zgG" secondAttribute="bottom" id="qt6-Pu-Mwv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vsa-zA-np4"/>

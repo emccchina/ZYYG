@@ -51,6 +51,10 @@
 
 - (void)reloadTitles:(NSArray *)titles details:(NSArray *)details
 {
+    CGRect TBRect = self.bounds;
+    TBRect.size.width -= 80;
+    TBRect.origin.x = 80;
+    self.chooseTB.frame = TBRect;
     _titles = titles;
     _details = details;
     [self.chooseTB reloadData];

@@ -226,13 +226,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/MyView/ChooseView.m"
-            timestampString = "441517745.082286"
+            timestampString = "441536140.854367"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "@implementation ChooseView"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
