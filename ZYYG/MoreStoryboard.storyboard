@@ -125,16 +125,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-ld-zgG" customClass="ChooseView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-ld-zgG" customClass="ChooseView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Tv7-ld-zgG" firstAttribute="top" secondItem="D1e-mJ-Veb" secondAttribute="top" id="2g8-AS-uIa"/>
+                            <constraint firstAttribute="trailing" secondItem="Tv7-ld-zgG" secondAttribute="trailing" id="4mA-fW-6O3"/>
                             <constraint firstItem="Vfy-S0-dsK" firstAttribute="leading" secondItem="D1e-mJ-Veb" secondAttribute="leading" id="5aX-2U-ukE"/>
+                            <constraint firstItem="Tv7-ld-zgG" firstAttribute="leading" secondItem="D1e-mJ-Veb" secondAttribute="leading" id="6rR-vo-UlU"/>
                             <constraint firstItem="Vfy-S0-dsK" firstAttribute="top" secondItem="D1e-mJ-Veb" secondAttribute="top" id="I2x-oj-lnW"/>
                             <constraint firstAttribute="trailing" secondItem="Vfy-S0-dsK" secondAttribute="trailing" id="cg9-Ns-Lhr"/>
+                            <constraint firstItem="C6d-Ax-e1E" firstAttribute="top" secondItem="Tv7-ld-zgG" secondAttribute="bottom" id="kKq-aQ-7Wf"/>
                             <constraint firstItem="C6d-Ax-e1E" firstAttribute="top" secondItem="Vfy-S0-dsK" secondAttribute="bottom" id="mU8-Ng-T7d"/>
                         </constraints>
                     </view>
