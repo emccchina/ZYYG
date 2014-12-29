@@ -121,7 +121,7 @@ static NSString *spreadCell = @"SpreadCell";
     [self requestAddCart];
 }
 - (IBAction)goToCartPressed:(id)sender {
-    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:4];
 }
 
 - (void)reloadTableViewSection:(NSInteger)section spread:(BOOL)spread

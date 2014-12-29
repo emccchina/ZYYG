@@ -209,7 +209,7 @@ static NSString *listCell = @"listCell";
     }
     PersonCenterModel *model=personDataArray[indexPath.section][indexPath.row];
     if ([model.segueString isEqualToString:@"ShoppingCart"]) {
-        [self.tabBarController setSelectedIndex:3];
+        [self.tabBarController setSelectedIndex:4];
         return;
     }
     [self performSegueWithIdentifier:model.segueString sender:self];
