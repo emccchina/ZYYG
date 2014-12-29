@@ -45,6 +45,7 @@
     self.chooseView.type = 1;
     [self.chooseView setChooseFinised:^(id selected){
         if ([selected isKindOfClass:[NSDictionary class]]) {
+            [goodsArray removeAllObjects];
             [self presChooseView:nil];
             [self requestTalkBuy:1 artistName:selected[@"Code"]];
         }else if ([selected isKindOfClass:[UIEvent class]]){
