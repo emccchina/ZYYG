@@ -12,10 +12,11 @@
 #import "OrderListCellSum.h"
 #import "OrderListCellBottom.h"
 #import "HMSegmentedControl.h"
-#import "OrderModel.h"
 #import "UserInfo.h"
 #import "GoodsModel.h"
 #import "OrderDetailVC.h"
+#import "PaaCreater.h"
+
 
 @interface OrderListVC ()
 {
@@ -224,7 +225,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
         bootomCell.cancelTime.text=order.CreateTime;
         [self setButton:bootomCell orderMod:order];
-        bootomCell.orderCode=order.OrderCode;
+        bootomCell.order=order;
         bootomCell.orderlistVc=self;
         bootomCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return bootomCell;
@@ -288,14 +289,14 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     
 }
 
--(void)cancellOrder:(NSString *)order_id
+-(void)cancellOrder:(OrderModel *)order
 {
  
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@DeleteOrder.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",order_id, @"order_id"  ,nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",order.OrderCode, @"order_id"  ,nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
@@ -318,7 +319,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }];
 
 }
+-(void)payOrder:(OrderModel *)order
+{
+    [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:@"" money:@"1" type:1] viewController:self delegate:self mode:kPayMode];
 
+}
 /*
  #pragma mark - Navigation
  
