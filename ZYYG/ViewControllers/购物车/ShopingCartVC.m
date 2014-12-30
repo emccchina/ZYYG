@@ -238,10 +238,15 @@ static NSString *cartCell = @"CartCell";
     [self changeSelectedGoodsButState:_selectedButState];
     [_selectDict removeAllObjects];
     _selectedAccount = 0;
+    totalPriceCount = 0;
     if (_selectedButState){
         for (int i = 0; i < _shopCart.count; i++) {
-            [_selectDict setObject:@(1) forKey:@(i)];
-            ++_selectedAccount;
+            GoodsModel *model = _shopCart[i];
+            if (model.valid) {
+                [_selectDict setObject:@(1) forKey:@(i)];
+                ++_selectedAccount;
+                totalPriceCount += model.AppendPrice;
+            }
         }
         ++_selectedAccount;
     }
@@ -303,16 +308,17 @@ static NSString *cartCell = @"CartCell";
 
 - (BOOL)selectAllList
 {
-    if (_selectDict.count < _shopCart.count) {
-        return NO;
-    }else{
-        for (int i = 0; i < _shopCart.count; i++) {
-            NSNumber *selected = _selectDict[@(i)];
-            if (selected && ![selected integerValue]) {
-                return NO;
-            }
+    for (int i = 0; i < _shopCart.count; i++) {
+        GoodsModel *model = _shopCart[i];
+        if (!model.valid) {
+            continue;
+        }
+        NSNumber *selected = _selectDict[@(i)];
+        if (![selected integerValue]) {
+            return NO;
         }
     }
+    
     return YES;
 }
 

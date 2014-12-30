@@ -114,6 +114,9 @@
         NSArray *arr = @[@(areaID), areaName, @(UPID)];
         [array addObject:arr];
     }
+    if (!array.count) {
+        return @[@[@"0",@"",@"0"]];
+    }
     return array;
 }
 

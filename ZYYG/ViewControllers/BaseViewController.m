@@ -207,11 +207,8 @@
         // 跳转到相机或相册页面
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.delegate = self;
-        
-        imagePickerController.allowsEditing = YES;
-        
+        imagePickerController.allowsEditing = NO;
         imagePickerController.sourceType = sourceType;
-        
         [self presentViewController:imagePickerController animated:YES completion:^{}];
     
 }
