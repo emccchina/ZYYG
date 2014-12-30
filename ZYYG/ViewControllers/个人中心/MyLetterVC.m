@@ -253,6 +253,7 @@ static NSString *letterCell = @"letterCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
+            [letterArray removeAllObjects];
             if (state) {
                 [self requestLetterList:1 pageNumber:1];
             }else{
