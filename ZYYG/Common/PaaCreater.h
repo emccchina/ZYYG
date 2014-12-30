@@ -14,7 +14,8 @@
 /*orderNo  订单号
  *name     商品名字
  *money    签署量  分为单位
+ *订单就是 1 保证金就是 2
  */
-+ (NSString *)createrWithOrderNo:(NSString*)orderNo productName:(NSString*)name money:(NSString*)money;
++ (NSString *)createrWithOrderNo:(NSString*)orderNo productName:(NSString*)name money:(NSString*)money type:(NSInteger)type;
 
 @end

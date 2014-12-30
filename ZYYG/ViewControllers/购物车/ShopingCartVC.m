@@ -301,6 +301,21 @@ static NSString *cartCell = @"CartCell";
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+- (BOOL)selectAllList
+{
+    if (_selectDict.count < _shopCart.count) {
+        return NO;
+    }else{
+        for (int i = 0; i < _shopCart.count; i++) {
+            NSNumber *selected = _selectDict[@(i)];
+            if (selected && ![selected integerValue]) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -339,6 +354,8 @@ static NSString *cartCell = @"CartCell";
     cell.doSelected = ^(NSIndexPath *cellIndexPath, BOOL selected){
         [_selectDict setObject:@(selected) forKey:@(indexPath.row)];
         [self changeSettleAccount:selected price:model.AppendPrice];
+        _selectedButState = [self selectAllList];
+        [self changeSelectedGoodsButState:_selectedButState];
     };
     return cell;
 }

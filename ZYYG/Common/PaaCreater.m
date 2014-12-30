@@ -12,16 +12,16 @@
 
 static int count = 0;
 
-+ (NSString *)createrWithOrderNo:(NSString*)orderNo productName:(NSString*)name money:(NSString*)money
++ (NSString *)createrWithOrderNo:(NSString*)orderNo productName:(NSString*)name money:(NSString*)money type:(NSInteger)type
 {
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     NSDate * workDate = [NSDate dateWithTimeIntervalSinceReferenceDate:[NSDate timeIntervalSinceReferenceDate]];
     NSString * timeStr = [dateFormatter stringFromDate:workDate];
-    
+    NSString *receiveURL = [NSString stringWithFormat:@"%@?type=%ld&member=%@&source=iOS", kReceiveURLForPay,(long)type,[UserInfo shareUserInfo].userKey];
     NSArray * paaDic = @[
                          @"1", @"inputCharset",
-                         @"http://www.baidu.com", @"receiveUrl",
+                         receiveURL, @"receiveUrl",
                          @"v1.0", @"version",
                          @"1", @"signType",
                          @"100020091218001", @"merchantId",

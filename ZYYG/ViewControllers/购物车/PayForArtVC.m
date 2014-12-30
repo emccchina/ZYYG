@@ -203,7 +203,7 @@ static NSString *cartCell = @"CartCell";
     for (NSString *name in _resultDict[@"GoodsNames"]) {
         [names appendString:[NSString stringWithFormat:@"%@,",name]];
     }
-    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:@"1"] viewController:self delegate:self mode:kPayMode];
+    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:@"1" type:1] viewController:self delegate:self mode:kPayMode];
 }
 
 - (IBAction)submitOrder:(id)sender {

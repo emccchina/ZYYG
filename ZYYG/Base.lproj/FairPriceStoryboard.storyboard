@@ -433,7 +433,7 @@
                                             <action selector="addToCartPressed:" destination="1xU-3h-eV7" eventType="touchUpInside" id="XVR-l5-dfn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73j-bi-oxE">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73j-bi-oxE">
                                         <rect key="frame" x="20" y="18" width="25" height="22"/>
                                         <state key="normal" image="ShoppingRed">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
