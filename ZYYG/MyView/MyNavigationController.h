@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MyNavigationController : UINavigationController
-
+<UINavigationControllerDelegate, UIGestureRecognizerDelegate>
+{
+    
+}
 @end
