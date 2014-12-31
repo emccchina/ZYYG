@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import "LetterModel.h"
-
+//阅读站内信
 @interface ReadLetterVC : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *letterFrom;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//订单列表 2 商品cell
 @interface OrderListCellGoods : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *goodsImage;

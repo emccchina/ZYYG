@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+//修改密码
 @interface UpdatePassVC : BaseViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *backView;

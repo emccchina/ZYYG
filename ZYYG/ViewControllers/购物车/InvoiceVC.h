@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+//发票填写
 typedef void (^SelectInvoiceFinished)(NSDictionary* invoiceFinished);
 @interface InvoiceVC : BaseViewController
 

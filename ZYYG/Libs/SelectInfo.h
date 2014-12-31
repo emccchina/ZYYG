@@ -21,27 +21,27 @@
 #define kSpeciesCode            @"species"
 #define kVersionsCode           @"versionNumber"
 
-
+//筛选内容
 @interface SelectInfo : NSObject
 
 @property (nonatomic, strong) NSString *categaryCode;//
-@property (nonatomic, strong) NSString *price;
-@property (nonatomic, strong) NSString *size;
+@property (nonatomic, strong) NSString *price;//价格
+@property (nonatomic, strong) NSString *size;//
 @property (nonatomic, strong) NSString *squareFoot;//平尺
-@property (nonatomic, strong) NSString *sytle;
-@property (nonatomic, strong) NSString *artorName;
-@property (nonatomic, strong) NSString *country;
-@property (nonatomic, strong) NSString *height;
+@property (nonatomic, strong) NSString *sytle;//风格
+@property (nonatomic, strong) NSString *artorName;//作者
+@property (nonatomic, strong) NSString *country;//国籍
+@property (nonatomic, strong) NSString *height;//高度
 @property (nonatomic, strong) NSString *versionNumber;
 @property (nonatomic, strong) NSString *species;
-@property (nonatomic, assign) NSInteger  shotPrice;
-@property (nonatomic, assign) NSInteger shotDate;
+@property (nonatomic, assign) NSInteger  shotPrice;//底价
+@property (nonatomic, assign) NSInteger shotDate;//日期
 @property (nonatomic, assign) NSInteger shotQuantity;//库存参数:0,全部; 1,待售; 2,已售
-@property (nonatomic, assign) NSInteger num;
-@property (nonatomic, assign) NSInteger page;
-@property (nonatomic, strong) NSString  *attrible;
-@property (nonatomic, strong) NSString *makeStyle;
-@property (nonatomic, strong) NSString *searchKey;
+@property (nonatomic, assign) NSInteger num;//分页条数
+@property (nonatomic, assign) NSInteger page;//分页页数
+@property (nonatomic, strong) NSString  *attrible;//简介
+@property (nonatomic, strong) NSString *makeStyle;//创作风格
+@property (nonatomic, strong) NSString *searchKey;//关键字
 @property (nonatomic, assign) BOOL      sell;//0待售 1已售
 @property (nonatomic, assign) NSInteger searchType;//接口不同  0分类搜索  1关键字搜索
 - (void)recoverInfo;//筛选 复原

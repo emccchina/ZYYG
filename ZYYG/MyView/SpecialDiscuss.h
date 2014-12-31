@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//私人定制 (内容基本固定)
 @interface SpecialDiscuss : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *L1Image;

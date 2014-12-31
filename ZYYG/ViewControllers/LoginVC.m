@@ -25,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *QQLoginBut;
 
 @end
-
+//登陆
 @implementation LoginVC
 
 - (void)viewDidLoad {

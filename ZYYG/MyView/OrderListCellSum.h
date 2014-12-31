@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//订单列表 3 cell
 @interface OrderListCellSum : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *goodsSum;

@@ -10,7 +10,7 @@
 #import "SpecialDiscuss.h"
 #import "ImageScrollCell.h"
 #import "LetterModel.h"
-
+// 私人定制 单一请求
 @interface CustomVC ()
 {
     NSMutableArray *images;
@@ -28,7 +28,7 @@
     images = [[NSMutableArray alloc] init];
     manages  = [[NSMutableArray alloc] init];
 //    [self showBackItem];
-    [self requestGoods];
+    [self requestCustom];
     
     [self.customTableVIew registerNib:[UINib nibWithNibName:@"SpecialDiscuss" bundle:nil] forCellReuseIdentifier:@"SpecialDiscuss"];
     [self.customTableVIew registerNib:[UINib nibWithNibName:@"ImageScrollCell" bundle:nil] forCellReuseIdentifier:@"imageCell"];
@@ -48,7 +48,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)requestGoods
+//请求
+- (void)requestCustom
 {
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -75,7 +76,7 @@
     [self dismissIndicatorView];
     [self.customTableVIew headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
-
+//顶部图片点击
 - (void)scrollviewImageClick:(NSInteger)index
 {
     NSDictionary *dict = images[index];
@@ -94,7 +95,7 @@
 
 }
 
-
+//解析顶部广告
 - (void)parseBannerInfo:(NSMutableArray *)bannerArr
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -105,6 +106,7 @@
     [images removeAllObjects];
     [images addObjectsFromArray:array];
 }
+//解析经理人数据
 - (void)parseManageInfo:(NSMutableArray *)manageArr
 {
     NSMutableArray *array = [NSMutableArray array];

@@ -7,22 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//收货地址
 @interface AdressModel : NSObject
 
-@property (nonatomic, strong) NSString      *name;
-@property (nonatomic, strong) NSString      *defaultAdress;
-@property (nonatomic, strong) NSString      *provinceName;
+@property (nonatomic, strong) NSString      *name;//地址名
+@property (nonatomic, strong) NSString      *defaultAdress;//默认地址
+@property (nonatomic, strong) NSString      *provinceName;//省份
 @property (nonatomic, strong) NSString      *provinceID;
-@property (nonatomic, strong) NSString      *cityName;
+@property (nonatomic, strong) NSString      *cityName;//城市
 @property (nonatomic, strong) NSString      *cityID;
-@property (nonatomic, strong) NSString      *townName;
+@property (nonatomic, strong) NSString      *townName;//地区
 @property (nonatomic, strong) NSString      *townID;
-@property (nonatomic, strong) NSString      *detailAdress;
-@property (nonatomic, strong) NSString      *mobile;
-@property (nonatomic, strong) NSString      *telPhone;
-@property (nonatomic, strong) NSString      *adressCode;
-@property (nonatomic, strong) NSString      *zipCode;
+@property (nonatomic, strong) NSString      *detailAdress;//详细定制
+@property (nonatomic, strong) NSString      *mobile;//手机
+@property (nonatomic, strong) NSString      *telPhone;//电话
+@property (nonatomic, strong) NSString      *adressCode;//地址编号
+@property (nonatomic, strong) NSString      *zipCode;//邮编
 
 - (void)setModelFromAddressModel:(AdressModel*)model;
 

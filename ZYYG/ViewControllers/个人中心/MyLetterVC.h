@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+//站内信
 @interface MyLetterVC : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *myLetterTableView;

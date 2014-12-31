@@ -77,7 +77,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+//上拉刷新
 - (void)addFootRefresh
 {
     [orderArray removeAllObjects];
@@ -86,7 +86,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     }];
 }
-
+//状态标签按钮
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
     [orderArray removeAllObjects];
@@ -108,14 +108,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
 
 }
-
-
-
-//key
-//status
-//type
-//num
-//page
+//订单列表请求
 
 -(void)requestOrderList:(NSString *)ortype ordState:(NSString *)orstate ordSize:(NSInteger )size  ordNum:(NSInteger )num
 {
@@ -250,7 +243,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         [self performSegueWithIdentifier:@"OrderDetail" sender:self];
     }
 }
-
+//跳转详情
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSLog(@"查看订单详细");
@@ -267,7 +260,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     
     
 }
-
+//判断状态 给出按钮
 -(void)setButton:(OrderListCellBottom *)bottomCell orderMod:(OrderModel *)ord
 {
     if (0 == ord.state) {
@@ -288,7 +281,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }
     
 }
-
+//取消订单
 -(void)cancellOrder:(OrderModel *)order
 {
  
@@ -319,6 +312,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }];
 
 }
+//支付
 -(void)payOrder:(OrderModel *)order
 {
     [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:@"" money:@"1" type:1] viewController:self delegate:self mode:kPayMode];

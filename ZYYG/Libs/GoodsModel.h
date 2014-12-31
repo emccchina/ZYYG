@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//商品模型
 @interface GoodsModel : NSObject
 
 @property (nonatomic, strong) NSString      *GoodsCode;//商品编码

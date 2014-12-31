@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//价格区间cell
 typedef void (^ButtonSelected) (NSInteger butTag, NSIndexPath *indexPath);//but tag  0 left ,  1 right
 //价格参数cell
 @interface PriceCell : UITableViewCell

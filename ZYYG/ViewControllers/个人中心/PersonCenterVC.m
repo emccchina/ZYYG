@@ -9,12 +9,12 @@
 #import "PersonCenterVC.h"
 #import "PersonCenterModel.h"
 #import "UserInfo.h"
-
+//个人中心
 @implementation PersonCenterVC
 {
-    NSMutableArray *personDataArray;
-    UserInfo *user;
-    UIImage *imagedata;
+    NSMutableArray *personDataArray;//个人中心数据
+    UserInfo *user;//用户信息
+    UIImage *imagedata;//头像图片
 }
 
 static NSString *topCell = @"topCell";
@@ -51,13 +51,13 @@ static NSString *listCell = @"listCell";
     [super viewWillAppear:animated];
     [self.PersonTableView reloadData];
 }
-
+//跳转
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIViewController *destVC = [segue destinationViewController];
     destVC.hidesBottomBarWhenPushed = YES;
 }
-
+//获取用户信息
 - (void)requestPersonCenter:(NSInteger)number
 {
     user=[UserInfo shareUserInfo];
@@ -66,6 +66,7 @@ static NSString *listCell = @"listCell";
         return;
     }
 }
+//编辑按钮(已取消)
 - (IBAction)doHeadBut:(id)sender {
     if (![[UserInfo shareUserInfo] isLogin]) {
         [Utities presentLoginVC:self];
@@ -74,7 +75,7 @@ static NSString *listCell = @"listCell";
     [self presentCameraVC];
   
 }
-
+//更换头像
 - (void)selectImageFinished:(NSData *)image
 {
     UIImage *image1 = [UIImage imageWithData:image];

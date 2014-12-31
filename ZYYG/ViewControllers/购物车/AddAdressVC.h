@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "AddAdressVC.h"
 #import "AdressVC.h"
-
+//添加新地址
 typedef void (^AddAdressFinised) (void);
 @interface AddAdressVC : BaseViewController
 

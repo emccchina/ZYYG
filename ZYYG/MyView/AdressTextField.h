@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FMDatabase.h"
-
+//省市级联输入框
 @class AdressTextField;
 
 typedef void (^AdressFinished)(AdressTextField *textField);//省 市 区 的数组

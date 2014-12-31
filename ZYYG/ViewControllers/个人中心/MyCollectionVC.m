@@ -12,7 +12,7 @@
 #import "UserInfo.h"
 #import "GoodsModel.h"
 #import "ArtDetailVC.h"
-
+//我的收藏
 @interface MyCollectionVC ()
 {
 //    HMSegmentedControl *segmentView;// table view title

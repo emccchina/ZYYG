@@ -8,7 +8,7 @@
 
 #ifndef ZYYG_PublicDefine_h
 #define ZYYG_PublicDefine_h
-
+//底部线
 #define createBottomLine  UIView *lineB = [[UIView alloc] init];\
                                     lineB.backgroundColor = [UIColor blackColor];\
                                     lineB.alpha = 0.3;\
@@ -19,7 +19,7 @@
                                     [self addConstraint:[NSLayoutConstraint constraintWithItem:lineB attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0]];\
                                     [lineB addConstraint:[NSLayoutConstraint constraintWithItem:lineB attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:1/[UIScreen mainScreen].scale]];
 
-
+//顶部线
 #define createTopLine   UIView *lineT = [[UIView alloc] init];\
                                     lineT.backgroundColor = [UIColor blackColor];\
                                     lineT.alpha = 0.3;\

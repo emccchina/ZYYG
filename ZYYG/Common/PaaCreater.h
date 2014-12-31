@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "APay.h"
+//支付订单生成
 @interface PaaCreater : NSObject
 
 /*orderNo  订单号

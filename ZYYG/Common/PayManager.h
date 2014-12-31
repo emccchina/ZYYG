@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "APay.h"
 #import "PaaCreater.h"
+//支付
 typedef void (^PayforFinished) (id result);
 @interface PayManager : UIView
 <APayDelegate>

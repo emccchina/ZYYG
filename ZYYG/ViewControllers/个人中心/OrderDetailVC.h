@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+//订单详情
 @interface OrderDetailVC : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *orderDetailTableView;

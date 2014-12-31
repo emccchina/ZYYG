@@ -50,7 +50,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+//账户标签
 -(void)segViewInit
 {
     self.segView.sectionTitles=@[@"全部", @"收入", @"支出"];
@@ -63,6 +63,8 @@
      NSLog(@"不晓得成功没");
    
 }
+
+//刷新
 - (void)addFootRefresh
 {
     [accountArray removeAllObjects];

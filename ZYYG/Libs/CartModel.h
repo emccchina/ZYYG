@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//购物车模型
 @interface CartModel : NSObject
 
-@property (nonatomic, copy) NSString    *ImageUrl;
-@property (nonatomic, copy) NSString    *product_id;
+@property (nonatomic, copy) NSString    *ImageUrl;//商品图片地址
+@property (nonatomic, copy) NSString    *product_id;//商品编号
 @property (nonatomic, copy) NSString    *size;
 @property (nonatomic, copy) NSString    *Title;
 @property (nonatomic, copy) NSString    *Count;

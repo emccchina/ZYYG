@@ -66,7 +66,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+//私人洽购筛选 (条件只能选择作者)
 - (void)doSelectButton:(UIBarButtonItem*)item
 {
     if (!self.chooseView.hidden) {//隐藏 同时 筛选
@@ -79,6 +79,7 @@
     }
     [self requestForArtist];
 }
+//选择效果
 - (void)presChooseView:(NSMutableArray *)arr
 {
     self.chooseView.hidden = !self.chooseView.hidden;
@@ -94,7 +95,7 @@
         }];
     }
 }
-
+//请求作者列表
 - (void)requestForArtist
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -122,7 +123,7 @@
         [self showAlertView:kNetworkNotConnect];
     }];
 }
-
+//上拉刷新
 - (void)addFootRefresh
 {
     [goodsArray removeAllObjects];
@@ -131,7 +132,7 @@
         [self requestTalkBuy:pageNum artistName:artistName];
     }];
 }
-
+//私人洽购请求
 -(void)requestTalkBuy:(NSInteger)page artistName:(NSString *)name
 {
     [self showIndicatorView:kNetworkConnecting];

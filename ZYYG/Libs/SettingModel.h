@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//设置
 @interface SettingModel : NSObject
 
 @property(nonatomic ,copy) NSString *title;
-@property(nonatomic ,copy) NSString *segueString;
+@property(nonatomic ,copy) NSString *segueString;//跳转页面
 
 +(id)settongModelWithDict:(NSDictionary *)dict;
 @end

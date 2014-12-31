@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import "ChooseView.h"
-
+//私人洽购
 @interface TalkBuyVC : BaseViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *talkBuyTableView;

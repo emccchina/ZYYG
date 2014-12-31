@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//订单列表 1 顶部cell
 @interface OrderListCellTop : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *orderNO;

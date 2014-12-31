@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//我的账户cell
 @interface MyAccountCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *BillCode; //账单号

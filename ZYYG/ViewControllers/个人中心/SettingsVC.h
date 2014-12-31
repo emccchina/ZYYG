@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+//设置
 @interface SettingsVC : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *settingsTableView;

@@ -8,6 +8,7 @@
 
 #import "ForgetPasswordVC.h"
 #import "RegisterVC.h"
+//忘记密码
 @interface ForgetPasswordVC ()
 <UITextFieldDelegate>
 {

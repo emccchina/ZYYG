@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import "SelectInfo.h"
-
+//搜索结果
 @interface SearchReusltVC : BaseViewController
 
 @property (nonatomic, strong) SelectInfo    *selectInfo;
