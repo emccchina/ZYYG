@@ -55,13 +55,19 @@ static NSString *cartCell = @"CartCell";
     [super viewWillAppear:animated];
 //不要频繁请求
 //    if (![UserInfo shareUserInfo].cartsArr || ![UserInfo shareUserInfo].cartsArr.count) {
-        [self requestshopCart];
+//        [self requestshopCart];
 //    }else{
 //        [_shopCart removeAllObjects];
 //        [_shopCart addObjectsFromArray:[UserInfo shareUserInfo].cartsArr];
 //        [self.cartTB reloadData];
 //    }
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self requestshopCart];
 }
 
 - (void)doRightItem:(UIBarButtonItem*)item

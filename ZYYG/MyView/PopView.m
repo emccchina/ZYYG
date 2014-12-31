@@ -93,6 +93,7 @@
         else{
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.font = [UIFont systemFontOfSize:17];
             cell.textLabel.textColor = kBlackColor;
             cell.textLabel.text = (indexPath.row == 1 ? @"全部" : [(ClassifyModel*)(_titles[indexPath.row-1]) name]);
         

@@ -238,6 +238,7 @@ NSInteger soredArray(id model1, id model2, void *context)
     if (!_classfilyType) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:classfilyCell forIndexPath:indexPath];
         cell.backgroundColor = (_selectedIndex == indexPath.row ? [UIColor whiteColor] : kBGGrayColor);
+        cell.textLabel.font = [UIFont systemFontOfSize:17];
         cell.textLabel.text = [(ClassifyModel*)(_titles[indexPath.row]) name];
         return cell;
     }else{
