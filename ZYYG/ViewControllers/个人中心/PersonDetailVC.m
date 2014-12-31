@@ -69,15 +69,15 @@
     [dataBase executeStatements:sql withResultBlock:^int(NSDictionary *dictionary) {
         NSLog(@"%@", dictionary);
         switch (areaCount) {
-            case 0:
+            case 0:{
                 provience = dictionary[[NSString stringWithFormat:@"%@_name", kProvinceAdress]];
-                break;
-            case 1:
+            }break;
+            case 1:{
                 city = dictionary[[NSString stringWithFormat:@"%@_name", kCityAdress]];
-                break;
-            case 2:
+            }break;
+            case 2:{
                 town = dictionary[[NSString stringWithFormat:@"%@_name", kTownAdress]];
-                break;
+            }break;
             default:
                 break;
         }
@@ -91,9 +91,20 @@
         city = @"";
         town = @"";
     }
+    provience = [self checkNull:provience];
+    city = [self checkNull:city];
+    town = [self checkNull:town];
     
     [dataBase close];
     
+}
+
+- (NSString*)checkNull:(id)checkString
+{
+    if ([checkString isKindOfClass:[NSNull class]] || !checkString) {
+        return @"";
+    }
+    return checkString;
 }
 
 

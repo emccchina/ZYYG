@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/PersonDetailVC.m"
-            timestampString = "440991992.799386"
+            timestampString = "441681298.968567"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "-insertAddress:"
             landmarkType = "5">
          </BreakpointContent>
