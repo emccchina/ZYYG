@@ -112,13 +112,15 @@ static NSString *listCell = @"listCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat hight=5;
     if (section==0) {
         return 0.1;
     }
-    return hight;
+    return 5;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+        return 0.1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray  *dArray=personDataArray[section];
