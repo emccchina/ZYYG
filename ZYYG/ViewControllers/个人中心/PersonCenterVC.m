@@ -151,7 +151,7 @@ static NSString *listCell = @"listCell";
         UIButton *loginButton = (UIButton*)[cell viewWithTag:10];
         NSString *imageUrl=user.headImage;
         
-        if (imageUrl) {
+        if (imageUrl && ![imageUrl isEqualToString:@""]) {
             [viewBG setImageWithURL:[NSURL URLWithString:imageUrl]];
         }else{
             [viewBG setImage:[UIImage imageNamed:@"avatar.png"]];

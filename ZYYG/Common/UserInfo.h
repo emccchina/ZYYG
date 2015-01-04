@@ -29,7 +29,7 @@
 @property (nonatomic, strong) NSString          *aeraCode;//地区编码
 @property (nonatomic, strong) NSString          *detailAddress;//详细地址
 @property (nonatomic, strong) NSString          *zipCode;//邮编
-@property (nonatomic, strong) AddressManager    *addressManager;  // 省市级联数据
+@property (nonatomic, strong) AddressManager    *addressManager;  // 地址管理
 @property (nonatomic, strong) NSMutableArray    *cartsArr;//购物车数组
 
 - (BOOL)isLogin;//是否登录

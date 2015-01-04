@@ -278,7 +278,7 @@ static NSString *cartCell = @"CartCell";
             AddressManager *manager = [userInfo addressManager];
             NSString *textTop = @"请添加地址";
             NSString *textBut = @"";
-            if (manager) {
+            if (manager && manager.defaultAddressIndex < manager.addresses.count) {
                 AdressModel *model = manager.addresses[manager.defaultAddressIndex];
                 textTop = [NSString stringWithFormat:@"%@  %@", model.name, model.mobile];
                 textBut = [NSString stringWithFormat:@"%@%@%@%@", model.provinceName, model.cityName, model.townName, model.detailAdress];

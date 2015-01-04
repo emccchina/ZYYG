@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _adressesNewArr   = [UserInfo shareUserInfo].addressManager.addresses;
+    _adressesNewArr   = [UserInfo shareUserInfo].addressManager.addresses ? :[[NSMutableArray alloc] init];
     [self showBackItem];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"确定" target:self action:@selector(doRightBut:)];
     self.adressTB.delegate = self;
@@ -133,6 +133,7 @@
         id result = [self parseResults:responseObject];
         if (result) {
             [_adressesNewArr removeObjectAtIndex:index.row];
+//            [[UserInfo shareUserInfo].addressManager.addresses removeObjectAtIndex:index.row];
             [self.adressTB deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationFade];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
