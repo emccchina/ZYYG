@@ -23,6 +23,7 @@
     goods.CreationStyle=[dict safeObjectForKey:@"CreationStyle"] ;//创作风格
     goods.GoodsNum=dict[@"GoodsNum"];//商品数量
     goods.ImageUrl=dict[@"ImageUrl"] ;//图片路径
+    goods.centificateIntro = dict[@"Certificate"];
     goods.Intro=[dict safeObjectForKey:@"Intro"] ;//商品简介
     goods.IsCollect=dict[@"IsCollect"];//是否收藏 1标示收藏 0表示没收藏
     goods.LimitedSale=[dict safeObjectForKey:@"LimitedSale"] ;//限量

@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSString      *CreateTime;//创建时间
 @property (nonatomic, strong) NSString      *UpShelfTime;//创建时间
 @property (nonatomic, strong) NSString      *Nstatus;//在售状态
-
+@property (nonatomic, strong) NSString      *centificateIntro;//证书简介
 
 @property (nonatomic, strong) NSString      *addCartCount;
 @property (nonatomic, assign) BOOL          valid;//失效与否

@@ -372,7 +372,7 @@ static NSString *spreadCell = @"SpreadCell";
             case 4:{
                 SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
                 cell.titleLab.text = @"布罗德根艺术指数证书";
-                [cell.detailWebView loadHTMLString:goods.GoodsIntro baseURL:nil];
+                [cell.detailWebView loadHTMLString:goods.centificateIntro baseURL:nil];
                 cell.spreadState = _spreadCertification;
                 cell.reloadHeight = ^(BOOL spread, CGFloat height){
                     _spreadCertification = spread;
