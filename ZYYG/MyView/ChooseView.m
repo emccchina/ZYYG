@@ -103,6 +103,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"chooseCell"];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if ([self.titles[indexPath.row] isKindOfClass:[NSNull class]]) {
+        return cell;
+    }
     if (self.type) {
         cell.textLabel.text = self.titles[indexPath.row][@"Name"];
     }else{

@@ -23,6 +23,7 @@
     BOOL                _spreadArt;//作品简介展开
     CGFloat             _heightArt;
     BOOL                _spreadCertification;//证书展开
+    CGFloat             _heightCertification;//
     GoodsModel          *goods;
     CycleScrollView     *scrollview;
 }
@@ -248,7 +249,7 @@ static NSString *spreadCell = @"SpreadCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -269,9 +270,14 @@ static NSString *spreadCell = @"SpreadCell";
             break;
             
         default:
-            return 3;
+            return 5;
             break;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -287,15 +293,10 @@ static NSString *spreadCell = @"SpreadCell";
         case 3:{
             return 50+(_spreadArt?_heightArt:0);
         }
-//        case 4:
-//        {
-//            NSString *text = detailDict[@"AuthorIntro"];
-//            if (![text isKindOfClass:[NSNull class]] && ![text isEqualToString:@""] && _spreadCertification) {
-//                CGSize size = [Utities sizeWithUIFont:[UIFont systemFontOfSize:17] string:text rect:CGSizeMake(CGRectGetWidth(tableView.frame) - 20, CGFLOAT_MAX)];
-//                return size.height +70;
-//            }
-//            return 50;
-//        }
+        case 4:
+        {
+            return 50+(_spreadCertification?_heightCertification:0);
+        }
         default:
             return 44;
     }
@@ -368,18 +369,18 @@ static NSString *spreadCell = @"SpreadCell";
             };
             return cell;
         }
-        //        case 4:{
-        //            SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
-        //            cell.titleLab.text = @"布罗德根艺术指数证书";
-        //            cell.detailLab.text = @"null";
-        //            cell.spreadState = _spreadCertification;
-        //            cell.reloadHeight = ^(BOOL spread){
-        ////                NSLog(@"spread is %d", spread);
-        //                _spreadCertification = spread;
-        //                [self reloadTableViewSection:indexPath.section spread:spread];
-        //            };
-        //            return cell;
-        //        }
+            case 4:{
+                SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
+                cell.titleLab.text = @"布罗德根艺术指数证书";
+                [cell.detailWebView loadHTMLString:goods.GoodsIntro baseURL:nil];
+                cell.spreadState = _spreadCertification;
+                cell.reloadHeight = ^(BOOL spread, CGFloat height){
+                    _spreadCertification = spread;
+                    _heightCertification = height;
+                    [self reloadTableViewSection:indexPath.section spread:spread];
+                };
+                return cell;
+            }
         default:
         return nil;
     }

@@ -249,6 +249,7 @@ static NSString *goodsCell = @"GoodsCell";
             [self presentChooseView:searchCondition];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
         [self dismissIndicatorView];
         [self showAlertView:kNetworkNotConnect];
     }];

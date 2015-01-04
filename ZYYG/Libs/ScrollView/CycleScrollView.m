@@ -33,9 +33,9 @@
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     
-    _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds)-30, CGRectGetWidth(self.bounds), 30)];
+    _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.bounds)-20, CGRectGetWidth(self.bounds), 20)];
     [self addSubview:_pageControl];
-    _pageControl.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    _pageControl.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     _pageControl.userInteractionEnabled = NO;
 }
 
