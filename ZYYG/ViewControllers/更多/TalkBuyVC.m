@@ -111,6 +111,8 @@
             for (NSDictionary *dict in rarray) {
                 if ([dict[@"Code"] isEqualToString:@"author"]) {
                    NSMutableArray *darray =dict[@"TypeInfo"];
+                    NSDictionary *dict = @{@"Code":@"", @"Name":@"全部"};
+                    [allArtist addObject:dict];
                     [allArtist addObjectsFromArray:darray];
                 }
             }

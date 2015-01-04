@@ -75,8 +75,12 @@
     if (self.categaryCode) {
         [dict setObject:self.categaryCode forKey:@"Categary"];
     }
-    if (self.price) {
-        [dict setObject:self.price forKey:@"Price"];
+    if (self.classifyPrice && ![self.classifyPrice isEqualToString:@""]) {
+        [dict setObject:self.classifyPrice forKey:@"Price"];
+    }else {
+        if (self.price) {
+            [dict setObject:self.price forKey:@"Price"];
+        }
     }
     if (self.size) {
         [dict setObject:self.size forKey:@"Size"];

@@ -25,7 +25,8 @@
 @interface SelectInfo : NSObject
 
 @property (nonatomic, strong) NSString *categaryCode;//
-@property (nonatomic, strong) NSString *price;//价格
+@property (nonatomic, strong) NSString *price;//价格，此价格为筛选价格
+@property (nonatomic, strong) NSString *classifyPrice;//分类中的价格 ，再次筛选的时候 有此选择条件
 @property (nonatomic, strong) NSString *size;//
 @property (nonatomic, strong) NSString *squareFoot;//平尺
 @property (nonatomic, strong) NSString *sytle;//风格

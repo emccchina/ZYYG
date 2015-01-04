@@ -181,9 +181,13 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     if (section ==0) {
         return 1;
     }
-    return 20;
+    return 5;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return .1;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

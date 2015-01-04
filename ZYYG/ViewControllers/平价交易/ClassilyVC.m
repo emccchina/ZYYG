@@ -172,7 +172,7 @@ NSInteger soredArray(id model1, id model2, void *context)
     selectInfo.searchType = 0;
     if (_classfilyType) {
         NSArray *array = _priceArray[searchRow];
-        selectInfo.price = array[1];
+        selectInfo.classifyPrice = array[1];
     }else{
         ClassifyModel *mode = _details[_selectedIndex][searchRow];
         selectInfo.categaryCode = mode.code;
