@@ -276,6 +276,10 @@ static NSString *cartCell = @"CartCell";
         [self showAlertView:@"请选择"];
         return;
     }
+    if (i > 10) {
+        [self showAlertView:@"不能超过10件艺术品,请重新选择"];
+        return;
+    }
     if (_type) {
         [self requestDeleteCart];
         return;

@@ -133,7 +133,6 @@
         id result = [self parseResults:responseObject];
         if (result) {
             [_adressesNewArr removeObjectAtIndex:index.row];
-//            [[UserInfo shareUserInfo].addressManager.addresses removeObjectAtIndex:index.row];
             [self.adressTB deleteRowsAtIndexPaths:[NSArray arrayWithObject:index] withRowAnimation:UITableViewRowAnimationFade];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
