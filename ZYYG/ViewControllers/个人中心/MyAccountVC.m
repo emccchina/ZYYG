@@ -115,9 +115,9 @@
         id result = [self parseResults:responseObject];
         if (result) {
             NSString *MaybeMoney=result[@"MaybeMoney"];
-            self.maybeMoney.text=[NSString stringWithFormat:@"￥%@",MaybeMoney];
+            self.maybeMoney.text=[NSString stringWithFormat:@"￥%@元",MaybeMoney];
             NSString *Frozen=result[@"Frozen"];
-            self.frozen.text=[NSString stringWithFormat:@"￥%@",Frozen];
+            self.frozen.text=[NSString stringWithFormat:@"￥%@元",Frozen];
             NSArray *accounts=result[@"data"];
             if (!accounts ||[accounts isKindOfClass:[NSNull class]]||accounts.count<1) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新账单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
