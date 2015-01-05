@@ -22,6 +22,4 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)collect:(UIButton *)sender {
-}
 @end

@@ -186,12 +186,12 @@
 {
     GoodsModel *goods=goodsArray[indexPath.row];
    RecommendedListCell *cell = (RecommendedListCell*)[tableView dequeueReusableCellWithIdentifier:@"RecommendedListCell" forIndexPath:indexPath];
-    cell.collectButton.hidden=YES;
-    cell.collectionLabel.hidden=YES;
+    cell.Lab4.hidden=YES;
     [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL]];
     cell.goodsName.text=goods.GoodsName;
-    cell.fristLabel.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
-    cell.secondLabel.text=[NSString stringWithFormat:@"商品编码:%@",goods.GoodsCode];
+    cell.Lab1.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
+    cell.Lab2.text=[NSString stringWithFormat:@"商品编码:%@",goods.GoodsCode];
+    cell.Lab3.text=@"模式:私人洽购";
 //    [cell.collectButton setTitle:@"收藏" forState:UIControlStateNormal];
 //    [cell.collectButton setTitle:@"收藏" forState:UIControlStateHighlighted];
     return cell;

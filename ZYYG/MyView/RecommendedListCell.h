@@ -12,10 +12,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *goodsImage;
 @property (weak, nonatomic) IBOutlet UILabel *goodsName;
-@property (weak, nonatomic) IBOutlet UILabel *fristLabel;
-@property (weak, nonatomic) IBOutlet UILabel *secondLabel;
-@property (weak, nonatomic) IBOutlet UILabel *collectionLabel;
-@property (weak, nonatomic) IBOutlet UIButton *collectButton;
-- (IBAction)collect:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UILabel *Lab1;
+@property (weak, nonatomic) IBOutlet UILabel *Lab2;
+@property (weak, nonatomic) IBOutlet UILabel *Lab3;
+@property (weak, nonatomic) IBOutlet UILabel *Lab4;
 
 @end

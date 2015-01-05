@@ -148,13 +148,12 @@
 {
     GoodsModel *goods=collections[indexPath.row];
     RecommendedListCell *cell = (RecommendedListCell*)[tableView dequeueReusableCellWithIdentifier:@"RecommendedListCell" forIndexPath:indexPath];
-    cell.collectButton.hidden=YES;
-    cell.collectionLabel.hidden=NO;
    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL]];
     cell.goodsName.text=goods.GoodsName;
-    cell.fristLabel.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
-    cell.secondLabel.text=[NSString stringWithFormat:@"停售日期:%@",goods.UpShelfTime];
-    cell.collectionLabel.text=[NSString stringWithFormat:@"状态:%@",goods.Nstatus];
+    cell.Lab1.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
+    cell.Lab2.text=[NSString stringWithFormat:@"停售日期:%@",goods.UpShelfTime];
+    cell.Lab3.text=[NSString stringWithFormat:@"交易模式:%@",goods.SaleChannel];
+    cell.Lab4.text=[NSString stringWithFormat:@"状态:%@",goods.Nstatus];
     return cell;
    
     
