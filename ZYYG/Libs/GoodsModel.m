@@ -28,6 +28,7 @@
     goods.IsCollect=dict[@"IsCollect"];//是否收藏 1标示收藏 0表示没收藏
     goods.LimitedSale=[dict safeObjectForKey:@"LimitedSale"] ;//限量
     goods.SpecDesc=[dict safeObjectForKey:@"SpecDesc"] ;//尺寸
+    goods.typeForGoods = [dict[@"SaleChannel"] integerValue]/10;
     return goods;
 }
 

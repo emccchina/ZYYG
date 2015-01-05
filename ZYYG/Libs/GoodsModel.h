@@ -35,7 +35,7 @@
 
 @property (nonatomic, strong) NSString      *addCartCount;
 @property (nonatomic, assign) BOOL          valid;//失效与否
-
+@property (nonatomic, assign) NSInteger     typeForGoods;//(0 平价交易 1 线上竞价 2 私人定制 3 私人洽购 4 线下拍卖)
 +(id)goodsModelWith:(NSDictionary *)dict;//详情页面
 
 - (void)goodsModelFromCart:(NSDictionary*)dict;//购物车解析
