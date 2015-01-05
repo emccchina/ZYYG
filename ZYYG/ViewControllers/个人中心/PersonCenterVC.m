@@ -49,6 +49,7 @@ static NSString *listCell = @"listCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self requestForCount];
     [self.PersonTableView reloadData];
 }
 //跳转
@@ -75,6 +76,32 @@ static NSString *listCell = @"listCell";
     [self presentCameraVC];
   
 }
+
+- (void)requestForCount
+{
+    if (![[UserInfo shareUserInfo] isLogin]) {
+        return;
+    }
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@UserInfoCount.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager POST:url parameters:@{@"key":[UserInfo shareUserInfo].userKey} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [[UserInfo shareUserInfo] parseCount:result];
+            [self.PersonTableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
+}
+
 //更换头像
 - (void)selectImageFinished:(NSData *)image
 {
@@ -186,20 +213,30 @@ static NSString *listCell = @"listCell";
         
         UILabel *title = (UILabel*)[cell viewWithTag:2];
         title.text = model.title;
-        if(model.count!=nil){
-//            UILabel *count = (UILabel*)[cell viewWithTag:3];
-//            count.layer.cornerRadius=8;
-//            count.textColor=[UIColor whiteColor];
-//            count.layer.backgroundColor=kRedColor.CGColor;
-            //            count.text = model.count;
-        }
         
+        UILabel *count = (UILabel*)[cell viewWithTag:3];
+        count.layer.cornerRadius=10;
+        count.textColor=[UIColor whiteColor];
+        count.layer.backgroundColor=kRedColor.CGColor;
+        if ([model.segueString isEqualToString:@"ShoppingCart"]) {
+            [self setCount:[UserInfo shareUserInfo].cartCount label:count];
+        }else if ([model.segueString isEqualToString:@"Myletter"]) {
+            [self setCount:[UserInfo shareUserInfo].letterCount label:count];
+        }else{
+            [self setCount:0 label:count];
+        }
         UIImageView *footerImage = (UIImageView *)[cell viewWithTag:4];
         [footerImage setImage:[UIImage imageNamed:model.footerImage]];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+}
+
+- (void)setCount:(NSInteger)count label:(UILabel*)label
+{
+    label.hidden = !count;
+    label.text = [NSString stringWithFormat:@"%ld", (long)count];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -105,4 +105,10 @@
     self.cartsArr = array;
 }
 
+- (void)parseCount:(NSDictionary *)dict
+{
+    self.cartCount = [dict[@"CartCount"] integerValue];
+    self.letterCount = [dict[@"MessageCount"] integerValue];
+}
+
 @end
