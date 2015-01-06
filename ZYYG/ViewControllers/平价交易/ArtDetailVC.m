@@ -270,7 +270,7 @@ static NSString *spreadCell = @"SpreadCell";
             break;
             
         default:
-            return 5;
+            return 10;
             break;
     }
 }

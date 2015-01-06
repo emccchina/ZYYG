@@ -142,7 +142,7 @@ static NSString *listCell = @"listCell";
     if (section==0) {
         return 0.1;
     }
-    return 5;
+    return 10;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
