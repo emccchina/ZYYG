@@ -3,10 +3,7 @@
 <plist version="1.0">
 <array>
 	<array>
-		<dict>
-			<key>segueString</key>
-			<string>PersonDetail</string>
-		</dict>
+		<dict/>
 	</array>
 	<array>
 		<dict>

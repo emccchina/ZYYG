@@ -215,7 +215,7 @@ static NSString *listCell = @"listCell";
         title.text = model.title;
         
         UILabel *count = (UILabel*)[cell viewWithTag:3];
-        count.layer.cornerRadius=10;
+        count.layer.cornerRadius=8;
         count.textColor=[UIColor whiteColor];
         count.layer.backgroundColor=kRedColor.CGColor;
         if ([model.segueString isEqualToString:@"ShoppingCart"]) {
@@ -247,7 +247,11 @@ static NSString *listCell = @"listCell";
         [Utities presentLoginVC:self];
         return;
     }
+    if(indexPath.section == 0){
+        return;
+    }
     PersonCenterModel *model=personDataArray[indexPath.section][indexPath.row];
+    
     if ([model.segueString isEqualToString:@"ShoppingCart"]) {
         [self.tabBarController setSelectedIndex:4];
         return;
