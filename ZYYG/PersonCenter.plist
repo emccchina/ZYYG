@@ -74,7 +74,7 @@
 	<array>
 		<dict>
 			<key>headerImage</key>
-			<string>personRed</string>
+			<string>personInfo</string>
 			<key>title</key>
 			<string>个人资料</string>
 			<key>count</key>
