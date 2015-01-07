@@ -319,7 +319,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //支付
 -(void)payOrder:(OrderModel *)order
 {
-    [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:@"" money:@"1" type:1] viewController:self delegate:self mode:kPayMode];
+    [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:@"" money:@"1" type:1 shopNum:@"" key:@""] viewController:self delegate:self mode:kPayMode];
 
 }
 

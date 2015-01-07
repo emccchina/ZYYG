@@ -12,7 +12,7 @@
 
 static int count = 0;
 
-+ (NSString *)createrWithOrderNo:(NSString*)orderNo productName:(NSString*)name money:(NSString*)money type:(NSInteger)type
++ (NSString *)createrWithOrderNo:(NSString*)orderNo productName:(NSString*)name money:(NSString*)money type:(NSInteger)type shopNum:(NSString *)shopNum key:(NSString *)shopKey
 {
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
@@ -24,14 +24,14 @@ static int count = 0;
                          receiveURL, @"receiveUrl",
                          @"v1.0", @"version",
                          @"1", @"signType",
-                         @"100020091218001", @"merchantId",
+                         shopNum, @"merchantId",
                          orderNo, @"orderNo",
                          money, @"orderAmount",
                          @"0", @"orderCurrency",
                          timeStr, @"orderDatetime",
                          name, @"productName",
                          @"27", @"payType",
-                         @"1234567890", @"key",
+                         shopKey, @"key",
                          ];
     
     NSString *paaStr = [self formatPaa:paaDic];
