@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString          *OrderStatus;//订单状态
 @property (nonatomic, assign) NSInteger          state;//状态编号
 @property (nonatomic, strong) NSMutableArray    *Goods;//订单商品(多个)
-
+@property (nonatomic, strong) NSString          *MerchantID;//商户id
+@property (nonatomic, strong) NSString          *PayKey;//商户key
 +(id)orderModelWithDict:(NSDictionary *)dict;
 @end

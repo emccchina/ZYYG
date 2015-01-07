@@ -21,6 +21,8 @@
     order.GoodsTotal=[dict safeObjectForKey:@"GoodsTotal"];
     order.OrderMoney=[dict safeObjectForKey:@"OrderMoney"];
     order.OrderStatus=[dict safeObjectForKey:@"OrderStatus"];
+    order.MerchantID = dict[@"MerchantID"];
+    order.PayKey = dict[@"PayKey"];
     order.state=[dict[@"OrderStatusCode"] integerValue];
     NSMutableArray *goods=[NSMutableArray arrayWithArray:dict[@"Goods"]];
     for (int i=0; i<goods.count; i++) {
