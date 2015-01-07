@@ -26,6 +26,10 @@
 
 - (void)showIndicatorView:(NSString*)text
 {
+    if (HUD.visible) {
+        return;
+    }
+    
     if (!HUD) {
         HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleExtraLight];
     }
@@ -35,6 +39,9 @@
 //    }else{
         [HUD showInView:self.view];
 //    }
+    
+//    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+//    [HUD showInView:window];
 }
 
 - (void)dismissIndicatorView
