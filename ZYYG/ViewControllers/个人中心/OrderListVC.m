@@ -322,6 +322,14 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:@"" money:@"1" type:1] viewController:self delegate:self mode:kPayMode];
 
 }
+
+#pragma mark - payDelegate
+- (void)APayResult:(NSString*)result
+{
+    NSLog(@"%@",result);
+    [self showAlertView:[Utities doWithPayList:result]];
+}
+
 /*
  #pragma mark - Navigation
  

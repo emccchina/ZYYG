@@ -18,7 +18,7 @@
 @end
 
 @implementation SettingsVC
-#define kAppID  @"414245413"//@"952611536"
+#define kAppID  @"952611536"
 #define APP_URL @"http://itunes.apple.com/lookup?id="kAppID
 
 - (void)viewDidLoad {
@@ -86,7 +86,6 @@
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            NSLog(@"reuslt is %@", result);
             if ([self compareVersions:result]) {
                 [self showAlertView:@"已经是最新版本"];
             }else{

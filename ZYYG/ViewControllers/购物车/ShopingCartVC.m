@@ -216,6 +216,39 @@ static NSString *cartCell = @"CartCell";
     [self.cartTB reloadData];
 }
 
+- (void)requestForCheckCart
+{
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@CheckCart.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSMutableString* products = [NSMutableString string];
+    NSArray *keys = [_selectDict allKeys];
+    for (NSNumber *number in keys) {
+        GoodsModel *model = _shopCart[[number integerValue]];
+        if ([number isEqual:[keys lastObject]]) {
+            [products appendString:[NSString stringWithFormat:@"%@", model.GoodsCode]];
+        }else{
+            [products appendString:[NSString stringWithFormat:@"%@,", model.GoodsCode]];
+        }
+    }
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",products,@"SelectGoods", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self requestFinished];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [self performSegueWithIdentifier:@"ToPaySegue" sender:self];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
+}
+
 - (void)changeSettleAccount:(BOOL)selected price:(CGFloat)price
 {
     if (!selected) {
@@ -284,7 +317,8 @@ static NSString *cartCell = @"CartCell";
         [self requestDeleteCart];
         return;
     }
-    [self performSegueWithIdentifier:@"ToPaySegue" sender:self];
+    [self requestForCheckCart];
+//    [self performSegueWithIdentifier:@"ToPaySegue" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -164,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x8d2d;&#x7269;&#x8f66;/ShopingCartVC.m"
-            timestampString = "441703688.156536"
+            timestampString = "442300557.705257"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-toSettleAccount:"
             landmarkType = "5">
          </BreakpointContent>
@@ -180,11 +180,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x8d2d;&#x7269;&#x8f66;/ShopingCartVC.m"
-            timestampString = "442050719.334299"
+            timestampString = "442300557.705257"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
             landmarkName = "-selectAllList"
             landmarkType = "5">
          </BreakpointContent>
