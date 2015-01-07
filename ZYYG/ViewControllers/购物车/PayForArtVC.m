@@ -251,7 +251,10 @@ static NSString *cartCell = @"CartCell";
             break;
     }
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.1;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     switch (section) {
@@ -295,10 +298,12 @@ static NSString *cartCell = @"CartCell";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"";
             NSString *detail = @"";
-            title = @"在线支付";
-            detail = @"到付";
+            title = @"支付方式";
+            detail = @"在线支付";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
             
@@ -310,6 +315,8 @@ static NSString *cartCell = @"CartCell";
             detail = @"快递";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
             
@@ -372,9 +379,10 @@ static NSString *cartCell = @"CartCell";
         }
             break;
         case 1://选择页面
+            break;
         case 2:{
-            _toPresentType = indexPath.section;
-            [self presentChooseVC];
+//            _toPresentType = indexPath.section;
+//            [self presentChooseVC];
         }break;
         case 3:{//发票信息
             [self presentInvoiceVC];
