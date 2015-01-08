@@ -539,6 +539,9 @@
 		F7EC68DD1A2C0851000B289D /* TSPopoverPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68D51A2C0851000B289D /* TSPopoverPopoverView.m */; };
 		F7EC68DE1A2C0851000B289D /* TSPopoverTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68D81A2C0851000B289D /* TSPopoverTouchView.m */; };
 		F7EC68DF1A2C0851000B289D /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EC68DA1A2C0851000B289D /* UIBarButtonItem+WEPopover.m */; };
+		F7EF4BB41A5E4AFF0073BD1F /* CompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EF4BB21A5E4AFF0073BD1F /* CompleteCell.m */; };
+		F7EF4BB51A5E4AFF0073BD1F /* CompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7EF4BB31A5E4AFF0073BD1F /* CompleteCell.xib */; };
+		F7EF4BB81A5E56880073BD1F /* AuctionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EF4BB71A5E56880073BD1F /* AuctionModel.m */; };
 		F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */; };
 		F7F304991A47F5D200A6AD7A /* LoginBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F304961A47F5D200A6AD7A /* LoginBG.png */; };
 		F7F3049A1A47F5D200A6AD7A /* LoginBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F304971A47F5D200A6AD7A /* LoginBG@2x.png */; };
@@ -1244,6 +1247,11 @@
 		F7EC68D81A2C0851000B289D /* TSPopoverTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSPopoverTouchView.m; sourceTree = "<group>"; };
 		F7EC68D91A2C0851000B289D /* UIBarButtonItem+WEPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WEPopover.h"; sourceTree = "<group>"; };
 		F7EC68DA1A2C0851000B289D /* UIBarButtonItem+WEPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WEPopover.m"; sourceTree = "<group>"; };
+		F7EF4BB11A5E4AFF0073BD1F /* CompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteCell.h; sourceTree = "<group>"; };
+		F7EF4BB21A5E4AFF0073BD1F /* CompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteCell.m; sourceTree = "<group>"; };
+		F7EF4BB31A5E4AFF0073BD1F /* CompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteCell.xib; sourceTree = "<group>"; };
+		F7EF4BB61A5E56880073BD1F /* AuctionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuctionModel.h; sourceTree = "<group>"; };
+		F7EF4BB71A5E56880073BD1F /* AuctionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuctionModel.m; sourceTree = "<group>"; };
 		F7F304931A47F21000A6AD7A /* ForgetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswordVC.h; path = ZYYG/ViewControllers/ForgetPasswordVC.h; sourceTree = SOURCE_ROOT; };
 		F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswordVC.m; path = ZYYG/ViewControllers/ForgetPasswordVC.m; sourceTree = SOURCE_ROOT; };
 		F7F304961A47F5D200A6AD7A /* LoginBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginBG.png; sourceTree = "<group>"; };
@@ -1586,6 +1594,9 @@
 				F966EDD71A35AA4E00D2994A /* MyAccountCell.h */,
 				F966EDD81A35AA4E00D2994A /* MyAccountCell.m */,
 				F966EDD51A35A46800D2994A /* MyAccountCell.xib */,
+				F7EF4BB11A5E4AFF0073BD1F /* CompleteCell.h */,
+				F7EF4BB21A5E4AFF0073BD1F /* CompleteCell.m */,
+				F7EF4BB31A5E4AFF0073BD1F /* CompleteCell.xib */,
 			);
 			name = MyView;
 			path = ZYYG/MyView;
@@ -2480,6 +2491,8 @@
 				F996B8461A4AB26F00D38473 /* SelectInfo.m */,
 				F996B8471A4AB26F00D38473 /* SettingModel.h */,
 				F996B8481A4AB26F00D38473 /* SettingModel.m */,
+				F7EF4BB61A5E56880073BD1F /* AuctionModel.h */,
+				F7EF4BB71A5E56880073BD1F /* AuctionModel.m */,
 			);
 			name = MyModel;
 			path = ZYYG/Libs;
@@ -2808,6 +2821,7 @@
 				F7D249221A4191FC001AAAC3 /* keychar01_57.png in Resources */,
 				F7D2485B1A4191FC001AAAC3 /* ipad_key_[]{[S]_38.png in Resources */,
 				94D89EDC1A220D900074B874 /* Main.storyboard in Resources */,
+				F7EF4BB51A5E4AFF0073BD1F /* CompleteCell.xib in Resources */,
 				F7D249021A4191FC001AAAC3 /* ipad_key_QWE[H]_66.png in Resources */,
 				F7D2492A1A4191FC001AAAC3 /* iphonekeyboardH_05.png in Resources */,
 				F7D249281A4191FC001AAAC3 /* keychar01_75.png in Resources */,
@@ -3083,6 +3097,7 @@
 				F996B8521A4AB26F00D38473 /* PersonCenterModel.m in Sources */,
 				94D89EC31A21FDA70074B874 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				F93099481A2DB4170054FFC1 /* MarginMoneyCell.m in Sources */,
+				F7EF4BB41A5E4AFF0073BD1F /* CompleteCell.m in Sources */,
 				F996B8541A4AB26F00D38473 /* SettingModel.m in Sources */,
 				F9BC26A51A2EE913006894C6 /* OrderListCellGoods.m in Sources */,
 				F7F71D551A28383200AEE6BA /* PayForArtVC.m in Sources */,
@@ -3098,6 +3113,7 @@
 				F7EC68CA1A2BF5DA000B289D /* UIScrollView+JHRefresh.m in Sources */,
 				940178681A21CCE400697D14 /* FairPriceVC.m in Sources */,
 				9401789F1A21CE0000697D14 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				F7EF4BB81A5E56880073BD1F /* AuctionModel.m in Sources */,
 				940178A11A21CE0000697D14 /* UIAlertView+AFNetworking.m in Sources */,
 				F9C302951A42BC0100B1B53C /* UpdatePassVC.m in Sources */,
 				F7C8D5171A3809C6009F36B3 /* FMResultSet.m in Sources */,
