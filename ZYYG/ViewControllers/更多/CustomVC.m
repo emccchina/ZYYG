@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     images = [[NSMutableArray alloc] init];
     manages  = [[NSMutableArray alloc] init];
-//    [self showBackItem];
+    [self showBackItem];
     [self requestCustom];
     
     [self.customTableVIew registerNib:[UINib nibWithNibName:@"SpecialDiscuss" bundle:nil] forCellReuseIdentifier:@"SpecialDiscuss"];

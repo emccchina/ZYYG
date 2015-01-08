@@ -34,7 +34,7 @@
     goodsArray=[NSMutableArray array];
     allArtist=[NSMutableArray array];
     self.title = @"私人洽购";
-//    [self showBackItem];
+    [self showBackItem];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doSelectButton:)];
     [self requestTalkBuy:pageNum artistName:artistName];
     [self addFootRefresh];
