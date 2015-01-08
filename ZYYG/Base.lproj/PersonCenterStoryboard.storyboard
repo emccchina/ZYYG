@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -129,7 +129,6 @@
                                                 <constraint firstItem="aHZ-iw-Fyc" firstAttribute="top" secondItem="xwA-f8-BCr" secondAttribute="topMargin" constant="-8" id="4Mr-Om-xDU"/>
                                                 <constraint firstItem="z9A-YD-sqK" firstAttribute="leading" secondItem="fgu-Nn-EWT" secondAttribute="trailing" constant="17" id="5vE-Q2-iq7"/>
                                                 <constraint firstItem="Hoh-Mn-fvG" firstAttribute="top" secondItem="fAX-n7-785" secondAttribute="bottom" constant="9" id="7lh-cJ-E6c"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="fgu-Nn-EWT" secondAttribute="bottom" constant="8" id="9C2-bT-4HS"/>
                                                 <constraint firstItem="aHZ-iw-Fyc" firstAttribute="leading" secondItem="xwA-f8-BCr" secondAttribute="leadingMargin" constant="-8" id="A9z-o7-kWa"/>
                                                 <constraint firstItem="vGh-Nk-1vc" firstAttribute="top" secondItem="xwA-f8-BCr" secondAttribute="topMargin" constant="22" id="AKd-Ak-W8H"/>
                                                 <constraint firstItem="Il7-Qw-Z4M" firstAttribute="top" secondItem="z9A-YD-sqK" secondAttribute="bottom" constant="15" id="B9E-58-u8p"/>
@@ -148,7 +147,6 @@
                                                 <constraint firstItem="Hoh-Mn-fvG" firstAttribute="leading" secondItem="VaX-13-wiC" secondAttribute="trailing" constant="1" id="jSE-hT-scC"/>
                                                 <constraint firstItem="vGh-Nk-1vc" firstAttribute="leading" secondItem="fgu-Nn-EWT" secondAttribute="trailing" constant="17" id="kgp-1w-fkT"/>
                                                 <constraint firstItem="z9A-YD-sqK" firstAttribute="leading" secondItem="AVX-Wv-vKX" secondAttribute="trailing" constant="20" id="nQo-ML-AgI"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="AVX-Wv-vKX" secondAttribute="bottom" constant="11" id="sDX-Yx-vRf"/>
                                                 <constraint firstItem="z9A-YD-sqK" firstAttribute="top" secondItem="xwA-f8-BCr" secondAttribute="topMargin" constant="22" id="wIK-zP-VtN"/>
                                                 <constraint firstItem="VFh-8V-BG4" firstAttribute="top" secondItem="z9A-YD-sqK" secondAttribute="bottom" constant="4" id="xLe-vH-Ep0"/>
                                                 <constraint firstItem="VaX-13-wiC" firstAttribute="top" secondItem="VFh-8V-BG4" secondAttribute="bottom" constant="9" id="xjB-4O-meu"/>

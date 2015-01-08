@@ -542,6 +542,8 @@
 		F7EF4BB41A5E4AFF0073BD1F /* CompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EF4BB21A5E4AFF0073BD1F /* CompleteCell.m */; };
 		F7EF4BB51A5E4AFF0073BD1F /* CompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7EF4BB31A5E4AFF0073BD1F /* CompleteCell.xib */; };
 		F7EF4BB81A5E56880073BD1F /* AuctionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EF4BB71A5E56880073BD1F /* AuctionModel.m */; };
+		F7EF4BC81A5E6C9B0073BD1F /* MarginMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7EF4BC61A5E6C9B0073BD1F /* MarginMoneyCell.m */; };
+		F7EF4BC91A5E6C9B0073BD1F /* MarginMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7EF4BC71A5E6C9B0073BD1F /* MarginMoneyCell.xib */; };
 		F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */; };
 		F7F304991A47F5D200A6AD7A /* LoginBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F304961A47F5D200A6AD7A /* LoginBG.png */; };
 		F7F3049A1A47F5D200A6AD7A /* LoginBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7F304971A47F5D200A6AD7A /* LoginBG@2x.png */; };
@@ -558,8 +560,6 @@
 		F7F928E11A354917000BAE49 /* NSDictionary+safeObjectForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F928E01A354917000BAE49 /* NSDictionary+safeObjectForKey.m */; };
 		F7FEC1271A49345F00CFE9D4 /* InvoiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */; };
 		F7FEC12A1A4955CB00CFE9D4 /* MyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F7FEC1291A4955CB00CFE9D4 /* MyTextField.m */; };
-		F93099481A2DB4170054FFC1 /* MarginMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F93099461A2DB4170054FFC1 /* MarginMoneyCell.m */; };
-		F93099491A2DB4170054FFC1 /* MarginMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */; };
 		F930994D1A2DB42B0054FFC1 /* CompeteRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */; };
 		F930994E1A2DB42B0054FFC1 /* CompeteRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F930994C1A2DB42B0054FFC1 /* CompeteRecordCell.xib */; };
 		F93099521A2DB4B40054FFC1 /* MyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F93099501A2DB4B40054FFC1 /* MyCollectionCell.m */; };
@@ -1252,6 +1252,9 @@
 		F7EF4BB31A5E4AFF0073BD1F /* CompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteCell.xib; sourceTree = "<group>"; };
 		F7EF4BB61A5E56880073BD1F /* AuctionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuctionModel.h; sourceTree = "<group>"; };
 		F7EF4BB71A5E56880073BD1F /* AuctionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuctionModel.m; sourceTree = "<group>"; };
+		F7EF4BC51A5E6C9B0073BD1F /* MarginMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginMoneyCell.h; sourceTree = "<group>"; };
+		F7EF4BC61A5E6C9B0073BD1F /* MarginMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginMoneyCell.m; sourceTree = "<group>"; };
+		F7EF4BC71A5E6C9B0073BD1F /* MarginMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarginMoneyCell.xib; sourceTree = "<group>"; };
 		F7F304931A47F21000A6AD7A /* ForgetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswordVC.h; path = ZYYG/ViewControllers/ForgetPasswordVC.h; sourceTree = SOURCE_ROOT; };
 		F7F304941A47F21000A6AD7A /* ForgetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswordVC.m; path = ZYYG/ViewControllers/ForgetPasswordVC.m; sourceTree = SOURCE_ROOT; };
 		F7F304961A47F5D200A6AD7A /* LoginBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginBG.png; sourceTree = "<group>"; };
@@ -1278,9 +1281,6 @@
 		F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceVC.m; sourceTree = "<group>"; };
 		F7FEC1281A4955CB00CFE9D4 /* MyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextField.h; sourceTree = "<group>"; };
 		F7FEC1291A4955CB00CFE9D4 /* MyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextField.m; sourceTree = "<group>"; };
-		F93099451A2DB4170054FFC1 /* MarginMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginMoneyCell.h; sourceTree = "<group>"; };
-		F93099461A2DB4170054FFC1 /* MarginMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginMoneyCell.m; sourceTree = "<group>"; };
-		F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarginMoneyCell.xib; sourceTree = "<group>"; };
 		F930994A1A2DB42B0054FFC1 /* CompeteRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompeteRecordCell.h; sourceTree = "<group>"; };
 		F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompeteRecordCell.m; sourceTree = "<group>"; };
 		F930994C1A2DB42B0054FFC1 /* CompeteRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompeteRecordCell.xib; sourceTree = "<group>"; };
@@ -1574,15 +1574,15 @@
 				F930994F1A2DB4B40054FFC1 /* MyCollectionCell.h */,
 				F93099501A2DB4B40054FFC1 /* MyCollectionCell.m */,
 				F93099511A2DB4B40054FFC1 /* MyCollectionCell.xib */,
+				F7EF4BC51A5E6C9B0073BD1F /* MarginMoneyCell.h */,
+				F7EF4BC61A5E6C9B0073BD1F /* MarginMoneyCell.m */,
+				F7EF4BC71A5E6C9B0073BD1F /* MarginMoneyCell.xib */,
 				F9AB0D911A2FEF4100EFEDC5 /* CompeteRecordCellTop.h */,
 				F9AB0D921A2FEF4100EFEDC5 /* CompeteRecordCellTop.m */,
 				F9AB0D941A2FEF5B00EFEDC5 /* CompeteRecordCellTop.xib */,
 				F930994A1A2DB42B0054FFC1 /* CompeteRecordCell.h */,
 				F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */,
 				F930994C1A2DB42B0054FFC1 /* CompeteRecordCell.xib */,
-				F93099451A2DB4170054FFC1 /* MarginMoneyCell.h */,
-				F93099461A2DB4170054FFC1 /* MarginMoneyCell.m */,
-				F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */,
 				F9BC26A01A2EE8ED006894C6 /* OrderListCellTop.h */,
 				F9BC26A11A2EE8ED006894C6 /* OrderListCellTop.m */,
 				F9BC26A31A2EE913006894C6 /* OrderListCellGoods.h */,
@@ -2705,7 +2705,6 @@
 				F7D249C61A4191FC001AAAC3 /* iphoneHQ_83.png in Resources */,
 				F7D249D51A4191FC001AAAC3 /* keychar31_23.png in Resources */,
 				F7D248E61A4191FC001AAAC3 /* ipad_key_QWE[S]__61.png in Resources */,
-				F93099491A2DB4170054FFC1 /* MarginMoneyCell.xib in Resources */,
 				F7D2490F1A4191FC001AAAC3 /* keychar01_11.png in Resources */,
 				F7D2495A1A4191FC001AAAC3 /* keychar11_39.png in Resources */,
 				F7F3049B1A47F5D200A6AD7A /* LoginBG@3x.png in Resources */,
@@ -2755,6 +2754,7 @@
 				F7D2498E1A4191FC001AAAC3 /* keychar21_17.png in Resources */,
 				F7D248B91A4191FC001AAAC3 /* ipad_key_123[]{[H]_42.png in Resources */,
 				F7D248F21A4191FC001AAAC3 /* ipad_key_QWE[H]_36.png in Resources */,
+				F7EF4BC91A5E6C9B0073BD1F /* MarginMoneyCell.xib in Resources */,
 				F7D249A11A4191FC001AAAC3 /* keychar21_67.png in Resources */,
 				F7D248F51A4191FC001AAAC3 /* ipad_key_QWE[H]_42.png in Resources */,
 				F7D2489C1A4191FC001AAAC3 /* ipad_key_123[]{[S]_53.png in Resources */,
@@ -3096,7 +3096,6 @@
 				F996B84F1A4AB26F00D38473 /* InvoiceModel.m in Sources */,
 				F996B8521A4AB26F00D38473 /* PersonCenterModel.m in Sources */,
 				94D89EC31A21FDA70074B874 /* JGProgressHUDRingIndicatorView.m in Sources */,
-				F93099481A2DB4170054FFC1 /* MarginMoneyCell.m in Sources */,
 				F7EF4BB41A5E4AFF0073BD1F /* CompleteCell.m in Sources */,
 				F996B8541A4AB26F00D38473 /* SettingModel.m in Sources */,
 				F9BC26A51A2EE913006894C6 /* OrderListCellGoods.m in Sources */,
@@ -3148,6 +3147,7 @@
 				F9BC26A81A2EE92F006894C6 /* OrderListCellSum.m in Sources */,
 				94D89ECF1A220A050074B874 /* HeadTableView.m in Sources */,
 				F7EC68DB1A2C0851000B289D /* TSActionSheet.m in Sources */,
+				F7EF4BC81A5E6C9B0073BD1F /* MarginMoneyCell.m in Sources */,
 				F7DF47D31A25AF6F006EB419 /* ArtDetailVC.m in Sources */,
 				F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */,
 				F77AD84F1A4BBD30004662E2 /* PaaCreater.m in Sources */,
