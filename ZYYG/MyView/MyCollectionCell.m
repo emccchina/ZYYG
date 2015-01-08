@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 wu. All rights reserved.
 //
 
-#import "RecommendedListCell.h"
+#import "MyCollectionCell.h"
 
-@implementation RecommendedListCell
+@implementation MyCollectionCell
 
 - (void)awakeFromNib {
     // Initialization code

@@ -10,11 +10,7 @@
 			<key>headerImage</key>
 			<string>orderList.png</string>
 			<key>title</key>
-			<string>交易订单</string>
-			<key>count</key>
-			<string></string>
-			<key>New item</key>
-			<string></string>
+			<string>评价订单</string>
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>
@@ -22,11 +18,29 @@
 		</dict>
 		<dict>
 			<key>headerImage</key>
+			<string>orderList.png</string>
+			<key>title</key>
+			<string>竞价订单</string>
+			<key>footerImage</key>
+			<string>left.png</string>
+			<key>segueString</key>
+			<string>OrderList</string>
+		</dict>
+		<dict>
+			<key>headerImage</key>
+			<string>compete.png</string>
+			<key>title</key>
+			<string>竞价记录</string>
+			<key>footerImage</key>
+			<string>left.png</string>
+			<key>segueString</key>
+			<string>BiddingRecord</string>
+		</dict>
+		<dict>
+			<key>headerImage</key>
 			<string>shoppingCart.png</string>
 			<key>title</key>
 			<string>购物车</string>
-			<key>count</key>
-			<string></string>
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>
@@ -36,13 +50,21 @@
 			<key>headerImage</key>
 			<string>marginMoney.png</string>
 			<key>title</key>
-			<string>我的账户</string>
-			<key>count</key>
-			<string></string>
+			<string>保证金</string>
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>
 			<string>MarginMoney</string>
+		</dict>
+		<dict>
+			<key>headerImage</key>
+			<string>marginMoney.png</string>
+			<key>title</key>
+			<string>我的账户</string>
+			<key>footerImage</key>
+			<string>left.png</string>
+			<key>segueString</key>
+			<string>MyAccount</string>
 		</dict>
 	</array>
 	<array>
@@ -51,8 +73,6 @@
 			<string>collection.png</string>
 			<key>title</key>
 			<string>我的收藏</string>
-			<key>count</key>
-			<string></string>
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>
@@ -77,8 +97,6 @@
 			<string>personInfo</string>
 			<key>title</key>
 			<string>个人资料</string>
-			<key>count</key>
-			<string></string>
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>
@@ -89,8 +107,6 @@
 			<string>settings.png</string>
 			<key>title</key>
 			<string>设置</string>
-			<key>count</key>
-			<string></string>
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>

@@ -11,7 +11,7 @@
 @interface MarginMoneyCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *goodsImage;
-@property (weak, nonatomic) IBOutlet UILabel *orderNO;
+@property (weak, nonatomic) IBOutlet UILabel *goodsName;
 @property (weak, nonatomic) IBOutlet UILabel *marginMoney;
 @property (weak, nonatomic) IBOutlet UILabel *marginState;
 @property (weak, nonatomic) IBOutlet UILabel *freezeTime;

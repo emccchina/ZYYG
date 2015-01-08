@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 //推荐拍品cell(目前用于 私人洽购,我的收藏)
-@interface RecommendedListCell : UITableViewCell
+@interface MyCollectionCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *goodsImage;
 @property (weak, nonatomic) IBOutlet UILabel *goodsName;

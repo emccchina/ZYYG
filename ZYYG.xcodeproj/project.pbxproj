@@ -559,8 +559,8 @@
 		F93099491A2DB4170054FFC1 /* MarginMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93099471A2DB4170054FFC1 /* MarginMoneyCell.xib */; };
 		F930994D1A2DB42B0054FFC1 /* CompeteRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */; };
 		F930994E1A2DB42B0054FFC1 /* CompeteRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F930994C1A2DB42B0054FFC1 /* CompeteRecordCell.xib */; };
-		F93099521A2DB4B40054FFC1 /* RecommendedListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F93099501A2DB4B40054FFC1 /* RecommendedListCell.m */; };
-		F93099531A2DB4B40054FFC1 /* RecommendedListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93099511A2DB4B40054FFC1 /* RecommendedListCell.xib */; };
+		F93099521A2DB4B40054FFC1 /* MyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F93099501A2DB4B40054FFC1 /* MyCollectionCell.m */; };
+		F93099531A2DB4B40054FFC1 /* MyCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93099511A2DB4B40054FFC1 /* MyCollectionCell.xib */; };
 		F93099581A2DB6AE0054FFC1 /* PersonCenter.plist in Resources */ = {isa = PBXBuildFile; fileRef = F93099571A2DB6AE0054FFC1 /* PersonCenter.plist */; };
 		F966EDD61A35A46800D2994A /* MyAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F966EDD51A35A46800D2994A /* MyAccountCell.xib */; };
 		F966EDD91A35AA4E00D2994A /* MyAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F966EDD81A35AA4E00D2994A /* MyAccountCell.m */; };
@@ -589,7 +589,7 @@
 		F9BC26831A2E95BB006894C6 /* OrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26821A2E95BB006894C6 /* OrderListVC.m */; };
 		F9BC26861A2E9F1E006894C6 /* CompeteRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26851A2E9F1E006894C6 /* CompeteRecordVC.m */; };
 		F9BC26891A2EA263006894C6 /* MyAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26881A2EA263006894C6 /* MyAccountVC.m */; };
-		F9BC268C1A2EA41A006894C6 /* RecommendedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC268B1A2EA41A006894C6 /* RecommendedVC.m */; };
+		F9BC268C1A2EA41A006894C6 /* MarginMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC268B1A2EA41A006894C6 /* MarginMoneyVC.m */; };
 		F9BC268F1A2EA5CB006894C6 /* MyCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC268E1A2EA5CB006894C6 /* MyCollectionVC.m */; };
 		F9BC26921A2EA5E8006894C6 /* MyLetterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26911A2EA5E8006894C6 /* MyLetterVC.m */; };
 		F9BC26951A2EA9CE006894C6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26941A2EA9CE006894C6 /* SettingsVC.m */; };
@@ -1276,9 +1276,9 @@
 		F930994A1A2DB42B0054FFC1 /* CompeteRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompeteRecordCell.h; sourceTree = "<group>"; };
 		F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompeteRecordCell.m; sourceTree = "<group>"; };
 		F930994C1A2DB42B0054FFC1 /* CompeteRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompeteRecordCell.xib; sourceTree = "<group>"; };
-		F930994F1A2DB4B40054FFC1 /* RecommendedListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedListCell.h; sourceTree = "<group>"; };
-		F93099501A2DB4B40054FFC1 /* RecommendedListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedListCell.m; sourceTree = "<group>"; };
-		F93099511A2DB4B40054FFC1 /* RecommendedListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendedListCell.xib; sourceTree = "<group>"; };
+		F930994F1A2DB4B40054FFC1 /* MyCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionCell.h; sourceTree = "<group>"; };
+		F93099501A2DB4B40054FFC1 /* MyCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionCell.m; sourceTree = "<group>"; };
+		F93099511A2DB4B40054FFC1 /* MyCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionCell.xib; sourceTree = "<group>"; };
 		F93099571A2DB6AE0054FFC1 /* PersonCenter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PersonCenter.plist; sourceTree = "<group>"; };
 		F966EDD51A35A46800D2994A /* MyAccountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAccountCell.xib; sourceTree = "<group>"; };
 		F966EDD71A35AA4E00D2994A /* MyAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountCell.h; sourceTree = "<group>"; };
@@ -1330,8 +1330,8 @@
 		F9BC26851A2E9F1E006894C6 /* CompeteRecordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompeteRecordVC.m; sourceTree = "<group>"; };
 		F9BC26871A2EA263006894C6 /* MyAccountVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountVC.h; sourceTree = "<group>"; };
 		F9BC26881A2EA263006894C6 /* MyAccountVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountVC.m; sourceTree = "<group>"; };
-		F9BC268A1A2EA41A006894C6 /* RecommendedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedVC.h; sourceTree = "<group>"; };
-		F9BC268B1A2EA41A006894C6 /* RecommendedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedVC.m; sourceTree = "<group>"; };
+		F9BC268A1A2EA41A006894C6 /* MarginMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginMoneyVC.h; sourceTree = "<group>"; };
+		F9BC268B1A2EA41A006894C6 /* MarginMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginMoneyVC.m; sourceTree = "<group>"; };
 		F9BC268D1A2EA5CB006894C6 /* MyCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionVC.h; sourceTree = "<group>"; };
 		F9BC268E1A2EA5CB006894C6 /* MyCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionVC.m; sourceTree = "<group>"; };
 		F9BC26901A2EA5E8006894C6 /* MyLetterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLetterVC.h; sourceTree = "<group>"; };
@@ -1563,9 +1563,9 @@
 				F7BBA58C1A2806F9009DF9F2 /* CartCell.h */,
 				F7BBA58D1A2806F9009DF9F2 /* CartCell.m */,
 				F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */,
-				F930994F1A2DB4B40054FFC1 /* RecommendedListCell.h */,
-				F93099501A2DB4B40054FFC1 /* RecommendedListCell.m */,
-				F93099511A2DB4B40054FFC1 /* RecommendedListCell.xib */,
+				F930994F1A2DB4B40054FFC1 /* MyCollectionCell.h */,
+				F93099501A2DB4B40054FFC1 /* MyCollectionCell.m */,
+				F93099511A2DB4B40054FFC1 /* MyCollectionCell.xib */,
 				F9AB0D911A2FEF4100EFEDC5 /* CompeteRecordCellTop.h */,
 				F9AB0D921A2FEF4100EFEDC5 /* CompeteRecordCellTop.m */,
 				F9AB0D941A2FEF5B00EFEDC5 /* CompeteRecordCellTop.xib */,
@@ -1618,8 +1618,8 @@
 				F9BC26851A2E9F1E006894C6 /* CompeteRecordVC.m */,
 				F9BC26871A2EA263006894C6 /* MyAccountVC.h */,
 				F9BC26881A2EA263006894C6 /* MyAccountVC.m */,
-				F9BC268A1A2EA41A006894C6 /* RecommendedVC.h */,
-				F9BC268B1A2EA41A006894C6 /* RecommendedVC.m */,
+				F9BC268A1A2EA41A006894C6 /* MarginMoneyVC.h */,
+				F9BC268B1A2EA41A006894C6 /* MarginMoneyVC.m */,
 				F9BC268D1A2EA5CB006894C6 /* MyCollectionVC.h */,
 				F9BC268E1A2EA5CB006894C6 /* MyCollectionVC.m */,
 				F9BC26901A2EA5E8006894C6 /* MyLetterVC.h */,
@@ -2630,7 +2630,7 @@
 				F7D248461A4191FC001AAAC3 /* iPhonePureNumberKeyboardView.xib in Resources */,
 				F7D248BD1A4191FC001AAAC3 /* ipad_key_123[]{[H]_59.png in Resources */,
 				F7D248431A4191FC001AAAC3 /* iPhoneNumberKeyboardLandscapeView.xib in Resources */,
-				F93099531A2DB4B40054FFC1 /* RecommendedListCell.xib in Resources */,
+				F93099531A2DB4B40054FFC1 /* MyCollectionCell.xib in Resources */,
 				F7D248FD1A4191FC001AAAC3 /* ipad_key_QWE[H]_61_nor.png in Resources */,
 				F7D2499D1A4191FC001AAAC3 /* keychar21_63.png in Resources */,
 				F7D249211A4191FC001AAAC3 /* keychar01_55.png in Resources */,
@@ -3043,7 +3043,7 @@
 				F7E905EE1A26B683001117EE /* ClassifyCell.m in Sources */,
 				F9BC26AB1A2EE945006894C6 /* OrderListCellBottom.m in Sources */,
 				F729B0191A36C55C0001FD39 /* MyButton.m in Sources */,
-				F9BC268C1A2EA41A006894C6 /* RecommendedVC.m in Sources */,
+				F9BC268C1A2EA41A006894C6 /* MarginMoneyVC.m in Sources */,
 				9401786A1A21CCE400697D14 /* ShopingCartVC.m in Sources */,
 				F7FEC1271A49345F00CFE9D4 /* InvoiceVC.m in Sources */,
 				F7EC68C11A2BF5DA000B289D /* JHRefreshAmazingAniView.m in Sources */,
@@ -3145,7 +3145,7 @@
 				F7BE80DE1A3EE5610053C5CA /* KDPreView.m in Sources */,
 				9401789B1A21CE0000697D14 /* AFURLResponseSerialization.m in Sources */,
 				9401785D1A21CCE400697D14 /* ImageScrollCell.m in Sources */,
-				F93099521A2DB4B40054FFC1 /* RecommendedListCell.m in Sources */,
+				F93099521A2DB4B40054FFC1 /* MyCollectionCell.m in Sources */,
 				940178591A21CCE400697D14 /* NSTimer+Addition.m in Sources */,
 				F7E905F61A26C2F4001117EE /* PriceCell.m in Sources */,
 				F7F626E61A30399600CD2340 /* FileManager.m in Sources */,

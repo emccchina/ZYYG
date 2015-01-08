@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -225,8 +225,8 @@
                         <outlet property="PersonTableView" destination="fFf-AZ-lFj" id="P8J-lH-XE3"/>
                         <segue destination="UVi-hU-iMQ" kind="show" identifier="OrderList" id="MyI-yB-JXQ"/>
                         <segue destination="mCK-sY-phf" kind="show" identifier="BiddingRecord" id="pme-Qn-zwk"/>
-                        <segue destination="xiK-2U-C01" kind="show" identifier="MarginMoney" id="FIj-WB-ErO"/>
-                        <segue destination="tsx-7s-GN3" kind="show" identifier="RecommendedGoods" id="KPv-AQ-43A"/>
+                        <segue destination="xiK-2U-C01" kind="show" identifier="MyAccount" id="FIj-WB-ErO"/>
+                        <segue destination="tsx-7s-GN3" kind="show" identifier="MarginMoney" id="KPv-AQ-43A"/>
                         <segue destination="ia1-nm-XwD" kind="show" identifier="MyCollection" id="Zny-U5-y94"/>
                         <segue destination="cC6-0e-9UI" kind="show" identifier="Myletter" id="EhZ-zO-6xR"/>
                         <segue destination="REY-Wu-nO7" kind="show" identifier="Settings" id="EgV-0W-Gy3"/>
@@ -380,7 +380,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共(2)件商品" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coo-Zn-UUB">
-                                                    <rect key="frame" x="363" y="5" width="67" height="16"/>
+                                                    <rect key="frame" x="10" y="5" width="67" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -394,7 +394,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="npt-8L-cWy" firstAttribute="top" secondItem="spt-ng-hyR" secondAttribute="top" constant="5" id="Kc5-TC-tzB"/>
-                                                <constraint firstAttribute="trailing" secondItem="coo-Zn-UUB" secondAttribute="trailing" constant="170" id="Psa-wL-suI"/>
+                                                <constraint firstItem="coo-Zn-UUB" firstAttribute="leading" secondItem="spt-ng-hyR" secondAttribute="leading" constant="10" id="efD-Rr-A8C"/>
                                                 <constraint firstItem="coo-Zn-UUB" firstAttribute="top" secondItem="spt-ng-hyR" secondAttribute="top" constant="5" id="feX-Q2-6ty"/>
                                                 <constraint firstAttribute="trailing" secondItem="npt-8L-cWy" secondAttribute="trailing" constant="10" id="ufP-hR-N9Y"/>
                                             </constraints>
@@ -505,7 +505,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbT-Uy-LUS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="-2254"/>
+            <point key="canvasLocation" x="1664" y="-2289"/>
         </scene>
         <!--竞价记录-->
         <scene sceneID="O6c-nL-8cm">
@@ -539,7 +539,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8F-oK-1K1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="-1597"/>
+            <point key="canvasLocation" x="1664" y="-1606"/>
         </scene>
         <!--个人资料-->
         <scene sceneID="Hsw-I5-SfM">
@@ -629,7 +629,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Yn-0J-eSe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="-937"/>
+            <point key="canvasLocation" x="1664" y="-243"/>
         </scene>
         <!--我的账户-->
         <scene sceneID="IXs-6l-eSn">
@@ -730,12 +730,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dOQ-fS-SQL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="-281"/>
+            <point key="canvasLocation" x="1664" y="429"/>
         </scene>
-        <!--推荐拍品-->
+        <!--保证金-->
         <scene sceneID="0cQ-YX-r4N">
             <objects>
-                <viewController id="tsx-7s-GN3" userLabel="推荐拍品" customClass="RecommendedVC" sceneMemberID="viewController">
+                <viewController id="tsx-7s-GN3" userLabel="保证金" customClass="MarginMoneyVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ri9-b0-lux"/>
                         <viewControllerLayoutGuide type="bottom" id="Keh-Cr-j01"/>
@@ -757,14 +757,14 @@
                             <constraint firstAttribute="bottom" secondItem="IKJ-g8-Cnz" secondAttribute="bottom" id="dEW-zE-dAn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="推荐拍品" id="fRF-FS-rnQ"/>
+                    <navigationItem key="navigationItem" title="保证金" id="fRF-FS-rnQ"/>
                     <connections>
                         <outlet property="recommendedTableView" destination="IKJ-g8-Cnz" id="Nod-Qh-ewK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tj3-5g-bho" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1664" y="383"/>
+            <point key="canvasLocation" x="1664" y="-919"/>
         </scene>
         <!--我的收藏-->
         <scene sceneID="kmw-Le-9ON">
@@ -1293,7 +1293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EX0-SH-Eh3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="-2254"/>
+            <point key="canvasLocation" x="2407" y="-2289"/>
         </scene>
     </scenes>
     <resources>

@@ -6,17 +6,17 @@
 //  Copyright (c) 2014年 wu. All rights reserved.
 //
 
-#import "RecommendedVC.h"
-#import "RecommendedListCell.h"
-@interface RecommendedVC ()
+#import "MarginMoneyVC.h"
+#import "MarginMoneyCell.h"
+@interface MarginMoneyVC ()
 
 @end
 
-@implementation RecommendedVC
+@implementation MarginMoneyVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.recommendedTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
+    [self.recommendedTableView registerNib:[UINib nibWithNibName:@"MarginMoneyCell" bundle:nil] forCellReuseIdentifier:@"MarginMoneyCell"];
     [self showBackItem];
     self.recommendedTableView.delegate = self;
     self.recommendedTableView.dataSource = self;
@@ -42,11 +42,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 125;
+    return 200;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RecommendedListCell *cell = (RecommendedListCell*)[tableView dequeueReusableCellWithIdentifier:@"RecommendedListCell" forIndexPath:indexPath];
+    MarginMoneyCell *cell = (MarginMoneyCell*)[tableView dequeueReusableCellWithIdentifier:@"MarginMoneyCell" forIndexPath:indexPath];
     [cell.goodsImage setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"]];
     return cell;
     

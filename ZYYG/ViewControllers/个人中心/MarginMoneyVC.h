@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface RecommendedVC : BaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface MarginMoneyVC : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *recommendedTableView;
 @end

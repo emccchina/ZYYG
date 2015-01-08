@@ -7,7 +7,7 @@
 //
 
 #import "TalkBuyVC.h"
-#import "RecommendedListCell.h"
+#import "MyCollectionCell.h"
 #import "GoodsModel.h"
 #import "ArtDetailVC.h"
 
@@ -38,7 +38,7 @@
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doSelectButton:)];
     [self requestTalkBuy:pageNum artistName:artistName];
     [self addFootRefresh];
-    [self.talkBuyTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
+    [self.talkBuyTableView registerNib:[UINib nibWithNibName:@"MyCollectionCell" bundle:nil] forCellReuseIdentifier:@"MyCollectionCell"];
     self.talkBuyTableView.dataSource=self;
     self.talkBuyTableView.delegate=self;
     
@@ -185,7 +185,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GoodsModel *goods=goodsArray[indexPath.row];
-   RecommendedListCell *cell = (RecommendedListCell*)[tableView dequeueReusableCellWithIdentifier:@"RecommendedListCell" forIndexPath:indexPath];
+   MyCollectionCell *cell = (MyCollectionCell*)[tableView dequeueReusableCellWithIdentifier:@"MyCollectionCell" forIndexPath:indexPath];
     cell.Lab4.hidden=YES;
     [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL]];
     cell.goodsName.text=goods.GoodsName;

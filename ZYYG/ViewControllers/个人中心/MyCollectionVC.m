@@ -7,7 +7,7 @@
 //
 
 #import "MyCollectionVC.h"
-#import "RecommendedListCell.h"
+#import "MyCollectionCell.h"
 #import "HMSegmentedControl.h"
 #import "UserInfo.h"
 #import "GoodsModel.h"
@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [self.myCollectionTableView registerNib:[UINib nibWithNibName:@"RecommendedListCell" bundle:nil] forCellReuseIdentifier:@"RecommendedListCell"];
+    [self.myCollectionTableView registerNib:[UINib nibWithNibName:@"MyCollectionCell" bundle:nil] forCellReuseIdentifier:@"MyCollectionCell"];
     collections=[NSMutableArray array];
     pageNum=1;
     [self requestCollections:pageNum];
@@ -147,7 +147,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GoodsModel *goods=collections[indexPath.row];
-    RecommendedListCell *cell = (RecommendedListCell*)[tableView dequeueReusableCellWithIdentifier:@"RecommendedListCell" forIndexPath:indexPath];
+    MyCollectionCell *cell = (MyCollectionCell*)[tableView dequeueReusableCellWithIdentifier:@"MyCollectionCell" forIndexPath:indexPath];
    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL]];
     cell.goodsName.text=goods.GoodsName;
     cell.Lab1.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
