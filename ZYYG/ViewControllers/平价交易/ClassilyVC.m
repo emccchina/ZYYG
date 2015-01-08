@@ -13,6 +13,7 @@
 #import "PopView.h"
 #import "ClassifyModel.h"
 #import "SearchReusltVC.h"
+#import "AuctionDetialVC.h"
 
 @interface ClassilyVC ()
 <UITableViewDataSource, UITableViewDelegate>
@@ -177,7 +178,16 @@ NSInteger soredArray(id model1, id model2, void *context)
         ClassifyModel *mode = _details[_selectedIndex][searchRow];
         selectInfo.categaryCode = mode.code;
     }
-    [self performSegueWithIdentifier:@"ClassifySearch" sender:self];
+    if (self.type) {
+        UIViewController *vc = [[UIStoryboard storyboardWithName:@"CompeteStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"AuctionVC"];
+        vc.hidesBottomBarWhenPushed = YES;
+        if ([vc respondsToSelector:@selector(setSelectInfo:)]) {
+            [(AuctionDetialVC*)vc setSelectInfo:selectInfo];
+        }
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        [self performSegueWithIdentifier:@"ClassifySearch" sender:self];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

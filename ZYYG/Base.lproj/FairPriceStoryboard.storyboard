@@ -321,7 +321,7 @@
         <!--分类-->
         <scene sceneID="04T-jf-IXI">
             <objects>
-                <viewController title="分类" id="N9j-CZ-aZ2" customClass="ClassilyVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClassifyVC" title="分类" id="N9j-CZ-aZ2" customClass="ClassilyVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tb0-uz-lQ2"/>
                         <viewControllerLayoutGuide type="bottom" id="ejQ-3A-9zW"/>
@@ -433,7 +433,7 @@
                                             <action selector="addToCartPressed:" destination="1xU-3h-eV7" eventType="touchUpInside" id="XVR-l5-dfn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73j-bi-oxE">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73j-bi-oxE">
                                         <rect key="frame" x="20" y="18" width="25" height="22"/>
                                         <state key="normal" image="ShoppingRed">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -492,6 +492,6 @@
         <image name="ShoppingRed" width="25" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CHt-aV-BuY"/>
+        <segue reference="CCc-AN-ob5"/>
     </inferredMetricsTieBreakers>
 </document>

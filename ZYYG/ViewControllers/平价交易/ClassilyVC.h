@@ -11,5 +11,5 @@
 //分类页面
 @interface ClassilyVC : BaseViewController
 
-
+@property (nonatomic, assign) NSInteger   type;//0 平价中的分类  1竞价中的分类
 @end

@@ -30,7 +30,20 @@
                             <constraint firstItem="dxT-3d-YOd" firstAttribute="top" secondItem="eZ9-B0-13g" secondAttribute="top" id="tnI-eF-adS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="线上竞价" id="SK2-Al-yyk"/>
+                    <navigationItem key="navigationItem" title="线上竞价" id="SK2-Al-yyk">
+                        <barButtonItem key="leftBarButtonItem" title="分类" id="yNl-vK-7ko">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="doClassifyItem:" destination="CSi-CW-fxe" id="LDa-NJ-W4Q"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="筛选" id="Mva-Ui-AFh">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="doChooseItem:" destination="CSi-CW-fxe" id="Xkc-NN-5wn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="completeTB" destination="dxT-3d-YOd" id="tfm-zz-HnL"/>
                     </connections>
@@ -38,6 +51,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7s-gR-932" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="977" y="864"/>
+        </scene>
+        <!--Auction DetialVC-->
+        <scene sceneID="5YB-H5-H3C">
+            <objects>
+                <viewController storyboardIdentifier="AuctionVC" id="1oj-pF-aUX" customClass="AuctionDetialVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kuL-y7-zd4"/>
+                        <viewControllerLayoutGuide type="bottom" id="lE7-v0-8HN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h8D-vL-tt5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dgn-QN-K5J">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrV-Ts-LUb" customClass="ChooseView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lE7-v0-8HN" firstAttribute="top" secondItem="jrV-Ts-LUb" secondAttribute="bottom" id="4wK-vH-U2S"/>
+                            <constraint firstItem="jrV-Ts-LUb" firstAttribute="leading" secondItem="h8D-vL-tt5" secondAttribute="leading" id="STx-e8-2UF"/>
+                            <constraint firstItem="dgn-QN-K5J" firstAttribute="leading" secondItem="h8D-vL-tt5" secondAttribute="leading" id="cF4-cB-1la"/>
+                            <constraint firstItem="dgn-QN-K5J" firstAttribute="leading" secondItem="jrV-Ts-LUb" secondAttribute="trailing" id="cW1-Q4-lqe"/>
+                            <constraint firstItem="dgn-QN-K5J" firstAttribute="top" secondItem="h8D-vL-tt5" secondAttribute="top" id="dN5-A1-cwp"/>
+                            <constraint firstItem="jrV-Ts-LUb" firstAttribute="top" secondItem="kuL-y7-zd4" secondAttribute="bottom" id="ghA-Ax-k8i"/>
+                            <constraint firstItem="lE7-v0-8HN" firstAttribute="top" secondItem="dgn-QN-K5J" secondAttribute="bottom" id="p3y-0r-JOt"/>
+                            <constraint firstAttribute="trailing" secondItem="dgn-QN-K5J" secondAttribute="trailing" id="wj8-Ei-e9y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="auctionTB" destination="dgn-QN-K5J" id="Vkn-dM-4JS"/>
+                        <outlet property="chooseView" destination="jrV-Ts-LUb" id="iq7-fo-AoI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4ck-kO-97Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1819" y="864"/>
         </scene>
         <!--My Navigation Controller-->
         <scene sceneID="gcZ-GP-rPl">

@@ -9,7 +9,7 @@
 #import "CompeteVC.h"
 #import "CompleteCell.h"
 #import "AuctionModel.h"
-
+#import "ClassilyVC.h"
 @interface CompeteVC()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -79,6 +79,17 @@ static NSString * completeCell = @"completeCell";
     }];
 }
 
+- (IBAction)doClassifyItem:(id)sender {
+    UIViewController *vc = [[UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"ClassifyVC"];
+    vc.hidesBottomBarWhenPushed = YES;
+    if ([vc isKindOfClass:[ClassilyVC class]]) {
+        ClassilyVC *classVC = (ClassilyVC*)vc;
+        [classVC setType:1];
+        [self.navigationController pushViewController:classVC animated:YES];
+    }
+}
+- (IBAction)doChooseItem:(id)sender {
+}
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

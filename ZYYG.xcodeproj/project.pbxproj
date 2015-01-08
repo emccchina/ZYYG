@@ -71,6 +71,7 @@
 		F77AD84F1A4BBD30004662E2 /* PaaCreater.m in Sources */ = {isa = PBXBuildFile; fileRef = F77AD84E1A4BBD30004662E2 /* PaaCreater.m */; };
 		F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302B1A26D64A00DB0EDC /* SearchVC.m */; };
 		F791302F1A26F42500DB0EDC /* SearchReusltVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F791302E1A26F42500DB0EDC /* SearchReusltVC.m */; };
+		F7983F0A1A5E7B2100A68AA2 /* AuctionDetialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7983F091A5E7B2100A68AA2 /* AuctionDetialVC.m */; };
 		F7BBA58F1A2806F9009DF9F2 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BBA58D1A2806F9009DF9F2 /* CartCell.m */; };
 		F7BBA5901A2806F9009DF9F2 /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */; };
 		F7BE243A1A3144EE001EA855 /* CustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE24391A3144EE001EA855 /* CustomVC.m */; };
@@ -739,6 +740,8 @@
 		F791302B1A26D64A00DB0EDC /* SearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		F791302D1A26F42500DB0EDC /* SearchReusltVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchReusltVC.h; sourceTree = "<group>"; };
 		F791302E1A26F42500DB0EDC /* SearchReusltVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchReusltVC.m; sourceTree = "<group>"; };
+		F7983F081A5E7B2100A68AA2 /* AuctionDetialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuctionDetialVC.h; sourceTree = "<group>"; };
+		F7983F091A5E7B2100A68AA2 /* AuctionDetialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuctionDetialVC.m; sourceTree = "<group>"; };
 		F7BBA58C1A2806F9009DF9F2 /* CartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartCell.h; sourceTree = "<group>"; };
 		F7BBA58D1A2806F9009DF9F2 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartCell.m; sourceTree = "<group>"; };
 		F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
@@ -1675,6 +1678,8 @@
 			children = (
 				9401784E1A21CCE400697D14 /* CompeteVC.h */,
 				9401784F1A21CCE400697D14 /* CompeteVC.m */,
+				F7983F081A5E7B2100A68AA2 /* AuctionDetialVC.h */,
+				F7983F091A5E7B2100A68AA2 /* AuctionDetialVC.m */,
 			);
 			path = "线上竞价";
 			sourceTree = "<group>";
@@ -3170,6 +3175,7 @@
 				940178611A21CCE400697D14 /* MyNavigationController.m in Sources */,
 				F7FEC12A1A4955CB00CFE9D4 /* MyTextField.m in Sources */,
 				940178601A21CCE400697D14 /* MybarButItem.m in Sources */,
+				F7983F0A1A5E7B2100A68AA2 /* AuctionDetialVC.m in Sources */,
 				F9A2EF511A358BB600070BFF /* PersonDetailVC.m in Sources */,
 				940178631A21CCE400697D14 /* MyTabbarController.m in Sources */,
 				940178971A21CE0000697D14 /* AFNetworkReachabilityManager.m in Sources */,
