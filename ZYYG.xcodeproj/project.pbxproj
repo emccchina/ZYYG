@@ -604,6 +604,10 @@
 		F9BC26A51A2EE913006894C6 /* OrderListCellGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26A41A2EE913006894C6 /* OrderListCellGoods.m */; };
 		F9BC26A81A2EE92F006894C6 /* OrderListCellSum.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26A71A2EE92F006894C6 /* OrderListCellSum.m */; };
 		F9BC26AB1A2EE945006894C6 /* OrderListCellBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BC26AA1A2EE945006894C6 /* OrderListCellBottom.m */; };
+		F9C2808B1A5FB7E900FAC045 /* PayMarginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C280881A5FB7E900FAC045 /* PayMarginVC.m */; };
+		F9C2808C1A5FB7E900FAC045 /* PaySuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C2808A1A5FB7E900FAC045 /* PaySuccessVC.m */; };
+		F9C280901A5FB84100FAC045 /* PayMarginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C2808E1A5FB84100FAC045 /* PayMarginCell.m */; };
+		F9C280911A5FB84100FAC045 /* PayMarginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C2808F1A5FB84100FAC045 /* PayMarginCell.xib */; };
 		F9C302951A42BC0100B1B53C /* UpdatePassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C302941A42BC0100B1B53C /* UpdatePassVC.m */; };
 		F9DC702A1A31A43B006AE19C /* SettingsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9DC70291A31A43B006AE19C /* SettingsList.plist */; };
 /* End PBXBuildFile section */
@@ -1365,6 +1369,13 @@
 		F9BC26A71A2EE92F006894C6 /* OrderListCellSum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCellSum.m; sourceTree = "<group>"; };
 		F9BC26A91A2EE945006894C6 /* OrderListCellBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCellBottom.h; sourceTree = "<group>"; };
 		F9BC26AA1A2EE945006894C6 /* OrderListCellBottom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCellBottom.m; sourceTree = "<group>"; };
+		F9C280871A5FB7E900FAC045 /* PayMarginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMarginVC.h; sourceTree = "<group>"; };
+		F9C280881A5FB7E900FAC045 /* PayMarginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMarginVC.m; sourceTree = "<group>"; };
+		F9C280891A5FB7E900FAC045 /* PaySuccessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySuccessVC.h; sourceTree = "<group>"; };
+		F9C2808A1A5FB7E900FAC045 /* PaySuccessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySuccessVC.m; sourceTree = "<group>"; };
+		F9C2808D1A5FB84100FAC045 /* PayMarginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMarginCell.h; sourceTree = "<group>"; };
+		F9C2808E1A5FB84100FAC045 /* PayMarginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMarginCell.m; sourceTree = "<group>"; };
+		F9C2808F1A5FB84100FAC045 /* PayMarginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayMarginCell.xib; sourceTree = "<group>"; };
 		F9C302931A42BC0100B1B53C /* UpdatePassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePassVC.h; sourceTree = "<group>"; };
 		F9C302941A42BC0100B1B53C /* UpdatePassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassVC.m; sourceTree = "<group>"; };
 		F9DC70291A31A43B006AE19C /* SettingsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingsList.plist; sourceTree = "<group>"; };
@@ -1537,6 +1548,9 @@
 		940178311A21CCE400697D14 /* MyView */ = {
 			isa = PBXGroup;
 			children = (
+				F9C2808D1A5FB84100FAC045 /* PayMarginCell.h */,
+				F9C2808E1A5FB84100FAC045 /* PayMarginCell.m */,
+				F9C2808F1A5FB84100FAC045 /* PayMarginCell.xib */,
 				F996B8081A4AADDE00D38473 /* SpecialDiscuss.h */,
 				F996B8091A4AADDE00D38473 /* SpecialDiscuss.m */,
 				F996B80A1A4AADDE00D38473 /* SpecialDiscuss.xib */,
@@ -1689,6 +1703,10 @@
 		9401784D1A21CCE400697D14 /* 线上竞价 */ = {
 			isa = PBXGroup;
 			children = (
+				F9C280871A5FB7E900FAC045 /* PayMarginVC.h */,
+				F9C280881A5FB7E900FAC045 /* PayMarginVC.m */,
+				F9C280891A5FB7E900FAC045 /* PaySuccessVC.h */,
+				F9C2808A1A5FB7E900FAC045 /* PaySuccessVC.m */,
 				9401784E1A21CCE400697D14 /* CompeteVC.h */,
 				9401784F1A21CCE400697D14 /* CompeteVC.m */,
 				F7983F081A5E7B2100A68AA2 /* AuctionDetialVC.h */,
@@ -3015,6 +3033,7 @@
 				F7D248FC1A4191FC001AAAC3 /* ipad_key_QWE[H]_61_c.png in Resources */,
 				F7D249031A4191FC001AAAC3 /* ipad_key_QWE[H]_67.png in Resources */,
 				F7D2498D1A4191FC001AAAC3 /* keychar21_15.png in Resources */,
+				F9C280911A5FB84100FAC045 /* PayMarginCell.xib in Resources */,
 				F7D248871A4191FC001AAAC3 /* ipad_key_[]{[H]_76.png in Resources */,
 				F7D249511A4191FC001AAAC3 /* keychar11_19.png in Resources */,
 				F7D249261A4191FC001AAAC3 /* keychar01_71.png in Resources */,
@@ -3069,6 +3088,7 @@
 			files = (
 				94D89EC01A21FDA70074B874 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
 				F7C216011A2EE77A00C011AE /* SearchFrameVC.m in Sources */,
+				F9C280901A5FB84100FAC045 /* PayMarginCell.m in Sources */,
 				F7EC68C61A2BF5DA000B289D /* JHRefreshConfig.m in Sources */,
 				F7EC68C51A2BF5DA000B289D /* JHRefreshBaseView.m in Sources */,
 				94D23C741A220E5E00EE159B /* BaseViewController.m in Sources */,
@@ -3089,6 +3109,7 @@
 				F996B8531A4AB26F00D38473 /* SelectInfo.m in Sources */,
 				F9BC26A21A2EE8ED006894C6 /* OrderListCellTop.m in Sources */,
 				F996B84E1A4AB26F00D38473 /* GoodsModel.m in Sources */,
+				F9C2808C1A5FB7E900FAC045 /* PaySuccessVC.m in Sources */,
 				F7C8D5151A3809C6009F36B3 /* FMDatabasePool.m in Sources */,
 				94D89EC11A21FDA70074B874 /* JGProgressHUDIndicatorView.m in Sources */,
 				940178981A21CE0000697D14 /* AFSecurityPolicy.m in Sources */,
@@ -3142,6 +3163,7 @@
 				94D89EBC1A21FDA70074B874 /* JGProgressHUD.m in Sources */,
 				F7C8D5131A3809C6009F36B3 /* FMDatabase.m in Sources */,
 				F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */,
+				F9C2808B1A5FB7E900FAC045 /* PayMarginVC.m in Sources */,
 				940177FD1A21CBEA00697D14 /* main.m in Sources */,
 				F7F928E11A354917000BAE49 /* NSDictionary+safeObjectForKey.m in Sources */,
 				F7C215FC1A2EB80200C011AE /* ChooseView.m in Sources */,
