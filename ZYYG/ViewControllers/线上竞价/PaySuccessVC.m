@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.successImage setImage:[UIImage imageNamed:@"competeOrder"]];
+    [self.successImage setImage:[UIImage imageNamed:@"success"]];
     // Do any additional setup after loading the view.
 }
 
