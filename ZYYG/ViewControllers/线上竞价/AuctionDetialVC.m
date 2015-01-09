@@ -7,7 +7,7 @@
 //
 
 #import "AuctionDetialVC.h"
-#import "CompleteCell.h"
+#import "AuctionArtCell.h"
 #import "GoodsModel.h"
 #import "ChooseView.h"
 
@@ -41,7 +41,7 @@ static NSString * auctionCell = @"auctionCell";
     
     self.auctionTB.delegate = self;
     self.auctionTB.dataSource = self;
-    [self.auctionTB registerNib:[UINib nibWithNibName:@"CompleteCell" bundle:nil] forCellReuseIdentifier:auctionCell];
+    [self.auctionTB registerNib:[UINib nibWithNibName:@"AuctionArtCell" bundle:nil] forCellReuseIdentifier:auctionCell];
     [self addheadRefresh];
     
     
@@ -185,7 +185,7 @@ static NSString * auctionCell = @"auctionCell";
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
     NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 #endif
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
@@ -284,13 +284,8 @@ static NSString * auctionCell = @"auctionCell";
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CompleteCell *cell = (CompleteCell*)[tableView dequeueReusableCellWithIdentifier:auctionCell forIndexPath:indexPath];
-//    cell.LFLabel.text = model.auctionName;
-//    cell.type = 0;
-//    cell.LTLabel.text = model.auctionState;
-//    cell.LFoLabel.text = model.auctionDate;
-//    cell.fourLableState = YES;
-//    [cell.image setImageWithURL:[NSURL URLWithString:model.imageURL]];
+    AuctionArtCell *cell = (AuctionArtCell*)[tableView dequeueReusableCellWithIdentifier:auctionCell forIndexPath:indexPath];
+
     return cell;
 }
 

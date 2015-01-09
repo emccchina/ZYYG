@@ -93,6 +93,9 @@
 		F7C8D5161A3809C6009F36B3 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C8D50F1A3809C6009F36B3 /* FMDatabaseQueue.m */; };
 		F7C8D5171A3809C6009F36B3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C8D5121A3809C6009F36B3 /* FMResultSet.m */; };
 		F7C8D5191A3809D4009F36B3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C8D5181A3809D4009F36B3 /* libsqlite3.dylib */; };
+		F7D20A601A5F709F00DE0F96 /* AuctionArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D20A5E1A5F709F00DE0F96 /* AuctionArtCell.m */; };
+		F7D20A611A5F709F00DE0F96 /* AuctionArtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D20A5F1A5F709F00DE0F96 /* AuctionArtCell.xib */; };
+		F7D20A641A5F743E00DE0F96 /* TimeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D20A631A5F743E00DE0F96 /* TimeLabel.m */; };
 		F7D248371A4191FC001AAAC3 /* APayRes.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F7D246871A4191FC001AAAC3 /* APayRes.bundle */; };
 		F7D248381A4191FC001AAAC3 /* libAPayLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D246881A4191FC001AAAC3 /* libAPayLib.a */; };
 		F7D248391A4191FC001AAAC3 /* iPadInputLandscapeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D2468A1A4191FC001AAAC3 /* iPadInputLandscapeView.xib */; };
@@ -776,6 +779,11 @@
 		F7C8D5111A3809C6009F36B3 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		F7C8D5121A3809C6009F36B3 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		F7C8D5181A3809D4009F36B3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F7D20A5D1A5F709F00DE0F96 /* AuctionArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuctionArtCell.h; sourceTree = "<group>"; };
+		F7D20A5E1A5F709F00DE0F96 /* AuctionArtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuctionArtCell.m; sourceTree = "<group>"; };
+		F7D20A5F1A5F709F00DE0F96 /* AuctionArtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuctionArtCell.xib; sourceTree = "<group>"; };
+		F7D20A621A5F743E00DE0F96 /* TimeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLabel.h; sourceTree = "<group>"; };
+		F7D20A631A5F743E00DE0F96 /* TimeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLabel.m; sourceTree = "<group>"; };
 		F7D246861A4191FC001AAAC3 /* APay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APay.h; sourceTree = "<group>"; };
 		F7D246871A4191FC001AAAC3 /* APayRes.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = APayRes.bundle; sourceTree = "<group>"; };
 		F7D246881A4191FC001AAAC3 /* libAPayLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAPayLib.a; sourceTree = "<group>"; };
@@ -1488,6 +1496,8 @@
 				F77AD84B1A4BB0B4004662E2 /* PayManager.m */,
 				F77AD84D1A4BBD30004662E2 /* PaaCreater.h */,
 				F77AD84E1A4BBD30004662E2 /* PaaCreater.m */,
+				F7D20A621A5F743E00DE0F96 /* TimeLabel.h */,
+				F7D20A631A5F743E00DE0F96 /* TimeLabel.m */,
 			);
 			name = Common;
 			path = ZYYG/Common;
@@ -1600,6 +1610,9 @@
 				F7EF4BB11A5E4AFF0073BD1F /* CompleteCell.h */,
 				F7EF4BB21A5E4AFF0073BD1F /* CompleteCell.m */,
 				F7EF4BB31A5E4AFF0073BD1F /* CompleteCell.xib */,
+				F7D20A5D1A5F709F00DE0F96 /* AuctionArtCell.h */,
+				F7D20A5E1A5F709F00DE0F96 /* AuctionArtCell.m */,
+				F7D20A5F1A5F709F00DE0F96 /* AuctionArtCell.xib */,
 			);
 			name = MyView;
 			path = ZYYG/MyView;
@@ -2962,6 +2975,7 @@
 				F7C8D5021A37D39C009F36B3 /* erp_district_code.json in Resources */,
 				F7D248861A4191FC001AAAC3 /* ipad_key_[]{[H]_74.png in Resources */,
 				F7D248741A4191FC001AAAC3 /* ipad_key_[]{[H]_33.png in Resources */,
+				F7D20A611A5F709F00DE0F96 /* AuctionArtCell.xib in Resources */,
 				F7D249B01A4191FC001AAAC3 /* iphoneHQ_19.png in Resources */,
 				F7D2484B1A4191FC001AAAC3 /* bg.png in Resources */,
 				F7D249931A4191FC001AAAC3 /* keychar21_38.png in Resources */,
@@ -3162,6 +3176,7 @@
 				F7C8D5161A3809C6009F36B3 /* FMDatabaseQueue.m in Sources */,
 				F7EC68DD1A2C0851000B289D /* TSPopoverPopoverView.m in Sources */,
 				F9BC268F1A2EA5CB006894C6 /* MyCollectionVC.m in Sources */,
+				F7D20A601A5F709F00DE0F96 /* AuctionArtCell.m in Sources */,
 				F7EC68DC1A2C0851000B289D /* TSPopoverController.m in Sources */,
 				F7BE80DE1A3EE5610053C5CA /* KDPreView.m in Sources */,
 				9401789B1A21CE0000697D14 /* AFURLResponseSerialization.m in Sources */,
@@ -3188,6 +3203,7 @@
 				F7EC68C71A2BF5DA000B289D /* JHRefreshFooterView.m in Sources */,
 				F9AB0D9A1A3030C100EFEDC5 /* OrderDetailVC.m in Sources */,
 				9401785B1A21CCE400697D14 /* GoodsShowCell.m in Sources */,
+				F7D20A641A5F743E00DE0F96 /* TimeLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
