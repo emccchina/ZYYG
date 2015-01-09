@@ -3,7 +3,10 @@
 <plist version="1.0">
 <array>
 	<array>
-		<dict/>
+		<dict>
+			<key>segueString</key>
+			<string>MarginPay</string>
+		</dict>
 	</array>
 	<array>
 		<dict>

@@ -247,9 +247,9 @@ static NSString *listCell = @"listCell";
         [Utities presentLoginVC:self];
         return;
     }
-    if(indexPath.section == 0){
-        return;
-    }
+//    if(indexPath.section == 0){
+//        return;
+//    }
     PersonCenterModel *model=personDataArray[indexPath.section][indexPath.row];
     
     if ([model.segueString isEqualToString:@"ShoppingCart"]) {

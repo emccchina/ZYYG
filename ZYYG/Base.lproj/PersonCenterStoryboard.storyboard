@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tjm-z7-GRQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -229,6 +229,7 @@
                         <segue destination="cC6-0e-9UI" kind="show" identifier="Myletter" id="EhZ-zO-6xR"/>
                         <segue destination="REY-Wu-nO7" kind="show" identifier="Settings" id="EgV-0W-Gy3"/>
                         <segue destination="wqP-Ye-KOB" kind="show" identifier="PersonDetail" id="WKX-Zb-NtZ"/>
+                        <segue destination="td9-fG-hTt" kind="show" identifier="MarginPay" id="zyY-Zb-dab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VZ-Y7-BU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1292,6 +1293,153 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EX0-SH-Eh3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2407" y="-2289"/>
+        </scene>
+        <!--保证金支付-->
+        <scene sceneID="tnU-cP-A7A">
+            <objects>
+                <viewController title="支付保证金" id="td9-fG-hTt" userLabel="保证金支付" customClass="PayMarginVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6TX-hg-SmL"/>
+                        <viewControllerLayoutGuide type="bottom" id="eE0-Vt-79O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FOA-3Z-zcb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="hQD-1I-O9v">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYY-7t-ioD">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保证金:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCa-lN-IqD">
+                                        <rect key="frame" x="20" y="14" width="56" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yv-uW-Paj">
+                                        <rect key="frame" x="81" y="14" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Py-1P-rPF">
+                                        <rect key="frame" x="534" y="10" width="46" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressPay:" destination="td9-fG-hTt" eventType="touchUpInside" id="rwm-Kn-0fO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7Py-1P-rPF" secondAttribute="trailing" constant="20" id="F1p-lf-rVa"/>
+                                    <constraint firstAttribute="centerY" secondItem="7Py-1P-rPF" secondAttribute="centerY" id="GZ9-1m-fmj"/>
+                                    <constraint firstItem="3yv-uW-Paj" firstAttribute="leading" secondItem="YCa-lN-IqD" secondAttribute="trailing" constant="5" id="PDg-3h-kE1"/>
+                                    <constraint firstAttribute="centerY" secondItem="YCa-lN-IqD" secondAttribute="centerY" id="V5F-BB-Xzw"/>
+                                    <constraint firstAttribute="height" constant="50" id="bVK-U9-CG1"/>
+                                    <constraint firstAttribute="centerY" secondItem="3yv-uW-Paj" secondAttribute="centerY" id="e5m-qd-kCz"/>
+                                    <constraint firstItem="YCa-lN-IqD" firstAttribute="leading" secondItem="hYY-7t-ioD" secondAttribute="leading" constant="20" id="li6-Ij-zOf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hYY-7t-ioD" firstAttribute="leading" secondItem="FOA-3Z-zcb" secondAttribute="leadingMargin" constant="-16" id="1cN-nL-J6d"/>
+                            <constraint firstAttribute="bottom" secondItem="hQD-1I-O9v" secondAttribute="bottom" id="IsZ-7w-cOi"/>
+                            <constraint firstItem="hQD-1I-O9v" firstAttribute="leading" secondItem="FOA-3Z-zcb" secondAttribute="leading" id="ONW-nR-PzM"/>
+                            <constraint firstAttribute="trailing" secondItem="hQD-1I-O9v" secondAttribute="trailing" id="OuO-yZ-VY3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hYY-7t-ioD" secondAttribute="trailing" constant="-16" id="ZCK-8w-Lr6"/>
+                            <constraint firstItem="eE0-Vt-79O" firstAttribute="top" secondItem="hYY-7t-ioD" secondAttribute="bottom" id="egZ-Dy-ZGW"/>
+                            <constraint firstItem="hQD-1I-O9v" firstAttribute="top" secondItem="FOA-3Z-zcb" secondAttribute="top" id="k07-CV-gFY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="保证金支付" id="PNR-nO-j0h"/>
+                    <connections>
+                        <outlet property="PayMarginTabelView" destination="hQD-1I-O9v" id="1up-Pk-GZN"/>
+                        <outlet property="marginMoneyLab" destination="3yv-uW-Paj" id="XTg-XD-zlM"/>
+                        <outlet property="payButton" destination="7Py-1P-rPF" id="arP-Lh-gqv"/>
+                        <segue destination="TfI-l3-QJm" kind="show" identifier="paySuccess" id="qZQ-AQ-vl3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A3Z-f4-rIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893" y="1200"/>
+        </scene>
+        <!--支付成功-->
+        <scene sceneID="zdl-Qe-tUn">
+            <objects>
+                <viewController title="支付保证金" id="TfI-l3-QJm" userLabel="支付成功" customClass="PaySuccessVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="068-Yz-6iN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cxd-M2-ORo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d5a-5W-KkH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FTm-dp-lSv">
+                                <rect key="frame" x="250" y="178" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="ZC3-h7-6Fa"/>
+                                    <constraint firstAttribute="height" constant="100" id="tOj-sc-Sfc"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜您!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sch-Wu-2U3">
+                                <rect key="frame" x="267" y="288" width="66" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在保证金列表中查看详细!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WW8-OO-mC4">
+                                <rect key="frame" x="208" y="377" width="185" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保证金支付成功!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNc-EU-uVi">
+                                <rect key="frame" x="227" y="317" width="146" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付订单号为:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PM7-pS-MIZ">
+                                <rect key="frame" x="247" y="351" width="107" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="sch-Wu-2U3" secondAttribute="centerX" id="27F-En-fE5"/>
+                            <constraint firstItem="PM7-pS-MIZ" firstAttribute="top" secondItem="eNc-EU-uVi" secondAttribute="bottom" constant="10" id="BMw-dQ-VBg"/>
+                            <constraint firstAttribute="centerX" secondItem="eNc-EU-uVi" secondAttribute="centerX" id="BQE-5C-7mJ"/>
+                            <constraint firstAttribute="centerY" secondItem="sch-Wu-2U3" secondAttribute="centerY" id="Ir1-pI-csW"/>
+                            <constraint firstAttribute="centerX" secondItem="FTm-dp-lSv" secondAttribute="centerX" id="NUF-io-MyO"/>
+                            <constraint firstAttribute="centerX" secondItem="WW8-OO-mC4" secondAttribute="centerX" id="YKk-fW-iYR"/>
+                            <constraint firstAttribute="centerX" secondItem="PM7-pS-MIZ" secondAttribute="centerX" id="ije-7L-MFK"/>
+                            <constraint firstItem="eNc-EU-uVi" firstAttribute="top" secondItem="sch-Wu-2U3" secondAttribute="bottom" constant="5" id="rQm-4i-ZJ2"/>
+                            <constraint firstItem="WW8-OO-mC4" firstAttribute="top" secondItem="PM7-pS-MIZ" secondAttribute="bottom" constant="5" id="y7E-jX-wZL"/>
+                            <constraint firstItem="sch-Wu-2U3" firstAttribute="top" secondItem="FTm-dp-lSv" secondAttribute="bottom" constant="10" id="yuG-Nc-XC3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="支付成功" id="bHz-mP-0M4"/>
+                    <connections>
+                        <outlet property="lab1" destination="sch-Wu-2U3" id="NG6-oA-LJh"/>
+                        <outlet property="lab2" destination="eNc-EU-uVi" id="FiF-1Q-DT1"/>
+                        <outlet property="lab3" destination="PM7-pS-MIZ" id="Bnk-H5-Cmx"/>
+                        <outlet property="lab4" destination="WW8-OO-mC4" id="Pge-tp-LWT"/>
+                        <outlet property="successImage" destination="FTm-dp-lSv" id="pIh-VV-bbj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tmI-8S-SE0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893" y="393"/>
         </scene>
     </scenes>
     <resources>
