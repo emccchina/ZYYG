@@ -18,24 +18,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self showBackItem];
     [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCell" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCell"];
     [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCellTop" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCellTop"];
-    [self showBackItem];
+    
+    self.segmentView.sectionTitles = @[@"全部",@"竞价中", @"已结束"];
+    self.segmentView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    self.segmentView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    self.segmentView.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    [self.segmentView addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     self.competeTableView.delegate = self;
     self.competeTableView.dataSource = self;
     
     // Do any additional setup after loading the view.
 }
-
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+        [self.competeTableView reloadData];
 }
 #pragma mark -tableView
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

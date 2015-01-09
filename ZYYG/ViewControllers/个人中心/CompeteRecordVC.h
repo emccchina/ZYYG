@@ -7,8 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "HMSegmentedControl.h"
 
 @interface CompeteRecordVC : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet HMSegmentedControl *segmentView;
 @property (weak, nonatomic) IBOutlet UITableView *competeTableView;
 @end
