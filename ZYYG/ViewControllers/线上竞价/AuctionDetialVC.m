@@ -34,7 +34,7 @@ static NSString * auctionCell = @"auctionCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    
+    _selectInfo.searchType = 2;
     results = [[NSMutableArray alloc] init];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doRightButton:)];
     details = [[NSMutableArray alloc] init];
@@ -165,7 +165,7 @@ static NSString * auctionCell = @"auctionCell";
     NSMutableArray *array = [NSMutableArray array];
     for (NSDictionary *dict in arr) {
         GoodsModel *model = [[GoodsModel alloc] init];
-        [model goodsModelFromSearch:dict];
+        [model goodsModelFromAuctionDetail:dict];
         [array addObject:model];
     }
     
@@ -189,8 +189,8 @@ static NSString * auctionCell = @"auctionCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-//            [self parseRequestResults:result[@"Goods"]];
-//            [self.auctionTB reloadData];
+            [self parseRequestResults:result[@"Goods"]];
+            [self.auctionTB reloadData];
         }
         [self requestFinished];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -271,7 +271,8 @@ static NSString * auctionCell = @"auctionCell";
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
     label.backgroundColor = [UIColor whiteColor];
-    label.text = @"  竞价主题";
+    NSString *name = _selectInfo.auctionName?:@"竞价主题";
+    label.text = [NSString stringWithFormat:@"   %@", name];
     label.textColor = kBlackColor;
     label.font = [UIFont boldSystemFontOfSize:20];
     return label;
@@ -284,8 +285,14 @@ static NSString * auctionCell = @"auctionCell";
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GoodsModel *model = results[indexPath.row];
     AuctionArtCell *cell = (AuctionArtCell*)[tableView dequeueReusableCellWithIdentifier:auctionCell forIndexPath:indexPath];
-
+    cell.LFLabel.text = model.GoodsName;
+//    cell.LSLabel.text =
+    cell.RSLabel.text = model.endTime;
+    cell.RTLabel.text = [NSString stringWithFormat:@"￥%.2f",model.AppendPrice];
+    cell.RBLabel.text = model.biddingNum;
+    [cell.image setImageWithURL:[NSURL URLWithString:model.picURL]];
     return cell;
 }
 

@@ -10,6 +10,7 @@
 #import "TimeLabel.h"
 @interface AuctionArtCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *LFLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LSLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LTLabel;

@@ -12,6 +12,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    createTopLine
+    [self.image.layer setCornerRadius:2];
+    [self.image.layer setBorderWidth:1.0/[UIScreen mainScreen].scale];
+    [self.image.layer setBorderColor:kLightGrayColor.CGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

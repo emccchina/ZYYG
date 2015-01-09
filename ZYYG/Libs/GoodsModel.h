@@ -33,6 +33,13 @@
 @property (nonatomic, strong) NSString      *Nstatus;//在售状态
 @property (nonatomic, strong) NSString      *centificateIntro;//证书简介
 
+@property (nonatomic, strong) NSString      *auctionCode;//拍卖场次code
+@property (nonatomic, strong) NSString      *auctionName;//拍卖场次name
+@property (nonatomic, strong) NSString      *endTime; //结束时间
+@property (nonatomic, strong) NSString      *startTime; // 开始时间
+@property (nonatomic, strong) NSString      *status; //拍卖状态 10已成交20流拍  0有效
+@property (nonatomic, strong) NSString      *biddingNum;//竞拍次数
+
 @property (nonatomic, strong) NSString      *addCartCount;
 @property (nonatomic, assign) BOOL          valid;//失效与否
 @property (nonatomic, assign) NSInteger     typeForGoods;//(0 平价交易 1 线上竞价 2 私人定制 3 私人洽购 4 线下拍卖)
@@ -43,4 +50,5 @@
 - (void)goodsModelFromCollect:(NSDictionary *)dict;//我的收藏解析
 - (void)goodsModelFromSearch:(NSDictionary *)dict;//搜索结果解析
 - (void)goodsModelFromOrder:(NSDictionary *)dict;//搜索结果解析
+- (void)goodsModelFromAuctionDetail:(NSDictionary*)dict;//从竞价搜索中解析
 @end

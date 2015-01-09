@@ -85,4 +85,19 @@
     self.picURL = [dict safeObjectForKey:@"Title"];
 }
 
+- (void)goodsModelFromAuctionDetail:(NSDictionary *)dict
+{
+    self.GoodsCode = [dict safeObjectForKey:@"GoodsCode"];
+    self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
+    self.AppendPrice = [[dict safeObjectForKey:@"Price"] floatValue];
+    self.picURL = [dict safeObjectForKey:@"ImgUrl"];
+    self.auctionCode = [dict safeObjectForKey:@"ActionCode"];
+    self.auctionName = [dict safeObjectForKey:@"ActionName"];
+    self.ArtName = [dict safeObjectForKey:@"ArtName"];
+    self.biddingNum = [dict safeObjectForKey:@"BiddingNum"];
+    self.endTime = [dict safeObjectForKey:@"EndDate"];
+    self.startTime = [dict safeObjectForKey:@"StartDate"];
+    self.status = [dict safeObjectForKey:@"Status"];
+}
+
 @end

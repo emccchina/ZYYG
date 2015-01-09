@@ -44,7 +44,11 @@
 @property (nonatomic, strong) NSString *makeStyle;//创作风格
 @property (nonatomic, strong) NSString *searchKey;//关键字
 @property (nonatomic, assign) BOOL      sell;//0待售 1已售
-@property (nonatomic, assign) NSInteger searchType;//接口不同  0分类搜索  1关键字搜索
+@property (nonatomic, assign) NSInteger searchType;//接口不同  0分类搜索  1关键字搜索 2竞价搜索
+
+@property (nonatomic, strong) NSString  *auctionCode;//拍卖会code
+@property (nonatomic, strong) NSString *auctionName;//拍卖会name
+@property (nonatomic, assign) NSInteger biddingStatus;//状态 1全部  2 正在进行 3 即将开始  4 已结束
 - (void)recoverInfo;//筛选 复原
 
 - (NSDictionary*)createURLDict;

@@ -16,6 +16,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bj1-GN-c82">
                         <rect key="frame" x="15" y="15" width="100" height="100"/>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="QNO-9x-I3C"/>
                             <constraint firstAttribute="height" constant="100" id="dEo-Y8-PtX"/>
@@ -91,6 +92,7 @@
                 <outlet property="RBLabel" destination="8gA-1Y-dwO" id="kNm-GG-WvR"/>
                 <outlet property="RSLabel" destination="xct-oc-hJg" id="hD6-CH-YOk"/>
                 <outlet property="RTLabel" destination="Gut-ds-7yC" id="pMr-an-NvJ"/>
+                <outlet property="image" destination="Bj1-GN-c82" id="1yK-kM-FhM"/>
             </connections>
             <point key="canvasLocation" x="688" y="569"/>
         </tableViewCell>

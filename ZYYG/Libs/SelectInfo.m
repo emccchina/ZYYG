@@ -38,6 +38,8 @@
     self.shotQuantity = 0;
     self.num = 20;
     self.page = 1;
+    
+    self.auctionCode = nil;
 }
 
 - (void)setSorteType:(NSInteger)type
@@ -134,9 +136,21 @@
         [dict setObject:self.searchKey forKey:@"q"];
     }
     
+    if (self.auctionCode) {
+        [dict setObject:self.auctionCode forKey:@"AuctionCode"];
+    }
+    
+    if (self.searchType == 2) {
+        [dict setObject:( self.biddingStatus ? @(self.biddingStatus) : @(1)) forKey:@"BiddingStatus"];
+    }
+    
+    
     if (!dict.count) {
         return nil;
     }
+    
+   
+    
     return dict;
 }
 

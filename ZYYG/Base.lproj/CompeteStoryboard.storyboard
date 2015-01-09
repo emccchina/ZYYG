@@ -46,6 +46,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="completeTB" destination="dxT-3d-YOd" id="tfm-zz-HnL"/>
+                        <segue destination="1oj-pF-aUX" kind="show" identifier="AuctionVC" id="eL8-9N-so6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7s-gR-932" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -64,17 +65,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dgn-QN-K5J">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dgn-QN-K5J">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jrV-Ts-LUb" customClass="ChooseView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrV-Ts-LUb" customClass="ChooseView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="jrV-Ts-LUb" firstAttribute="leading" secondItem="h8D-vL-tt5" secondAttribute="leading" id="0uO-vN-wzx"/>
                             <constraint firstItem="lE7-v0-8HN" firstAttribute="top" secondItem="jrV-Ts-LUb" secondAttribute="bottom" id="4wK-vH-U2S"/>
+                            <constraint firstAttribute="trailing" secondItem="jrV-Ts-LUb" secondAttribute="trailing" id="FhR-Ah-Yok"/>
                             <constraint firstItem="jrV-Ts-LUb" firstAttribute="leading" secondItem="h8D-vL-tt5" secondAttribute="leading" id="STx-e8-2UF"/>
                             <constraint firstItem="dgn-QN-K5J" firstAttribute="leading" secondItem="h8D-vL-tt5" secondAttribute="leading" id="cF4-cB-1la"/>
                             <constraint firstItem="dgn-QN-K5J" firstAttribute="leading" secondItem="jrV-Ts-LUb" secondAttribute="trailing" id="cW1-Q4-lqe"/>
@@ -83,6 +87,12 @@
                             <constraint firstItem="lE7-v0-8HN" firstAttribute="top" secondItem="dgn-QN-K5J" secondAttribute="bottom" id="p3y-0r-JOt"/>
                             <constraint firstAttribute="trailing" secondItem="dgn-QN-K5J" secondAttribute="trailing" id="wj8-Ei-e9y"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cW1-Q4-lqe"/>
+                                <exclude reference="0uO-vN-wzx"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="auctionTB" destination="dgn-QN-K5J" id="Vkn-dM-4JS"/>

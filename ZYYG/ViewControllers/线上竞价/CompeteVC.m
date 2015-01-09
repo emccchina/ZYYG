@@ -9,7 +9,9 @@
 #import "CompeteVC.h"
 #import "CompleteCell.h"
 #import "AuctionModel.h"
+#import "AuctionDetialVC.h"
 #import "ClassilyVC.h"
+#import "SelectInfo.h"
 @interface CompeteVC()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -114,6 +116,8 @@ static NSString * completeCell = @"completeCell";
 }
 - (IBAction)doChooseItem:(id)sender {
 }
+
+
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -166,5 +170,16 @@ static NSString * completeCell = @"completeCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    AuctionModel *model = completeResults[indexPath.row];
+    UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AuctionVC"];
+    if ([vc isKindOfClass:[AuctionDetialVC class]]) {
+        AuctionDetialVC * detailVC = (AuctionDetialVC*)vc;
+        SelectInfo *info = [[SelectInfo alloc] init];
+        info.auctionCode = model.auctionCode;
+        info.auctionName = model.auctionName;
+        detailVC.selectInfo = info;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
+    
 }
 @end
