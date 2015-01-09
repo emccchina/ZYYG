@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     // Initialization code
     createBottomLine
+    self.bidButton.layer.backgroundColor=kRedColor.CGColor;
+    self.bidButton.layer.cornerRadius=3;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

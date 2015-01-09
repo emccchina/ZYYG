@@ -54,7 +54,7 @@
     if (indexPath.row == 0) {
         return 25;
     }
-    return 140;
+    return 160;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

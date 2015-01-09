@@ -8,8 +8,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="221" id="S0J-sH-VFe" customClass="CompeteRecordCell">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="221"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="242" id="S0J-sH-VFe" customClass="CompeteRecordCell">
+            <rect key="frame" x="0.0" y="0.0" width="604" height="242"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S0J-sH-VFe" id="ETa-M8-N35">
                 <autoresizingMask key="autoresizingMask"/>
@@ -81,14 +81,22 @@
                         <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWP-6G-2KH">
+                        <rect key="frame" x="530" y="120" width="46" height="30"/>
+                        <state key="normal" title="Button">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ycX-OA-zON" firstAttribute="leading" secondItem="f1m-Vg-mOo" secondAttribute="trailing" constant="10" id="1rf-6V-Jwd"/>
                     <constraint firstItem="wNQ-Jo-47T" firstAttribute="leading" secondItem="ao5-Fm-TcH" secondAttribute="trailing" constant="10" id="2Qd-5P-kM6"/>
                     <constraint firstItem="M8R-XJ-9Gx" firstAttribute="leading" secondItem="ao5-Fm-TcH" secondAttribute="leading" id="4y3-Yu-UlW"/>
+                    <constraint firstItem="AWP-6G-2KH" firstAttribute="top" secondItem="M8R-XJ-9Gx" secondAttribute="top" id="9BQ-jT-IvH"/>
                     <constraint firstItem="f1m-Vg-mOo" firstAttribute="leading" secondItem="ETa-M8-N35" secondAttribute="leadingMargin" constant="10" id="DML-x7-Qp5"/>
                     <constraint firstItem="SFA-VO-6up" firstAttribute="top" secondItem="Sq5-kN-gks" secondAttribute="bottom" constant="5" id="DX5-sA-yCG"/>
                     <constraint firstItem="M8R-XJ-9Gx" firstAttribute="leading" secondItem="45z-VS-jak" secondAttribute="leading" id="Fsf-yq-ckF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="AWP-6G-2KH" secondAttribute="trailing" constant="20" id="J0y-yA-V3j"/>
                     <constraint firstItem="M8R-XJ-9Gx" firstAttribute="top" secondItem="wNQ-Jo-47T" secondAttribute="bottom" constant="5" id="KT0-MY-QBe"/>
                     <constraint firstItem="M8R-XJ-9Gx" firstAttribute="top" secondItem="ao5-Fm-TcH" secondAttribute="bottom" constant="5" id="NRQ-2g-9QL"/>
                     <constraint firstItem="8sP-9t-DVM" firstAttribute="leading" secondItem="f1m-Vg-mOo" secondAttribute="trailing" constant="10" id="Puu-0e-4bt"/>
@@ -110,13 +118,14 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="beginTime" destination="4z3-qD-xJZ" id="M82-1q-J9D"/>
+                <outlet property="bidButton" destination="AWP-6G-2KH" id="fih-Wc-Ie6"/>
                 <outlet property="endTime" destination="wNQ-Jo-47T" id="dAO-pf-Tnv"/>
                 <outlet property="goodsImage" destination="f1m-Vg-mOo" id="gm2-Gz-kqv"/>
                 <outlet property="goodsName" destination="bac-JR-CfS" id="8P3-3S-X2h"/>
                 <outlet property="highestPrice" destination="SFA-VO-6up" id="J1e-mQ-tvc"/>
                 <outlet property="yourPrice" destination="Sq5-kN-gks" id="fRW-RN-FCx"/>
             </connections>
-            <point key="canvasLocation" x="-97" y="215.5"/>
+            <point key="canvasLocation" x="-95" y="226"/>
         </tableViewCell>
     </objects>
 </document>

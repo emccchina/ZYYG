@@ -18,7 +18,7 @@
 		</dict>
 		<dict>
 			<key>headerImage</key>
-			<string>orderList.png</string>
+			<string>competeOrder.png</string>
 			<key>title</key>
 			<string>竞价订单</string>
 			<key>footerImage</key>
@@ -55,16 +55,6 @@
 			<string>left.png</string>
 			<key>segueString</key>
 			<string>MarginMoney</string>
-		</dict>
-		<dict>
-			<key>headerImage</key>
-			<string>marginMoney.png</string>
-			<key>title</key>
-			<string>我的账户</string>
-			<key>footerImage</key>
-			<string>left.png</string>
-			<key>segueString</key>
-			<string>MyAccount</string>
 		</dict>
 	</array>
 	<array>

@@ -15,31 +15,31 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tv8-fr-wck">
-                        <rect key="frame" x="84" y="13" width="33" height="16"/>
+                        <rect key="frame" x="84" y="5" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起拍价:$1000009" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-1G-sai">
-                        <rect key="frame" x="479" y="13" width="103" height="16"/>
+                        <rect key="frame" x="479" y="5" width="103" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易状态:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yR6-VQ-bNA" userLabel="交易状态:">
-                        <rect key="frame" x="18" y="13" width="56" height="16"/>
+                        <rect key="frame" x="18" y="5" width="56" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="yR6-VQ-bNA" firstAttribute="top" secondItem="mAJ-ya-P5J" secondAttribute="topMargin" constant="5" id="8FI-pr-j7m"/>
-                    <constraint firstItem="tv8-fr-wck" firstAttribute="top" secondItem="mAJ-ya-P5J" secondAttribute="topMargin" constant="5" id="X8i-mR-9OT"/>
-                    <constraint firstItem="yR6-VQ-bNA" firstAttribute="leading" secondItem="mAJ-ya-P5J" secondAttribute="leadingMargin" constant="10" id="bA8-EB-cm8"/>
-                    <constraint firstItem="EWs-1G-sai" firstAttribute="top" secondItem="mAJ-ya-P5J" secondAttribute="topMargin" constant="5" id="cP6-oy-eno"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="EWs-1G-sai" secondAttribute="trailing" constant="10" id="gOu-t6-WnK"/>
-                    <constraint firstItem="tv8-fr-wck" firstAttribute="leading" secondItem="yR6-VQ-bNA" secondAttribute="trailing" constant="10" id="gsV-1N-xsl"/>
+                    <constraint firstItem="tv8-fr-wck" firstAttribute="top" secondItem="mAJ-ya-P5J" secondAttribute="topMargin" constant="-3" id="PmI-aK-QpZ"/>
+                    <constraint firstItem="tv8-fr-wck" firstAttribute="leading" secondItem="yR6-VQ-bNA" secondAttribute="trailing" constant="10" id="W6v-yi-UlD"/>
+                    <constraint firstItem="yR6-VQ-bNA" firstAttribute="top" secondItem="mAJ-ya-P5J" secondAttribute="topMargin" constant="-3" id="f6p-fY-ASZ"/>
+                    <constraint firstItem="EWs-1G-sai" firstAttribute="top" secondItem="mAJ-ya-P5J" secondAttribute="topMargin" constant="-3" id="rcf-Ta-G7b"/>
+                    <constraint firstItem="yR6-VQ-bNA" firstAttribute="leading" secondItem="mAJ-ya-P5J" secondAttribute="leadingMargin" constant="10" id="x92-Db-R2t"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="EWs-1G-sai" secondAttribute="trailing" constant="10" id="yFw-H4-sWy"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="71" y="109.5"/>
