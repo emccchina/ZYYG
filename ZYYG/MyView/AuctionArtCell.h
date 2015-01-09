@@ -18,4 +18,5 @@
 @property (weak, nonatomic) IBOutlet TimeLabel *RSLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RTLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RBLabel;
+
 @end

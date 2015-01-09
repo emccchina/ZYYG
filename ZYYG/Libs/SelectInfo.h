@@ -20,7 +20,7 @@
 #define kSpec2Cpde              @"spec2"
 #define kSpeciesCode            @"species"
 #define kVersionsCode           @"versionNumber"
-
+#define kDealStatus             @"status"
 //筛选内容
 @interface SelectInfo : NSObject
 
@@ -48,7 +48,7 @@
 
 @property (nonatomic, strong) NSString  *auctionCode;//拍卖会code
 @property (nonatomic, strong) NSString *auctionName;//拍卖会name
-@property (nonatomic, assign) NSInteger biddingStatus;//状态 1全部  2 正在进行 3 即将开始  4 已结束
+@property (nonatomic, strong) NSString *biddingStatus;//状态 1全部  2 正在进行 3 即将开始  4 已结束
 - (void)recoverInfo;//筛选 复原
 
 - (NSDictionary*)createURLDict;

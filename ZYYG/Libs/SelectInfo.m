@@ -141,7 +141,7 @@
     }
     
     if (self.searchType == 2) {
-        [dict setObject:( self.biddingStatus ? @(self.biddingStatus) : @(1)) forKey:@"BiddingStatus"];
+        [dict setObject:([self.biddingStatus integerValue] ? self.biddingStatus : @"1") forKey:@"BiddingStatus"];
     }
     
     
@@ -185,6 +185,8 @@
         self.species = code;
     }else if ([type isEqualToString:kVersionsCode]){
         self.versionNumber = code;
+    }else if ([type isEqualToString:kDealStatus]){
+        self.biddingStatus = code;
     }
 }
 @end

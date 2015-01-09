@@ -10,6 +10,7 @@
 #import "AuctionArtCell.h"
 #import "GoodsModel.h"
 #import "ChooseView.h"
+#import "SearchVC.h"
 
 @interface AuctionDetialVC ()
 <UITableViewDataSource, UITableViewDelegate>
@@ -53,6 +54,16 @@ static NSString * auctionCell = @"auctionCell";
         }
         
     }];
+    
+    [self.chooseView setChooseFinised:^(id selected){
+        if ([selected isKindOfClass:[NSDictionary class]]) {
+            [self presentSearchVC:selected];
+        }else if ([selected isKindOfClass:[UIEvent class]]){
+            [self doRightButton:nil];
+        }
+        
+    }];
+    
     [self requestForResult];
 }
 
@@ -126,30 +137,29 @@ static NSString * auctionCell = @"auctionCell";
 - (void)presentSearchVC:(id)selected
 {
     selectType = selected;
-    [self performSegueWithIdentifier:@"ChooseSegue" sender:self];
+    UIViewController* destVC = [[UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"SearchVC"];
+    if ([destVC isKindOfClass:[SearchVC class]]) {
+        SearchVC *search = (SearchVC*)destVC;
+        [search setTitles:selectType];
+        //        [search setValue:@(_selectedIndex) forKey:@"searchType"];
+        [search setChooseFinished:^(NSString *type, id content){
+            NSLog(@"id content %@, %@",type, content);
+            NSInteger index = [searchCondition indexOfObject:selectType];
+            [details replaceObjectAtIndex:index withObject:content];
+            [_selectInfo setInfoWithType:type content:content];
+            [self.chooseView reloadTitles:searchCondition details:details];
+        }];
+        [self.navigationController pushViewController:search animated:YES];
+    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UIViewController* destVC = segue.destinationViewController;
-//    if ([destVC isKindOfClass:[SearchVC class]]) {
-//        SearchVC *search = (SearchVC*)destVC;
-//        [search setTitles:selectType];
-//        //        [search setValue:@(_selectedIndex) forKey:@"searchType"];
-//        [search setChooseFinished:^(NSString *type, id content){
-//            NSLog(@"id content %@, %@",type, content);
-//            NSInteger index = [searchCondition indexOfObject:selectType];
-//            [details replaceObjectAtIndex:index withObject:content];
-//            [_selectInfo setInfoWithType:type content:content];
-//            [self.chooseView reloadTitles:searchCondition details:details];
-//        }];
-//    }
+    
     
 //    destVC.hidesBottomBarWhenPushed = YES;
 //    if ([(ArtDetailVC*)destVC respondsToSelector:@selector(setProductID:)]) {
 //        [destVC setValue:selectedProductID forKey:@"productID"];
 //    }
-    
-    
     
 }
 
@@ -200,6 +210,20 @@ static NSString * auctionCell = @"auctionCell";
     }];
 }
 
+- (NSMutableDictionary*)createChooseArrForDealStaus
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:@"交易状态" forKey:@"Title"];
+    [dict setObject:kDealStatus forKey:@"Code"];
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObject:@{@"Code":@"1",@"Name":@"全部"}];
+    [arr addObject:@{@"Code":@"2",@"Name":@"尚未开始"}];
+    [arr addObject:@{@"Code":@"3",@"Name":@"进行中"}];
+    [arr addObject:@{@"Code":@"4",@"Name":@"已结束"}];
+    [dict setObject:arr forKey:@"TypeInfo"];
+    return dict;
+}
+
 - (void)requestForSearchItem
 {
     [self showIndicatorView:kNetworkConnecting];
@@ -216,12 +240,14 @@ static NSString * auctionCell = @"auctionCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            searchCondition = result[@"SearchItems"];
-            [self recoverDetails];
-            if (!searchCondition.count) {
+            NSMutableArray *arr = result[@"SearchItems"];
+            if (!arr.count) {
                 [self showAlertView:@"没有筛选条件"];
                 return;
             }
+            [arr insertObject:[self createChooseArrForDealStaus] atIndex:0];
+            searchCondition = arr;
+            [self recoverDetails];
             [self presentChooseView:searchCondition];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -290,6 +316,19 @@ static NSString * auctionCell = @"auctionCell";
     cell.LFLabel.text = model.GoodsName;
 //    cell.LSLabel.text =
     cell.RSLabel.text = model.endTime;
+//    if (indexPath.row == 0) {
+//        cell.RSLabel.endTime = @"2015/01/09 17:30:00";//model.endTime;
+//        cell.RSLabel.startTime = @"2015/01/09 16:32:00";//model.startTime;
+//        [cell.RSLabel start];
+//    }else{
+//        cell.RSLabel.endTime = @"2015/01/09 19:36:23";//model.endTime;
+//        cell.RSLabel.startTime = @"2015/01/09 17:00:00";//model.startTime;
+//        [cell.RSLabel start];
+//    }
+    
+    cell.RSLabel.endTime = model.endTime;
+    cell.RSLabel.startTime = model.startTime;
+    [cell.RSLabel start];
     cell.RTLabel.text = [NSString stringWithFormat:@"￥%.2f",model.AppendPrice];
     cell.RBLabel.text = model.biddingNum;
     [cell.image setImageWithURL:[NSURL URLWithString:model.picURL]];

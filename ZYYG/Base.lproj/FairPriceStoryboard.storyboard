@@ -90,7 +90,7 @@
         <!--筛选-->
         <scene sceneID="WOd-9U-R1y">
             <objects>
-                <viewController title="筛选" id="edJ-3y-Kze" customClass="SearchVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchVC" title="筛选" id="edJ-3y-Kze" customClass="SearchVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gaH-E5-seX"/>
                         <viewControllerLayoutGuide type="bottom" id="cBy-EF-apE"/>

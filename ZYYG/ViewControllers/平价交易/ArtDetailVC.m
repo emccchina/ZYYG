@@ -102,7 +102,6 @@ static NSString *spreadCell = @"SpreadCell";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
 }
 
 - (void)doRightButton:(UIBarButtonItem*)item

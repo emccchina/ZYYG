@@ -28,8 +28,8 @@
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lod-VL-cwI">
-                        <rect key="frame" x="135" y="41" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lod-VL-cwI">
+                        <rect key="frame" x="135" y="41" width="5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -47,7 +47,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xct-oc-hJg" customClass="TimeLabel">
-                        <rect key="frame" x="192" y="41" width="42" height="21"/>
+                        <rect key="frame" x="136" y="41" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.89411764709999997" green="0.22352941179999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                     <constraint firstItem="DeU-LW-nRq" firstAttribute="leading" secondItem="Bj1-GN-c82" secondAttribute="trailing" constant="20" id="IQv-BZ-r6k"/>
                     <constraint firstItem="bGO-Qk-Ry5" firstAttribute="leading" secondItem="lod-VL-cwI" secondAttribute="leading" id="RiO-VE-ZVf"/>
                     <constraint firstItem="Bj1-GN-c82" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Xxd-ba-UWP"/>
-                    <constraint firstItem="xct-oc-hJg" firstAttribute="leading" secondItem="lod-VL-cwI" secondAttribute="trailing" constant="15" id="cXP-Y8-swU"/>
+                    <constraint firstItem="xct-oc-hJg" firstAttribute="leading" secondItem="lod-VL-cwI" secondAttribute="trailing" constant="-4" id="cXP-Y8-swU"/>
                     <constraint firstItem="bGO-Qk-Ry5" firstAttribute="leading" secondItem="3uD-t1-HRs" secondAttribute="leading" id="g9T-wb-AWt"/>
                     <constraint firstItem="xct-oc-hJg" firstAttribute="top" secondItem="lod-VL-cwI" secondAttribute="top" id="lPK-PG-D2e"/>
                     <constraint firstItem="8gA-1Y-dwO" firstAttribute="leading" secondItem="3uD-t1-HRs" secondAttribute="trailing" constant="15" id="tc7-eR-9f1"/>

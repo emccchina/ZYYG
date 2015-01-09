@@ -37,12 +37,6 @@
                                 <action selector="doClassifyItem:" destination="CSi-CW-fxe" id="LDa-NJ-W4Q"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="筛选" id="Mva-Ui-AFh">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="doChooseItem:" destination="CSi-CW-fxe" id="Xkc-NN-5wn"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="completeTB" destination="dxT-3d-YOd" id="tfm-zz-HnL"/>

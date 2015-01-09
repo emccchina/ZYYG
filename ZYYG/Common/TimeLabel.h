@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface TimeLabel : UILabel
+{
+    CADisplayLink *_countDownTimer;
+    NSTimeInterval          startCount;
+    NSTimeInterval          endCount;
+}
+
+@property (nonatomic, strong) NSString *startTime;
+@property (nonatomic, strong) NSString *endTime;
+@property (nonatomic, assign) NSInteger status;//0 开始   1 计时中   2 结束
+
+- (void)start;
 
 @end

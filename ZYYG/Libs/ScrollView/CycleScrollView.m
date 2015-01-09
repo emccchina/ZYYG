@@ -48,6 +48,7 @@
     return self;
 }
 
+
 #pragma mark -
 #pragma mark - 私有函数
 - (void)setDataource:(id<CycleScrollViewDatasource>)datasource
@@ -204,6 +205,7 @@
 #pragma mark - 响应事件
 - (void)animationTimerDidFired:(NSTimer *)timer
 {
+//    NSLog(@";;;;;;;;;;;;;;;;;;;, %p", self);
     CGFloat width = CGRectGetWidth(self.scrollView.frame);
     CGPoint newOffset = CGPointMake(self.scrollView.contentOffset.x/width*width + width , self.scrollView.contentOffset.y);
     [self.scrollView setContentOffset:newOffset animated:YES];
