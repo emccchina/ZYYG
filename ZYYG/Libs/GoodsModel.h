@@ -39,12 +39,17 @@
 @property (nonatomic, strong) NSString      *startTime; // 开始时间
 @property (nonatomic, strong) NSString      *status; //拍卖状态 10已成交20流拍  0有效
 @property (nonatomic, strong) NSString      *biddingNum;//竞拍次数
+@property (nonatomic, strong) NSString      *appendMoney;//加价
+@property (nonatomic, assign) NSInteger     delayMinute;
+@property (nonatomic, strong) NSString      *securityDeposit;//保证金
+@property (nonatomic, assign) BOOL          isSecurityDeposit;//是否交保证金
+@property (nonatomic, strong) NSString      *maxMoney;//
 
 @property (nonatomic, strong) NSString      *addCartCount;
 @property (nonatomic, assign) BOOL          valid;//失效与否
 @property (nonatomic, assign) NSInteger     typeForGoods;//(0 平价交易 1 线上竞价 2 私人定制 3 私人洽购 4 线下拍卖)
-+(id)goodsModelWith:(NSDictionary *)dict;//详情页面
-
+- (void)goodsModelWith:(NSDictionary *)dict;//详情页面
+- (void)goodsForBidHistroy:(NSDictionary*)dict;
 - (void)goodsModelFromCart:(NSDictionary*)dict;//购物车解析
 - (void)goodsModelFromHomePage:(NSDictionary*)dict;//首页解析
 - (void)goodsModelFromCollect:(NSDictionary *)dict;//我的收藏解析

@@ -60,6 +60,10 @@
 		94D89EDC1A220D900074B874 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED41A220D900074B874 /* Main.storyboard */; };
 		94D89EDD1A220D900074B874 /* PersonCenterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED61A220D900074B874 /* PersonCenterStoryboard.storyboard */; };
 		94D89EDE1A220D900074B874 /* ShopCartStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D89ED81A220D900074B874 /* ShopCartStoryboard.storyboard */; };
+		F71163561A60C162008EB58C /* BiddingInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F71163541A60C162008EB58C /* BiddingInfoCell.m */; };
+		F71163571A60C162008EB58C /* BiddingInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F71163551A60C162008EB58C /* BiddingInfoCell.xib */; };
+		F711635A1A60C4DB008EB58C /* MarginChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F71163591A60C4DB008EB58C /* MarginChooseView.m */; };
+		F711635C1A60C4EC008EB58C /* MarginChooseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F711635B1A60C4EC008EB58C /* MarginChooseView.xib */; };
 		F71DC88C1A43CF9900CF74E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */; };
 		F729B0191A36C55C0001FD39 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F729B0181A36C55C0001FD39 /* MyButton.m */; };
 		F73CE7991A4A6E7300B8012A /* MyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CE7981A4A6E7300B8012A /* MyWebView.m */; };
@@ -726,6 +730,12 @@
 		94D89ED51A220D900074B874 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		94D89ED71A220D900074B874 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PersonCenterStoryboard.storyboard; sourceTree = "<group>"; };
 		94D89ED91A220D900074B874 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShopCartStoryboard.storyboard; sourceTree = "<group>"; };
+		F71163531A60C162008EB58C /* BiddingInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiddingInfoCell.h; sourceTree = "<group>"; };
+		F71163541A60C162008EB58C /* BiddingInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiddingInfoCell.m; sourceTree = "<group>"; };
+		F71163551A60C162008EB58C /* BiddingInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BiddingInfoCell.xib; sourceTree = "<group>"; };
+		F71163581A60C4DB008EB58C /* MarginChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginChooseView.h; sourceTree = "<group>"; };
+		F71163591A60C4DB008EB58C /* MarginChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginChooseView.m; sourceTree = "<group>"; };
+		F711635B1A60C4EC008EB58C /* MarginChooseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarginChooseView.xib; sourceTree = "<group>"; };
 		F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F729B0171A36C55C0001FD39 /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
 		F729B0181A36C55C0001FD39 /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
@@ -1627,6 +1637,12 @@
 				F7D20A5D1A5F709F00DE0F96 /* AuctionArtCell.h */,
 				F7D20A5E1A5F709F00DE0F96 /* AuctionArtCell.m */,
 				F7D20A5F1A5F709F00DE0F96 /* AuctionArtCell.xib */,
+				F71163531A60C162008EB58C /* BiddingInfoCell.h */,
+				F71163541A60C162008EB58C /* BiddingInfoCell.m */,
+				F71163551A60C162008EB58C /* BiddingInfoCell.xib */,
+				F71163581A60C4DB008EB58C /* MarginChooseView.h */,
+				F71163591A60C4DB008EB58C /* MarginChooseView.m */,
+				F711635B1A60C4EC008EB58C /* MarginChooseView.xib */,
 			);
 			name = MyView;
 			path = ZYYG/MyView;
@@ -2678,6 +2694,7 @@
 				F7D2496B1A4191FC001AAAC3 /* iphonekeyboardHN_11.png in Resources */,
 				F7D248461A4191FC001AAAC3 /* iPhonePureNumberKeyboardView.xib in Resources */,
 				F7D248BD1A4191FC001AAAC3 /* ipad_key_123[]{[H]_59.png in Resources */,
+				F711635C1A60C4EC008EB58C /* MarginChooseView.xib in Resources */,
 				F7D248431A4191FC001AAAC3 /* iPhoneNumberKeyboardLandscapeView.xib in Resources */,
 				F93099531A2DB4B40054FFC1 /* MyCollectionCell.xib in Resources */,
 				F7D248FD1A4191FC001AAAC3 /* ipad_key_QWE[H]_61_nor.png in Resources */,
@@ -2871,6 +2888,7 @@
 				F7D2489E1A4191FC001AAAC3 /* ipad_key_123[]{[S]_57.png in Resources */,
 				F7D2490B1A4191FC001AAAC3 /* keychar01_03.png in Resources */,
 				F7D248B71A4191FC001AAAC3 /* ipad_key_123[]{[H]_40.png in Resources */,
+				F71163571A60C162008EB58C /* BiddingInfoCell.xib in Resources */,
 				F7D249BE1A4191FC001AAAC3 /* iphoneHQ_64.png in Resources */,
 				F7D248931A4191FC001AAAC3 /* ipad_key_123[]{[S]_34.png in Resources */,
 				F7D249C81A4191FC001AAAC3 /* iphoneHQ_88.png in Resources */,
@@ -3110,6 +3128,7 @@
 				F9BC26A21A2EE8ED006894C6 /* OrderListCellTop.m in Sources */,
 				F996B84E1A4AB26F00D38473 /* GoodsModel.m in Sources */,
 				F9C2808C1A5FB7E900FAC045 /* PaySuccessVC.m in Sources */,
+				F71163561A60C162008EB58C /* BiddingInfoCell.m in Sources */,
 				F7C8D5151A3809C6009F36B3 /* FMDatabasePool.m in Sources */,
 				94D89EC11A21FDA70074B874 /* JGProgressHUDIndicatorView.m in Sources */,
 				940178981A21CE0000697D14 /* AFSecurityPolicy.m in Sources */,
@@ -3118,6 +3137,7 @@
 				F7C8D5141A3809C6009F36B3 /* FMDatabaseAdditions.m in Sources */,
 				F7EC68CB1A2BF5DA000B289D /* UIView+JHExtension.m in Sources */,
 				F76A4DEB1A2C2F120005FF46 /* AdressVC.m in Sources */,
+				F711635A1A60C4DB008EB58C /* MarginChooseView.m in Sources */,
 				F791302F1A26F42500DB0EDC /* SearchReusltVC.m in Sources */,
 				F9BC26831A2E95BB006894C6 /* OrderListVC.m in Sources */,
 				F996B84B1A4AB26F00D38473 /* CartManager.m in Sources */,

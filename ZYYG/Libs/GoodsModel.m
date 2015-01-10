@@ -10,26 +10,36 @@
 
 @implementation GoodsModel
 
-+(id)goodsModelWith:(NSDictionary *)dict
+-(void)goodsModelWith:(NSDictionary *)dict
 {
-    GoodsModel *goods =[[GoodsModel alloc] init];
-    goods.GoodsCode =[dict safeObjectForKey:@"GoodsCode"];//商品编码
-    goods.GoodsName=[dict safeObjectForKey:@"GoodsName"] ;//商品名
-    goods.GoodsIntro=[dict safeObjectForKey:@"GoodsIntro"];//商品简介
-    goods.AppendPrice=[dict[@"AppendPrice"] floatValue];//价格
-    goods.ArtName=[dict safeObjectForKey:@"ArtName"] ;//艺术家名称
-    goods.AuthorIntro=[dict safeObjectForKey:@"AuthorIntro"] ;//作者简介
-    goods.CategoryName=[dict safeObjectForKey:@"CategoryName"] ;//分类名称
-    goods.CreationStyle=[dict safeObjectForKey:@"CreationStyle"] ;//创作风格
-    goods.GoodsNum=dict[@"GoodsNum"];//商品数量
-    goods.ImageUrl=dict[@"ImageUrl"] ;//图片路径
-    goods.centificateIntro = dict[@"Certificate"];
-    goods.Intro=[dict safeObjectForKey:@"Intro"] ;//商品简介
-    goods.IsCollect=dict[@"IsCollect"];//是否收藏 1标示收藏 0表示没收藏
-    goods.LimitedSale=[dict safeObjectForKey:@"LimitedSale"] ;//限量
-    goods.SpecDesc=[dict safeObjectForKey:@"SpecDesc"] ;//尺寸
-    goods.typeForGoods = [dict[@"SaleChannel"] integerValue]/10;
-    return goods;
+    self.GoodsCode =[dict safeObjectForKey:@"GoodsCode"];//商品编码
+    self.GoodsName=[dict safeObjectForKey:@"GoodsName"] ;//商品名
+    self.GoodsIntro=[dict safeObjectForKey:@"GoodsIntro"];//商品简介
+    self.AppendPrice=[dict[@"AppendPrice"] floatValue];//价格
+    self.ArtName=[dict safeObjectForKey:@"ArtName"] ;//艺术家名称
+    self.AuthorIntro=[dict safeObjectForKey:@"AuthorIntro"] ;//作者简介
+    self.CategoryName=[dict safeObjectForKey:@"CategoryName"] ;//分类名称
+    self.CreationStyle=[dict safeObjectForKey:@"CreationStyle"] ;//创作风格
+    self.GoodsNum=dict[@"GoodsNum"];//商品数量
+    self.ImageUrl=dict[@"ImageUrl"] ;//图片路径
+    self.centificateIntro = dict[@"Certificate"];
+    self.Intro=[dict safeObjectForKey:@"Intro"] ;//商品简介
+    self.IsCollect=dict[@"IsCollect"];//是否收藏 1标示收藏 0表示没收藏
+    self.LimitedSale=[dict safeObjectForKey:@"LimitedSale"] ;//限量
+    self.SpecDesc=[dict safeObjectForKey:@"SpecDesc"] ;//尺寸
+    self.typeForGoods = [dict[@"SaleChannel"] integerValue]/10;
+    
+    self.appendMoney = [dict safeObjectForKey:@"AppendMoney"];
+    self.endTime = [dict safeObjectForKey:@"EndDate"];
+    self.startTime = [dict safeObjectForKey:@"StartDate"];;
+    self.securityDeposit = [dict safeObjectForKey:@"SecurityDeposit"];
+    self.isSecurityDeposit = [[dict safeObjectForKey:@"IsSecurtyDeposit"] integerValue];
+    self.delayMinute = [[dict safeObjectForKey:@"DelayMinute"] integerValue];
+}
+
+- (void)goodsForBidHistroy:(NSDictionary *)dict
+{
+    
 }
 
 - (void)goodsModelFromCollect:(NSDictionary *)dict

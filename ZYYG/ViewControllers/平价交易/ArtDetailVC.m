@@ -14,6 +14,8 @@
 #import "GoodsModel.h"
 #import "AppDelegate.h"
 #import "KDPreView.h"
+#import "BiddingInfoCell.h"
+#import "MarginChooseView.h"
 
 @interface ArtDetailVC ()
 <UITableViewDataSource, UITableViewDelegate, CycleScrollViewDatasource, CycleScrollViewDelegate>
@@ -26,12 +28,15 @@
     CGFloat             _heightCertification;//
     GoodsModel          *goods;
     CycleScrollView     *scrollview;
+    NSMutableArray      *historyArr;
+    BOOL                _spreadHistory;
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
 @property (weak, nonatomic) IBOutlet UIButton *addCartBut;
 @property (weak, nonatomic) IBOutlet UIButton *cartBut;
 @property (weak, nonatomic) IBOutlet UILabel *countLab;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet MarginChooseView *marginView;
 
 @end
 
@@ -41,18 +46,29 @@ static NSString *imageCell = @"ImageScrollCell";
 static NSString *collectCell = @"CollectCell";
 static NSString *artInfoCell = @"ArtInfoCell";
 static NSString *spreadCell = @"SpreadCell";
-
+static NSString *biddingInfoCell = @"biddingInfoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
     CGFloat TBBottom = self.hiddenBottom ? 0 : 50;
+    self.bottomView.hidden = self.hiddenBottom;
+    goods = [[GoodsModel alloc] init];
+    if (self.type == 2) {
+        TBBottom = 80;
+        self.bottomView.hidden = YES;
+        self.marginView.hidden = NO;
+    }
+    historyArr = [[NSMutableArray alloc] init];
     _heightArt = 0;
     _heightArtist = 0;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
 
-    self.bottomView.hidden = self.hiddenBottom;
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MarginChooseView" owner:self options:nil];
+    UIView *view = nib[0];
+    [self.marginView addSubview:view];
+
     
     self.detailTB.delegate = self;
     self.detailTB.dataSource = self;
@@ -60,7 +76,7 @@ static NSString *spreadCell = @"SpreadCell";
     [self.detailTB registerNib:[UINib nibWithNibName:@"CollectCell" bundle:nil] forCellReuseIdentifier:collectCell];
     [self.detailTB registerNib:[UINib nibWithNibName:@"ArtInfoCell" bundle:nil] forCellReuseIdentifier:artInfoCell];
     [self.detailTB registerNib:[UINib nibWithNibName:@"SpreadCell" bundle:nil] forCellReuseIdentifier:spreadCell];
-    
+    [self.detailTB registerNib:[UINib nibWithNibName:@"BiddingInfoCell" bundle:nil] forCellReuseIdentifier:biddingInfoCell];
     self.addCartBut.layer.cornerRadius = 3;
     self.addCartBut.layer.backgroundColor = kRedColor.CGColor;
     
@@ -96,6 +112,9 @@ static NSString *spreadCell = @"SpreadCell";
 {
     [super viewWillAppear:animated];
     [self requestDetialInfo];
+    if (self.type == 2) {
+//        [self requestForHistory];
+    }
     self.tabBarController.tabBar.hidden = YES;
 }
 
@@ -141,11 +160,14 @@ static NSString *spreadCell = @"SpreadCell";
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@Detail.ashx",kServerDomain];
+    NSString *url = (self.type == 2?[NSString stringWithFormat:@"%@BidDetail.ashx",kServerDomain]:[NSString stringWithFormat:@"%@Detail.ashx",kServerDomain]);
     NSLog(@"url %@", url);
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"product_id", nil];
     if ([[UserInfo shareUserInfo] isLogin]) {
         [dict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
+    }
+    if (self.auctionCode) {
+        [dict setObject:self.auctionCode forKey:@"AuctionCode"];
     }
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self dismissIndicatorView];
@@ -153,7 +175,7 @@ static NSString *spreadCell = @"SpreadCell";
         id result = [self parseResults:responseObject];
         
         if (result) {
-            goods =[GoodsModel goodsModelWith:result];
+            [goods goodsModelWith:result];
             [self.detailTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -204,7 +226,10 @@ static NSString *spreadCell = @"SpreadCell";
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = collect ? [NSString stringWithFormat:@"%@favorite.ashx",kServerDomain] : [NSString stringWithFormat:@"%@Delfavorite.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.productID,@"Product_id",[UserInfo shareUserInfo].userKey,@"key",@"0",@"AUCTION_CODE",@"0",@"SALE_CHANNEL", nil];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"Product_id",[UserInfo shareUserInfo].userKey,@"key", nil];
+
+    [dict setObject:(self.auctionCode?:@"") forKey:@"AUCTION_CODE"];
+    [dict setObject:[NSString stringWithFormat:@"%ld", (long)goods.typeForGoods*10] forKey:@"SALE_CHANNEL"];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
@@ -220,6 +245,36 @@ static NSString *spreadCell = @"SpreadCell";
         [self showAlertView:kNetworkNotConnect];
         
     }];
+}
+
+- (void)requestForHistory
+{
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@BidHistory.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"goodsCode", nil];
+    if (self.auctionCode) {
+        [dict setObject:self.auctionCode forKey:@"auctionCode"];
+    }
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self dismissIndicatorView];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        
+        if (result) {
+            goods.maxMoney = result[@"MaxMoeny"];
+            [historyArr removeAllObjects];
+            [historyArr addObjectsFromArray:result[@"data"]];
+            [self.detailTB reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+
 }
 #pragma mark - scrollview cycle
 - (NSInteger)numberOfPages
@@ -248,7 +303,7 @@ static NSString *spreadCell = @"SpreadCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 5+(self.type==2);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -256,6 +311,8 @@ static NSString *spreadCell = @"SpreadCell";
     switch (section) {
         case 0:
             return 2;
+        case 5:
+            return _spreadHistory?3:1;//historyArr.count+1;
         default:
             return 1;
     }
@@ -283,7 +340,7 @@ static NSString *spreadCell = @"SpreadCell";
 {
     switch (indexPath.section) {
         case 0:
-            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : 75;
+            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : (self.type == 2 ? 160 : 75);
         case 1:
             return 120;
         case 2:{
@@ -318,18 +375,37 @@ static NSString *spreadCell = @"SpreadCell";
                 };
                 return cell;
             }else{
-                CollectCell *cell = (CollectCell*)[tableView dequeueReusableCellWithIdentifier:collectCell forIndexPath:indexPath];
-                cell.spread = YES;
-                NSNumber *colloct =goods.IsCollect;
-                NSLog(@"%@", colloct);
-                cell.collectState = [colloct integerValue];
-                cell.topLab.text =goods.GoodsName;
-                cell.botLab.text = goods.typeForGoods ? @"电话:" : @"价格:";
-                cell.botRightLab.text = goods.typeForGoods ? @"123456789" : [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
-                cell.colloct = ^(BOOL collect11){
-                    [self requestForCollect:collect11];
-                };
-                return cell;
+                if (self.type == 2) {
+                    BiddingInfoCell *cell = (BiddingInfoCell*)[tableView dequeueReusableCellWithIdentifier:biddingInfoCell forIndexPath:indexPath];
+                    cell.LTLabel.text = goods.GoodsName;
+                    cell.LSLabel.text = @"no data";
+                    cell.LThirstLabel.text = goods.maxMoney;//@"no data";
+                    cell.LFourthLabel.text = goods.securityDeposit;
+                    cell.RSLabel.text = goods.appendMoney;
+                    cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld",(long)goods.delayMinute];
+                    cell.LFifthLabel.text = goods.endTime;
+                    cell.collectState = [goods.IsCollect integerValue];
+                    cell.Lfinished = ^(){
+                        [self requestForCollect:YES];
+                    };
+                    cell.Rfinished = ^(){
+                        [self requestForHistory];
+                    };
+                    return cell;
+                }else{
+                    CollectCell *cell = (CollectCell*)[tableView dequeueReusableCellWithIdentifier:collectCell forIndexPath:indexPath];
+                    cell.spread = YES;
+                    NSNumber *colloct =goods.IsCollect;
+                    NSLog(@"%@", colloct);
+                    cell.collectState = [colloct integerValue];
+                    cell.topLab.text =goods.GoodsName;
+                    cell.botLab.text = goods.typeForGoods ? @"电话:" : @"价格:";
+                    cell.botRightLab.text = goods.typeForGoods ? @"123456789" : [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
+                    cell.colloct = ^(BOOL collect11){
+                        [self requestForCollect:collect11];
+                    };
+                    return cell;
+                }
             }
         }
         case 1:{
@@ -368,18 +444,40 @@ static NSString *spreadCell = @"SpreadCell";
             };
             return cell;
         }
-            case 4:{
+        case 4:{
+            SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
+            cell.titleLab.text = @"布罗德根艺术指数证书";
+            [cell.detailWebView loadHTMLString:goods.centificateIntro baseURL:nil];
+            cell.spreadState = _spreadCertification;
+            cell.reloadHeight = ^(BOOL spread, CGFloat height){
+                _spreadCertification = spread;
+                _heightCertification = height;
+                [self reloadTableViewSection:indexPath.section spread:spread];
+            };
+            return cell;
+        }
+        case 5:{
+            if (indexPath.row > 0) {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"historyCell" forIndexPath:indexPath];
+                UILabel *label1 = (UILabel*)[cell viewWithTag:1];
+                label1.text = @"用户";
+                UILabel *label2 = (UILabel*)[cell viewWithTag:2];
+                label2.text = @"出价";
+                UILabel *label3 = (UILabel*)[cell viewWithTag:3];
+                label3.text = @"当前状态";
+                return cell;
+            }else{
                 SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
-                cell.titleLab.text = @"布罗德根艺术指数证书";
-                [cell.detailWebView loadHTMLString:goods.centificateIntro baseURL:nil];
-                cell.spreadState = _spreadCertification;
+                cell.titleLab.text = @"出价历史";
+                cell.spreadState = _spreadHistory;
                 cell.reloadHeight = ^(BOOL spread, CGFloat height){
-                    _spreadCertification = spread;
-                    _heightCertification = height;
+                    _spreadHistory = spread;
+                    
                     [self reloadTableViewSection:indexPath.section spread:spread];
                 };
                 return cell;
             }
+        }
         default:
         return nil;
     }
@@ -389,7 +487,7 @@ static NSString *spreadCell = @"SpreadCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 1 && self.type) {
+    if (indexPath.section == 0 && indexPath.row == 1 && self.type == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
     }
 }

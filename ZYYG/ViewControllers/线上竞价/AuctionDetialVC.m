@@ -11,6 +11,7 @@
 #import "GoodsModel.h"
 #import "ChooseView.h"
 #import "SearchVC.h"
+#import "ArtDetailVC.h"
 
 @interface AuctionDetialVC ()
 <UITableViewDataSource, UITableViewDelegate>
@@ -262,6 +263,21 @@ static NSString * auctionCell = @"auctionCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)presentDetailVC:(GoodsModel*)info
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
+    UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
+    if ([detailVC isKindOfClass:[ArtDetailVC class]]) {
+        ArtDetailVC *vc = (ArtDetailVC*)detailVC;
+        [vc setHiddenBottom:NO];
+        [vc setProductID:info.GoodsCode];
+        [vc setAuctionCode:info.auctionCode];
+        [vc setType:2];
+    }
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -338,6 +354,8 @@ static NSString * auctionCell = @"auctionCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    GoodsModel *model = results[indexPath.row];
+    [self presentDetailVC:model];
 }
 
 @end
