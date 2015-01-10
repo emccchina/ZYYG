@@ -98,6 +98,7 @@
             </constraints>
             <connections>
                 <outlet property="addBut" destination="pUq-Ah-uhf" id="TPN-GA-bED"/>
+                <outlet property="dd" destination="-1" id="FFR-WZ-8Lg"/>
                 <outlet property="hightestBut" destination="Mqx-tD-Jid" id="rft-Pw-37v"/>
                 <outlet property="inputTF" destination="zHM-Ia-nxg" id="drf-W3-TMl"/>
                 <outlet property="marignBut" destination="8XD-6K-4A2" id="ujA-J8-AcS"/>

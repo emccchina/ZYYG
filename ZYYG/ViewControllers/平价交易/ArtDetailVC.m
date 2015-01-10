@@ -30,13 +30,14 @@
     CycleScrollView     *scrollview;
     NSMutableArray      *historyArr;
     BOOL                _spreadHistory;
+    MarginChooseView    *_marginView1;
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
 @property (weak, nonatomic) IBOutlet UIButton *addCartBut;
 @property (weak, nonatomic) IBOutlet UIButton *cartBut;
 @property (weak, nonatomic) IBOutlet UILabel *countLab;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet MarginChooseView *marginView;
+@property (strong, nonatomic) IBOutlet UIView *marginView;
 
 @end
 
@@ -48,6 +49,11 @@ static NSString *artInfoCell = @"ArtInfoCell";
 static NSString *spreadCell = @"SpreadCell";
 static NSString *biddingInfoCell = @"biddingInfoCell";
 
+- (void)awakeFromNib
+{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -58,17 +64,14 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     if (self.type == 2) {
         TBBottom = 80;
         self.bottomView.hidden = YES;
-        self.marginView.hidden = NO;
+        _marginView.hidden = NO;
     }
     historyArr = [[NSMutableArray alloc] init];
     _heightArt = 0;
     _heightArtist = 0;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
 
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MarginChooseView" owner:self options:nil];
-    UIView *view = nib[0];
-    [self.marginView addSubview:view];
-
+    
     
     self.detailTB.delegate = self;
     self.detailTB.dataSource = self;
@@ -80,14 +83,26 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     self.addCartBut.layer.cornerRadius = 3;
     self.addCartBut.layer.backgroundColor = kRedColor.CGColor;
     
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MarginChooseView" owner:_marginView options:nil];
+    UIView *view = nib[0];
+    _marginView1 = (MarginChooseView*)view;
+    [self.marginView addSubview:_marginView1];
+    _marginView1.frame = self.marginView.bounds;
+    __block ArtDetailVC *weakSelf = self;
+    _marginView1.gotoMargin = ^(){
+        [weakSelf presentPayMarginVC];
+    };
+    
     CGFloat width = CGRectGetWidth(self.countLab.frame);
     self.countLab.layer.cornerRadius = width/2;
     self.countLab.layer.backgroundColor = kRedColor.CGColor;
     [self setCountLabCount:0];
-    
-    NSLog(@"product id %@", self.productID);
-    
-    
+}
+
+- (void)presentPayMarginVC
+{
+    UIViewController *vc = [[UIStoryboard storyboardWithName:@"CompeteStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"PayMarginVC"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)addScrollForImageToWindow:(NSArray*)images
@@ -276,6 +291,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     }];
 
 }
+
 #pragma mark - scrollview cycle
 - (NSInteger)numberOfPages
 {

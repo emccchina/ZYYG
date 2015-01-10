@@ -384,7 +384,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inf-1H-OPf" customClass="MarginChooseView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inf-1H-OPf">
                                 <rect key="frame" x="0.0" y="520" width="600" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="ktO-Dc-CcX"/>

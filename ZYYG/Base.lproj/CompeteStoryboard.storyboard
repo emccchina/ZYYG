@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--线上竞价-->
@@ -112,6 +113,152 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omS-5Y-Fsx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="294" y="864"/>
+        </scene>
+        <!--保证金支付-->
+        <scene sceneID="vqs-dr-Jgb">
+            <objects>
+                <viewController storyboardIdentifier="PayMarginVC" title="支付保证金" id="PJB-tZ-0gm" userLabel="保证金支付" customClass="PayMarginVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Vz-uw-rPJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Epo-mL-0de"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IOA-67-QiI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="xyT-eo-WLR">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="So9-8K-1pM">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保证金:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pR1-Km-wyU">
+                                        <rect key="frame" x="20" y="14" width="56" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4HM-eH-3Tz">
+                                        <rect key="frame" x="81" y="14" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uto-c0-opR">
+                                        <rect key="frame" x="534" y="10" width="46" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressPay:" destination="PJB-tZ-0gm" eventType="touchUpInside" id="BW2-cH-Uka"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="4HM-eH-3Tz" firstAttribute="leading" secondItem="pR1-Km-wyU" secondAttribute="trailing" constant="5" id="Jlg-hc-nCa"/>
+                                    <constraint firstAttribute="height" constant="50" id="M3P-BB-1kU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uto-c0-opR" secondAttribute="trailing" constant="20" id="aep-yF-rpT"/>
+                                    <constraint firstAttribute="centerY" secondItem="pR1-Km-wyU" secondAttribute="centerY" id="g0k-OT-KB5"/>
+                                    <constraint firstItem="pR1-Km-wyU" firstAttribute="leading" secondItem="So9-8K-1pM" secondAttribute="leading" constant="20" id="hP1-F2-hBB"/>
+                                    <constraint firstAttribute="centerY" secondItem="4HM-eH-3Tz" secondAttribute="centerY" id="tDq-iP-dyZ"/>
+                                    <constraint firstAttribute="centerY" secondItem="Uto-c0-opR" secondAttribute="centerY" id="tHc-pC-k3j"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="So9-8K-1pM" firstAttribute="leading" secondItem="IOA-67-QiI" secondAttribute="leadingMargin" constant="-16" id="1Iz-yD-ccK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="So9-8K-1pM" secondAttribute="trailing" constant="-16" id="Bpd-lg-g3s"/>
+                            <constraint firstAttribute="trailing" secondItem="xyT-eo-WLR" secondAttribute="trailing" id="TLn-xo-SZc"/>
+                            <constraint firstItem="xyT-eo-WLR" firstAttribute="top" secondItem="IOA-67-QiI" secondAttribute="top" id="eBy-Vp-Duv"/>
+                            <constraint firstItem="Epo-mL-0de" firstAttribute="top" secondItem="So9-8K-1pM" secondAttribute="bottom" id="eX3-Q7-exa"/>
+                            <constraint firstItem="xyT-eo-WLR" firstAttribute="leading" secondItem="IOA-67-QiI" secondAttribute="leading" id="td3-0N-vWt"/>
+                            <constraint firstAttribute="bottom" secondItem="xyT-eo-WLR" secondAttribute="bottom" id="vKP-ks-NAG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="保证金支付" id="bFt-zQ-lAg"/>
+                    <connections>
+                        <outlet property="PayMarginTabelView" destination="xyT-eo-WLR" id="smu-se-xbd"/>
+                        <outlet property="marginMoneyLab" destination="4HM-eH-3Tz" id="4fQ-W7-g0Y"/>
+                        <outlet property="payButton" destination="Uto-c0-opR" id="bsz-1A-zEg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aSZ-iK-iWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2523" y="864"/>
+        </scene>
+        <!--支付成功-->
+        <scene sceneID="vng-tj-29T">
+            <objects>
+                <viewController title="支付保证金" id="9xF-ui-zhy" userLabel="支付成功" customClass="PaySuccessVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MaI-xH-vK9"/>
+                        <viewControllerLayoutGuide type="bottom" id="pzS-FA-Q1z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sae-qr-AUP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O8J-60-x08">
+                                <rect key="frame" x="250" y="178" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="A8H-bP-8hC"/>
+                                    <constraint firstAttribute="height" constant="100" id="fBI-oh-p14"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜您!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCv-P3-5zV">
+                                <rect key="frame" x="267" y="288" width="66" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在保证金列表中查看详细!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Dn-ad-Le4">
+                                <rect key="frame" x="208" y="377" width="185" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保证金支付成功!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfw-e2-htO">
+                                <rect key="frame" x="227" y="317" width="146" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付订单号为:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ4-vK-Y2k">
+                                <rect key="frame" x="247" y="351" width="107" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="QCv-P3-5zV" secondAttribute="centerX" id="37u-uU-Fiq"/>
+                            <constraint firstItem="QCv-P3-5zV" firstAttribute="top" secondItem="O8J-60-x08" secondAttribute="bottom" constant="10" id="629-xJ-YAF"/>
+                            <constraint firstItem="lQ4-vK-Y2k" firstAttribute="top" secondItem="sfw-e2-htO" secondAttribute="bottom" constant="10" id="ETk-G1-l4W"/>
+                            <constraint firstAttribute="centerX" secondItem="lQ4-vK-Y2k" secondAttribute="centerX" id="N5q-Az-bso"/>
+                            <constraint firstAttribute="centerX" secondItem="sfw-e2-htO" secondAttribute="centerX" id="SGV-w7-mkE"/>
+                            <constraint firstAttribute="centerX" secondItem="O8J-60-x08" secondAttribute="centerX" id="YbG-ou-GMd"/>
+                            <constraint firstAttribute="centerY" secondItem="QCv-P3-5zV" secondAttribute="centerY" id="f5B-GP-g1C"/>
+                            <constraint firstItem="sfw-e2-htO" firstAttribute="top" secondItem="QCv-P3-5zV" secondAttribute="bottom" constant="5" id="jhY-gR-eGA"/>
+                            <constraint firstAttribute="centerX" secondItem="7Dn-ad-Le4" secondAttribute="centerX" id="yKd-lC-weC"/>
+                            <constraint firstItem="7Dn-ad-Le4" firstAttribute="top" secondItem="lQ4-vK-Y2k" secondAttribute="bottom" constant="5" id="z9k-nz-8df"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="支付成功" id="DPh-di-qC6"/>
+                    <connections>
+                        <outlet property="lab1" destination="QCv-P3-5zV" id="CE4-Jt-U3K"/>
+                        <outlet property="lab2" destination="sfw-e2-htO" id="LpZ-Qh-vf0"/>
+                        <outlet property="lab3" destination="lQ4-vK-Y2k" id="mVA-Pq-CoG"/>
+                        <outlet property="lab4" destination="7Dn-ad-Le4" id="gxY-Au-TjL"/>
+                        <outlet property="successImage" destination="O8J-60-x08" id="u7C-28-u99"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wQe-gb-cUg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3239" y="864"/>
         </scene>
     </scenes>
 </document>

@@ -15,6 +15,7 @@
     self.inputTF.delegate = self;
     self.marignBut.layer.cornerRadius = 2;
     self.marignBut.layer.backgroundColor = kRedColor.CGColor;
+//    [self add]
 }
 
 
@@ -25,6 +26,9 @@
 - (IBAction)doHightestBut:(id)sender {
 }
 - (IBAction)doMarginBut:(id)sender {
+    if (self.gotoMargin) {
+        self.gotoMargin();
+    }
 }
 
 
