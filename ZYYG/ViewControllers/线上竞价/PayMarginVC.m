@@ -9,7 +9,12 @@
 #import "PayMarginVC.h"
 #import "PayMarginCell.h"
 
+
 @implementation PayMarginVC
+{
+    UserInfo *user;
+    NSDictionary            *_resultDict;
+}
 
 - (void)viewDidLoad
 {
@@ -43,7 +48,14 @@
 {
     if (indexPath.row==0) {
         PayMarginCell *cell=[tableView dequeueReusableCellWithIdentifier:@"PayMarginCell" forIndexPath:indexPath];
-        [cell.goodsImage setImage:[UIImage imageNamed:@"competeOrder"]];
+        [cell.goodsImage setImageWithURL:[NSURL URLWithString:self.goods.picURL]];
+   
+        cell.goodsName.text=self.goods.GoodsName;
+        cell.competeCode.text=[NSString stringWithFormat:@" %.2f",self.goods.AppendPrice];
+        cell.artistName.text=self.goods.ArtName;
+        cell.createStyle.text=self.goods.CreationStyle;
+        cell.size.text=self.goods.SpecDesc;
+        cell.MarginMoney.text=self.goods.securityDeposit;
         return cell;
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"PayWay"];
@@ -54,6 +66,45 @@
 }
 //
 - (IBAction)pressPay:(id)sender {
-    [self performSegueWithIdentifier:@"paySuccess" sender:self];
+    user=[UserInfo shareUserInfo];
+    if (![user isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@BidSecurtyDeposit.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    
+//    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",self.goods.auctionCode, @"AuctionCode",self.goods.GoodsCode, @"GoodsCode", @"60" , @"PaymentType",nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",@"1501080937178720", @"AuctionCode",@"1412191714231983", @"GoodsCode", @"60" , @"PaymentType",nil];
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+                        NSLog(@"%@",result);
+            if(!result[@"errno"]){
+                _resultDict=result;
+                [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"SecurtyDepositCode"] productName:_resultDict[@"GoodsName"] money:@"0.1" type:1 shopNum:_resultDict[@"MerchantID"] key:_resultDict[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
+                
+            }
+           
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+   
+}
+- (void)requestFinished
+{
+    [self dismissIndicatorView];
+}
+- (void)APayResult:(NSString*)result
+{
+    NSLog(@"%@",result);
+    [self showAlertView:[Utities doWithPayList:result]];
 }
 @end

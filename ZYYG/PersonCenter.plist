@@ -13,7 +13,7 @@
 			<key>headerImage</key>
 			<string>orderList.png</string>
 			<key>title</key>
-			<string>评价订单</string>
+			<string>平价订单</string>
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>

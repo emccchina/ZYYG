@@ -7,9 +7,11 @@
 //
 
 #import "BaseViewController.h"
+#import "GoodsModel.h"
+#import "PaaCreater.h"
+@interface PayMarginVC : BaseViewController <UITableViewDelegate,UITableViewDataSource,APayDelegate>
 
-@interface PayMarginVC : BaseViewController <UITableViewDelegate,UITableViewDataSource>
-
+@property (nonatomic,retain) GoodsModel *goods;
 @property (weak, nonatomic) IBOutlet UITableView *PayMarginTabelView;
 @property (weak, nonatomic) IBOutlet UILabel *marginMoneyLab;
 @property (weak, nonatomic) IBOutlet UIButton *payButton;

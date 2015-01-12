@@ -16,6 +16,7 @@
 #import "KDPreView.h"
 #import "BiddingInfoCell.h"
 #import "MarginChooseView.h"
+#import "PayMarginVC.h"
 
 @interface ArtDetailVC ()
 <UITableViewDataSource, UITableViewDelegate, CycleScrollViewDatasource, CycleScrollViewDelegate>
@@ -101,7 +102,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 
 - (void)presentPayMarginVC
 {
-    UIViewController *vc = [[UIStoryboard storyboardWithName:@"CompeteStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"PayMarginVC"];
+    PayMarginVC *vc = (PayMarginVC *)[[UIStoryboard storyboardWithName:@"CompeteStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"PayMarginVC"];
+    vc.goods=goods;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -497,12 +500,12 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         default:
         return nil;
     }
-    
-    
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0 && indexPath.row == 1 && self.type == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
     }

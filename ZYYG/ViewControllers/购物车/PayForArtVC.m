@@ -197,8 +197,8 @@ static NSString *cartCell = @"CartCell";
 
 - (void)doAlertViewTwo
 {
-    CGFloat money = [_resultDict[@"OrderMoney"] floatValue];
-    NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
+//    CGFloat money = [_resultDict[@"OrderMoney"] floatValue];
+//    NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
     NSMutableString *names = [NSMutableString string];
     for (NSString *name in _resultDict[@"GoodsNames"]) {
         [names appendString:[NSString stringWithFormat:@"%@,",name]];
