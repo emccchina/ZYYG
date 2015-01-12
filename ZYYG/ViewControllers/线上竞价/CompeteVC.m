@@ -39,7 +39,7 @@ static NSString * completeCell = @"completeCell";
 
 - (void)addheadRefresh
 {
-    [self.completeTB addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+    [self.completeTB addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self requestForCompleteGoods];
     }];
 }
