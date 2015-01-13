@@ -140,7 +140,6 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
             }else{
                 for (int i=0; i<orders.count; i++) {
                     OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
-                    NSLog(@"订单读取成功");
                     [orderArray addObject:order];
                 }
             }

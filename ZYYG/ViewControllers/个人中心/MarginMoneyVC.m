@@ -85,7 +85,6 @@
                 for (int i=0; i<marginList.count; i++) {
                     GoodsModel *mar=[[GoodsModel alloc] init];
                     [mar goodsModelFromMarginList:marginList[i]];
-                    NSLog(@"订单读取成功");
                     [marginArray addObject:mar];
                 }
             }
