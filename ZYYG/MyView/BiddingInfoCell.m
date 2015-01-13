@@ -14,6 +14,7 @@
     // Initialization code
     createTopLine
     createBottomLine
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.RBut.layer.cornerRadius = 2;
     self.RBut.layer.backgroundColor = kRedColor.CGColor;
 }

@@ -82,15 +82,18 @@
     
     if (endCount < 0){
         self.status = 2;
-        self.text = @"已结束";
+        self.timeCount = @"已结束";
+        self.text = self.timeCount;
         [_countDownTimer invalidate];
         _countDownTimer = nil;
     }else{
         if (startCount > 0) {
-            self.text = [NSString stringWithFormat:@"距开始:%@", [self HHMMSSFromCount:startCount]];
+            self.timeCount = [NSString stringWithFormat:@"距开始:%@", [self HHMMSSFromCount:startCount]];
+            self.text = self.timeCount;
         }else{
             self.status = 1;
-            self.text = [NSString stringWithFormat:@"距结束:%@", [self HHMMSSFromCount:endCount]];
+            self.timeCount = [NSString stringWithFormat:@"距结束:%@", [self HHMMSSFromCount:endCount]];
+            self.text = self.timeCount;
         }
     }
     endCount -= 1;

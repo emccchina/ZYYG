@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TimeLabel.h"
 typedef void (^doLeftButFinished)();
 typedef void (^doRightButFinished)();
 //竞价的状态  竞价详情中使用
@@ -20,7 +20,7 @@ typedef void (^doRightButFinished)();
 @property (weak, nonatomic) IBOutlet UILabel *LSLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LThirstLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LFourthLabel;
-@property (weak, nonatomic) IBOutlet UILabel *LFifthLabel;
+@property (weak, nonatomic) IBOutlet TimeLabel *LFifthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RSLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RThirstLabel;
 @property (weak, nonatomic) IBOutlet UIButton *LBut;

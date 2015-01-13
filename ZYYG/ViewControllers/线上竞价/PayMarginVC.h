@@ -12,6 +12,7 @@
 @interface PayMarginVC : BaseViewController <UITableViewDelegate,UITableViewDataSource,APayDelegate>
 
 @property (nonatomic,retain) GoodsModel *goods;
+@property (nonatomic, strong) NSString *auctionCode;
 @property (weak, nonatomic) IBOutlet UITableView *PayMarginTabelView;
 @property (weak, nonatomic) IBOutlet UILabel *marginMoneyLab;
 @property (weak, nonatomic) IBOutlet UIButton *payButton;

@@ -43,7 +43,7 @@
 @property (nonatomic, strong) NSString      *appendMoney;//加价
 @property (nonatomic, assign) NSInteger     delayMinute;
 @property (nonatomic, strong) NSString      *securityDeposit;//保证金
-@property (nonatomic, assign) BOOL          isSecurityDeposit;//是否交保证金
+@property (nonatomic, assign) NSInteger     isSecurityDeposit;//是否交保证金 -1:没有；0：待付款；10：已付款；
 @property (nonatomic, strong) NSString      *maxMoney;//当前价格
 @property (nonatomic, strong) NSString      *bidHistory;//出价历史
 @property (nonatomic, strong) NSString      *addCartCount;

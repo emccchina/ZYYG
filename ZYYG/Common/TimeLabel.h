@@ -11,7 +11,7 @@
 
 @interface TimeLabel : UILabel
 {
-    CADisplayLink *_countDownTimer;
+    CADisplayLink           *_countDownTimer;
     NSTimeInterval          startCount;
     NSTimeInterval          endCount;
 }
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *startTime;
 @property (nonatomic, strong) NSString *endTime;
 @property (nonatomic, assign) NSInteger status;//0 开始   1 计时中   2 结束
-
+@property (nonatomic, strong) NSString *timeCount;
 - (void)start;
 
 @end

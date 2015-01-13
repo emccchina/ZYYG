@@ -498,10 +498,10 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inf-1H-OPf">
-                                <rect key="frame" x="0.0" y="520" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="515" width="600" height="85"/>
                                 <color key="backgroundColor" red="0.89411764709999997" green="0.22352941179999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="ktO-Dc-CcX"/>
+                                    <constraint firstAttribute="height" constant="85" id="ktO-Dc-CcX"/>
                                 </constraints>
                             </view>
                         </subviews>

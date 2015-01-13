@@ -64,7 +64,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     self.bottomView.hidden = self.hiddenBottom;
     goods = [[GoodsModel alloc] init];
     if (self.type == 2) {
-        TBBottom = 80;
+        TBBottom = 85;
         self.bottomView.hidden = YES;
         _marginView.hidden = NO;
     }
@@ -91,8 +91,22 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [self.marginView addSubview:_marginView1];
     _marginView1.frame = self.marginView.bounds;
     __block ArtDetailVC *weakSelf = self;
-    _marginView1.gotoMargin = ^(){
-        [weakSelf presentPayMarginVC];
+    _marginView1.gotoMargin = ^(NSInteger state){
+        switch (state) {
+            case 0:
+                [weakSelf presentPayMarginVC];
+                break;
+            case 1:
+                break;
+            case 2:
+                [weakSelf requestForUpLoadMyPrice];
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+        
     };
     
     CGFloat width = CGRectGetWidth(self.countLab.frame);
@@ -103,8 +117,13 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 
 - (void)presentPayMarginVC
 {
+    if (![[UserInfo shareUserInfo] isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
     PayMarginVC *vc = (PayMarginVC *)[[UIStoryboard storyboardWithName:@"CompeteStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"PayMarginVC"];
     vc.goods=goods;
+    vc.auctionCode = self.auctionCode;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -174,6 +193,16 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     
 }
 
+- (void)setBottomState
+{
+//    if (<#condition#>) {
+//        <#statements#>
+//    }
+    _marginView1.type = goods.isSecurityDeposit/10;
+    _marginView1.appendMoney = [goods.appendMoney doubleValue];
+    _marginView1.minMoney = [goods.maxMoney doubleValue];
+}
+
 - (void)requestDetialInfo
 {
     [self showIndicatorView:kNetworkConnecting];
@@ -196,6 +225,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         if (result) {
             [goods goodsModelWith:result];
             [self.detailTB reloadData];
+            if (self.type == 2) {
+                [self setBottomState];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self dismissIndicatorView];
@@ -288,6 +320,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 //            [historyArr removeAllObjects];
 //            [historyArr addObjectsFromArray:result[@"data"]];
             [self.detailTB reloadData];
+            if (self.type == 2) {
+                [self setBottomState];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
@@ -295,6 +330,34 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [self showAlertView:kNetworkNotConnect];
     }];
 
+}
+
+- (void)requestForUpLoadMyPrice
+{
+    if (![UserInfo shareUserInfo].isLogin) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@BiddingSave.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"GoodCode",[UserInfo shareUserInfo].userKey,@"key",self.auctionCode,@"AuctionCode",_marginView1.inputTF.text,@"bidMoney", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
 }
 
 #pragma mark - scrollview cycle
@@ -361,7 +424,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 {
     switch (indexPath.section) {
         case 0:
-            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : (self.type == 2 ? 160 : 75);
+            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : (self.type == 2 ? 185 : 75);
         case 1:
             return 120;
         case 2:{
@@ -407,7 +470,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     cell.LFourthLabel.text = goods.securityDeposit;
                     cell.RSLabel.text = goods.appendMoney;
                     cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld",(long)goods.delayMinute];
-                    cell.LFifthLabel.text = goods.endTime;
+                    cell.LFifthLabel.startTime = goods.startTime;
+                    cell.LFifthLabel.endTime = goods.endTime;
+                    [cell.LFifthLabel start];
                     cell.collectState = [goods.IsCollect integerValue];
                     cell.Lfinished = ^(){
                         [self requestForCollect:YES];
