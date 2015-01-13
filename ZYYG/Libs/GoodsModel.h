@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSString      *Nstatus;//在售状态
 @property (nonatomic, strong) NSString      *centificateIntro;//证书简介
 
+@property (nonatomic, strong) NSString      *startPrice;
 @property (nonatomic, strong) NSString      *auctionCode;//拍卖场次code
 @property (nonatomic, strong) NSString      *auctionName;//拍卖场次name
 @property (nonatomic, strong) NSString      *endTime; //结束时间
@@ -43,8 +44,8 @@
 @property (nonatomic, assign) NSInteger     delayMinute;
 @property (nonatomic, strong) NSString      *securityDeposit;//保证金
 @property (nonatomic, assign) BOOL          isSecurityDeposit;//是否交保证金
-@property (nonatomic, strong) NSString      *maxMoney;//
-
+@property (nonatomic, strong) NSString      *maxMoney;//当前价格
+@property (nonatomic, strong) NSString      *bidHistory;//出价历史
 @property (nonatomic, strong) NSString      *addCartCount;
 @property (nonatomic, assign) BOOL          valid;//失效与否
 @property (nonatomic, assign) NSInteger     typeForGoods;//(0 平价交易 1 线上竞价 2 私人定制 3 私人洽购 4 线下拍卖)

@@ -29,6 +29,7 @@
     self.SpecDesc=[dict safeObjectForKey:@"SpecDesc"] ;//尺寸
     self.typeForGoods = [dict[@"SaleChannel"] integerValue]/10;
     
+    self.startPrice = [dict safeObjectForKey:@"StartMoney"];
     self.appendMoney = [dict safeObjectForKey:@"AppendMoney"];
     self.endTime = [dict safeObjectForKey:@"EndDate"];
     self.startTime = [dict safeObjectForKey:@"StartDate"];;

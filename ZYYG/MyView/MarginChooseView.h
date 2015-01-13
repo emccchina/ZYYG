@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MyTextField.h"
 typedef void (^GoToPayMargin)();
 
 @interface MarginChooseView : UIView
 <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *reduceBut;
-@property (weak, nonatomic) IBOutlet UITextField *inputTF;
+@property (weak, nonatomic) IBOutlet MyTextField *inputTF;
 @property (weak, nonatomic) IBOutlet UIButton *addBut;
 @property (weak, nonatomic) IBOutlet UIButton *hightestBut;
 @property (weak, nonatomic) IBOutlet UIButton *marignBut;

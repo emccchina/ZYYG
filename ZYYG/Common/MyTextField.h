@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MyTextField : UITextField
+{
+}
+@property (nonatomic, assign) CGRect superRect;
 @property (nonatomic, strong) id mark;
 @end

@@ -15,7 +15,8 @@
     self.inputTF.delegate = self;
     self.marignBut.layer.cornerRadius = 2;
     self.marignBut.layer.backgroundColor = kRedColor.CGColor;
-//    [self add]
+    self.inputTF.delegate = self;
+    self.inputTF.returnKeyType = UIReturnKeyDone;
 }
 
 
@@ -30,6 +31,27 @@
         self.gotoMargin();
     }
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(MyTextField *)textField
+{
+    NSLog(@"bigin tf");
+    textField.superRect = self.superview.frame;
+    CGRect rect = self.superview.frame;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+//    [textField.superview bringSubviewToFront:;];
+    
+}
+
 
 
 @end

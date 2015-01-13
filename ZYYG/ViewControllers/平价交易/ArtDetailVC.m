@@ -32,6 +32,7 @@
     NSMutableArray      *historyArr;
     BOOL                _spreadHistory;
     MarginChooseView    *_marginView1;
+    CGFloat             _heightHistory;
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
 @property (weak, nonatomic) IBOutlet UIButton *addCartBut;
@@ -131,7 +132,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [super viewWillAppear:animated];
     [self requestDetialInfo];
     if (self.type == 2) {
-//        [self requestForHistory];
+        [self requestForHistory];
     }
     self.tabBarController.tabBar.hidden = YES;
 }
@@ -283,8 +284,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         
         if (result) {
             goods.maxMoney = result[@"MaxMoeny"];
-            [historyArr removeAllObjects];
-            [historyArr addObjectsFromArray:result[@"data"]];
+            goods.bidHistory = result[@"Table"];
+//            [historyArr removeAllObjects];
+//            [historyArr addObjectsFromArray:result[@"data"]];
             [self.detailTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -330,8 +332,8 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     switch (section) {
         case 0:
             return 2;
-        case 5:
-            return _spreadHistory?3:1;//historyArr.count+1;
+//        case 5:
+//            return _spreadHistory?3:1;//historyArr.count+1;
         default:
             return 1;
     }
@@ -372,6 +374,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         {
             return 50+(_spreadCertification?_heightCertification:0);
         }
+        case 5:{
+            return 50+(_spreadHistory?_heightHistory:0);
+        }
         default:
             return 44;
     }
@@ -397,7 +402,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                 if (self.type == 2) {
                     BiddingInfoCell *cell = (BiddingInfoCell*)[tableView dequeueReusableCellWithIdentifier:biddingInfoCell forIndexPath:indexPath];
                     cell.LTLabel.text = goods.GoodsName;
-                    cell.LSLabel.text = @"no data";
+                    cell.LSLabel.text = goods.startPrice;
                     cell.LThirstLabel.text = goods.maxMoney;//@"no data";
                     cell.LFourthLabel.text = goods.securityDeposit;
                     cell.RSLabel.text = goods.appendMoney;
@@ -476,27 +481,28 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             return cell;
         }
         case 5:{
-            if (indexPath.row > 0) {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"historyCell" forIndexPath:indexPath];
-                UILabel *label1 = (UILabel*)[cell viewWithTag:1];
-                label1.text = @"用户";
-                UILabel *label2 = (UILabel*)[cell viewWithTag:2];
-                label2.text = @"出价";
-                UILabel *label3 = (UILabel*)[cell viewWithTag:3];
-                label3.text = @"当前状态";
-                return cell;
-            }else{
+//            if (indexPath.row > 0) {
+//                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"historyCell" forIndexPath:indexPath];
+//                UILabel *label1 = (UILabel*)[cell viewWithTag:1];
+//                label1.text = @"用户";
+//                UILabel *label2 = (UILabel*)[cell viewWithTag:2];
+//                label2.text = @"出价";
+//                UILabel *label3 = (UILabel*)[cell viewWithTag:3];
+//                label3.text = @"当前状态";
+//                return cell;
+//            }else{
                 SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
                 cell.titleLab.text = @"出价历史";
+                [cell.detailWebView loadHTMLString:goods.bidHistory baseURL:nil];
                 cell.spreadState = _spreadHistory;
                 cell.reloadHeight = ^(BOOL spread, CGFloat height){
                     _spreadHistory = spread;
-                    
+                    _heightHistory = height;
                     [self reloadTableViewSection:indexPath.section spread:spread];
                 };
                 return cell;
             }
-        }
+//        }
         default:
         return nil;
     }

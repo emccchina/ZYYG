@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--My Navigation Controller-->
@@ -384,12 +383,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inf-1H-OPf">
-                                <rect key="frame" x="0.0" y="520" width="600" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="ktO-Dc-CcX"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="sF3-kX-ug4">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -504,6 +497,13 @@
                                     <constraint firstAttribute="trailing" secondItem="m7W-MB-5GM" secondAttribute="trailing" constant="25" id="l0i-qj-mNo"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inf-1H-OPf">
+                                <rect key="frame" x="0.0" y="520" width="600" height="80"/>
+                                <color key="backgroundColor" red="0.89411764709999997" green="0.22352941179999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="ktO-Dc-CcX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -516,7 +516,7 @@
                             <constraint firstAttribute="trailing" secondItem="H5v-DM-YRi" secondAttribute="trailing" id="iYb-UN-fbn"/>
                             <constraint firstAttribute="trailing" secondItem="inf-1H-OPf" secondAttribute="trailing" id="rse-8f-W2o"/>
                             <constraint firstItem="inf-1H-OPf" firstAttribute="leading" secondItem="q24-dt-ek1" secondAttribute="leading" id="tMc-Z9-nxX"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="inf-1H-OPf" secondAttribute="bottom" id="vti-g7-gbi"/>
+                            <constraint firstAttribute="bottom" secondItem="inf-1H-OPf" secondAttribute="bottom" id="vti-g7-gbi"/>
                             <constraint firstItem="sF3-kX-ug4" firstAttribute="leading" secondItem="q24-dt-ek1" secondAttribute="leading" id="xHv-m6-PgZ"/>
                         </constraints>
                     </view>
