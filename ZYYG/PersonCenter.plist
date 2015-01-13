@@ -17,7 +17,7 @@
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>
-			<string>OrderList</string>
+			<string>NormalOrderList</string>
 		</dict>
 		<dict>
 			<key>headerImage</key>
@@ -27,7 +27,7 @@
 			<key>footerImage</key>
 			<string>left.png</string>
 			<key>segueString</key>
-			<string>OrderList</string>
+			<string>CompeteOrderList</string>
 		</dict>
 		<dict>
 			<key>headerImage</key>

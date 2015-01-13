@@ -13,6 +13,8 @@
 @interface OrderListVC : BaseViewController
 <UITableViewDataSource,UITableViewDelegate,APayDelegate>
 
+@property (retain, nonatomic)  NSString *orderType;
+
 @property (weak, nonatomic) IBOutlet UITableView *orderListTabelView;
 - (void)requestFinished;
 -(void)requestOrderList:(NSString *)ortype ordState:(NSString *)orstate ordSize:(NSInteger )size  ordNum:(NSInteger )num;

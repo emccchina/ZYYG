@@ -23,7 +23,6 @@
     NSMutableArray *orderArray;
     UserInfo *user;
     OrderModel *currentOrder;
-    NSString *orderType;
     NSString *orderState;
     NSInteger pageSize;
     NSInteger pageNum;
@@ -42,13 +41,18 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
+    if ([_orderType intValue]) {
+       self.title=@"竞价订单";
+    }else{
+        self.title=@"平价订单";
+    }
+    
     orderArray=[NSMutableArray array];
     [orderArray removeAllObjects];
-    orderType =@"0"; //平价订单
     orderState=@""; // 20 :已支付,30:已发货,40:已签收,50:已取消,-1删除,10:审核,0:创建
     pageSize=5;
     pageNum=1;
-    [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     
     self.orderListTabelView.delegate = self;
     self.orderListTabelView.dataSource = self;
@@ -83,7 +87,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     [orderArray removeAllObjects];
     [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
-        [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+        [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     }];
 }
 //状态标签按钮
@@ -105,14 +109,14 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else{
         orderState=@"";
     }
-    [self requestOrderList:orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
 
 }
 //订单列表请求
 
 -(void)requestOrderList:(NSString *)ortype ordState:(NSString *)orstate ordSize:(NSInteger )size  ordNum:(NSInteger )num
 {
-    orderType =ortype;
+    _orderType =ortype;
     orderState=orstate;
     pageSize=size;
     pageNum=num;
@@ -213,7 +217,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(indexPath.row == (order.Goods.count+1)){
         OrderListCellSum *sumCell=(OrderListCellSum*)[tableView dequeueReusableCellWithIdentifier:orderSumCell forIndexPath:indexPath];
         sumCell.goodsSum.text =[NSString stringWithFormat:@"共计(%lu)商品",(unsigned long)order.Goods.count];
-        sumCell.priceSum.text=[NSString stringWithFormat:@"实付:￥%@",order.OrderMoney];
+        sumCell.priceSum.text=[NSString stringWithFormat:@"应付:￥%@",order.OrderMoney];
         sumCell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         return sumCell;
@@ -260,8 +264,6 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else{
         NSLog(@"选择某一行");
     }
-    
-    
 }
 //判断状态 给出按钮
 -(void)setButton:(OrderListCellBottom *)bottomCell orderMod:(OrderModel *)ord
@@ -306,7 +308,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //            }
             NSLog(@"%@",result);
             [orderArray removeAllObjects];
-            [self requestOrderList:orderType ordState:orderState ordSize:5 ordNum:1];
+            [self requestOrderList:_orderType ordState:orderState ordSize:5 ordNum:1];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",error] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];

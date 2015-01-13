@@ -9,12 +9,14 @@
 #import "PersonCenterVC.h"
 #import "PersonCenterModel.h"
 #import "UserInfo.h"
+#import "OrderListVC.h"
 //个人中心
 @implementation PersonCenterVC
 {
     NSMutableArray *personDataArray;//个人中心数据
     UserInfo *user;//用户信息
     UIImage *imagedata;//头像图片
+    NSInteger orderType;
 }
 
 static NSString *topCell = @"topCell";
@@ -24,7 +26,6 @@ static NSString *listCell = @"listCell";
 {
     [super viewDidLoad];
     user=[UserInfo shareUserInfo];
-//    [self requestPersonCenter:0];
     //初始化数据
     personDataArray =[NSMutableArray array];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"PersonCenter" ofType:@"plist"];
@@ -52,12 +53,7 @@ static NSString *listCell = @"listCell";
     [self requestForCount];
     [self.PersonTableView reloadData];
 }
-//跳转
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    UIViewController *destVC = [segue destinationViewController];
-    destVC.hidesBottomBarWhenPushed = YES;
-}
+
 //获取用户信息
 - (void)requestPersonCenter:(NSInteger)number
 {
@@ -251,14 +247,35 @@ static NSString *listCell = @"listCell";
         return;
     }
     PersonCenterModel *model=personDataArray[indexPath.section][indexPath.row];
-    
-    if ([model.segueString isEqualToString:@"ShoppingCart"]) {
+    if ([model.segueString isEqualToString:@"NormalOrderList"]) {
+        orderType=0;
+        [self performSegueWithIdentifier:@"OrderList" sender:self];
+        return;
+    }else if ([model.segueString isEqualToString:@"CompeteOrderList"]) {
+        orderType=10;
+        [self performSegueWithIdentifier:@"OrderList" sender:self];
+        return;
+    }else if([model.segueString isEqualToString:@"ShoppingCart"]) {
         [self.tabBarController setSelectedIndex:3];
         return;
     }
     [self performSegueWithIdentifier:model.segueString sender:self];
 }
 
+//跳转
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if(orderType){
+        NSString *orderCode=[NSString stringWithFormat:@"%d",orderType];
+        UIViewController *vc = segue.destinationViewController;
+        vc.hidesBottomBarWhenPushed = YES;
+        if ([(OrderListVC *)vc respondsToSelector:@selector(setOrderType:)]) {
+            [vc setValue:orderCode forKey:@"orderType"];
+        }
+    }else{
+        NSLog(@"选择某一行");
+    }
+}
 - (IBAction)loginPress:(UIButton *)sender {
     [Utities presentLoginVC:self];
 }
