@@ -109,5 +109,20 @@
     self.startTime = [dict safeObjectForKey:@"StartDate"];
     self.status = [dict safeObjectForKey:@"Status"];
 }
+- (void)goodsModelFromMarginList:(NSDictionary*)dict
+{
+    self.GoodsCode = [dict safeObjectForKey:@"GoodsCode"];
+    self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
+    self.auctionName = [dict safeObjectForKey:@"ActionName"];
+    self.picURL = [dict safeObjectForKey:@"ImgUrl"];
+    self.securityDeposit=[dict safeObjectForKey:@"SecurtyDeposit"];
+    self.status = [dict safeObjectForKey:@"Status"];
+    self.startTime = [dict safeObjectForKey:@"ReceiveTime"];
+    self.endTime = [dict safeObjectForKey:@"RefundTime"];
+    self.CreateTime = [dict safeObjectForKey:@"DealTime"];
+    
+    
+    self.auctionCode = [dict safeObjectForKey:@"ActionCode"];
+}
 
 @end

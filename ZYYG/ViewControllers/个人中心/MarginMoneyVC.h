@@ -10,5 +10,5 @@
 
 @interface MarginMoneyVC : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *recommendedTableView;
+@property (weak, nonatomic) IBOutlet UITableView *marginTableView;
 @end
