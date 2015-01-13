@@ -117,7 +117,7 @@
 
 - (void)addheadRefresh
 {
-    [self.dataTB addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+    [self.dataTB addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [self requestGoods:0];
     }];
 }
