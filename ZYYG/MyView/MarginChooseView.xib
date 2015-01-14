@@ -17,20 +17,20 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pw7-y7-jcG">
-                    <rect key="frame" x="57" y="11" width="33" height="33"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pw7-y7-jcG">
+                    <rect key="frame" x="57" y="11" width="30" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="C7P-pm-mul"/>
                     </constraints>
-                    <state key="normal" image="reduceSign">
+                    <state key="normal" image="reduceRed">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="doReduceBut:" destination="iN0-l3-epB" eventType="touchUpInside" id="MeU-V6-M0c"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="交易无法进行" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-Ia-nxg" customClass="MyTextField">
-                    <rect key="frame" x="98" y="12" width="150" height="28"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="交易无法进行" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-Ia-nxg" customClass="MyTextField">
+                    <rect key="frame" x="95" y="12" width="150" height="28"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="4cS-Qg-7vy"/>
@@ -39,20 +39,20 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUq-Ah-uhf">
-                    <rect key="frame" x="256" y="12" width="33" height="33"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUq-Ah-uhf">
+                    <rect key="frame" x="253" y="12" width="30" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="DAS-1J-YgE"/>
                     </constraints>
-                    <state key="normal" image="addSign">
+                    <state key="normal" image="addRed">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="doAddBut:" destination="iN0-l3-epB" eventType="touchUpInside" id="J7W-2I-MHl"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-tD-Jid">
-                    <rect key="frame" x="113" y="52" width="120" height="20"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-tD-Jid">
+                    <rect key="frame" x="110" y="52" width="120" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="qFa-YU-EHd"/>
                     </constraints>
@@ -66,8 +66,8 @@
                         <action selector="doHightestBut:" destination="iN0-l3-epB" eventType="touchUpInside" id="vk7-PO-6hR"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XD-6K-4A2">
-                    <rect key="frame" x="146" y="52" width="70" height="27"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XD-6K-4A2">
+                    <rect key="frame" x="143" y="52" width="70" height="27"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="27" id="ip7-i9-VpV"/>
                         <constraint firstAttribute="width" constant="70" id="yNQ-cq-ObZ"/>
@@ -115,7 +115,7 @@
     </objects>
     <resources>
         <image name="accountUnselected" width="20" height="20"/>
-        <image name="addSign" width="33" height="33"/>
-        <image name="reduceSign" width="33" height="33"/>
+        <image name="addRed" width="30" height="30"/>
+        <image name="reduceRed" width="30" height="30"/>
     </resources>
 </document>
