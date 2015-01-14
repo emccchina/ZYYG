@@ -102,6 +102,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"chooseCell"];
     }
+    cell.textLabel.font = [UIFont systemFontOfSize:17];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if ([self.titles[indexPath.row] isKindOfClass:[NSNull class]]) {
         return cell;

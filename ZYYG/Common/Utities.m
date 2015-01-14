@@ -171,7 +171,7 @@
 {
     const char *original_str = [str UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(original_str, strlen(original_str), result);
+    CC_MD5(original_str, (CC_LONG)strlen(original_str), result);
     NSData* data = [NSData dataWithBytes:result length:CC_MD5_DIGEST_LENGTH];
     NSString *hash = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return hash;

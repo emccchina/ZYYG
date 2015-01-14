@@ -216,6 +216,7 @@
         SettingModel *model=settingDataArray[indexPath.section][indexPath.row];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingCell" forIndexPath:indexPath];
         cell.textLabel.text=model.title;
+        cell.textLabel.font = [UIFont systemFontOfSize:17];
         return cell;
     }
     

@@ -101,7 +101,6 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@RetakePassWord.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
-    NSLog(@"url %@, %@, %d", url, password, password.length);
     NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.accountTF.text, @"CheckCode",password, @"PassWord",self.emailTF.text, @"Username", nil];
     [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
