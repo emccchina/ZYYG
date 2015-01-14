@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "addSign.png"
+      "filename" : "addRed.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "addSign@2x.png"
+      "filename" : "addRed@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "addSign@3x.png"
+      "filename" : "addRed@3x.png"
     }
   ],
   "info" : {

@@ -56,9 +56,15 @@
 
 - (IBAction)doReduceBut:(id)sender {
     [self changeMoney:NO];
+    if (self.changeMoney) {
+        self.changeMoney(NO);
+    }
 }
 - (IBAction)doAddBut:(id)sender {
     [self changeMoney:YES];
+    if (self.changeMoney) {
+        self.changeMoney(YES);
+    }
 }
 - (IBAction)doHightestBut:(id)sender {
 }
@@ -75,6 +81,15 @@
     self.reduceBut.enabled = enable;
     self.inputTF.enabled = NO;
     self.hightestBut.enabled = enable;
+    if (enable) {
+        [self.marignBut.layer setBackgroundColor:kRedColor.CGColor];
+        [self.addBut setImage:[UIImage imageNamed:@"addRed"] forState:UIControlStateNormal];
+        [self.reduceBut setImage:[UIImage imageNamed:@"reduceRed"] forState:UIControlStateNormal];
+    }else{
+        [self.marignBut.layer setBackgroundColor:kLightGrayColor.CGColor];
+        [self.addBut setImage:[UIImage imageNamed:@"addGray"] forState:UIControlStateNormal];
+        [self.reduceBut setImage:[UIImage imageNamed:@"reduceGray"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)setType:(NSInteger)type
@@ -90,21 +105,17 @@
         case 1:{
             [self.marignBut setTitle:@"尚未开始" forState:UIControlStateNormal];
             [self setButState:NO];
-            [self.marignBut.layer setBackgroundColor:kLightGrayColor.CGColor];
         }break;
         case 2:{
             [self.marignBut setTitle:@"我要出价" forState:UIControlStateNormal];
-            [self.marignBut.layer setBackgroundColor:kRedColor.CGColor];
             [self setButState:YES];
         }break;
         case 3:{
             [self.marignBut setTitle:@"已成交" forState:UIControlStateNormal];
-            [self.marignBut.layer setBackgroundColor:kLightGrayColor.CGColor];
             [self setButState:NO];
         }break;
         case 4:{
             [self.marignBut setTitle:@"已流拍" forState:UIControlStateNormal];
-            [self.marignBut.layer setBackgroundColor:kLightGrayColor.CGColor];
             [self setButState:NO];
         }
         default:

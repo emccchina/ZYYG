@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MyTextField.h"
 typedef void (^GoToPayMargin)(NSInteger state);
-
+typedef void (^ChangeMoneyCount)(BOOL addMoney);//no reduce    yes add
 @interface MarginChooseView : UIView
 <UITextFieldDelegate>
 {
@@ -24,7 +24,7 @@ typedef void (^GoToPayMargin)(NSInteger state);
 @property (nonatomic, assign) double minMoney;
 @property (weak, nonatomic) IBOutlet NSObject *dd;
 @property (nonatomic, copy) GoToPayMargin  gotoMargin;
-
+@property (nonatomic, copy) ChangeMoneyCount changeMoney;
 @property (nonatomic, assign) NSInteger type;//0交保证金  1 尚未开始   2我要出价   3已成交灰色不能点 4已流拍
 @property (nonatomic, assign) double appendMoney;
 @end

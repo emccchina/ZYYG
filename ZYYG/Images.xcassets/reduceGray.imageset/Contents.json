@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "reduceSign.png"
+      "filename" : "reduceGray.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "reduceSign@2x.png"
+      "filename" : "reduceGray@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "reduceSign@3x.png"
+      "filename" : "reduceGray@3x.png"
     }
   ],
   "info" : {

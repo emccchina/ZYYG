@@ -34,6 +34,7 @@
     MarginChooseView    *_marginView1;
     CGFloat             _heightHistory;
     NSInteger                isBegin;//竞价中 拍卖是否开始
+    BOOL                isCompare;//竞价中底部view 状态 通过刷新0  还是 加减1,比较是否最大值 可否提交出价
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
 @property (weak, nonatomic) IBOutlet UIButton *addCartBut;
@@ -72,6 +73,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     historyArr = [[NSMutableArray alloc] init];
     _heightArt = 0;
     _heightArtist = 0;
+    isCompare = NO;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
 
     
@@ -92,6 +94,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [self.marginView addSubview:_marginView1];
     _marginView1.frame = self.marginView.bounds;
     __block ArtDetailVC *weakSelf = self;
+    _marginView1.changeMoney = ^(BOOL add){
+        [weakSelf doWithMoneyCount];
+    };
     _marginView1.gotoMargin = ^(NSInteger state){
         switch (state) {
             case 0:
@@ -114,6 +119,20 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     self.countLab.layer.cornerRadius = width/2;
     self.countLab.layer.backgroundColor = kRedColor.CGColor;
     [self setCountLabCount:0];
+}
+
+- (void)doWithMoneyCount
+{
+    if (![[UserInfo shareUserInfo] isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    if (!_marginView1.type) {
+        [self showAlertView:@"请先交保证金"];
+        return;
+    }
+    isCompare = YES;
+    [self requestForHistory];
 }
 
 - (void)presentPayMarginVC
@@ -211,6 +230,14 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 
 - (void)setBottomState
 {
+    if (isCompare) {
+        double price = [_marginView1.inputTF.text doubleValue];
+        if (price <= [goods.maxMoney floatValue]) {
+            [self showAlertView:@"已有用户出更高价格"];
+        }
+        return;
+    }
+    
     if (goods.biddingStatus == 20) {
         _marginView1.type = 4;
     }else if(goods.biddingStatus == 10){
@@ -375,6 +402,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [Utities presentLoginVC:self];
         return;
     }
+    isCompare = YES;
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -386,7 +414,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-            
+            [self setBottomState];
+            isCompare = NO;
+            [self requestForHistory];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -526,6 +556,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                             [Utities presentLoginVC:self];
                             return;
                         }
+                        isCompare = NO;
                         [self requestForHistory];
                     };
                     return cell;
