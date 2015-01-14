@@ -33,6 +33,7 @@
     BOOL                _spreadHistory;
     MarginChooseView    *_marginView1;
     CGFloat             _heightHistory;
+    NSInteger                isBegin;//竞价中 拍卖是否开始
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
 @property (weak, nonatomic) IBOutlet UIButton *addCartBut;
@@ -150,9 +151,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 {
     [super viewWillAppear:animated];
     [self requestDetialInfo];
-    if (self.type == 2) {
-        [self requestForHistory];
-    }
+//    if (self.type == 2) {
+//        [self requestForHistory];
+//    }
     self.tabBarController.tabBar.hidden = YES;
 }
 
@@ -193,14 +194,45 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     
 }
 
+- (BOOL)artOwn:(NSArray*)array
+{
+    if (![[UserInfo shareUserInfo] isLogin]) {
+        return NO;
+    }
+    if (array.count > 0) {
+        NSDictionary *dict = array[0];
+        if ([dict[@"UserCode"] isEqualToString:[UserInfo shareUserInfo].userKey]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 - (void)setBottomState
 {
-//    if (<#condition#>) {
-//        <#statements#>
-//    }
-    _marginView1.type = goods.isSecurityDeposit/10;
-    _marginView1.appendMoney = [goods.appendMoney doubleValue];
-    _marginView1.minMoney = [goods.maxMoney doubleValue];
+    if (goods.biddingStatus == 20) {
+        _marginView1.type = 4;
+    }else if(goods.biddingStatus == 10){
+        _marginView1.type = 3;
+        if ([self artOwn:historyArr]) {
+            [self showAlertView:@"您已拍下此艺术品,请在十分钟内付款"];
+        }
+    }else{
+        if (goods.isSecurityDeposit == 10) {
+            if (!isBegin) {
+                _marginView1.type = 1;
+            }else{
+                _marginView1.type = 2;
+                _marginView1.appendMoney = [goods.appendMoney doubleValue];
+                _marginView1.minMoney = [goods.maxMoney doubleValue];
+            }
+        }else{
+           _marginView1.type = 0;
+        }
+    }
+    
+    
 }
 
 - (void)requestDetialInfo
@@ -224,10 +256,12 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         
         if (result) {
             [goods goodsModelWith:result];
-            [self.detailTB reloadData];
             if (self.type == 2) {
                 [self setBottomState];
+                [self requestForHistory];
             }
+            [self.detailTB reloadData];
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self dismissIndicatorView];
@@ -300,6 +334,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 
 - (void)requestForHistory
 {
+    
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -317,12 +352,14 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         if (result) {
             goods.maxMoney = result[@"MaxMoeny"];
             goods.bidHistory = result[@"Table"];
-//            [historyArr removeAllObjects];
-//            [historyArr addObjectsFromArray:result[@"data"]];
-            [self.detailTB reloadData];
+            goods.biddingStatus = [result[@"Status"] integerValue];
+            [historyArr removeAllObjects];
+            [historyArr addObjectsFromArray:result[@"data"]];
             if (self.type == 2) {
                 [self setBottomState];
             }
+            [self.detailTB reloadData];
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
@@ -470,14 +507,25 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     cell.LFourthLabel.text = goods.securityDeposit;
                     cell.RSLabel.text = goods.appendMoney;
                     cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld",(long)goods.delayMinute];
-                    cell.LFifthLabel.startTime = goods.startTime;
-                    cell.LFifthLabel.endTime = goods.endTime;
-                    [cell.LFifthLabel start];
+                    if (goods.biddingStatus == 20) {
+                        cell.LFifthLabel.text = @"已流拍";
+                    }else if (goods.biddingStatus == 10){
+                        cell.LFifthLabel.text = @"已成交";
+                    }else{
+                        cell.LFifthLabel.startTime = goods.startTime;
+                        cell.LFifthLabel.endTime = goods.endTime;
+                        [cell.LFifthLabel start];
+                        isBegin = cell.LFifthLabel.status;
+                    }
                     cell.collectState = [goods.IsCollect integerValue];
                     cell.Lfinished = ^(){
                         [self requestForCollect:YES];
                     };
                     cell.Rfinished = ^(){
+                        if (![UserInfo shareUserInfo].isLogin) {
+                            [Utities presentLoginVC:self];
+                            return;
+                        }
                         [self requestForHistory];
                     };
                     return cell;

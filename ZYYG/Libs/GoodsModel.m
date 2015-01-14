@@ -115,7 +115,7 @@
     self.GoodsCode = [dict safeObjectForKey:@"GoodsCode"];
     self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
     self.auctionName = [dict safeObjectForKey:@"ActionName"];
-    self.picURL = [dict safeObjectForKey:@"ImgUrl"];
+    self.picURL = [dict safeObjectForKey:@"ImageUrl"];
     self.securityDeposit=[dict safeObjectForKey:@"SecurtyDeposit"];
     self.status = [dict safeObjectForKey:@"Status"];
     self.startTime = [dict safeObjectForKey:@"ReceiveTime"];

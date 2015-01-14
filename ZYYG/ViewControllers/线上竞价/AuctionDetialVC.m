@@ -68,6 +68,12 @@ static NSString * auctionCell = @"auctionCell";
     [self requestForResult];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
 - (void)back
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -139,6 +145,7 @@ static NSString * auctionCell = @"auctionCell";
 {
     selectType = selected;
     UIViewController* destVC = [[UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"SearchVC"];
+    destVC.hidesBottomBarWhenPushed = YES;
     if ([destVC isKindOfClass:[SearchVC class]]) {
         SearchVC *search = (SearchVC*)destVC;
         [search setTitles:selectType];

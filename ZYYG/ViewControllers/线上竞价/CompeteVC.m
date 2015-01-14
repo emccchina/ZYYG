@@ -150,6 +150,7 @@ static NSString * completeCell = @"completeCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     AuctionModel *model = completeResults[indexPath.row];
     UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AuctionVC"];
+    vc.hidesBottomBarWhenPushed = YES;
     if ([vc isKindOfClass:[AuctionDetialVC class]]) {
         AuctionDetialVC * detailVC = (AuctionDetialVC*)vc;
         SelectInfo *info = [[SelectInfo alloc] init];

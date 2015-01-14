@@ -94,6 +94,7 @@
         }break;
         case 2:{
             [self.marignBut setTitle:@"我要出价" forState:UIControlStateNormal];
+            [self.marignBut.layer setBackgroundColor:kRedColor.CGColor];
             [self setButState:YES];
         }break;
         case 3:{
@@ -101,7 +102,11 @@
             [self.marignBut.layer setBackgroundColor:kLightGrayColor.CGColor];
             [self setButState:NO];
         }break;
-            
+        case 4:{
+            [self.marignBut setTitle:@"已流拍" forState:UIControlStateNormal];
+            [self.marignBut.layer setBackgroundColor:kLightGrayColor.CGColor];
+            [self setButState:NO];
+        }
         default:
             break;
     }

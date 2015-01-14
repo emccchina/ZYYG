@@ -25,6 +25,6 @@ typedef void (^GoToPayMargin)(NSInteger state);
 @property (weak, nonatomic) IBOutlet NSObject *dd;
 @property (nonatomic, copy) GoToPayMargin  gotoMargin;
 
-@property (nonatomic, assign) NSInteger type;//0交保证金  1 尚未开始   2我要出价   3已成交灰色不能点
+@property (nonatomic, assign) NSInteger type;//0交保证金  1 尚未开始   2我要出价   3已成交灰色不能点 4已流拍
 @property (nonatomic, assign) double appendMoney;
 @end

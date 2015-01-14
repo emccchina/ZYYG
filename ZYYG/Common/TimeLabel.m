@@ -88,6 +88,7 @@
         _countDownTimer = nil;
     }else{
         if (startCount > 0) {
+            self.status = 0;
             self.timeCount = [NSString stringWithFormat:@"距开始:%@", [self HHMMSSFromCount:startCount]];
             self.text = self.timeCount;
         }else{

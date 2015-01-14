@@ -36,7 +36,7 @@
     NSLog(@"%@", NSStringFromCGRect(self.superRect));
     NSLog(@"keyboard info %@", notification.userInfo);
     CGRect _keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGFloat u = CGRectGetMaxY(self.superRect);
+//    CGFloat u = CGRectGetMaxY(self.superRect);
     //如果self在键盘之下 才做偏移
     if (CGRectGetMaxY(self.superRect)>=_keyboardRect.origin.y)
         {

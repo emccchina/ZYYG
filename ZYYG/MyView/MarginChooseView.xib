@@ -29,7 +29,7 @@
                         <action selector="doReduceBut:" destination="iN0-l3-epB" eventType="touchUpInside" id="MeU-V6-M0c"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="请输入金额" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-Ia-nxg" customClass="MyTextField">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="交易无法进行" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-Ia-nxg" customClass="MyTextField">
                     <rect key="frame" x="98" y="12" width="150" height="28"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
