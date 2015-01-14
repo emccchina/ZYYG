@@ -11,5 +11,4 @@
 @interface OrderListCellTop : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *orderNO;
-@property (weak, nonatomic) IBOutlet UILabel *orderType;
 @end

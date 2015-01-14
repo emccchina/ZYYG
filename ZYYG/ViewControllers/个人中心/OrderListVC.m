@@ -52,6 +52,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     orderState=@""; // 20 :已支付,30:已发货,40:已签收,50:已取消,-1删除,10:审核,0:创建
     pageSize=5;
     pageNum=1;
+    [self.orderListTabelView registerNib:[UINib nibWithNibName:orderTopCell bundle:nil] forCellReuseIdentifier:orderTopCell];
+    [self.orderListTabelView registerNib:[UINib nibWithNibName:orderGoodsCell bundle:nil] forCellReuseIdentifier:orderGoodsCell];
+    [self.orderListTabelView registerNib:[UINib nibWithNibName:orderSumCell bundle:nil] forCellReuseIdentifier:orderSumCell];
+    [self.orderListTabelView registerNib:[UINib nibWithNibName:orderBottomCell bundle:nil] forCellReuseIdentifier:orderBottomCell];
+    
     [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     
     self.orderListTabelView.delegate = self;
@@ -211,13 +216,12 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     if(indexPath.row ==0){
         OrderListCellTop   *topCell=(OrderListCellTop*)[tableView dequeueReusableCellWithIdentifier:orderTopCell forIndexPath:indexPath];
         topCell.orderNO.text=order.OrderCode;
-        topCell.orderType.text=order.OrderType;
         topCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return topCell;
     }else if(indexPath.row == (order.Goods.count+1)){
         OrderListCellSum *sumCell=(OrderListCellSum*)[tableView dequeueReusableCellWithIdentifier:orderSumCell forIndexPath:indexPath];
-        sumCell.goodsSum.text =[NSString stringWithFormat:@"共计(%lu)商品",(unsigned long)order.Goods.count];
-        sumCell.priceSum.text=[NSString stringWithFormat:@"应付:￥%@",order.OrderMoney];
+        sumCell.goodsSum.text =[NSString stringWithFormat:@"(%lu)",(unsigned long)order.Goods.count];
+        sumCell.priceSum.text=[NSString stringWithFormat:@"￥%@",order.OrderMoney];
         sumCell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         return sumCell;

@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *goodsName;
 @property (weak, nonatomic) IBOutlet UILabel *goodsPrice;
 @property (weak, nonatomic) IBOutlet UILabel *goodsCount;
+@property (weak, nonatomic) IBOutlet UILabel *marginLab;
+@property (weak, nonatomic) IBOutlet UILabel *marginPrice;
 @end
