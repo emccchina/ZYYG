@@ -595,6 +595,8 @@
 		F99C891D1A66182800EC87DF /* OrderListGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C89191A66182800EC87DF /* OrderListGoodsCell.xib */; };
 		F99C891E1A66182800EC87DF /* OrderListSumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C891A1A66182800EC87DF /* OrderListSumCell.xib */; };
 		F99C891F1A66182800EC87DF /* OrderListTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C891B1A66182800EC87DF /* OrderListTopCell.xib */; };
+		F99C89211A665A2000EC87DF /* OrderDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C89201A665A2000EC87DF /* OrderDetailCell.xib */; };
+		F99C89241A665BEF00EC87DF /* OrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F99C89231A665BEF00EC87DF /* OrderDetailCell.m */; };
 		F9A2D45F1A4CF70F0019EACE /* ChooseSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2D45E1A4CF70F0019EACE /* ChooseSingleView.m */; };
 		F9A2EF511A358BB600070BFF /* PersonDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2EF501A358BB600070BFF /* PersonDetailVC.m */; };
 		F9AB0D931A2FEF4100EFEDC5 /* CompeteRecordCellTop.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0D921A2FEF4100EFEDC5 /* CompeteRecordCellTop.m */; };
@@ -1354,6 +1356,9 @@
 		F99C89191A66182800EC87DF /* OrderListGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListGoodsCell.xib; sourceTree = "<group>"; };
 		F99C891A1A66182800EC87DF /* OrderListSumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListSumCell.xib; sourceTree = "<group>"; };
 		F99C891B1A66182800EC87DF /* OrderListTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListTopCell.xib; sourceTree = "<group>"; };
+		F99C89201A665A2000EC87DF /* OrderDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailCell.xib; sourceTree = "<group>"; };
+		F99C89221A665BEF00EC87DF /* OrderDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailCell.h; sourceTree = "<group>"; };
+		F99C89231A665BEF00EC87DF /* OrderDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailCell.m; sourceTree = "<group>"; };
 		F9A2D45D1A4CF70F0019EACE /* ChooseSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSingleView.h; sourceTree = "<group>"; };
 		F9A2D45E1A4CF70F0019EACE /* ChooseSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSingleView.m; sourceTree = "<group>"; };
 		F9A2EF4F1A358BB600070BFF /* PersonDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDetailVC.h; sourceTree = "<group>"; };
@@ -1655,6 +1660,9 @@
 				F71163581A60C4DB008EB58C /* MarginChooseView.h */,
 				F71163591A60C4DB008EB58C /* MarginChooseView.m */,
 				F711635B1A60C4EC008EB58C /* MarginChooseView.xib */,
+				F99C89221A665BEF00EC87DF /* OrderDetailCell.h */,
+				F99C89231A665BEF00EC87DF /* OrderDetailCell.m */,
+				F99C89201A665A2000EC87DF /* OrderDetailCell.xib */,
 			);
 			name = MyView;
 			path = ZYYG/MyView;
@@ -2866,6 +2874,7 @@
 				F7C8D5011A37D39C009F36B3 /* erp_city_code.json in Resources */,
 				F7D2484F1A4191FC001AAAC3 /* ipad_key_[]{[S]_09.png in Resources */,
 				F7D2486C1A4191FC001AAAC3 /* ipad_key_[]{[H]_07.png in Resources */,
+				F99C89211A665A2000EC87DF /* OrderDetailCell.xib in Resources */,
 				F7D248F91A4191FC001AAAC3 /* ipad_key_QWE[H]_50.png in Resources */,
 				F7D249991A4191FC001AAAC3 /* keychar21_50.png in Resources */,
 				F7D249471A4191FC001AAAC3 /* iphonekeyboardH_84.png in Resources */,
@@ -3179,6 +3188,7 @@
 				940178A41A21CE0000697D14 /* UIProgressView+AFNetworking.m in Sources */,
 				F7BE80DA1A3E6DDF0053C5CA /* AdressTextField.m in Sources */,
 				940178551A21CCE400697D14 /* Utities.m in Sources */,
+				F99C89241A665BEF00EC87DF /* OrderDetailCell.m in Sources */,
 				F996B8491A4AB26F00D38473 /* AccountModel.m in Sources */,
 				940178541A21CCE400697D14 /* UserInfo.m in Sources */,
 				940178001A21CBEA00697D14 /* AppDelegate.m in Sources */,

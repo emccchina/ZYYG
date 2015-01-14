@@ -272,10 +272,16 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     NSLog(@"查看订单详细");
     if(currentOrder){
         NSString *orderCode=currentOrder.OrderCode;
-        UIViewController *vc = segue.destinationViewController;
-        vc.hidesBottomBarWhenPushed = YES;
-        if ([(OrderDetailVC*)vc respondsToSelector:@selector(setOrderCode:)]) {
-            [vc setValue:orderCode forKey:@"orderCode"];
+        UIViewController *detailVC = segue.destinationViewController;
+        detailVC.hidesBottomBarWhenPushed = YES;
+        if ([detailVC isKindOfClass:[OrderDetailVC class]]) {
+            OrderDetailVC *vc = (OrderDetailVC*)detailVC;
+            [vc setOrderCode:orderCode];
+            if ([_orderType intValue] ==0) {
+                [vc setOrderType:0];
+            }else{
+                [vc setOrderType:2];
+            }
         }
     }else{
         NSLog(@"选择某一行");

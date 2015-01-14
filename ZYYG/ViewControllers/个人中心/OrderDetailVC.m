@@ -14,6 +14,7 @@
 #import "InvoiceModel.h"
 #import "ArtDetailVC.h"
 #import "CartCell.h"
+#import "OrderDetailCell.h"
 
 @interface OrderDetailVC ()
 {
@@ -32,6 +33,7 @@ static NSString *nomalCell = @"nomalCell";
 static NSString *adressCell = @"AdressCell";
 static NSString *ticketCell = @"TicketCell";
 static NSString *cartCell = @"CartCell";
+static NSString *ODCell = @"OrderDetailCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +43,7 @@ static NSString *cartCell = @"CartCell";
     self.orderDetailTableView.delegate = self;
     self.orderDetailTableView.dataSource = self;
     [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
+    [self.orderDetailTableView registerNib:[UINib nibWithNibName:ODCell bundle:nil] forCellReuseIdentifier:ODCell];
     
     self.confirmDelivery.layer.backgroundColor = kRedColor.CGColor;
     self.confirmDelivery.layer.cornerRadius = 3;
@@ -132,7 +135,7 @@ static NSString *cartCell = @"CartCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1)        return order.Goods.count+1;
+    if (section == 1)        return order.Goods.count+2;
     else if(section ==4)     return 2;
     return 1;
 }
@@ -192,6 +195,14 @@ static NSString *cartCell = @"CartCell";
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return cell;
+            }else if(indexPath.row == (order.Goods.count+1)){
+                OrderDetailCell *orCell=(OrderDetailCell*)[tableView dequeueReusableCellWithIdentifier:ODCell forIndexPath:indexPath];
+                orCell.createTime.text=order.CreateTime;
+                orCell.cancellTime.text=order.CreateTime;
+                orCell.redLab.numberOfLines=0;
+                orCell.redLab.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!并且会扣除您的保证金!";
+                return orCell;
+
             }else{
                 GoodsModel *model=order.Goods[indexPath.row -1];
                 CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
@@ -215,7 +226,7 @@ static NSString *cartCell = @"CartCell";
             NSString *title = @"";
             NSString *detail = @"";
             title = @"在线支付";
-            detail = @"到付";
+            detail = @"在线支付";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -249,7 +260,7 @@ static NSString *cartCell = @"CartCell";
                 UILabel *topLabel = (UILabel*)[cell viewWithTag:1];
                 UILabel *midLabel = (UILabel*)[cell viewWithTag:2];
                 UILabel *botLabel = (UILabel*)[cell viewWithTag:3];
-                topLabel.text =[NSString stringWithFormat:@"发票类型：%@",invoice.InvoiceType];
+                topLabel.text = [NSString stringWithFormat:@"发票类型：%@",invoice.InvoiceType];
                 midLabel.text = [NSString stringWithFormat:@"发票抬头：%@",invoice.InvoiceTitle];
                 botLabel.text = [NSString stringWithFormat:@"发票内容：%@",invoice.InvoiceTaxNo];
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -267,7 +278,7 @@ static NSString *cartCell = @"CartCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section ==1 && indexPath.row!=0) {
+    if (indexPath.section ==1 && indexPath.row!=0 && indexPath.row != (order.Goods.count+1)) {
         GoodsModel *goods=order.Goods[indexPath.row-1];
         [self presentDetailVC:goods.GoodsCode];
     }
@@ -279,6 +290,15 @@ static NSString *cartCell = @"CartCell";
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
+    
+    if ([detailVC isKindOfClass:[ArtDetailVC class]]) {
+        ArtDetailVC *vc = (ArtDetailVC*)detailVC;
+        [vc setHiddenBottom:YES];
+        [vc setProductID:(NSString*)info];
+        [vc setAuctionCode:@""];
+        [vc setType:self.orderType];
+    }
+
     if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
         [detailVC setValue:@(1) forKey:@"hiddenBottom"];
     }

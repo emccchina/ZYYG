@@ -265,10 +265,10 @@ static NSString *listCell = @"listCell";
 //跳转
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSString *orderCode=[NSString stringWithFormat:@"%ld",(long)orderType];
+    UIViewController *vc = segue.destinationViewController;
+    vc.hidesBottomBarWhenPushed = YES;
     if(orderType){
-        NSString *orderCode=[NSString stringWithFormat:@"%d",orderType];
-        UIViewController *vc = segue.destinationViewController;
-        vc.hidesBottomBarWhenPushed = YES;
         if ([(OrderListVC *)vc respondsToSelector:@selector(setOrderType:)]) {
             [vc setValue:orderCode forKey:@"orderType"];
         }

@@ -28,7 +28,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="NXn-2v-EN7" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="CVH-hQ-CLq" customClass="orderlist"/>
+                    <constraint firstItem="NXn-2v-EN7" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="CVH-hQ-CLq"/>
                     <constraint firstItem="4gZ-l8-TT6" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="QzX-IJ-E5o"/>
                     <constraint firstItem="NXn-2v-EN7" firstAttribute="leading" secondItem="NSQ-5r-kmQ" secondAttribute="leadingMargin" constant="2" id="RcG-TD-sFg"/>
                     <constraint firstItem="4gZ-l8-TT6" firstAttribute="leading" secondItem="NXn-2v-EN7" secondAttribute="trailing" constant="2" id="SBl-oX-sar"/>

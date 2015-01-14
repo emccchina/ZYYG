@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *checkDelivery;
 @property (weak, nonatomic) IBOutlet UIButton *confirmDelivery;
 @property (retain, nonatomic)  NSString *orderCode;
+@property (assign, nonatomic)  NSInteger orderType;
+
 @end
