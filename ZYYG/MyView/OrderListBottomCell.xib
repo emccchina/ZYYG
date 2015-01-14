@@ -14,35 +14,32 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hOY-KL-ZyL" id="S7A-5Z-Mq0">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk0-ez-3xv">
+                        <rect key="frame" x="10" y="8" width="5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykr-Ro-v5m">
+                        <rect key="frame" x="10" y="30" width="5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单失效时间:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ths-SW-49C">
-                        <rect key="frame" x="10" y="8" width="82" height="16"/>
+                        <rect key="frame" x="17" y="8" width="82" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在下单后" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87e-mj-HjQ">
-                        <rect key="frame" x="10" y="30" width="65" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="请在下单后" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87e-mj-HjQ">
+                        <rect key="frame" x="17" y="30" width="573" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRW-i0-eTp">
-                        <rect key="frame" x="30" y="70" width="70" height="30"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="70" id="2yK-4o-h6X"/>
-                            <constraint firstAttribute="height" constant="30" id="Jes-jU-Lej"/>
-                        </constraints>
-                        <state key="normal" title="取消">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="cancelOrder:" destination="hOY-KL-ZyL" eventType="touchUpInside" id="geE-NA-Lez"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWv-lP-vHm">
-                        <rect key="frame" x="500" y="70" width="70" height="30"/>
+                        <rect key="frame" x="500" y="75" width="70" height="30"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="4Yp-VN-iWn"/>
@@ -59,16 +56,36 @@
                             <action selector="payOrder:" destination="hOY-KL-ZyL" eventType="touchUpInside" id="cbh-Vd-XJG"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRW-i0-eTp">
+                        <rect key="frame" x="30" y="75" width="70" height="30"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="2yK-4o-h6X"/>
+                            <constraint firstAttribute="height" constant="30" id="Jes-jU-Lej"/>
+                        </constraints>
+                        <state key="normal" title="取消">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="cancelOrder:" destination="hOY-KL-ZyL" eventType="touchUpInside" id="geE-NA-Lez"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="aWv-lP-vHm" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="top" constant="70" id="1rZ-MD-apN"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="aWv-lP-vHm" secondAttribute="trailing" constant="22" id="2te-hN-HYJ"/>
-                    <constraint firstItem="ths-SW-49C" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="topMargin" id="5yB-TK-iN3"/>
-                    <constraint firstItem="87e-mj-HjQ" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="2" id="PQx-md-MKa"/>
-                    <constraint firstItem="ths-SW-49C" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="2" id="TFo-0f-fuG"/>
-                    <constraint firstItem="QRW-i0-eTp" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="22" id="yMD-47-FLg"/>
-                    <constraint firstItem="87e-mj-HjQ" firstAttribute="top" secondItem="ths-SW-49C" secondAttribute="bottom" constant="6" id="ydi-DT-h1l"/>
-                    <constraint firstItem="QRW-i0-eTp" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="top" constant="70" id="yuv-N9-GW9"/>
+                    <constraint firstItem="ths-SW-49C" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="topMargin" id="0lb-i8-1Ws"/>
+                    <constraint firstItem="aWv-lP-vHm" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="top" constant="75" id="2BE-iV-MOg"/>
+                    <constraint firstItem="dk0-ez-3xv" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="2" id="4tE-Sk-BU5"/>
+                    <constraint firstItem="QRW-i0-eTp" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="top" constant="75" id="4yD-P4-sN8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="aWv-lP-vHm" secondAttribute="trailing" constant="22" id="S09-Kt-4cO"/>
+                    <constraint firstItem="QRW-i0-eTp" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="22" id="auS-go-m3Q"/>
+                    <constraint firstItem="87e-mj-HjQ" firstAttribute="leading" secondItem="ykr-Ro-v5m" secondAttribute="trailing" constant="2" id="bsy-Ac-XSQ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="87e-mj-HjQ" secondAttribute="trailing" constant="2" id="cVq-Rr-gmd"/>
+                    <constraint firstItem="ykr-Ro-v5m" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="2" id="kMf-ff-Dvi"/>
+                    <constraint firstItem="ths-SW-49C" firstAttribute="leading" secondItem="dk0-ez-3xv" secondAttribute="trailing" constant="2" id="l7r-FX-jPc"/>
+                    <constraint firstItem="ykr-Ro-v5m" firstAttribute="top" secondItem="dk0-ez-3xv" secondAttribute="bottom" constant="6" id="mYV-Rd-2SL"/>
+                    <constraint firstItem="87e-mj-HjQ" firstAttribute="top" secondItem="ths-SW-49C" secondAttribute="bottom" constant="6" id="nIc-FA-ssZ"/>
+                    <constraint firstItem="dk0-ez-3xv" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="topMargin" id="r61-Kw-bkz"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

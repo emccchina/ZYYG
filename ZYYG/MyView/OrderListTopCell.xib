@@ -15,21 +15,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXn-2v-EN7">
-                        <rect key="frame" x="10" y="5" width="43" height="16"/>
+                        <rect key="frame" x="10" y="8" width="43" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gZ-l8-TT6">
-                        <rect key="frame" x="55" y="5" width="33" height="16"/>
+                        <rect key="frame" x="55" y="8" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="NXn-2v-EN7" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" constant="-3" id="CVH-hQ-CLq" customClass="orderlist"/>
-                    <constraint firstItem="4gZ-l8-TT6" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" constant="-3" id="QzX-IJ-E5o"/>
+                    <constraint firstItem="NXn-2v-EN7" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="CVH-hQ-CLq" customClass="orderlist"/>
+                    <constraint firstItem="4gZ-l8-TT6" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="QzX-IJ-E5o"/>
                     <constraint firstItem="NXn-2v-EN7" firstAttribute="leading" secondItem="NSQ-5r-kmQ" secondAttribute="leadingMargin" constant="2" id="RcG-TD-sFg"/>
                     <constraint firstItem="4gZ-l8-TT6" firstAttribute="leading" secondItem="NXn-2v-EN7" secondAttribute="trailing" constant="2" id="SBl-oX-sar"/>
                 </constraints>

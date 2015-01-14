@@ -41,10 +41,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
-    if ([_orderType intValue]) {
-       self.title=@"竞价订单";
+    if ([_orderType intValue] ==0) {
+       self.title=@"平价订单";
     }else{
-        self.title=@"平价订单";
+        self.title=@"竞价订单";
+        
     }
     
     orderArray=[NSMutableArray array];
@@ -200,13 +201,13 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderModel *order=orderArray[indexPath.section];
-    CGFloat hight=100;
+    CGFloat hight=110;
     if(indexPath.row ==0){
-        hight=35;
+        hight=32;
     }else if(indexPath.row == (order.Goods.count+1)){
-        hight=25;
+        hight=32;
     }else if(indexPath.row == (order.Goods.count+2)){
-        hight=110;
+        hight=120;
     }
     return hight;
 }
@@ -223,16 +224,16 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         sumCell.goodsSum.text =[NSString stringWithFormat:@"(%lu)",(unsigned long)order.Goods.count];
         sumCell.priceSum.text=[NSString stringWithFormat:@"￥%@",order.OrderMoney];
         sumCell.selectionStyle=UITableViewCellSelectionStyleNone;
-        
         return sumCell;
     }else if(indexPath.row == (order.Goods.count+2)){
-        OrderListCellBottom *bootomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
-        bootomCell.cancelTime.text=order.CreateTime;
-        [self setButton:bootomCell orderMod:order];
-        bootomCell.order=order;
-        bootomCell.orderlistVc=self;
-        bootomCell.selectionStyle=UITableViewCellSelectionStyleNone;
-        return bootomCell;
+        OrderListCellBottom *bottomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
+        bottomCell.cancelTime.text=[NSString stringWithFormat:@"订单失效时间:%@",order.CreateTime];
+        bottomCell.redLabel.numberOfLines=0;
+        [self setButton:bottomCell orderMod:order];
+        bottomCell.order=order;
+        bottomCell.orderlistVc=self;
+        bottomCell.selectionStyle=UITableViewCellSelectionStyleNone;
+        return bottomCell;
     }else {
         GoodsModel *goods=order.Goods[indexPath.row-1];
         OrderListCellGoods   *goodsCell=(OrderListCellGoods*)[tableView dequeueReusableCellWithIdentifier:orderGoodsCell forIndexPath:indexPath];
@@ -240,6 +241,17 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         goodsCell.goodsName.text=goods.GoodsName;
         goodsCell.goodsCount.text=@"1";
         goodsCell.goodsPrice.text=[NSString stringWithFormat:@"%.2f" ,goods.AppendPrice];
+        if ([_orderType intValue] ==0) {
+            goodsCell.marginLab.hidden=YES;
+            goodsCell.marginPrice.hidden=YES;
+        }else{
+            goodsCell.marginLab.hidden=NO;
+            goodsCell.marginPrice.hidden=NO;
+            goodsCell.marginLab.text=@"保证金:";
+            goodsCell.marginPrice.text=[NSString stringWithFormat:@"%.2f" ,goods.AppendPrice];
+            
+        }
+
         
         return goodsCell;
     }
@@ -274,7 +286,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 {
     if (0 == ord.state) {
         //创建状态 可支付  可取消
-        bottomCell.redLabel.text=@"请在订单失效之前尽快支付";
+        if ([_orderType intValue] ==0) {
+            bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!";
+        }else{
+            bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!并且会扣除您的保证金!";
+        }
         bottomCell.cancellButton.hidden=NO;
         bottomCell.payButton.hidden=NO;
     }else if(10 == ord.state){
@@ -282,7 +298,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(30 == ord.state){
     }else if(40 == ord.state){
     }else if(50 == ord.state){
-        bottomCell.redLabel.text=@"该订单已经被取消无法操作";
+        if ([_orderType intValue] ==0) {
+            bottomCell.redLabel.text=@"该订单已经被取消无法操作,您已经丢失购买此商品的机会!";
+        }else{
+            bottomCell.redLabel.text=@"该订单已经被取消无法操作,您已经丢失购买此商品的机会!已经扣除了您的保证金!";
+        }
         bottomCell.cancellButton.hidden=YES;
         bottomCell.payButton.hidden=YES;
     }else if(-1 == ord.state){

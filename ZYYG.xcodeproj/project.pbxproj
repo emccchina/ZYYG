@@ -591,6 +591,10 @@
 		F996B8521A4AB26F00D38473 /* PersonCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F996B8441A4AB26F00D38473 /* PersonCenterModel.m */; };
 		F996B8531A4AB26F00D38473 /* SelectInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F996B8461A4AB26F00D38473 /* SelectInfo.m */; };
 		F996B8541A4AB26F00D38473 /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F996B8481A4AB26F00D38473 /* SettingModel.m */; };
+		F99C891C1A66182800EC87DF /* OrderListBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C89181A66182800EC87DF /* OrderListBottomCell.xib */; };
+		F99C891D1A66182800EC87DF /* OrderListGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C89191A66182800EC87DF /* OrderListGoodsCell.xib */; };
+		F99C891E1A66182800EC87DF /* OrderListSumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C891A1A66182800EC87DF /* OrderListSumCell.xib */; };
+		F99C891F1A66182800EC87DF /* OrderListTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99C891B1A66182800EC87DF /* OrderListTopCell.xib */; };
 		F9A2D45F1A4CF70F0019EACE /* ChooseSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2D45E1A4CF70F0019EACE /* ChooseSingleView.m */; };
 		F9A2EF511A358BB600070BFF /* PersonDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2EF501A358BB600070BFF /* PersonDetailVC.m */; };
 		F9AB0D931A2FEF4100EFEDC5 /* CompeteRecordCellTop.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AB0D921A2FEF4100EFEDC5 /* CompeteRecordCellTop.m */; };
@@ -614,10 +618,6 @@
 		F9C280911A5FB84100FAC045 /* PayMarginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C2808F1A5FB84100FAC045 /* PayMarginCell.xib */; };
 		F9C302951A42BC0100B1B53C /* UpdatePassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C302941A42BC0100B1B53C /* UpdatePassVC.m */; };
 		F9DC702A1A31A43B006AE19C /* SettingsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9DC70291A31A43B006AE19C /* SettingsList.plist */; };
-		F9DF3F2F1A651F5D00E87B79 /* OrderListTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9DF3F2E1A651F5D00E87B79 /* OrderListTopCell.xib */; };
-		F9DF3F311A65206300E87B79 /* OrderListGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9DF3F301A65206300E87B79 /* OrderListGoodsCell.xib */; };
-		F9DF3F331A6520B400E87B79 /* OrderListSumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9DF3F321A6520B400E87B79 /* OrderListSumCell.xib */; };
-		F9DF3F351A65211000E87B79 /* OrderListBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9DF3F341A65211000E87B79 /* OrderListBottomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1350,6 +1350,10 @@
 		F996B8461A4AB26F00D38473 /* SelectInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectInfo.m; sourceTree = "<group>"; };
 		F996B8471A4AB26F00D38473 /* SettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModel.h; sourceTree = "<group>"; };
 		F996B8481A4AB26F00D38473 /* SettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModel.m; sourceTree = "<group>"; };
+		F99C89181A66182800EC87DF /* OrderListBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListBottomCell.xib; sourceTree = "<group>"; };
+		F99C89191A66182800EC87DF /* OrderListGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListGoodsCell.xib; sourceTree = "<group>"; };
+		F99C891A1A66182800EC87DF /* OrderListSumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListSumCell.xib; sourceTree = "<group>"; };
+		F99C891B1A66182800EC87DF /* OrderListTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListTopCell.xib; sourceTree = "<group>"; };
 		F9A2D45D1A4CF70F0019EACE /* ChooseSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSingleView.h; sourceTree = "<group>"; };
 		F9A2D45E1A4CF70F0019EACE /* ChooseSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSingleView.m; sourceTree = "<group>"; };
 		F9A2EF4F1A358BB600070BFF /* PersonDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDetailVC.h; sourceTree = "<group>"; };
@@ -1393,10 +1397,6 @@
 		F9C302931A42BC0100B1B53C /* UpdatePassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePassVC.h; sourceTree = "<group>"; };
 		F9C302941A42BC0100B1B53C /* UpdatePassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassVC.m; sourceTree = "<group>"; };
 		F9DC70291A31A43B006AE19C /* SettingsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingsList.plist; sourceTree = "<group>"; };
-		F9DF3F2E1A651F5D00E87B79 /* OrderListTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListTopCell.xib; sourceTree = "<group>"; };
-		F9DF3F301A65206300E87B79 /* OrderListGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListGoodsCell.xib; sourceTree = "<group>"; };
-		F9DF3F321A6520B400E87B79 /* OrderListSumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListSumCell.xib; sourceTree = "<group>"; };
-		F9DF3F341A65211000E87B79 /* OrderListBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListBottomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1630,16 +1630,16 @@
 				F930994C1A2DB42B0054FFC1 /* CompeteRecordCell.xib */,
 				F9BC26A01A2EE8ED006894C6 /* OrderListCellTop.h */,
 				F9BC26A11A2EE8ED006894C6 /* OrderListCellTop.m */,
-				F9DF3F2E1A651F5D00E87B79 /* OrderListTopCell.xib */,
+				F99C891B1A66182800EC87DF /* OrderListTopCell.xib */,
 				F9BC26A31A2EE913006894C6 /* OrderListCellGoods.h */,
 				F9BC26A41A2EE913006894C6 /* OrderListCellGoods.m */,
-				F9DF3F301A65206300E87B79 /* OrderListGoodsCell.xib */,
+				F99C89191A66182800EC87DF /* OrderListGoodsCell.xib */,
 				F9BC26A61A2EE92F006894C6 /* OrderListCellSum.h */,
 				F9BC26A71A2EE92F006894C6 /* OrderListCellSum.m */,
-				F9DF3F321A6520B400E87B79 /* OrderListSumCell.xib */,
+				F99C891A1A66182800EC87DF /* OrderListSumCell.xib */,
 				F9BC26A91A2EE945006894C6 /* OrderListCellBottom.h */,
 				F9BC26AA1A2EE945006894C6 /* OrderListCellBottom.m */,
-				F9DF3F341A65211000E87B79 /* OrderListBottomCell.xib */,
+				F99C89181A66182800EC87DF /* OrderListBottomCell.xib */,
 				F966EDD71A35AA4E00D2994A /* MyAccountCell.h */,
 				F966EDD81A35AA4E00D2994A /* MyAccountCell.m */,
 				F966EDD51A35A46800D2994A /* MyAccountCell.xib */,
@@ -2651,6 +2651,7 @@
 				F7D248DE1A4191FC001AAAC3 /* ipad_key_QWE[S]_68.png in Resources */,
 				F7D2493A1A4191FC001AAAC3 /* iphonekeyboardH_45.png in Resources */,
 				F7D249B11A4191FC001AAAC3 /* iphoneHQ_21.png in Resources */,
+				F99C891C1A66182800EC87DF /* OrderListBottomCell.xib in Resources */,
 				F7D248981A4191FC001AAAC3 /* ipad_key_123[]{[S]_39.png in Resources */,
 				F7D249C41A4191FC001AAAC3 /* iphoneHQ_70.png in Resources */,
 				F7D249C11A4191FC001AAAC3 /* iphoneHQ_67.png in Resources */,
@@ -2852,7 +2853,6 @@
 				F7D249C71A4191FC001AAAC3 /* iphoneHQ_85.png in Resources */,
 				F7D249CB1A4191FC001AAAC3 /* keychar31_03.png in Resources */,
 				F7F304991A47F5D200A6AD7A /* LoginBG.png in Resources */,
-				F9DF3F351A65211000E87B79 /* OrderListBottomCell.xib in Resources */,
 				F7D2495F1A4191FC001AAAC3 /* keychar11_55.png in Resources */,
 				F7D2483C1A4191FC001AAAC3 /* iPadNumberKeyboardView.xib in Resources */,
 				F7D248F71A4191FC001AAAC3 /* ipad_key_QWE[H]_46.png in Resources */,
@@ -2914,8 +2914,8 @@
 				F7D2497F1A4191FC001AAAC3 /* iphonekeyboardHN_66.png in Resources */,
 				F7D249771A4191FC001AAAC3 /* iphonekeyboardHN_43.png in Resources */,
 				F7D249621A4191FC001AAAC3 /* keychar11_61.png in Resources */,
+				F99C891D1A66182800EC87DF /* OrderListGoodsCell.xib in Resources */,
 				F7D248E31A4191FC001AAAC3 /* ipad_key_QWE[S]_86.png in Resources */,
-				F9DF3F311A65206300E87B79 /* OrderListGoodsCell.xib in Resources */,
 				F7D249C21A4191FC001AAAC3 /* iphoneHQ_68.png in Resources */,
 				F7D2488E1A4191FC001AAAC3 /* ipad_key_123[]{[S]_15.png in Resources */,
 				F7D2496D1A4191FC001AAAC3 /* iphonekeyboardHN_15.png in Resources */,
@@ -2955,6 +2955,7 @@
 				F7D249121A4191FC001AAAC3 /* keychar01_17.png in Resources */,
 				F7D248601A4191FC001AAAC3 /* ipad_key_[]{[S]_53.png in Resources */,
 				F7D248451A4191FC001AAAC3 /* iPhonePureNumberKeyboardLandscapeView.xib in Resources */,
+				F99C891F1A66182800EC87DF /* OrderListTopCell.xib in Resources */,
 				F7D249C31A4191FC001AAAC3 /* iphoneHQ_69.png in Resources */,
 				F7D2489B1A4191FC001AAAC3 /* ipad_key_123[]{[S]_42.png in Resources */,
 				F7D248661A4191FC001AAAC3 /* ipad_key_[]{[S]_65.png in Resources */,
@@ -2965,8 +2966,7 @@
 				F7D249961A4191FC001AAAC3 /* keychar21_44.png in Resources */,
 				F7D2484A1A4191FC001AAAC3 /* iPhoneStandardKeyboardView.xib in Resources */,
 				F7D249A01A4191FC001AAAC3 /* keychar21_66.png in Resources */,
-				F9DF3F2F1A651F5D00E87B79 /* OrderListTopCell.xib in Resources */,
-				F9DF3F331A6520B400E87B79 /* OrderListSumCell.xib in Resources */,
+				F99C891E1A66182800EC87DF /* OrderListSumCell.xib in Resources */,
 				F7D2490D1A4191FC001AAAC3 /* keychar01_07.png in Resources */,
 				F7D249D61A4191FC001AAAC3 /* keychar31_24.png in Resources */,
 				F7D249CD1A4191FC001AAAC3 /* keychar31_07.png in Resources */,
