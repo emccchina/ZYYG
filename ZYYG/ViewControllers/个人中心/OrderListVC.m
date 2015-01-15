@@ -350,7 +350,12 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //支付
 -(void)payOrder:(OrderModel *)order
 {
-    [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:@"" money:@"1" type:1 shopNum:order.MerchantID key:order.PayKey] viewController:self delegate:self mode:kPayMode];
+    NSMutableString *names = [NSMutableString string];
+    for (GoodsModel *name in order.Goods) {
+        [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
+    }
+    NSString *string = [NSString stringWithFormat:@"%ld", (long)([order.OrderMoney floatValue]*100)];
+    [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:order.MerchantID key:order.PayKey] viewController:self delegate:self mode:kPayMode];
 
 }
 

@@ -90,7 +90,7 @@
                 _resultDict=result;
                 NSInteger money = (NSInteger)([_resultDict[@"SecurtyDeposit"] floatValue]*100);
                 NSString *moneyString = [NSString stringWithFormat:@"%ld",(long)money];
-                [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"SecurtyDepositCode"] productName:_resultDict[@"GoodsName"] money:@"1" type:2 shopNum:_resultDict[@"MerchantID"] key:_resultDict[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
+                [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"SecurtyDepositCode"] productName:_resultDict[@"GoodsName"] money:moneyString type:2 shopNum:_resultDict[@"MerchantID"] key:_resultDict[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
             }
            
         }
