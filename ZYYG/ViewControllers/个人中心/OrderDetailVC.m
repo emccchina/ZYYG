@@ -210,7 +210,7 @@ static NSString *ODCell = @"OrderDetailCell";
 //                cell.goodsName.text=goods.GoodsName;
 //                cell.goodsPrice.text=[NSString stringWithFormat:@"￥%.2f", goods.AppendPrice];
 //                cell.goodsCount.text=@"1";
-                [cell.iconImage setImageWithURL:[NSURL URLWithString:model.defaultImageUrl]];
+                [cell.iconImage setImageWithURL:[NSURL URLWithString:model.defaultImageUrl] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
                 cell.LTLab.text = model.GoodsName;
                 cell.RTLab.text = @"  ";
                 cell.RSecondLab.text = model.GoodsCode;

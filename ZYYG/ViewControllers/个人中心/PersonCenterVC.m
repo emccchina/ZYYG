@@ -177,7 +177,7 @@ static NSString *listCell = @"listCell";
         NSString *imageUrl=user.headImage;
         
         if (imageUrl && ![imageUrl isEqualToString:@""]) {
-            [viewBG setImageWithURL:[NSURL URLWithString:imageUrl]];
+            [viewBG setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
         }else{
             [viewBG setImage:[UIImage imageNamed:@"avatar.png"]];
         }

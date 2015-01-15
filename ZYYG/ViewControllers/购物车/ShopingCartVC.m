@@ -387,7 +387,7 @@ static NSString *cartCell = @"CartCell";
 {
     GoodsModel *model = _shopCart[indexPath.row];
     CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
-    [cell.iconImage setImageWithURL:[NSURL URLWithString:model.picURL]];
+    [cell.iconImage setImageWithURL:[NSURL URLWithString:model.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     cell.LTLab.text = model.GoodsName;
     cell.RTLab.text = model.ArtName;
     cell.RSecondLab.text = model.GoodsCode;

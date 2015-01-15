@@ -233,7 +233,7 @@
         LetterModel *mana=manages[indexPath.row];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConsultantCell" forIndexPath:indexPath];
         UIImageView *imageView = (UIImageView*)[cell viewWithTag:1];
-        [imageView setImageWithURL:[NSURL URLWithString:mana.LetterCode]];
+        [imageView setImageWithURL:[NSURL URLWithString:mana.LetterCode] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
         UILabel *label1= (UILabel*)[cell viewWithTag:2];
         label1.text = mana.Title;
         UILabel* label2 = (UILabel*)[cell viewWithTag:3];

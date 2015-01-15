@@ -332,7 +332,7 @@ static NSString *goodsCell = @"GoodsCell";
     cell.LTLab.text = modelLeft.GoodsName;
     cell.LMLab.text = modelLeft.ArtName;
     cell.LBLab.text = [NSString stringWithFormat:@"￥%.2f", modelLeft.AppendPrice];
-    [cell.leftImage setImageWithURL:[NSURL URLWithString:modelLeft.picURL]];
+    [cell.leftImage setImageWithURL:[NSURL URLWithString:modelLeft.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     if (results.count > indexPath.row*2+1) {
         cell.showRight = YES;
         GoodsModel* modelRight = results[indexPath.row*2+1];
@@ -340,7 +340,7 @@ static NSString *goodsCell = @"GoodsCell";
         cell.RTLab.text = modelRight.GoodsName;
         cell.RMLab.text = modelRight.ArtName;
         cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f",modelRight.AppendPrice];//[goodsDetialRight safeObjectForKey:@"Product_Price"]
-        [cell.rightImage setImageWithURL:[NSURL URLWithString:modelRight.picURL]];
+        [cell.rightImage setImageWithURL:[NSURL URLWithString:modelRight.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     }else{
         cell.showRight = NO;
     }

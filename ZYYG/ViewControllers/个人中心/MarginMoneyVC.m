@@ -116,7 +116,7 @@
 {
     GoodsModel *goods=marginArray[indexPath.row];
     MarginMoneyCell *cell = (MarginMoneyCell*)[tableView dequeueReusableCellWithIdentifier:@"MarginMoneyCell" forIndexPath:indexPath];
-    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL]];
+    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
      
     cell.goodsName.text=goods.GoodsName;
     cell.marginMoney.text=goods.securityDeposit;

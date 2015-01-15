@@ -73,7 +73,7 @@
         return topCell;
     }else{
         CompeteRecordCell *cell = (CompeteRecordCell *)[tableView dequeueReusableCellWithIdentifier:@"CompeteRecordCell" forIndexPath:indexPath];
-        [cell.goodsImage setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"]];
+        [cell.goodsImage setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
         return cell;
     }
     

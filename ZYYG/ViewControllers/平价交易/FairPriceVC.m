@@ -272,7 +272,7 @@
             cell.LTLab.text = goodsDetialLeft.GoodsName;
             cell.LMLab.text = goodsDetialLeft.ArtName;
             cell.LBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialLeft.AppendPrice];
-            [cell.leftImage setImageWithURL:[NSURL URLWithString:goodsDetialLeft.picURL]];
+            [cell.leftImage setImageWithURL:[NSURL URLWithString:goodsDetialLeft.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
         }
         if (goods.count > indexPath.row*2+1) {
             GoodsModel* goodsDetialRight = goods[indexPath.row*2+1];
@@ -281,7 +281,7 @@
                 cell.RTLab.text = goodsDetialRight.GoodsName;
                 cell.RMLab.text = goodsDetialRight.ArtName;
                 cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f",goodsDetialRight.AppendPrice];
-                [cell.rightImage setImageWithURL:[NSURL URLWithString:goodsDetialRight.picURL]];
+                [cell.rightImage setImageWithURL:[NSURL URLWithString:goodsDetialRight.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
             }else{
                 cell.showRight = NO;
             }

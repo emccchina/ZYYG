@@ -149,7 +149,7 @@ static NSString * completeCell = @"completeCell";
     cell.LTLabel.text = model.auctionState;
     cell.LFoLabel.text = model.auctionDate;
     cell.fourLableState = YES;
-    [cell.image setImageWithURL:[NSURL URLWithString:model.imageURL]];
+    [cell.image setImageWithURL:[NSURL URLWithString:model.imageURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     return cell;
 }
 

@@ -242,7 +242,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else {
         GoodsModel *goods=order.Goods[indexPath.row-1];
         OrderListCellGoods   *goodsCell=(OrderListCellGoods*)[tableView dequeueReusableCellWithIdentifier:orderGoodsCell forIndexPath:indexPath];
-        [goodsCell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl]];
+        [goodsCell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
         goodsCell.goodsName.text=goods.GoodsName;
         goodsCell.goodsCount.text=@"1";
         goodsCell.goodsPrice.text=[NSString stringWithFormat:@"%.2f" ,goods.AppendPrice];

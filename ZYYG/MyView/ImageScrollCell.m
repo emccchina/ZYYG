@@ -42,7 +42,7 @@
         if ([url isKindOfClass:[NSNull class]]) {
             url = @"";
         }
-        [imageView setImageWithURL:[NSURL URLWithString:url]];
+        [imageView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     }
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     return imageView;

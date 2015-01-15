@@ -141,7 +141,7 @@
 
 - (void)imageShow
 {
-    [photoView setImageWithURL:[NSURL URLWithString:self.imageURL]];
+    [photoView setImageWithURL:[NSURL URLWithString:self.imageURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     [self adjustFrame];
 }
 

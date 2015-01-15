@@ -187,7 +187,7 @@
     GoodsModel *goods=goodsArray[indexPath.row];
    MyCollectionCell *cell = (MyCollectionCell*)[tableView dequeueReusableCellWithIdentifier:@"MyCollectionCell" forIndexPath:indexPath];
     cell.Lab4.hidden=YES;
-    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL]];
+    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     cell.goodsName.text=goods.GoodsName;
     cell.Lab1.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
     cell.Lab2.text=[NSString stringWithFormat:@"商品编码:%@",goods.GoodsCode];

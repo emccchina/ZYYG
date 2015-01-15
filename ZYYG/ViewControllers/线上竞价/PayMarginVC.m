@@ -49,7 +49,7 @@
 {
     if (indexPath.row==0) {
         PayMarginCell *cell=[tableView dequeueReusableCellWithIdentifier:@"PayMarginCell" forIndexPath:indexPath];
-        [cell.goodsImage setImageWithURL:[NSURL URLWithString:self.goods.picURL]];
+        [cell.goodsImage setImageWithURL:[NSURL URLWithString:self.goods.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
    
         cell.goodsName.text=self.goods.GoodsName;
         cell.competeCode.text=[NSString stringWithFormat:@" %.2f",self.goods.AppendPrice];

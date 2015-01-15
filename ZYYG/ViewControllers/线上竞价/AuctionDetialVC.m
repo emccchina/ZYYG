@@ -371,7 +371,7 @@ static NSString * auctionCell = @"auctionCell";
     [cell.RSLabel start];
     cell.RTLabel.text = [NSString stringWithFormat:@"￥%.2f",model.AppendPrice];
     cell.RBLabel.text = model.biddingNum;
-    [cell.image setImageWithURL:[NSURL URLWithString:model.picURL]];
+    [cell.image setImageWithURL:[NSURL URLWithString:model.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     if (cell.RSLabel.countDownTimer) {
         [_timerArr addObject:cell.RSLabel.countDownTimer];
     }
