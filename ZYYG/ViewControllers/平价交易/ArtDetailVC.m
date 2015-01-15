@@ -33,8 +33,11 @@
     BOOL                _spreadHistory;
     MarginChooseView    *_marginView1;
     CGFloat             _heightHistory;
+    NSMutableArray      *_timerArr;//定时器释放 否则会内存泄露
+    BOOL                _isReleaseTimer;
     NSInteger                isBegin;//竞价中 拍卖是否开始
     BOOL                isCompare;//竞价中底部view 状态 通过刷新0  还是 加减1,比较是否最大值 可否提交出价
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *detailTB;
 @property (weak, nonatomic) IBOutlet UIButton *addCartBut;
@@ -62,6 +65,8 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
+    NSLog(@"%@,,%@",self.parentViewController, self.navigationController.parentViewController);
+    self.navigationController.delegate = self;
     CGFloat TBBottom = self.hiddenBottom ? 0 : 50;
     self.bottomView.hidden = self.hiddenBottom;
     goods = [[GoodsModel alloc] init];
@@ -74,6 +79,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     _heightArt = 0;
     _heightArtist = 0;
     isCompare = NO;
+    _timerArr = [[NSMutableArray alloc] init];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
 
     
@@ -170,16 +176,32 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 {
     [super viewWillAppear:animated];
     [self requestDetialInfo];
-//    if (self.type == 2) {
-//        [self requestForHistory];
-//    }
     self.tabBarController.tabBar.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (void)releaseTimer
+{
+    [_timerArr makeObjectsPerformSelector:@selector(invalidate)];
+    [_timerArr removeAllObjects];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
 }
+
+- (void)back
+{
+    [self releaseTimer];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 - (void)doRightButton:(UIBarButtonItem*)item
 {
@@ -527,6 +549,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                 cell.click = ^(NSInteger index){
                     [self addScrollForImageToWindow:goods.ImageUrl];
                 };
+                [_timerArr addObject:cell.scrollView.animationTimer];
                 return cell;
             }else{
                 if (self.type == 2) {
@@ -559,12 +582,19 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                         isCompare = NO;
                         [self requestForHistory];
                     };
+                    if (cell.LFifthLabel.countDownTimer) {
+                        [_timerArr addObject:cell.LFifthLabel.countDownTimer];
+                    }
+                    NSLog(@",,,,%p,,,,,,%p",cell.LFifthLabel, cell.LFifthLabel.countDownTimer);
                     return cell;
                 }else{
                     CollectCell *cell = (CollectCell*)[tableView dequeueReusableCellWithIdentifier:collectCell forIndexPath:indexPath];
                     cell.spread = YES;
                     NSNumber *colloct =goods.IsCollect;
-                    NSLog(@"%@", colloct);
+                    NSLog(@"11 %@", colloct);
+                    if (!colloct || [colloct isKindOfClass:[NSNull class]]) {
+                        colloct = @(0);
+                    }
                     cell.collectState = [colloct integerValue];
                     cell.topLab.text =goods.GoodsName;
                     cell.botLab.text = goods.typeForGoods ? @"电话:" : @"价格:";
@@ -591,7 +621,10 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         case 2:{
             SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
             cell.titleLab.text = @"艺术家简介";
-            [cell.detailWebView loadHTMLString:goods.AuthorIntro baseURL:nil];
+            if (goods.AuthorIntro && ![goods.AuthorIntro isKindOfClass:[NSNull class]]) {
+                [cell.detailWebView loadHTMLString:goods.AuthorIntro baseURL:nil];
+            }
+            
             cell.spreadState = _spreadArtist;
             cell.reloadHeight = ^(BOOL spread, CGFloat height){
                 _spreadArtist = spread;
@@ -603,7 +636,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         case 3:{
             SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
             cell.titleLab.text = @"作品简介";
-            [cell.detailWebView loadHTMLString:goods.GoodsIntro baseURL:nil];
+            if (goods.GoodsIntro && ![goods.GoodsIntro isKindOfClass:[NSNull class]]) {
+                [cell.detailWebView loadHTMLString:goods.GoodsIntro baseURL:nil];
+            }
             cell.spreadState = _spreadArt;
             cell.reloadHeight = ^(BOOL spread, CGFloat height){
                 _spreadArt = spread;
@@ -615,7 +650,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         case 4:{
             SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
             cell.titleLab.text = @"布罗德根艺术指数证书";
-            [cell.detailWebView loadHTMLString:goods.centificateIntro baseURL:nil];
+            if (goods.centificateIntro && ![goods.centificateIntro isKindOfClass:[NSNull class]]) {
+                [cell.detailWebView loadHTMLString:goods.centificateIntro baseURL:nil];
+            }
             cell.spreadState = _spreadCertification;
             cell.reloadHeight = ^(BOOL spread, CGFloat height){
                 _spreadCertification = spread;
@@ -637,7 +674,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 //            }else{
                 SpreadCell *cell = (SpreadCell*)[tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
                 cell.titleLab.text = @"出价历史";
-                [cell.detailWebView loadHTMLString:goods.bidHistory baseURL:nil];
+                if (goods.bidHistory && ![goods.bidHistory isKindOfClass:[NSNull class]]) {
+                    [cell.detailWebView loadHTMLString:goods.bidHistory baseURL:nil];
+                }
                 cell.spreadState = _spreadHistory;
                 cell.reloadHeight = ^(BOOL spread, CGFloat height){
                     _spreadHistory = spread;

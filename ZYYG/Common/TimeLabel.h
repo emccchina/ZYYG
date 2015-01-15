@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSString *endTime;
 @property (nonatomic, assign) NSInteger status;//0 开始   1 计时中   2 结束
 @property (nonatomic, strong) NSString *timeCount;
+@property (nonatomic, strong) CADisplayLink *countDownTimer;
 - (void)start;
 
 @end

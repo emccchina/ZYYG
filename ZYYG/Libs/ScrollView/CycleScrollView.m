@@ -18,6 +18,7 @@
 - (void)dealloc
 {
     [self.animationTimer invalidate];
+    self.animationTimer = nil;
 }
 - (void)awakeFromNib
 {

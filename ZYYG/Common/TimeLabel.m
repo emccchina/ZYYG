@@ -71,9 +71,8 @@
     if (!_countDownTimer) {
         _countDownTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(countDown)];
         _countDownTimer.frameInterval = 60;//CADisplayLink 默认每秒运行60次，将它的frameInterval属性设置为60 CADisplayLink每隔60帧运行一次
+        [_countDownTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     }
-    
-    [_countDownTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 }
 
 - (void)countDown

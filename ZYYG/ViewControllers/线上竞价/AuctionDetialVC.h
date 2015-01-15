@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) SelectInfo    *selectInfo;
 
+- (void)releaseTimer;
+
 @end

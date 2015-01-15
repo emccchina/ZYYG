@@ -23,6 +23,8 @@
     NSArray             *searchCondition;//筛选条件 是否已经存在， 不存在请求
     NSMutableArray      *details;//已经选择的条件,显示在chooseview 上的
     BOOL                refreshFooter;//是否是上拉刷新
+    NSMutableArray      *_timerArr;
+    ArtDetailVC         *artDetailVC;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *auctionTB;
@@ -37,6 +39,7 @@ static NSString * auctionCell = @"auctionCell";
     // Do any additional setup after loading the view.
     [self showBackItem];
     _selectInfo.searchType = 2;
+    _timerArr = [[NSMutableArray alloc] init];
     results = [[NSMutableArray alloc] init];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doRightButton:)];
     details = [[NSMutableArray alloc] init];
@@ -67,15 +70,37 @@ static NSString * auctionCell = @"auctionCell";
     
     [self requestForResult];
 }
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (artDetailVC) {
+        [artDetailVC releaseTimer];
+        [artDetailVC.view removeFromSuperview];
+        artDetailVC = nil;
+    }
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (void)releaseTimer
+{
+    [_timerArr makeObjectsPerformSelector:@selector(invalidate)];
+    [_timerArr removeAllObjects];
+}
+
 - (void)back
 {
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -160,16 +185,7 @@ static NSString * auctionCell = @"auctionCell";
         [self.navigationController pushViewController:search animated:YES];
     }
 }
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-    
-//    destVC.hidesBottomBarWhenPushed = YES;
-//    if ([(ArtDetailVC*)destVC respondsToSelector:@selector(setProductID:)]) {
-//        [destVC setValue:selectedProductID forKey:@"productID"];
-//    }
-    
-}
+
 
 - (void)parseRequestResults:(NSArray*)arr
 {
@@ -276,6 +292,7 @@ static NSString * auctionCell = @"auctionCell";
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
     if ([detailVC isKindOfClass:[ArtDetailVC class]]) {
         ArtDetailVC *vc = (ArtDetailVC*)detailVC;
+        artDetailVC = vc;
         [vc setHiddenBottom:NO];
         [vc setProductID:info.GoodsCode];
         [vc setAuctionCode:info.auctionCode];
@@ -355,6 +372,10 @@ static NSString * auctionCell = @"auctionCell";
     cell.RTLabel.text = [NSString stringWithFormat:@"￥%.2f",model.AppendPrice];
     cell.RBLabel.text = model.biddingNum;
     [cell.image setImageWithURL:[NSURL URLWithString:model.picURL]];
+    if (cell.RSLabel.countDownTimer) {
+        [_timerArr addObject:cell.RSLabel.countDownTimer];
+    }
+    
     return cell;
 }
 

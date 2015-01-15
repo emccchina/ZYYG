@@ -16,6 +16,7 @@
 <UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *completeResults;
+    AuctionDetialVC *auctionDetialVC;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *completeTB;
@@ -35,7 +36,14 @@ static NSString * completeCell = @"completeCell";
     [self requestForCompleteGoods];
 }
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (auctionDetialVC) {
+        [auctionDetialVC releaseTimer];
+        auctionDetialVC = nil;
+    }
+}
 
 - (void)addheadRefresh
 {
@@ -153,6 +161,7 @@ static NSString * completeCell = @"completeCell";
     vc.hidesBottomBarWhenPushed = YES;
     if ([vc isKindOfClass:[AuctionDetialVC class]]) {
         AuctionDetialVC * detailVC = (AuctionDetialVC*)vc;
+        auctionDetialVC = detailVC;
         SelectInfo *info = [[SelectInfo alloc] init];
         info.auctionCode = model.auctionCode;
         info.auctionName = model.auctionName;
