@@ -21,9 +21,13 @@
     order.GoodsTotal=[dict safeObjectForKey:@"GoodsTotal"];
     order.OrderMoney=[dict safeObjectForKey:@"OrderMoney"];
     order.OrderStatus=[dict safeObjectForKey:@"OrderStatus"];
-    order.MerchantID = dict[@"MerchantID"];
-    order.PayKey = dict[@"PayKey"];
+    order.MerchantID = [dict safeObjectForKey:@"MerchantID"];
+    order.PayKey = [dict safeObjectForKey:@"PayKey"];
     order.state=[dict[@"OrderStatusCode"] integerValue];
+    order.PaidMoney = [dict safeObjectForKey:@"PaidMoney"];//已付款(已扣除保证金)
+    order.PayMoney = [dict safeObjectForKey:@"PayMoney"];//应付款（尾款）
+    order.PayTime = [dict safeObjectForKey:@"PayTime"];//付尾款时间
+    
     NSMutableArray *goods=[NSMutableArray arrayWithArray:dict[@"Goods"]];
     for (int i=0; i<goods.count; i++) {
         NSDictionary *gd=goods[i];

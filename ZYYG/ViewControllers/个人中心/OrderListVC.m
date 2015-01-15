@@ -222,11 +222,16 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(indexPath.row == (order.Goods.count+1)){
         OrderListCellSum *sumCell=(OrderListCellSum*)[tableView dequeueReusableCellWithIdentifier:orderSumCell forIndexPath:indexPath];
         sumCell.goodsSum.text =[NSString stringWithFormat:@"(%lu)",(unsigned long)order.Goods.count];
+        if ([_orderType intValue] ==0) {
         sumCell.priceSum.text=[NSString stringWithFormat:@"￥%@",order.OrderMoney];
+         }else{
+             sumCell.priceSum.text=[NSString stringWithFormat:@"￥%@",order.PayMoney];
+         }
         sumCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return sumCell;
     }else if(indexPath.row == (order.Goods.count+2)){
         OrderListCellBottom *bottomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
+        
         bottomCell.cancelTime.text=[NSString stringWithFormat:@"订单失效时间:%@",order.CreateTime];
         bottomCell.redLabel.numberOfLines=0;
         [self setButton:bottomCell orderMod:order];
@@ -247,8 +252,8 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         }else{
             goodsCell.marginLab.hidden=NO;
             goodsCell.marginPrice.hidden=NO;
-            goodsCell.marginLab.text=@"保证金:";
-            goodsCell.marginPrice.text=[NSString stringWithFormat:@"%.2f" ,goods.AppendPrice];
+            goodsCell.marginLab.text=@"尾款:";
+            goodsCell.marginPrice.text=[NSString stringWithFormat:@"%@(已扣除保证金)(%@)" ,order.PayMoney,order.PaidMoney];
             
         }
 
