@@ -525,6 +525,7 @@
 		F7DF47D01A259785006EB419 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DF47CF1A259785006EB419 /* CustomModel.m */; };
 		F7DF47D31A25AF6F006EB419 /* ArtDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DF47D21A25AF6F006EB419 /* ArtDetailVC.m */; };
 		F7DF47DA1A25C567006EB419 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F7DF47D91A25C567006EB419 /* HMSegmentedControl.m */; };
+		F7E439CE1A689C7E0004D51D /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E439CD1A689C7E0004D51D /* NSData+AES.m */; };
 		F7E905EE1A26B683001117EE /* ClassifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E905EC1A26B683001117EE /* ClassifyCell.m */; };
 		F7E905EF1A26B683001117EE /* ClassifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7E905ED1A26B683001117EE /* ClassifyCell.xib */; };
 		F7E905F61A26C2F4001117EE /* PriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7E905F41A26C2F4001117EE /* PriceCell.m */; };
@@ -1234,6 +1235,8 @@
 		F7DF47D21A25AF6F006EB419 /* ArtDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtDetailVC.m; sourceTree = "<group>"; };
 		F7DF47D81A25C567006EB419 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		F7DF47D91A25C567006EB419 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		F7E439CC1A689C7E0004D51D /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
+		F7E439CD1A689C7E0004D51D /* NSData+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES.m"; sourceTree = "<group>"; };
 		F7E905EB1A26B683001117EE /* ClassifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyCell.h; sourceTree = "<group>"; };
 		F7E905EC1A26B683001117EE /* ClassifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyCell.m; sourceTree = "<group>"; };
 		F7E905ED1A26B683001117EE /* ClassifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassifyCell.xib; sourceTree = "<group>"; };
@@ -1540,6 +1543,7 @@
 		9401782A1A21CCE400697D14 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				F7E439CB1A689BE90004D51D /* aes */,
 				F7D246851A4191FC001AAAC3 /* payLib */,
 				F7C095B91A382D280077EB47 /* adress.db */,
 				F7E97E601A3AB7300090752B /* Price.plist */,
@@ -2464,6 +2468,15 @@
 			path = SegmentView;
 			sourceTree = "<group>";
 		};
+		F7E439CB1A689BE90004D51D /* aes */ = {
+			isa = PBXGroup;
+			children = (
+				F7E439CC1A689C7E0004D51D /* NSData+AES.h */,
+				F7E439CD1A689C7E0004D51D /* NSData+AES.m */,
+			);
+			path = aes;
+			sourceTree = "<group>";
+		};
 		F7EC68A71A2BF5DA000B289D /* JHRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -3234,6 +3247,7 @@
 				F9BC26A81A2EE92F006894C6 /* OrderListCellSum.m in Sources */,
 				94D89ECF1A220A050074B874 /* HeadTableView.m in Sources */,
 				F7EC68DB1A2C0851000B289D /* TSActionSheet.m in Sources */,
+				F7E439CE1A689C7E0004D51D /* NSData+AES.m in Sources */,
 				F7EF4BC81A5E6C9B0073BD1F /* MarginMoneyCell.m in Sources */,
 				F7DF47D31A25AF6F006EB419 /* ArtDetailVC.m in Sources */,
 				F791302C1A26D64A00DB0EDC /* SearchVC.m in Sources */,
