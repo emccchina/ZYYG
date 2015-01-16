@@ -217,6 +217,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     if(indexPath.row ==0){
         OrderListCellTop   *topCell=(OrderListCellTop*)[tableView dequeueReusableCellWithIdentifier:orderTopCell forIndexPath:indexPath];
         topCell.orderNO.text=order.OrderCode;
+        topCell.orderState.text=order.OrderStatus;
         topCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return topCell;
     }else if(indexPath.row == (order.Goods.count+1)){

@@ -28,7 +28,7 @@
 
 @implementation OrderDetailVC
 
-
+static NSString *topCell = @"topCell";
 static NSString *nomalCell = @"nomalCell";
 static NSString *adressCell = @"AdressCell";
 static NSString *ticketCell = @"TicketCell";
@@ -130,26 +130,26 @@ static NSString *ODCell = @"OrderDetailCell";
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1)        return order.Goods.count+2;
-    else if(section ==4)     return 2;
+    if (section == 2)        return order.Goods.count+2;
+    else if(section ==5)     return 2;
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case 0:
+        case 1:
             return 100;
             break;
-        case 1:
+        case 2:
             return indexPath.row == 0 ? 44 : 125;
             break;
-        case 4:
+        case 5:
             return indexPath.row ? 100 : 44;
             break;
         default:
@@ -176,6 +176,14 @@ static NSString *ODCell = @"OrderDetailCell";
     
     switch (indexPath.section) {
         case 0:{
+            UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:topCell];
+            cell.textLabel.text=order.OrderStatus;
+            cell.detailTextLabel.text=order.OrderCode;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+            break;
+
+        }case 1:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:adressCell forIndexPath:indexPath];
             UIView *viewBG = [cell viewWithTag:1];
             viewBG.layer.borderColor = [UIColor colorWithRed:255.0/255.0 green:223.0/255.0 blue:175.0/255.0 alpha:1.0].CGColor;
@@ -187,7 +195,7 @@ static NSString *ODCell = @"OrderDetailCell";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             break;
-        }case 1:{
+        }case 2:{
             if (indexPath.row == 0) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
                 cell.textLabel.text = @"商品清单";
@@ -221,7 +229,7 @@ static NSString *ODCell = @"OrderDetailCell";
             }
          }
             break;
-        case 2:{
+        case 3:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"";
             NSString *detail = @"";
@@ -234,7 +242,7 @@ static NSString *ODCell = @"OrderDetailCell";
             return cell;
         }
             break;
-        case 3:{
+        case 4:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"";
             NSString *detail = @"";
@@ -247,7 +255,7 @@ static NSString *ODCell = @"OrderDetailCell";
             return cell;
         }
             break;
-        case 4:{
+        case 5:{
             if (indexPath.row == 0) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
                 cell.textLabel.text = @"发票信息";
@@ -278,7 +286,7 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section ==1 && indexPath.row!=0 && indexPath.row != (order.Goods.count+1)) {
+    if (indexPath.section ==2 && indexPath.row!=0 && indexPath.row != (order.Goods.count+1)) {
         GoodsModel *goods=order.Goods[indexPath.row-1];
         [self presentDetailVC:goods.GoodsCode];
     }

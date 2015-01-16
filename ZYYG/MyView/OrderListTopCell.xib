@@ -26,16 +26,25 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CO4-Wk-0OV">
+                        <rect key="frame" x="549" y="8" width="33" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="NXn-2v-EN7" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="CVH-hQ-CLq"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="CO4-Wk-0OV" secondAttribute="trailing" constant="10" id="LMR-xu-K6x"/>
                     <constraint firstItem="4gZ-l8-TT6" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="QzX-IJ-E5o"/>
                     <constraint firstItem="NXn-2v-EN7" firstAttribute="leading" secondItem="NSQ-5r-kmQ" secondAttribute="leadingMargin" constant="2" id="RcG-TD-sFg"/>
                     <constraint firstItem="4gZ-l8-TT6" firstAttribute="leading" secondItem="NXn-2v-EN7" secondAttribute="trailing" constant="2" id="SBl-oX-sar"/>
+                    <constraint firstItem="CO4-Wk-0OV" firstAttribute="top" secondItem="NSQ-5r-kmQ" secondAttribute="topMargin" id="tU2-vc-ie3"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="orderNO" destination="4gZ-l8-TT6" id="VKC-JP-uc0"/>
+                <outlet property="orderState" destination="CO4-Wk-0OV" id="gwT-6V-iYi"/>
             </connections>
             <point key="canvasLocation" x="464" y="384"/>
         </tableViewCell>
