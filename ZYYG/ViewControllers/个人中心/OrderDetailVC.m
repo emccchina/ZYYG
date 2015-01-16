@@ -220,7 +220,7 @@ static NSString *ODCell = @"OrderDetailCell";
 //                cell.goodsCount.text=@"1";
                 [cell.iconImage setImageWithURL:[NSURL URLWithString:model.defaultImageUrl] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
                 cell.LTLab.text = model.GoodsName;
-                cell.RTLab.text = @"  ";
+                cell.RTLab.text = model.ArtName;
                 cell.RSecondLab.text = model.GoodsCode;
                 cell.RThirdLab.text = model.SpecDesc;
                 cell.RBLab.text = [NSString stringWithFormat:@"￥%.2f", model.AppendPrice];
@@ -288,7 +288,7 @@ static NSString *ODCell = @"OrderDetailCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section ==2 && indexPath.row!=0 && indexPath.row != (order.Goods.count+1)) {
         GoodsModel *goods=order.Goods[indexPath.row-1];
-        [self presentDetailVC:goods.GoodsCode];
+        [self presentDetailVC:goods];
     }
    
 }
@@ -302,16 +302,9 @@ static NSString *ODCell = @"OrderDetailCell";
     if ([detailVC isKindOfClass:[ArtDetailVC class]]) {
         ArtDetailVC *vc = (ArtDetailVC*)detailVC;
         [vc setHiddenBottom:YES];
-        [vc setProductID:(NSString*)info];
-        [vc setAuctionCode:@""];
+        [vc setProductID:((GoodsModel *)info).GoodsCode];
+        [vc setAuctionCode:((GoodsModel *)info).auctionCode];
         [vc setType:self.orderType];
-    }
-
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
-        [detailVC setValue:@(1) forKey:@"hiddenBottom"];
-    }
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
-        [detailVC setValue:(NSString*)info forKey:@"productID"];
     }
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];

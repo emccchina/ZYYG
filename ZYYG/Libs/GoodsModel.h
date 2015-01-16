@@ -59,4 +59,5 @@
 - (void)goodsModelFromOrder:(NSDictionary *)dict;//搜索结果解析
 - (void)goodsModelFromAuctionDetail:(NSDictionary*)dict;//从竞价搜索中解析
 - (void)goodsModelFromMarginList:(NSDictionary*)dict;//从保证金中解析
+- (void)goodsModelFromRecordList:(NSDictionary*)dict;//从保证金中解析
 @end

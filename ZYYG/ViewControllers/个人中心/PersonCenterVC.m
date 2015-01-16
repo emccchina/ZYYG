@@ -26,6 +26,7 @@ static NSString *listCell = @"listCell";
 {
     [super viewDidLoad];
     user=[UserInfo shareUserInfo];
+    orderType=0;
     //初始化数据
     personDataArray =[NSMutableArray array];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"PersonCenter" ofType:@"plist"];
@@ -265,15 +266,11 @@ static NSString *listCell = @"listCell";
 //跳转
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSString *orderCode=[NSString stringWithFormat:@"%ld",(long)orderType];
     UIViewController *vc = segue.destinationViewController;
     vc.hidesBottomBarWhenPushed = YES;
-    if(orderType){
-        if ([(OrderListVC *)vc respondsToSelector:@selector(setOrderType:)]) {
-            [vc setValue:orderCode forKey:@"orderType"];
-        }
-    }else{
-        NSLog(@"选择某一行");
+    if ([(OrderListVC *)vc respondsToSelector:@selector(setOrderType:)]) {
+        NSString *orderCode=[NSString stringWithFormat:@"%ld",(long)orderType];
+        [vc setValue:orderCode forKey:@"orderType"];
     }
 }
 - (IBAction)loginPress:(UIButton *)sender {

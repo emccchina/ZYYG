@@ -42,6 +42,10 @@
                     <constraint firstAttribute="trailingMargin" secondItem="EWs-1G-sai" secondAttribute="trailing" constant="10" id="yFw-H4-sWy"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="orderType" destination="tv8-fr-wck" id="Dlj-7u-ziZ"/>
+                <outlet property="startPrice" destination="EWs-1G-sai" id="gst-4J-2Ef"/>
+            </connections>
             <point key="canvasLocation" x="71" y="109.5"/>
         </tableViewCell>
     </objects>

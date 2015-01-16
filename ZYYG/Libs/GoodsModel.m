@@ -121,9 +121,22 @@
     self.startTime = [dict safeObjectForKey:@"ReceiveTime"];
     self.endTime = [dict safeObjectForKey:@"RefundTime"];
     self.CreateTime = [dict safeObjectForKey:@"DealTime"];
-    
-    
     self.auctionCode = [dict safeObjectForKey:@"ActionCode"];
+}
+- (void)goodsModelFromRecordList:(NSDictionary*)dict
+{
+    self.GoodsCode = [dict safeObjectForKey:@"GoodsCode"];
+    self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
+    self.ArtName = [dict safeObjectForKey:@"ArtName"];
+    self.auctionCode =[dict safeObjectForKey:@"AuctionCode"];
+    self.auctionName = [dict safeObjectForKey:@"ActionName"];
+    self.picURL = [dict safeObjectForKey:@"ImageUrl"];
+    self.securityDeposit=[dict safeObjectForKey:@"SecurtyDeposit"];
+    self.startPrice =[dict safeObjectForKey:@"CurrentPrice"];
+    self.maxMoney =[dict safeObjectForKey:@"MyMaxPrice"];
+    self.startTime = [dict safeObjectForKey:@"StartDate"];
+    self.endTime = [dict safeObjectForKey:@"EndDate"];
+    self.status = [dict safeObjectForKey:@"Status"];
 }
 
 @end

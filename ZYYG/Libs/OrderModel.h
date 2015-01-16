@@ -23,5 +23,8 @@
 @property (nonatomic, strong) NSString          *PaidMoney;//已付款(已扣除保证金)
 @property (nonatomic, strong) NSString          *PayMoney;//应付款（尾款）
 @property (nonatomic, strong) NSString          *PayTime;//付尾款时间
+@property (nonatomic, strong) NSString          *RemainingTime;//剩余时间
+@property (nonatomic, strong) NSString          *TimeSpan;//时长（多少小时/分钟内付款)
+
 +(id)orderModelWithDict:(NSDictionary *)dict;
 @end

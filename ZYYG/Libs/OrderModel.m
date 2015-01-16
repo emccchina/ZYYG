@@ -24,9 +24,12 @@
     order.MerchantID = [dict safeObjectForKey:@"MerchantID"];
     order.PayKey = [dict safeObjectForKey:@"PayKey"];
     order.state=[dict[@"OrderStatusCode"] integerValue];
-    order.PaidMoney = [dict safeObjectForKey:@"PaidMoney"];//已付款(已扣除保证金)
-    order.PayMoney = [dict safeObjectForKey:@"PayMoney"];//应付款（尾款）
-    order.PayTime = [dict safeObjectForKey:@"PayTime"];//付尾款时间
+    order.PaidMoney = [dict safeObjectForKey:@"PaidMoney"];
+    order.PayMoney = [dict safeObjectForKey:@"PayMoney"];
+    order.PayTime = [dict safeObjectForKey:@"PayTime"];
+    order.RemainingTime = [dict safeObjectForKey:@"RemainingTime"];
+    order.TimeSpan = [dict safeObjectForKey:@"TimeSpan"];
+
     
     NSMutableArray *goods=[NSMutableArray arrayWithArray:dict[@"Goods"]];
     for (int i=0; i<goods.count; i++) {
@@ -35,6 +38,8 @@
         g.GoodsCode=[gd safeObjectForKey:@"Code"];
         g.GoodsName=[gd safeObjectForKey:@"Title"];
         g.defaultImageUrl=[gd safeObjectForKey:@"ImgUrl"];
+        g.auctionCode=[gd safeObjectForKey:@"AuctionCode"];
+        g.ArtName=[gd safeObjectForKey:@"Author"];
         g.AppendPrice=[[gd safeObjectForKey:@"Price"] floatValue];
         [order.Goods addObject:g];
     }

@@ -9,8 +9,16 @@
 #import "CompeteRecordVC.h"
 #import "CompeteRecordCell.h"
 #import "CompeteRecordCellTop.h"
+#import "GoodsModel.h"
 
 @interface CompeteRecordVC ()
+{
+    NSMutableArray *recordArray;
+    NSInteger pageNum;
+    NSInteger pageSize;
+    NSInteger status;
+    UserInfo *user;
+}
 
 @end
 
@@ -19,10 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackItem];
+    recordArray=[[NSMutableArray alloc] init];
+    pageNum=1;
+    pageSize=5;
+    status=0;
+    user=[UserInfo shareUserInfo];
     [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCell" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCell"];
     [self.competeTableView registerNib:[UINib nibWithNibName:@"CompeteRecordCellTop" bundle:nil] forCellReuseIdentifier:@"CompeteRecordCellTop"];
     
-    self.segmentView.sectionTitles = @[@"全部",@"竞价中", @"已结束"];
+    [self requestRecordList:status page:pageSize panum:pageNum];
+    [self addFootRefresh];
+    self.segmentView.sectionTitles = @[@"竞价中", @"已结束"];
     self.segmentView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     self.segmentView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     self.segmentView.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
@@ -42,17 +57,85 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
+- (void)addFootRefresh
+{
+    [recordArray removeAllObjects];
+    [self.competeTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        pageNum=pageNum+1;
+         [self requestRecordList:status page:pageSize panum:pageNum];
+    }];
+}
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-        [self.competeTableView reloadData];
+    [recordArray removeAllObjects];
+    //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
+    pageNum=1;
+    if (0==segmentedControl.selectedSegmentIndex) {
+        status=0;
+    }else if(1==segmentedControl.selectedSegmentIndex) {
+        status=10;
+    }else{
+        status=0;
+    }
+    [self requestRecordList:status page:pageSize panum:pageNum];
+    
 }
+-(void)requestRecordList:(NSInteger)Austatus  page:(NSInteger )size  panum:(NSInteger )num
+{
+    status=Austatus;
+    pageSize=size;
+    pageNum=num;
+    user=[UserInfo shareUserInfo];
+    if (![user isLogin]) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@MyBiddingList.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",[NSString stringWithFormat:@"%ld",(long)status], @"AuctionStatus",[NSString stringWithFormat:@"%ld",(long)size] , @"num", [NSString stringWithFormat:@"%ld",(long)num] , @"page" ,nil];
+    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            //            NSLog(@"%@",result);
+            NSMutableArray *records=result[@"BiddingList"];
+            if (!records ||[records isKindOfClass:[NSNull class]]|| records.count<1) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }else{
+                for (int i=0; i<records.count; i++) {
+                    GoodsModel *rgoods=[[GoodsModel alloc]init ];
+                    [rgoods  goodsModelFromRecordList:records[i]];
+                    [recordArray addObject:rgoods];
+                }
+            }
+            [self.competeTableView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+}
+
+- (void)requestFinished
+{
+    [self dismissIndicatorView];
+    [self.competeTableView footerEndRefreshing];
+    
+}
+
+
 #pragma mark -tableView
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 20;
+    return recordArray.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 20;
+    return 8;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -68,12 +151,33 @@
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    GoodsModel *goods=recordArray[indexPath.section];
     if (indexPath.row == 0) {
         CompeteRecordCellTop *topCell = (CompeteRecordCellTop *)[tableView dequeueReusableCellWithIdentifier:@"CompeteRecordCellTop" forIndexPath:indexPath];
+        topCell.orderType.text = goods.status;
+        topCell.startPrice.text = [NSString stringWithFormat:@"起拍价:%@" ,goods.startPrice];
+        topCell.startPrice.hidden=YES;
         return topCell;
     }else{
         CompeteRecordCell *cell = (CompeteRecordCell *)[tableView dequeueReusableCellWithIdentifier:@"CompeteRecordCell" forIndexPath:indexPath];
-        [cell.goodsImage setImageWithURL:[NSURL URLWithString:@"http://www.baidu.com/img/bd_logo1.png"] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
+        [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
+        cell.goodsName.text=goods.GoodsName;
+        cell.yourPrice.text=goods.maxMoney;
+        cell.highestPrice.text=goods.startPrice;
+        cell.beginTime.text=goods.startTime;
+        cell.endTime.text=goods.endTime;
+        
+        if (status==0) {
+            cell.redLab.hidden=YES;
+            [cell.bidButton setTitle:@"出价" forState:UIControlStateNormal];
+            
+            cell.bidButton.hidden=NO;
+        }else{
+            cell.redLab.hidden=NO;
+            cell.redLab.numberOfLines=0;
+            cell.redLab.text=@"请在竞价订单中查看结果或者付款!";
+            cell.bidButton.hidden=YES;
+        }
         return cell;
     }
     

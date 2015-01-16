@@ -10,6 +10,7 @@
 
 @interface CompeteRecordCell : UITableViewCell
 
+@property (nonatomic,strong) NSString *GoodsCode;
 @property (weak, nonatomic) IBOutlet UIImageView *goodsImage;
 @property (weak, nonatomic) IBOutlet UILabel *goodsName;
 @property (weak, nonatomic) IBOutlet UILabel *yourPrice;
@@ -17,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *beginTime;
 @property (weak, nonatomic) IBOutlet UILabel *endTime;
 @property (weak, nonatomic) IBOutlet UIButton *bidButton;
+@property (weak, nonatomic) IBOutlet UILabel *redLab;
+
+- (IBAction)bidPrice:(id)sender;
 
 
 @end

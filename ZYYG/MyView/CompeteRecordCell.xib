@@ -75,17 +75,25 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在交易订单中付款" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8R-XJ-9Gx">
-                        <rect key="frame" x="128" y="120" width="117" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8R-XJ-9Gx">
+                        <rect key="frame" x="128" y="120" width="460" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWP-6G-2KH">
-                        <rect key="frame" x="530" y="120" width="46" height="30"/>
+                        <rect key="frame" x="526" y="120" width="50" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="TUU-Wz-6YJ"/>
+                            <constraint firstAttribute="height" constant="30" id="ZMO-H0-Cgg"/>
+                        </constraints>
                         <state key="normal" title="Button">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="bidPrice:" destination="S0J-sH-VFe" eventType="touchUpInside" id="ei4-nG-7Pt"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -99,6 +107,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="AWP-6G-2KH" secondAttribute="trailing" constant="20" id="J0y-yA-V3j"/>
                     <constraint firstItem="M8R-XJ-9Gx" firstAttribute="top" secondItem="wNQ-Jo-47T" secondAttribute="bottom" constant="5" id="KT0-MY-QBe"/>
                     <constraint firstItem="M8R-XJ-9Gx" firstAttribute="top" secondItem="ao5-Fm-TcH" secondAttribute="bottom" constant="5" id="NRQ-2g-9QL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="M8R-XJ-9Gx" secondAttribute="trailing" constant="8" id="OkY-28-5bs"/>
                     <constraint firstItem="8sP-9t-DVM" firstAttribute="leading" secondItem="f1m-Vg-mOo" secondAttribute="trailing" constant="10" id="Puu-0e-4bt"/>
                     <constraint firstItem="SFA-VO-6up" firstAttribute="leading" secondItem="8sP-9t-DVM" secondAttribute="trailing" constant="10" id="QyM-Mc-s2w"/>
                     <constraint firstItem="45z-VS-jak" firstAttribute="top" secondItem="8sP-9t-DVM" secondAttribute="bottom" constant="5" id="RLc-Gs-3HB"/>
@@ -123,9 +132,10 @@
                 <outlet property="goodsImage" destination="f1m-Vg-mOo" id="gm2-Gz-kqv"/>
                 <outlet property="goodsName" destination="bac-JR-CfS" id="8P3-3S-X2h"/>
                 <outlet property="highestPrice" destination="SFA-VO-6up" id="J1e-mQ-tvc"/>
+                <outlet property="redLab" destination="M8R-XJ-9Gx" id="s8D-aR-Cf6"/>
                 <outlet property="yourPrice" destination="Sq5-kN-gks" id="fRW-RN-FCx"/>
             </connections>
-            <point key="canvasLocation" x="-95" y="226"/>
+            <point key="canvasLocation" x="-95" y="225"/>
         </tableViewCell>
     </objects>
 </document>

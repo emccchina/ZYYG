@@ -23,4 +23,6 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)bidPrice:(id)sender {
+}
 @end
