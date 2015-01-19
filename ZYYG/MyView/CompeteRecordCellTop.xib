@@ -20,7 +20,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起拍价:$1000009" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-1G-sai">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="起拍价" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-1G-sai">
                         <rect key="frame" x="479" y="5" width="103" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,7 +44,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="orderType" destination="tv8-fr-wck" id="Dlj-7u-ziZ"/>
-                <outlet property="startPrice" destination="EWs-1G-sai" id="gst-4J-2Ef"/>
+                <outlet property="startPrice" destination="EWs-1G-sai" id="iDq-ST-u5j"/>
             </connections>
             <point key="canvasLocation" x="71" y="109.5"/>
         </tableViewCell>

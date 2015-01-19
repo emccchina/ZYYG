@@ -170,7 +170,6 @@
         if (status==0) {
             cell.redLab.hidden=YES;
             [cell.bidButton setTitle:@"出价" forState:UIControlStateNormal];
-            
             cell.bidButton.hidden=NO;
         }else{
             cell.redLab.hidden=NO;

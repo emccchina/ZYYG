@@ -136,8 +136,8 @@
     self.securityDeposit=[dict safeObjectForKey:@"SecurtyDeposit"];
     self.startPrice =[dict safeObjectForKey:@"CurrentPrice"];
     self.maxMoney =[dict safeObjectForKey:@"MyMaxPrice"];
-    self.startTime = [dict safeObjectForKey:@"StartDate"];
-    self.endTime = [dict safeObjectForKey:@"EndDate"];
+    self.startTime = [dict safeObjectForKey:@"BeginTime"];
+    self.endTime = [dict safeObjectForKey:@"ReminingTime"];
     self.status = [dict safeObjectForKey:@"Status"];
 }
 
