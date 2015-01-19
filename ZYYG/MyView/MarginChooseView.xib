@@ -51,8 +51,8 @@
                         <action selector="doAddBut:" destination="iN0-l3-epB" eventType="touchUpInside" id="J7W-2I-MHl"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-tD-Jid">
-                    <rect key="frame" x="110" y="52" width="120" height="20"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-tD-Jid">
+                    <rect key="frame" x="57" y="52" width="120" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="qFa-YU-EHd"/>
                     </constraints>
@@ -67,7 +67,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XD-6K-4A2">
-                    <rect key="frame" x="143" y="52" width="70" height="27"/>
+                    <rect key="frame" x="510" y="50" width="70" height="27"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="27" id="ip7-i9-VpV"/>
                         <constraint firstAttribute="width" constant="70" id="yNQ-cq-ObZ"/>
@@ -84,24 +84,18 @@
             <color key="backgroundColor" red="0.92941176469999998" green="0.90588235289999997" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="umL-5d-oRv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="4a5-Wq-ynn"/>
-                <constraint firstItem="zHM-Ia-nxg" firstAttribute="centerX" secondItem="8XD-6K-4A2" secondAttribute="centerX" constant="-8" id="8EV-Fz-Erw"/>
                 <constraint firstItem="zHM-Ia-nxg" firstAttribute="top" secondItem="Pw7-y7-jcG" secondAttribute="top" constant="1" id="9dn-S4-8aS"/>
                 <constraint firstItem="zHM-Ia-nxg" firstAttribute="leading" secondItem="Pw7-y7-jcG" secondAttribute="trailing" constant="8" id="DRA-6Z-nS8"/>
                 <constraint firstItem="Pw7-y7-jcG" firstAttribute="leading" secondItem="umL-5d-oRv" secondAttribute="trailing" constant="8" id="EKE-b5-WIU"/>
                 <constraint firstItem="pUq-Ah-uhf" firstAttribute="leading" secondItem="zHM-Ia-nxg" secondAttribute="trailing" constant="8" id="KGP-mM-lQ2"/>
-                <constraint firstItem="8XD-6K-4A2" firstAttribute="top" secondItem="Mqx-tD-Jid" secondAttribute="top" id="KJJ-rL-WOv"/>
                 <constraint firstItem="umL-5d-oRv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="KO2-ZF-qgh"/>
+                <constraint firstItem="Pw7-y7-jcG" firstAttribute="leading" secondItem="Mqx-tD-Jid" secondAttribute="leading" id="Mkp-4y-Otx"/>
                 <constraint firstItem="umL-5d-oRv" firstAttribute="top" secondItem="Pw7-y7-jcG" secondAttribute="top" constant="4" id="ZhB-BP-W3c"/>
                 <constraint firstItem="zHM-Ia-nxg" firstAttribute="top" secondItem="pUq-Ah-uhf" secondAttribute="top" id="c7n-wG-gE0"/>
-                <constraint firstItem="zHM-Ia-nxg" firstAttribute="centerX" secondItem="Mqx-tD-Jid" secondAttribute="centerX" id="cp7-D1-9px"/>
-                <constraint firstAttribute="trailing" secondItem="8XD-6K-4A2" secondAttribute="trailing" constant="10" id="mn8-bC-iiB"/>
+                <constraint firstAttribute="trailing" secondItem="8XD-6K-4A2" secondAttribute="trailing" constant="20" id="iI0-S9-lVm"/>
                 <constraint firstItem="Mqx-tD-Jid" firstAttribute="top" secondItem="zHM-Ia-nxg" secondAttribute="bottom" constant="12" id="uH5-k6-AdK"/>
+                <constraint firstItem="8XD-6K-4A2" firstAttribute="top" secondItem="zHM-Ia-nxg" secondAttribute="bottom" constant="10" id="uNc-Az-wOb"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="mn8-bC-iiB"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="addBut" destination="pUq-Ah-uhf" id="TPN-GA-bED"/>
                 <outlet property="dd" destination="-1" id="FFR-WZ-8Lg"/>

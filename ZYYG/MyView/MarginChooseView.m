@@ -66,11 +66,22 @@
         self.changeMoney(YES);
     }
 }
+
+- (void)setHightestButState:(BOOL)hightest
+{
+    UIImage *image = hightest ? [UIImage imageNamed:@"accountSelected"] : [UIImage imageNamed:@"accountUnselected"];
+    [self.hightestBut setImage:image forState:UIControlStateNormal];
+}
 - (IBAction)doHightestBut:(id)sender {
+    self.hightest = !self.hightest;
+    [self setHightestButState:self.hightest];
+    if (self.hightestPrice) {
+        self.hightestPrice();
+    }
 }
 - (IBAction)doMarginBut:(id)sender {
     if (self.gotoMargin) {
-        self.gotoMargin(_type);
+        self.gotoMargin(_type, self.hightest);
     }
 }
 
@@ -117,7 +128,12 @@
         case 4:{
             [self.marignBut setTitle:@"已流拍" forState:UIControlStateNormal];
             [self setButState:NO];
-        }
+        }break;
+        case 5:{
+            [self.marignBut setTitle:@"已代理" forState:UIControlStateNormal];
+            [self setHightestButState:YES];
+            [self setButState:NO];
+        }break;
         default:
             break;
     }

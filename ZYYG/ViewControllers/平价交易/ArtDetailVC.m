@@ -103,16 +103,20 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     _marginView1.changeMoney = ^(BOOL add){
         [weakSelf doWithMoneyCount];
     };
-    _marginView1.gotoMargin = ^(NSInteger state){
+    _marginView1.gotoMargin = ^(NSInteger state, BOOL hightest){
         switch (state) {
             case 0:
                 [weakSelf presentPayMarginVC];
                 break;
             case 1:
                 break;
-            case 2:
-                [weakSelf requestForUpLoadMyPrice];
-                break;
+            case 2:{
+                if (hightest) {
+                    [weakSelf requestForHightestPrice];
+                }else{
+                    [weakSelf requestForUpLoadMyPrice];
+                }
+            }break;
             case 3:
                 break;
             default:
@@ -268,6 +272,10 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             [self showAlertView:@"您已拍下此艺术品,请在十分钟内付款"];
         }
     }else{
+        if (goods.isBidEntrustPrice) {
+            _marginView1.type = 5;
+            return;
+        }
         if (goods.isSecurityDeposit == 10) {
             if (!isBegin) {
                 _marginView1.type = 1;
@@ -414,6 +422,35 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [Utities errorPrint:error vc:self];
         [self dismissIndicatorView];
         [self showAlertView:kNetworkNotConnect];
+    }];
+
+}
+
+- (void)requestForHightestPrice
+{
+    if (![UserInfo shareUserInfo].isLogin) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@BidEntrustPrice.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"GoodsCode",[UserInfo shareUserInfo].userKey,@"key",self.auctionCode,@"AuctionCode",_marginView1.inputTF.text,@"Price",@"1",@"type", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+        
     }];
 
 }

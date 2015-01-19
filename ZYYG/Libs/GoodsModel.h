@@ -43,6 +43,8 @@
 @property (nonatomic, strong) NSString      *biddingNum;//竞拍次数
 @property (nonatomic, strong) NSString      *appendMoney;//加价
 @property (nonatomic, assign) NSInteger     delayMinute;
+@property (nonatomic, assign) NSInteger     isBidEntrustPrice;//是否最高价格
+@property (nonatomic, strong) NSString      *BidEntrustPrice;//最高价格
 @property (nonatomic, strong) NSString      *securityDeposit;//保证金
 @property (nonatomic, assign) NSInteger     isSecurityDeposit;//是否交保证金 -1:没有；0：待付款；10：已付款；
 @property (nonatomic, strong) NSString      *maxMoney;//当前价格

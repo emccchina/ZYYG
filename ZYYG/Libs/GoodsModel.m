@@ -36,6 +36,8 @@
     self.securityDeposit = [dict safeObjectForKey:@"SecurityDeposit"];
     self.isSecurityDeposit = [[dict safeObjectForKey:@"IsSecurtyDeposit"] integerValue];
     self.delayMinute = [[dict safeObjectForKey:@"DelayMinute"] integerValue];
+    self.isBidEntrustPrice = [dict[@"IsEntrustPrice"] integerValue];
+    self.BidEntrustPrice = [dict safeObjectForKey:@"EntrustPrice"];
 }
 
 - (void)goodsForBidHistroy:(NSDictionary *)dict
