@@ -10,7 +10,7 @@
 #import "CompeteRecordCell.h"
 #import "CompeteRecordCellTop.h"
 #import "GoodsModel.h"
-
+#import "ArtDetailVC.h"
 @interface CompeteRecordVC ()
 {
     NSMutableArray *recordArray;
@@ -180,6 +180,23 @@
         return cell;
     }
     
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+     GoodsModel *goods=recordArray[indexPath.section];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
+    UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
+    
+    if ([detailVC isKindOfClass:[ArtDetailVC class]]) {
+        ArtDetailVC *vc = (ArtDetailVC*)detailVC;
+        [vc setHiddenBottom:YES];
+        [vc setProductID:goods.GoodsCode];
+        [vc setAuctionCode:goods.auctionCode];
+        [vc setType:2];
+    }
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 /*
 #pragma mark - Navigation
