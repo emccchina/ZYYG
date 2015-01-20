@@ -114,7 +114,6 @@ static NSString *priceCell      = @"PriceCell";
     [_titles addObjectsFromArray:arrayTitle];
     [_details removeAllObjects];
     [_details addObjectsFromArray:arrayDetail];
-    NSLog(@"_titles %@", _titles);
 }
 
 NSInteger soredArray(id model1, id model2, void *context)
@@ -177,6 +176,9 @@ NSInteger soredArray(id model1, id model2, void *context)
     }else{
         ClassifyModel *mode = _details[_selectedIndex][searchRow];
         selectInfo.categaryCode = mode.code;
+        if (self.type) {
+            selectInfo.auctionName = mode.name;
+        }
     }
     if (self.type) {
         UIViewController *vc = [[UIStoryboard storyboardWithName:@"CompeteStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"AuctionVC"];

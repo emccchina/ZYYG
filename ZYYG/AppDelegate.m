@@ -28,7 +28,7 @@
 
     NSString *s = @"12345";
     NSString *e = [s AES256EncryptWithKey:@"0123456789012345"];
-    NSLog(@"e is %@", e);
+    NSLog(@"e is %@,%@", e,[Utities md5AndBase:s]);
     NSString *e2 = [e AES256DecryptWithKey:@"0123456789012345"];
     NSLog(@"e2 is %@", e2);
     return YES;
