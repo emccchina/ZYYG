@@ -97,7 +97,8 @@
 		F7C8D5161A3809C6009F36B3 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C8D50F1A3809C6009F36B3 /* FMDatabaseQueue.m */; };
 		F7C8D5171A3809C6009F36B3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C8D5121A3809C6009F36B3 /* FMResultSet.m */; };
 		F7C8D5191A3809D4009F36B3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C8D5181A3809D4009F36B3 /* libsqlite3.dylib */; };
-		F7D09CF21A6DDE5200332331 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D09CF11A6DDE5200332331 /* NSData+AES256.m */; };
+		F7D09CF51A6DE13000332331 /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D09CF41A6DE13000332331 /* NSData+AES.m */; };
+		F7D09CF81A6DE3D300332331 /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D09CF71A6DE3D300332331 /* NSString+AES.m */; };
 		F7D20A601A5F709F00DE0F96 /* AuctionArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D20A5E1A5F709F00DE0F96 /* AuctionArtCell.m */; };
 		F7D20A611A5F709F00DE0F96 /* AuctionArtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D20A5F1A5F709F00DE0F96 /* AuctionArtCell.xib */; };
 		F7D20A641A5F743E00DE0F96 /* TimeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D20A631A5F743E00DE0F96 /* TimeLabel.m */; };
@@ -800,8 +801,10 @@
 		F7C8D5111A3809C6009F36B3 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		F7C8D5121A3809C6009F36B3 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		F7C8D5181A3809D4009F36B3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		F7D09CF01A6DDE5200332331 /* NSData+AES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES256.h"; sourceTree = "<group>"; };
-		F7D09CF11A6DDE5200332331 /* NSData+AES256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES256.m"; sourceTree = "<group>"; };
+		F7D09CF31A6DE13000332331 /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
+		F7D09CF41A6DE13000332331 /* NSData+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES.m"; sourceTree = "<group>"; };
+		F7D09CF61A6DE3D300332331 /* NSString+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AES.h"; sourceTree = "<group>"; };
+		F7D09CF71A6DE3D300332331 /* NSString+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AES.m"; sourceTree = "<group>"; };
 		F7D20A5D1A5F709F00DE0F96 /* AuctionArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuctionArtCell.h; sourceTree = "<group>"; };
 		F7D20A5E1A5F709F00DE0F96 /* AuctionArtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuctionArtCell.m; sourceTree = "<group>"; };
 		F7D20A5F1A5F709F00DE0F96 /* AuctionArtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuctionArtCell.xib; sourceTree = "<group>"; };
@@ -2471,8 +2474,10 @@
 		F7E439CB1A689BE90004D51D /* aes */ = {
 			isa = PBXGroup;
 			children = (
-				F7D09CF01A6DDE5200332331 /* NSData+AES256.h */,
-				F7D09CF11A6DDE5200332331 /* NSData+AES256.m */,
+				F7D09CF31A6DE13000332331 /* NSData+AES.h */,
+				F7D09CF41A6DE13000332331 /* NSData+AES.m */,
+				F7D09CF61A6DE3D300332331 /* NSString+AES.h */,
+				F7D09CF71A6DE3D300332331 /* NSString+AES.m */,
 			);
 			path = aes;
 			sourceTree = "<group>";
@@ -3147,6 +3152,7 @@
 				F9C280901A5FB84100FAC045 /* PayMarginCell.m in Sources */,
 				F7EC68C61A2BF5DA000B289D /* JHRefreshConfig.m in Sources */,
 				F7EC68C51A2BF5DA000B289D /* JHRefreshBaseView.m in Sources */,
+				F7D09CF51A6DE13000332331 /* NSData+AES.m in Sources */,
 				94D23C741A220E5E00EE159B /* BaseViewController.m in Sources */,
 				940178641A21CCE400697D14 /* MyTabBarItem.m in Sources */,
 				F7E905EE1A26B683001117EE /* ClassifyCell.m in Sources */,
@@ -3260,7 +3266,6 @@
 				F7D20A601A5F709F00DE0F96 /* AuctionArtCell.m in Sources */,
 				F7EC68DC1A2C0851000B289D /* TSPopoverController.m in Sources */,
 				F7BE80DE1A3EE5610053C5CA /* KDPreView.m in Sources */,
-				F7D09CF21A6DDE5200332331 /* NSData+AES256.m in Sources */,
 				9401789B1A21CE0000697D14 /* AFURLResponseSerialization.m in Sources */,
 				9401785D1A21CCE400697D14 /* ImageScrollCell.m in Sources */,
 				F93099521A2DB4B40054FFC1 /* MyCollectionCell.m in Sources */,
@@ -3279,6 +3284,7 @@
 				F930994D1A2DB42B0054FFC1 /* CompeteRecordCell.m in Sources */,
 				F77AD84C1A4BB0B4004662E2 /* PayManager.m in Sources */,
 				940178A31A21CE0000697D14 /* UIImageView+AFNetworking.m in Sources */,
+				F7D09CF81A6DE3D300332331 /* NSString+AES.m in Sources */,
 				94D89EBF1A21FDA70074B874 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				F7F30D431A22CFE900EF2580 /* ClassilyVC.m in Sources */,
 				F996B8511A4AB26F00D38473 /* OrderModel.m in Sources */,

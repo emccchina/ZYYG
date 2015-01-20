@@ -10,7 +10,8 @@
 #import "TSPopoverController.h"
 #import "PopView.h"
 #import "MyView/MyNavigationController.h"
-#import "NSData+AES256.h"
+#import "NSString+AES.h"
+
 @interface AppDelegate ()
 <UITabBarControllerDelegate>
 @end
@@ -26,10 +27,10 @@
     [[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTintColor:[UIColor whiteColor]];
 
     NSString *s = @"12345";
-    NSString *e = [NSData AES256EncryptWithPlainText:s];
+    NSString *e = [s AES256EncryptWithKey:@"0123456789012345"];
     NSLog(@"e is %@", e);
-    
-    
+    NSString *e2 = [e AES256DecryptWithKey:@"0123456789012345"];
+    NSLog(@"e2 is %@", e2);
     return YES;
 }
 
