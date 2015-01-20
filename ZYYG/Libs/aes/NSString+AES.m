@@ -39,7 +39,6 @@
 - (NSString *)AES256DecryptWithKey:(NSString *)key   //解密
 {
     NSData *dataSelf = [[NSData alloc] initWithBase64EncodedString:self options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    NSLog(@"endrypt data self %@", dataSelf);
     char keyPtr[kCCKeySizeAES256+1];
     bzero(keyPtr, sizeof(keyPtr));
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
@@ -57,7 +56,6 @@
     if (cryptStatus == kCCSuccess) {
         NSData *data = [NSData dataWithBytes:buffer length:numBytesDecrypted];
         free(buffer);
-        NSLog(@"data1 is %@", data);
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];//[NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
     }
     free(buffer);

@@ -54,7 +54,6 @@
     if (cryptStatus == kCCSuccess) {
         NSData *data = [NSData dataWithBytes:buffer length:numBytesDecrypted];
         free(buffer);
-        NSLog(@"data is %@", data);
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];//[NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
     }
     free(buffer);
