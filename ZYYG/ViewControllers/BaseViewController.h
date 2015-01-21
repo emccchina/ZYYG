@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JHRefresh.h"
+#import "NSString+AES.h"
 
 #define kNetworkNotConnect    @"网络不给力,请稍候再试"
 #define kNetworkConnecting    @"玩命加载中..."

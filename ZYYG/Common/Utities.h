@@ -42,6 +42,6 @@
 
 + (NSString*)doWithPayList:(NSString*)result;
 
-+ (NSDictionary*)AESAndMD5:(NSDictionary*)dict;
++ (NSString *)md5String:(NSMutableArray *)array;
 
 @end

@@ -51,6 +51,12 @@ static NSString *cartCell = @"CartCell";
     _orderDict = [[NSMutableDictionary alloc] init];
     [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
     [_orderDict setObject:@"0" forKey:@"InvoiceType"];//0不开发票  10 普通发票， 20 增值税发票
+    [_orderDict setObject:@"" forKey:@"InvoiceTitle"];
+    [_orderDict setObject:@"" forKey:@"RegAccount"];
+    [_orderDict setObject:@"" forKey:@"RegAddress"];
+    [_orderDict setObject:@"" forKey:@"RegBank"];
+    [_orderDict setObject:@"" forKey:@"RegPhone"];
+    [_orderDict setObject:@"" forKey:@"InvoiceTaxNo"];
     NSMutableString *productIDs = [NSMutableString string];
     for (GoodsModel *model in self.products) {
         if ([model isEqual:[self.products lastObject]]) {
@@ -173,9 +179,8 @@ static NSString *cartCell = @"CartCell";
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@AddOrder.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [Utities AESAndMD5:_orderDict];
-    NSLog(@"aes dict is %@", dict);
-    [manager POST:url parameters:_orderDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSMutableDictionary *rdict=[self arrayWithAES:_orderDict];
+    [manager POST:url parameters:rdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
@@ -396,6 +401,27 @@ static NSString *cartCell = @"CartCell";
             break;
     }
     
+}
+
+//加密
+-(NSMutableDictionary *)arrayWithAES:(NSMutableDictionary *)oDict
+{
+    NSString *ostr=[NSString stringWithFormat: @"%@%@%@%@%@%@%@%@%@%@%@" ,oDict[@"key"],oDict[@"address_id"],oDict[@"InvoiceType"],oDict[@"InvoiceTitle"],[oDict[@"RegAccount"] AES256EncryptWithKey:kAESKey],[oDict[@"RegAddress"] AES256EncryptWithKey:kAESKey],[oDict[@"RegBank"] AES256EncryptWithKey:kAESKey],[oDict[@"RegPhone"] AES256EncryptWithKey:kAESKey],oDict[@"InvoiceTaxNo"],oDict[@"product_id"],kAESKey];
+    NSMutableDictionary *orderArr= [NSMutableDictionary dictionary];
+    [orderArr setObject:oDict[@"key"] forKey:@"key"];
+    [orderArr setObject:oDict[@"address_id"] forKey:@"address_id"];
+    [orderArr setObject:oDict[@"InvoiceType"] forKey:@"InvoiceType"];
+    [orderArr setObject:oDict[@"InvoiceTitle"] forKey:@"InvoiceTitle"];
+    [orderArr setObject:[oDict[@"RegAccount"] AES256EncryptWithKey:kAESKey] forKey:@"RegAccount"];
+    [orderArr setObject:[oDict[@"RegAddress"] AES256EncryptWithKey:kAESKey] forKey:@"RegAddress"];
+    [orderArr setObject:[oDict[@"RegBank"] AES256EncryptWithKey:kAESKey]forKey:@"RegBank"];
+    [orderArr setObject:[oDict[@"RegPhone"] AES256EncryptWithKey:kAESKey]forKey:@"RegPhone"];
+    [orderArr setObject:oDict[@"InvoiceTaxNo"] forKey:@"InvoiceTaxNo"];
+    [orderArr setObject:oDict[@"product_id"] forKey:@"product_id"];
+    [orderArr setObject:[Utities md5AndBase:ostr] forKey:@"m"];
+    [orderArr setObject:@"5134DUIOIOO72761" forKey:@"t"];
+    NSLog(@"aes dict is %@", orderArr);
+    return orderArr;
 }
 
 /*

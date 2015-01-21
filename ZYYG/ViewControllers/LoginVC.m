@@ -127,6 +127,7 @@
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
     NSLog(@"url %@, %@", url, password);
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.accoutTF.text, @"email",password, @"pass", nil];
+    dict=[self dictWithAES:dict];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
@@ -174,6 +175,18 @@
     
 }
 
+-(NSMutableDictionary *)dictWithAES:(NSDictionary *)oDict
+{
+    NSString *ostr=[NSString stringWithFormat:@"%@%@%@" ,[oDict[@"email"] AES256EncryptWithKey:kAESKey],[oDict[@"pass"] AES256EncryptWithKey:kAESKey],kAESKey];
+    NSMutableDictionary *orderArr= [NSMutableDictionary dictionary];
+    [orderArr setObject:[oDict[@"email"] AES256EncryptWithKey:kAESKey] forKey:@"email"];
+    [orderArr setObject:[oDict[@"pass"] AES256EncryptWithKey:kAESKey] forKey:@"pass"];
+    [orderArr setObject:@"5134DUIOIOO72761" forKey:@"t"];
+    [orderArr setObject:[Utities md5AndBase:ostr] forKey:@"m"];
+
+    NSLog(@"aes dict is %@", orderArr);
+    return orderArr;
+}
 /*
 #pragma mark - Navigation
 
