@@ -231,6 +231,7 @@
     NSMutableDictionary* dictAES = [NSMutableDictionary dictionary];
     NSMutableString *md5String = [NSMutableString string];
     NSArray *keys = [dict allKeys];
+    NSLog(@"%@", keys);
     for (NSString *key in keys) {
         [md5String appendString:key];
         NSString *value = dict[key];
