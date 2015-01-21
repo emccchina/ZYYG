@@ -162,11 +162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x5e73;&#x4ef7;&#x4ea4;&#x6613;/ArtDetailVC.m"
-            timestampString = "443324592.250436"
+            timestampString = "443497943.500839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "610"
-            endingLineNumber = "610"
+            startingLineNumber = "612"
+            endingLineNumber = "612"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>

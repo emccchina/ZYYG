@@ -43,6 +43,9 @@
 #define kRememberAccount                    @"rememberAccount"
 #define kServerDomain                       @"http://test.zaixianchuangxin.com/mobile/"//@"http://www.zemcc.com/mobile/"
 #define kReceiveURLForPay                   @"http://test.zaixianchuangxin.com/pay/receive.aspx"
+
+#define kAESKey                             @"emcc!@#$%^!@#$%^"
+
 #ifdef DEBUG
 #define kPayMode                             @"01"
 #else

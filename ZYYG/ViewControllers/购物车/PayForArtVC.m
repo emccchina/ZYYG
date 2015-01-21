@@ -173,6 +173,8 @@ static NSString *cartCell = @"CartCell";
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@AddOrder.ashx",kServerDomain];
     NSLog(@"url %@", url);
+    NSDictionary *dict = [Utities AESAndMD5:_orderDict];
+    NSLog(@"aes dict is %@", dict);
     [manager POST:url parameters:_orderDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];

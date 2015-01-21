@@ -11,7 +11,7 @@
 #import "JGProgressHUD.h"
 #import "AppDelegate.h"
 #import "APay.h"
-
+#import "NSString+AES.h"
 @implementation Utities
 
 + (CGSize)sizeWithUIFont:(UIFont*)font string:(NSString*)string
@@ -223,6 +223,25 @@
     }
     
     return message;
+}
+
++ (NSDictionary*)AESAndMD5:(NSDictionary *)dict
+{
+    NSLog(@"%f", [NSDate date].timeIntervalSince1970);
+    NSMutableDictionary* dictAES = [NSMutableDictionary dictionary];
+    NSMutableString *md5String = [NSMutableString string];
+    NSArray *keys = [dict allKeys];
+    for (NSString *key in keys) {
+        [md5String appendString:key];
+        NSString *value = dict[key];
+        NSString *valueAES = [value AES256EncryptWithKey:kAESKey];
+        [dictAES setObject:valueAES forKey:key];
+    }
+    
+    NSString *mString = [Utities md5AndBase:md5String];
+    [dictAES setObject:mString forKey:@"m"];
+    NSLog(@"%f", [NSDate date].timeIntervalSince1970);
+    return dictAES;
 }
 
 @end
