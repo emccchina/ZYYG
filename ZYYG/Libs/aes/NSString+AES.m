@@ -11,8 +11,26 @@
 
 @implementation NSString (AES)
 
-- (NSString *)AES256EncryptWithKey:(NSString *)key   //加密
+- (NSString *)cleanString:(id)string
 {
+    if (!string || [string isKindOfClass:[NSNull class]] || string == nil || [@"" isEqual:string]) {
+        return @"";
+    }else{
+        string=[string stringByReplacingOccurrencesOfString:@" " withString:@""];
+        string=[string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        return string;
+    }
+    return @"";
+}
+
+- (NSString *)AES256EncryptWithKey:(id)key   //加密
+{
+    if (!key || [key isKindOfClass:[NSNull class]] || key == nil || [@"" isEqual:key]) {
+        return @"";
+    }else{
+        key=[key stringByReplacingOccurrencesOfString:@" " withString:@""];
+        key=[key stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    }
     NSData *dataSelf = [self dataUsingEncoding:NSUTF8StringEncoding];
     char keyPtr[kCCKeySizeAES256+1];
     bzero(keyPtr, sizeof(keyPtr));
@@ -34,7 +52,7 @@
         return [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];//[NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
     }
     free(buffer);
-    return nil;
+    return @"";
 }
 - (NSString *)AES256DecryptWithKey:(NSString *)key   //解密
 {
@@ -59,7 +77,7 @@
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];//[NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
     }
     free(buffer);
-    return nil;
+    return @"";
 }
 
 @end

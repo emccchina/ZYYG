@@ -10,7 +10,8 @@
 
 @interface NSString (AES)
 
-- (NSString *)AES256EncryptWithKey:(NSString *)key;   //加密
-- (NSString *)AES256DecryptWithKey:(NSString *)key;   //解密
+- (NSString *)cleanString:(id)string ;
+- (NSString *)AES256EncryptWithKey:(id)key;   //加密
+- (NSString *)AES256DecryptWithKey:(id)key;   //解密
 
 @end

@@ -10,7 +10,7 @@
 
 //空字符串判断
 
-#define checkNull(__X__)        (__X__) == [NSNull null] || (__X__) == nil ||[(__X__) isEqual:@""]? @"" : [NSString stringWithFormat:@"%@", (__X__)]
+#define checkNull(__X__)        (__X__) == [NSNull null] || (__X__) == nil ||[(__X__) isEqual:@""]? @" " : [NSString stringWithFormat:@"%@", (__X__)]
 
 
 @implementation NSDictionary (safeObjectForKey)

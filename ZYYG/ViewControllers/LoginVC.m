@@ -7,6 +7,7 @@
 //
 
 #import "LoginVC.h"
+#import "OrderedDictionary.h"
 
 @interface LoginVC ()
 <UITextFieldDelegate>
@@ -127,8 +128,8 @@
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
     NSLog(@"url %@, %@", url, password);
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.accoutTF.text, @"email",password, @"pass", nil];
-    dict=[self dictWithAES:dict];
-    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+   MutableOrderedDictionary *orderdict=[self dictWithAES:dict];
+    [manager POST:url parameters:orderdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
@@ -175,15 +176,18 @@
     
 }
 
--(NSMutableDictionary *)dictWithAES:(NSDictionary *)oDict
+-(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
 {
-    NSString *ostr=[NSString stringWithFormat:@"%@%@%@" ,[oDict[@"email"] AES256EncryptWithKey:kAESKey],[oDict[@"pass"] AES256EncryptWithKey:kAESKey],kAESKey];
-    NSMutableDictionary *orderArr= [NSMutableDictionary dictionary];
-    [orderArr setObject:[oDict[@"email"] AES256EncryptWithKey:kAESKey] forKey:@"email"];
-    [orderArr setObject:[oDict[@"pass"] AES256EncryptWithKey:kAESKey] forKey:@"pass"];
-    [orderArr setObject:@"5134DUIOIOO72761" forKey:@"t"];
-    [orderArr setObject:[Utities md5AndBase:ostr] forKey:@"m"];
-
+    NSMutableString *lStr=[NSMutableString string];
+    [lStr appendString:[[oDict[@"email"] cleanString:oDict[@"email"] ] AES256EncryptWithKey:kAESKey]];
+    [lStr appendString:[[oDict[@"pass"] cleanString:oDict[@"pass"] ] AES256EncryptWithKey:kAESKey]];
+    [lStr appendString:kAESKey];
+//    NSString *ostr=[NSString stringWithFormat:@"%@%@%@" ,[oDict[@"email"] AES256EncryptWithKey:kAESKey],[oDict[@"pass"] AES256EncryptWithKey:kAESKey],kAESKey];
+    MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
+    [orderArr insertObject:[oDict[@"email"] AES256EncryptWithKey:kAESKey] forKey:@"email" atIndex:0];
+    [orderArr insertObject:[oDict[@"pass"] AES256EncryptWithKey:kAESKey] forKey:@"pass" atIndex:1];
+    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:2];
+    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:3];
     NSLog(@"aes dict is %@", orderArr);
     return orderArr;
 }

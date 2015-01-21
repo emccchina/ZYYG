@@ -97,7 +97,6 @@
 		F7C8D5161A3809C6009F36B3 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C8D50F1A3809C6009F36B3 /* FMDatabaseQueue.m */; };
 		F7C8D5171A3809C6009F36B3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C8D5121A3809C6009F36B3 /* FMResultSet.m */; };
 		F7C8D5191A3809D4009F36B3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C8D5181A3809D4009F36B3 /* libsqlite3.dylib */; };
-		F7D09CF51A6DE13000332331 /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D09CF41A6DE13000332331 /* NSData+AES.m */; };
 		F7D09CF81A6DE3D300332331 /* NSString+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D09CF71A6DE3D300332331 /* NSString+AES.m */; };
 		F7D20A601A5F709F00DE0F96 /* AuctionArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7D20A5E1A5F709F00DE0F96 /* AuctionArtCell.m */; };
 		F7D20A611A5F709F00DE0F96 /* AuctionArtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7D20A5F1A5F709F00DE0F96 /* AuctionArtCell.xib */; };
@@ -621,6 +620,7 @@
 		F9C280901A5FB84100FAC045 /* PayMarginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C2808E1A5FB84100FAC045 /* PayMarginCell.m */; };
 		F9C280911A5FB84100FAC045 /* PayMarginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C2808F1A5FB84100FAC045 /* PayMarginCell.xib */; };
 		F9C302951A42BC0100B1B53C /* UpdatePassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C302941A42BC0100B1B53C /* UpdatePassVC.m */; };
+		F9DAFAC11A6FA3F000E41058 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DAFAC01A6FA3F000E41058 /* OrderedDictionary.m */; };
 		F9DC702A1A31A43B006AE19C /* SettingsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9DC70291A31A43B006AE19C /* SettingsList.plist */; };
 /* End PBXBuildFile section */
 
@@ -801,8 +801,6 @@
 		F7C8D5111A3809C6009F36B3 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		F7C8D5121A3809C6009F36B3 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		F7C8D5181A3809D4009F36B3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		F7D09CF31A6DE13000332331 /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
-		F7D09CF41A6DE13000332331 /* NSData+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES.m"; sourceTree = "<group>"; };
 		F7D09CF61A6DE3D300332331 /* NSString+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+AES.h"; sourceTree = "<group>"; };
 		F7D09CF71A6DE3D300332331 /* NSString+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+AES.m"; sourceTree = "<group>"; };
 		F7D20A5D1A5F709F00DE0F96 /* AuctionArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuctionArtCell.h; sourceTree = "<group>"; };
@@ -1407,6 +1405,8 @@
 		F9C2808F1A5FB84100FAC045 /* PayMarginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayMarginCell.xib; sourceTree = "<group>"; };
 		F9C302931A42BC0100B1B53C /* UpdatePassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePassVC.h; sourceTree = "<group>"; };
 		F9C302941A42BC0100B1B53C /* UpdatePassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassVC.m; sourceTree = "<group>"; };
+		F9DAFABF1A6FA3F000E41058 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedDictionary.h; sourceTree = "<group>"; };
+		F9DAFAC01A6FA3F000E41058 /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderedDictionary.m; sourceTree = "<group>"; };
 		F9DC70291A31A43B006AE19C /* SettingsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SettingsList.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2474,8 +2474,8 @@
 		F7E439CB1A689BE90004D51D /* aes */ = {
 			isa = PBXGroup;
 			children = (
-				F7D09CF31A6DE13000332331 /* NSData+AES.h */,
-				F7D09CF41A6DE13000332331 /* NSData+AES.m */,
+				F9DAFABF1A6FA3F000E41058 /* OrderedDictionary.h */,
+				F9DAFAC01A6FA3F000E41058 /* OrderedDictionary.m */,
 				F7D09CF61A6DE3D300332331 /* NSString+AES.h */,
 				F7D09CF71A6DE3D300332331 /* NSString+AES.m */,
 			);
@@ -3152,7 +3152,6 @@
 				F9C280901A5FB84100FAC045 /* PayMarginCell.m in Sources */,
 				F7EC68C61A2BF5DA000B289D /* JHRefreshConfig.m in Sources */,
 				F7EC68C51A2BF5DA000B289D /* JHRefreshBaseView.m in Sources */,
-				F7D09CF51A6DE13000332331 /* NSData+AES.m in Sources */,
 				94D23C741A220E5E00EE159B /* BaseViewController.m in Sources */,
 				940178641A21CCE400697D14 /* MyTabBarItem.m in Sources */,
 				F7E905EE1A26B683001117EE /* ClassifyCell.m in Sources */,
@@ -3228,6 +3227,7 @@
 				94D89EBC1A21FDA70074B874 /* JGProgressHUD.m in Sources */,
 				F7C8D5131A3809C6009F36B3 /* FMDatabase.m in Sources */,
 				F7F304951A47F21000A6AD7A /* ForgetPasswordVC.m in Sources */,
+				F9DAFAC11A6FA3F000E41058 /* OrderedDictionary.m in Sources */,
 				F9C2808B1A5FB7E900FAC045 /* PayMarginVC.m in Sources */,
 				940177FD1A21CBEA00697D14 /* main.m in Sources */,
 				F7F928E11A354917000BAE49 /* NSDictionary+safeObjectForKey.m in Sources */,
