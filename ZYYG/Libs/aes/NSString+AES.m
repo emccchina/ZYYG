@@ -13,7 +13,7 @@
 
 - (NSString *)cleanString:(id)string
 {
-    if (!string || [string isKindOfClass:[NSNull class]] || nil==string || [@"" isEqual:string]) {
+    if ( [string isKindOfClass:[NSNull class]] || nil==string || [@"" isEqual:string]) {
         return @"";
     }else{
         string=[string stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -25,12 +25,7 @@
 
 - (NSString *)AES256EncryptWithKey:(id)key   //加密
 {
-    if (!key || [key isKindOfClass:[NSNull class]] || nil == key || [@"" isEqual:key]) {
-        return @"";
-    }else{
-        key=[key stringByReplacingOccurrencesOfString:@" " withString:@""];
-        key=[key stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    }
+    key=[self cleanString:key];
     NSData *dataSelf = [self dataUsingEncoding:NSUTF8StringEncoding];
     char keyPtr[kCCKeySizeAES256+1];
     bzero(keyPtr, sizeof(keyPtr));
