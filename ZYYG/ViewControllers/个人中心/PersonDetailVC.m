@@ -196,7 +196,8 @@
     NSString *url = [NSString stringWithFormat:@"%@SaveUserInfo.ashx",kServerDomain];
     NSLog(@"url %@", url);
     NSDictionary *dict = [self createInfoDictForRequest];
-    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    MutableOrderedDictionary *orderArr= [self dictWithAES:dict];
+    [manager POST:url parameters:orderArr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
@@ -360,4 +361,57 @@
     
 }
 
+//加密
+-(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
+{
+    NSMutableString *lStr=[NSMutableString string];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Key"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"RealName"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Nickname"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Sex"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Industry"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Income"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Mobile"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"ProvideCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"CityCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"AeraCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"DetailAddr"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Postcode"] aes:NO]];
+    [lStr appendString:kAESKey];
+    NSLog(@"123 %@",lStr);
+    MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Key"] aes:NO] forKey:@"Key" atIndex:0];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"RealName"] aes:YES] forKey:@"RealName" atIndex:1];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Nickname"] aes:NO] forKey:@"Nickname" atIndex:2];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Sex"] aes:NO] forKey:@"Sex" atIndex:3];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Industry"] aes:NO] forKey:@"Industry" atIndex:4];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Income"] aes:YES] forKey:@"Income" atIndex:5];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Mobile"] aes:NO] forKey:@"Mobile" atIndex:6];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"ProvideCode"] aes:NO] forKey:@"ProvideCode" atIndex:7];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"CityCode"] aes:NO] forKey:@"CityCode" atIndex:8];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"AeraCode"] aes:NO] forKey:@"AeraCode" atIndex:9];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"DetailAddr"] aes:YES] forKey:@"DetailAddr" atIndex:10];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Postcode"] aes:NO] forKey:@"Postcode" atIndex:11];
+    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:12];
+    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:13];
+    NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
+    return orderArr;
+}
+- (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes
+{
+    NSLog(@"===================%@",value);
+    NSString *string = nil;
+    if (value == nil || [value isKindOfClass:[NSNull class]] ) {
+        return @"";
+    }
+    NSString *newValue=[NSString stringWithFormat:@"%@",value ];
+    if([newValue isEqualToString:@""]){
+        return @"";
+    }else if(!aes){
+        return newValue;
+    }else{
+        string = [newValue AES256EncryptWithKey:kAESKey];
+        return string;
+    }
+}
 @end

@@ -9,8 +9,8 @@
 #import "BaseViewController.h"
 
 #define kProvince       @"Province_Code"
-#define kcity           @"city_ Code"
-#define karea           @"area_ Code"
+#define kcity           @"city_Code"
+#define karea           @"area_Code"
 #define kDetailAdress   @"address"
 #define kName           @"name"
 #define kZipCode        @"zipCode"

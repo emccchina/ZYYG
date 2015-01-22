@@ -87,7 +87,8 @@
     NSString *new_pass = [Utities md5AndBase:self.passNew.text];
         NSLog(@"url %@, %@, %@", url, old_pass, new_pass);
     NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",old_pass, @"old_pass",new_pass, @"new_pass", nil];
-    [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    MutableOrderedDictionary *newDict=[self dictWithAES:regsiterDict];
+    [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
@@ -146,4 +147,44 @@
     //    self.view.frame = _initFrame;
     [self changeConstraint:0 restore:YES];
 }
+
+//加密
+-(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
+{
+    NSMutableString *lStr=[NSMutableString string];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"key"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"old_pass"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"new_pass"] aes:YES]];
+    [lStr appendString:kAESKey];
+    NSLog(@"123 %@",lStr);
+    MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"key"] aes:NO] forKey:@"key" atIndex:0];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"old_pass"] aes:YES] forKey:@"old_pass" atIndex:1];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"new_pass"] aes:YES] forKey:@"new_pass" atIndex:2];
+    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:3];
+    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:4];
+    NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
+    return orderArr;
+}
+- (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes
+{
+    NSLog(@"===================%@",value);
+    NSString *string = nil;
+    if (value == nil || [value isKindOfClass:[NSNull class]] ) {
+        return @"";
+    }
+    NSString *newValue=[NSString stringWithFormat:@"%@",value ];
+    if([newValue isEqualToString:@""]){
+        return @"";
+    }else if(!aes){
+        return newValue;
+    }else{
+        string = [newValue AES256EncryptWithKey:kAESKey];
+        return string;
+    }
+}
+
+
+
+
 @end

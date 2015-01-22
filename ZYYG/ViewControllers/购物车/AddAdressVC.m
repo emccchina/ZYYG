@@ -430,14 +430,18 @@
 }
 - (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes
 {
+    NSLog(@"===================%@",value);
     NSString *string = nil;
-    if ([(NSString*)value isEqualToString:@""] || value == nil || [value isKindOfClass:[NSNull class]] ) {
+    if (value == nil || [value isKindOfClass:[NSNull class]] ) {
+        return @"";
+    }
+    NSString *newValue=[NSString stringWithFormat:@"%@",value ];
+    if([newValue isEqualToString:@""]){
         return @"";
     }else if(!aes){
-        return value;
-    }
-    else{
-        string = [value AES256EncryptWithKey:kAESKey];
+        return newValue;
+    }else{
+        string = [newValue AES256EncryptWithKey:kAESKey];
         return string;
     }
 }

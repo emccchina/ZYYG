@@ -79,9 +79,10 @@
     NSString *url = [NSString stringWithFormat:@"%@BidSecurtyDeposit.ashx",kServerDomain];
     NSLog(@"url %@", url);
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",self.auctionCode, @"AuctionCode",self.goods.GoodsCode, @"GoodsCode", @"60" , @"PaymentType",nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",self.auctionCode, @"AuctionCode",self.goods.GoodsCode, @"GoodsCode", @"20" , @"PaymentType",nil];
 //    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",@"1501080937178720", @"AuctionCode",@"1412191714231983", @"GoodsCode", @"60" , @"PaymentType",nil];
-    [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    MutableOrderedDictionary *newDict=[self dictWithAES:dict];
+    [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
@@ -110,4 +111,42 @@
     NSLog(@"%@",result);
     [self showAlertView:[Utities doWithPayList:result]];
 }
+
+//加密
+-(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
+{
+    NSMutableString *lStr=[NSMutableString string];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"key"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"AuctionCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"GoodsCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"PaymentType"] aes:NO]];
+    [lStr appendString:kAESKey];
+    NSLog(@"123 %@",lStr);
+    MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"key"] aes:NO] forKey:@"key" atIndex:0];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"AuctionCode"] aes:NO] forKey:@"AuctionCode" atIndex:1];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"GoodsCode"] aes:NO] forKey:@"GoodsCode" atIndex:2];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"PaymentType"] aes:NO] forKey:@"PaymentType" atIndex:3];
+    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:4];
+    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:5];
+    NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
+    return orderArr;
+}
+- (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes
+{
+    NSString *string = nil;
+    if (value == nil || [value isKindOfClass:[NSNull class]] ) {
+        return @"";
+    }
+    NSString *newValue=[NSString stringWithFormat:@"%@",value ];
+    if([newValue isEqualToString:@""]){
+        return @"";
+    }else if(!aes){
+        return newValue;
+    }else{
+        string = [newValue AES256EncryptWithKey:kAESKey];
+        return string;
+    }
+}
+
 @end
