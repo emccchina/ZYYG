@@ -238,7 +238,13 @@
     for (NSString *key in keys) {
         NSLog(@"key is %@", key);
         NSString *value = dict[key];
-        NSString *valueAES = [value AES256EncryptWithKey:kAESKey];
+        NSString *valueAES = nil;
+        NSInteger index = [arr indexOfObject:key];
+        if (index >= 0 && index < keys.count && ![value isEqualToString:@""]) {
+            valueAES = [value AES256EncryptWithKey:kAESKey];
+        }else{
+            valueAES = value;
+        }
         [md5String appendString:valueAES];
         [dictAES setObject:valueAES forKey:key];
     }
