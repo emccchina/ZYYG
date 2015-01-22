@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "APay.h"
 #import "NSString+AES.h"
+#import "OrderedDictionary.h"
+
 @implementation Utities
 
 + (CGSize)sizeWithUIFont:(UIFont*)font string:(NSString*)string
@@ -225,20 +227,23 @@
     return message;
 }
 
-+ (NSDictionary*)AESAndMD5:(NSDictionary *)dict
++ (OrderedDictionary*)AESAndMD5:(NSDictionary *)dict keysWithAES:(NSArray *)arr
 {
     NSLog(@"%f", [NSDate date].timeIntervalSince1970);
-    NSMutableDictionary* dictAES = [NSMutableDictionary dictionary];
+    MutableOrderedDictionary* dictAES = [MutableOrderedDictionary dictionary];
+    OrderedDictionary   *dictor = [OrderedDictionary dictionaryWithDictionary:dict];
     NSMutableString *md5String = [NSMutableString string];
-    NSArray *keys = [dict allKeys];
+    NSArray *keys = [dictor reverseKeyEnumerator].allObjects;
     NSLog(@"%@", keys);
     for (NSString *key in keys) {
-        [md5String appendString:key];
+        NSLog(@"key is %@", key);
         NSString *value = dict[key];
         NSString *valueAES = [value AES256EncryptWithKey:kAESKey];
+        [md5String appendString:valueAES];
         [dictAES setObject:valueAES forKey:key];
     }
-    
+    [md5String appendString:kAESKey];
+    NSLog(@"md5 string %@", md5String);
     NSString *mString = [Utities md5AndBase:md5String];
     [dictAES setObject:mString forKey:@"m"];
     NSLog(@"%f", [NSDate date].timeIntervalSince1970);

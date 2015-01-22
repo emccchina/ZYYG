@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "OrderedDictionary.h"
 @interface Utities : NSObject
 
 //获取string 的大小
@@ -42,6 +42,6 @@
 
 + (NSString*)doWithPayList:(NSString*)result;
 
-+ (NSDictionary *)AESAndMD5:(NSDictionary *)array;
++ (OrderedDictionary *)AESAndMD5:(NSDictionary *)dict keysWithAES:(NSArray*)arr;
 
 @end
