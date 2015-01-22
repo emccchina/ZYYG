@@ -14,6 +14,7 @@
 {
     UserInfo *user;
     NSDictionary            *_resultDict;
+    NSDictionary            *_MerchantID;
 }
 
 - (void)viewDidLoad
@@ -27,6 +28,7 @@
     self.PayMarginTabelView.delegate = self;
     self.PayMarginTabelView.dataSource = self;
     self.marginMoneyLab.text = self.goods.securityDeposit;
+    [self getMerchantID];
 }
 #pragma mark --tableView
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -91,7 +93,7 @@
                 _resultDict=result;
                 NSInteger money = (NSInteger)([_resultDict[@"SecurtyDeposit"] floatValue]*100);
                 NSString *moneyString = [NSString stringWithFormat:@"%ld",(long)money];
-                [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"SecurtyDepositCode"] productName:_resultDict[@"GoodsName"] money:moneyString type:2 shopNum:_resultDict[@"MerchantID"] key:_resultDict[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
+                [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"SecurtyDepositCode"] productName:_resultDict[@"GoodsName"] money:moneyString type:2 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
             }
            
         }
@@ -102,6 +104,34 @@
     }];
    
 }
+
+- (void)getMerchantID {
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@GetUserInfo.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        NSLog(@"aes de %@", aesde);
+        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        if (result) {
+            if(![result[@"errno"] integerValue]){
+                _MerchantID=result;
+            }
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+    
+}
+
 - (void)requestFinished
 {
     [self dismissIndicatorView];
