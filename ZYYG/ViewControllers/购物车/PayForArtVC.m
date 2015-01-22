@@ -52,12 +52,6 @@ static NSString *cartCell = @"CartCell";
     _orderDict = [[NSMutableDictionary alloc] init];
     [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
     [_orderDict setObject:@"0" forKey:@"InvoiceType"];//0不开发票  10 普通发票， 20 增值税发票
-    [_orderDict setObject:@"" forKey:@"InvoiceTitle"];
-    [_orderDict setObject:@"" forKey:@"RegAccount"];
-    [_orderDict setObject:@"" forKey:@"RegAddress"];
-    [_orderDict setObject:@"" forKey:@"RegBank"];
-    [_orderDict setObject:@"" forKey:@"RegPhone"];
-    [_orderDict setObject:@"" forKey:@"InvoiceTaxNo"];
     NSMutableString *productIDs = [NSMutableString string];
     for (GoodsModel *model in self.products) {
         if ([model isEqual:[self.products lastObject]]) {
@@ -407,11 +401,13 @@ static NSString *cartCell = @"CartCell";
 //加密
 -(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
 {
+     NSLog(@"%@" ,oDict);
     NSMutableString *lStr=[NSMutableString string];
     [lStr appendString:[oDict[@"key"] cleanString:oDict[@"key"] ]];
     [lStr appendString:[oDict[@"address_id"] cleanString:oDict[@"address_id"]]];
     [lStr appendString:[oDict[@"InvoiceType"] cleanString:oDict[@"InvoiceType"]]];
     [lStr appendString:[oDict[@"InvoiceTitle"] cleanString:oDict[@"InvoiceTitle"]]];
+    NSLog(@"就急急急急急急急急急急急急急急急");
     [lStr appendString:[[oDict[@"RegAccount"] cleanString:oDict[@"RegAccount"] ] AES256EncryptWithKey:kAESKey]];
     [lStr appendString:[[oDict[@"RegAddress"] cleanString:oDict[@"RegAddress"] ] AES256EncryptWithKey:kAESKey]];
     [lStr appendString:[[oDict[@"RegBank"] cleanString:oDict[@"RegBank"] ] AES256EncryptWithKey:kAESKey]];
@@ -419,6 +415,7 @@ static NSString *cartCell = @"CartCell";
     [lStr appendString:[oDict[@"InvoiceTaxNo"] cleanString:oDict[@"InvoiceTaxNo"]]];
     [lStr appendString:[oDict[@"product_id"] cleanString:oDict[@"product_id"]]];
     [lStr appendString:kAESKey];
+    NSLog(@"%@" ,lStr);
     MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
     [orderArr insertObject:[oDict[@"key"] cleanString:oDict[@"key"] ] forKey:@"key" atIndex:0];
     [orderArr insertObject:[oDict[@"address_id"] cleanString:oDict[@"address_id"]] forKey:@"address_id" atIndex:1];

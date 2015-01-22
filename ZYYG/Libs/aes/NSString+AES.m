@@ -13,7 +13,7 @@
 
 - (NSString *)cleanString:(id)string
 {
-    if (!string || [string isKindOfClass:[NSNull class]] || string == nil || [@"" isEqual:string]) {
+    if (!string || [string isKindOfClass:[NSNull class]] || nil==string || [@"" isEqual:string]) {
         return @"";
     }else{
         string=[string stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -25,7 +25,7 @@
 
 - (NSString *)AES256EncryptWithKey:(id)key   //加密
 {
-    if (!key || [key isKindOfClass:[NSNull class]] || key == nil || [@"" isEqual:key]) {
+    if (!key || [key isKindOfClass:[NSNull class]] || nil == key || [@"" isEqual:key]) {
         return @"";
     }else{
         key=[key stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -54,7 +54,7 @@
     free(buffer);
     return @"";
 }
-- (NSString *)AES256DecryptWithKey:(NSString *)key   //解密
+- (NSString *)AES256DecryptWithKey:(id)key   //解密
 {
     NSData *dataSelf = [[NSData alloc] initWithBase64EncodedString:self options:NSDataBase64DecodingIgnoreUnknownCharacters];
     char keyPtr[kCCKeySizeAES256+1];
