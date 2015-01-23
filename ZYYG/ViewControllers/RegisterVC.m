@@ -15,12 +15,13 @@
     BOOL    registerSuccessuful;
 }
 @property (weak, nonatomic) IBOutlet UIView *BGView;
-@property (weak, nonatomic) IBOutlet UITextField *accountTF;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 @property (weak, nonatomic) IBOutlet UITextField *emailTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordAgainTF;
+@property (weak, nonatomic) IBOutlet UITextField *verifyTF;
 @property (weak, nonatomic) IBOutlet UIButton *registerBut;
 @property (weak, nonatomic) IBOutlet UIButton *agreeBut;
-@property (weak, nonatomic) IBOutlet UITextField *passwordAgainTF;
+@property (weak, nonatomic) IBOutlet UIImageView *fourImage;
 
 @end
 
@@ -31,7 +32,7 @@
     // Do any additional setup after loading the view.
     [self showBackItem];
     [self setInitState];
-    self.accountTF.delegate = self;
+    self.emailTF.delegate = self;
     self.passwordTF.delegate = self;
     self.passwordAgainTF.delegate = self;
     [self.passwordAgainTF setSecureTextEntry:YES];
@@ -47,7 +48,8 @@
 {
     self.title = self.typeVC ? @"找回密码" : @"注册帐号";
     self.agreeBut.hidden = self.typeVC;
-    self.accountTF.placeholder = self.typeVC ? @"请输入验证码" : @"请输入用户名";
+    self.verifyTF.hidden = !self.typeVC;
+    self.fourImage.hidden =!self.typeVC;
     [self.registerBut setTitle:(self.typeVC ? @"确定" : @"注册") forState:UIControlStateNormal];
 }
 
@@ -84,10 +86,10 @@
 - (void)requestForNewPassword
 {
     if ([self.passwordTF.text length] < 8) {
-        [self showAlertView:@"密码大于八位"];
+        [self showAlertView:@"密码不得少于八位"];
         return;
     }
-    if ([self.accountTF.text isEqualToString:@""] || [self.emailTF.text isEqualToString:@""] || [self.passwordTF.text isEqualToString:@""] || [self.passwordAgainTF.text isEqualToString:@""]) {
+    if ([self.emailTF.text isEqualToString:@""]||[self.verifyTF.text isEqualToString:@""]|| [self.passwordTF.text isEqualToString:@""] || [self.passwordAgainTF.text isEqualToString:@""]) {
         [self showAlertView:@"请完善信息"];
         return;
     }
@@ -101,7 +103,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@RetakePassWord.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
-    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.accountTF.text, @"CheckCode",password, @"PassWord",self.emailTF.text, @"Username", nil];
+    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.emailTF.text, @"Username",password, @"PassWord", self.verifyTF.text, @"CheckCode", nil];
     MutableOrderedDictionary *newDict= [self dictWithAES:regsiterDict];
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
@@ -127,14 +129,14 @@
 - (void)requestRegister
 {
     if ([self.passwordTF.text length] < 8) {
-        [self showAlertView:@"密码大于八位"];
+        [self showAlertView:@"密码不得少于八位"];
         return;
     }
     if (!agree) {
         [self showAlertView:@"请签署中艺易购协议协议"];
         return;
     }
-    if ([self.accountTF.text isEqualToString:@""] || [self.emailTF.text isEqualToString:@""] || [self.passwordTF.text isEqualToString:@""] || [self.passwordAgainTF.text isEqualToString:@""]) {
+    if ([self.emailTF.text isEqualToString:@""] || [self.passwordTF.text isEqualToString:@""] || [self.passwordAgainTF.text isEqualToString:@""]) {
         [self showAlertView:@"请完善基本信息"];
         return;
     }
@@ -149,8 +151,9 @@
     NSString *url = [NSString stringWithFormat:@"%@reg.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
 //    NSLog(@"url %@, %@, %d", url, password, password.length);
-    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.accountTF.text, @"username",password, @"pass",self.emailTF.text, @"email", nil];
-    [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.emailTF.text, @"email",password, @"pass", nil];
+    MutableOrderedDictionary *newDict=[self regWithAES:regsiterDict];
+    [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
@@ -197,6 +200,23 @@
 {
     //    self.view.frame = _initFrame;
     [self changeConstraint:0 restore:YES];
+}
+
+//加密
+-(MutableOrderedDictionary *)regWithAES:(NSDictionary *)oDict
+{
+    NSMutableString *lStr=[NSMutableString string];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"email"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"pass"] aes:YES]];
+    [lStr appendString:kAESKey];
+    NSLog(@"123 %@",lStr);
+    MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"email"] aes:YES] forKey:@"email" atIndex:0];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"pass"] aes:YES] forKey:@"pass" atIndex:1];
+    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:2];
+    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:3];
+    NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
+    return orderArr;
 }
 
 //加密
