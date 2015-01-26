@@ -87,7 +87,8 @@
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        id result = [self parseResults:responseObject];
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             if(![result[@"errno"] integerValue]){
                 _resultDict=result;
