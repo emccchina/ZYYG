@@ -444,7 +444,7 @@ static NSString *cartCell = @"CartCell";
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"InvoiceTaxNo"] aes:NO] forKey:@"InvoiceTaxNo" atIndex:8];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"product_id"] aes:NO] forKey:@"product_id" atIndex:9];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:10];
-    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:11];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:11];
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }

@@ -425,7 +425,7 @@
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"telPhone"] aes:YES] forKey:@"telPhone" atIndex:9];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"addr_code"] aes:NO] forKey:@"addr_code" atIndex:10];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:11];
-    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:12];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:12];
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }

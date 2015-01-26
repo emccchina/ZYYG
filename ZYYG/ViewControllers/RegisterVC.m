@@ -215,7 +215,7 @@
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"email"] aes:YES] forKey:@"email" atIndex:0];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"pass"] aes:YES] forKey:@"pass" atIndex:1];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:2];
-    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:3];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:3];
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }
@@ -234,7 +234,7 @@
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"PassWord"] aes:YES] forKey:@"PassWord" atIndex:1];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"CheckCode"] aes:NO] forKey:@"CheckCode" atIndex:2];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:3];
-    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:4];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:4];
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }

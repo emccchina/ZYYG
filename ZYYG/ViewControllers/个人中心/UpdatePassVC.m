@@ -91,7 +91,7 @@
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
+            id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [self showAlertView:@"修改成功,请重新登录"];
 //            user=nil;
@@ -162,7 +162,7 @@
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"old_pass"] aes:YES] forKey:@"old_pass" atIndex:1];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"new_pass"] aes:YES] forKey:@"new_pass" atIndex:2];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:3];
-    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:4];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:4];
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }

@@ -188,7 +188,7 @@
     [orderArr insertObject:[oDict[@"email"] AES256EncryptWithKey:kAESKey] forKey:@"email" atIndex:0];
     [orderArr insertObject:[oDict[@"pass"] AES256EncryptWithKey:kAESKey] forKey:@"pass" atIndex:1];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:2];
-    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:3];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:3];
     NSLog(@"aes dict is %@", orderArr);
     return orderArr;
 }

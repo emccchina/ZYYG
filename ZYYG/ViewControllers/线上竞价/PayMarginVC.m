@@ -159,7 +159,7 @@
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"GoodsCode"] aes:NO] forKey:@"GoodsCode" atIndex:2];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"PaymentType"] aes:NO] forKey:@"PaymentType" atIndex:3];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:4];
-    [orderArr insertObject:@"5134DUIOIOO72761" forKey:@"t" atIndex:5];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:5];
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }

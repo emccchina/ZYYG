@@ -43,7 +43,8 @@
 #define kRememberAccount                    @"rememberAccount"
 #define kServerDomain                       @"http://test.zaixianchuangxin.com/mobile/"//@"http://www.zemcc.com/mobile/"
 #define kReceiveURLForPay                   @"http://test.zaixianchuangxin.com/pay/receive.aspx"
-
+#define ARC4RANDOM                          0x100000000
+#define ARC4RANDOM_MAX                      [NSString stringWithFormat:@"%lld",ARC4RANDOM]
 #define kAESKey                             @"emcc!@#$%^!@#$%^"
 
 #ifdef DEBUG
