@@ -310,7 +310,6 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [self dismissIndicatorView];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
-        
         if (result) {
             [goods goodsModelWith:result];
             if (self.type == 2) {
@@ -441,8 +440,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
-        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             
         }
@@ -473,8 +471,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
-        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [self setBottomState];
             isCompare = NO;

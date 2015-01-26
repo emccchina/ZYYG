@@ -200,8 +200,7 @@
     [manager POST:url parameters:orderArr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
-        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [self userInfoFromInfos];
             [self.navigationController popViewControllerAnimated:YES];

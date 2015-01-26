@@ -26,13 +26,13 @@
                         <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单失效时间:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ths-SW-49C">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ths-SW-49C">
                         <rect key="frame" x="17" y="8" width="82" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="请在下单后" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87e-mj-HjQ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87e-mj-HjQ">
                         <rect key="frame" x="17" y="30" width="573" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -89,8 +89,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="canStar" destination="dk0-ez-3xv" id="cZh-EY-TcW"/>
                 <outlet property="cancelTime" destination="ths-SW-49C" id="BfW-Z0-pz0"/>
                 <outlet property="cancellButton" destination="QRW-i0-eTp" id="Ugm-2m-UJO"/>
+                <outlet property="labStar" destination="ykr-Ro-v5m" id="ecj-KZ-EpO"/>
                 <outlet property="payButton" destination="aWv-lP-vHm" id="m1Q-n7-8nz"/>
                 <outlet property="redLabel" destination="87e-mj-HjQ" id="i6A-4M-sok"/>
             </connections>

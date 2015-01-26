@@ -17,13 +17,14 @@
     order.Goods=[NSMutableArray array];
     order.OrderCode=[dict safeObjectForKey:@"OrderCode"];
     order.OrderType=[dict safeObjectForKey:@"OrderType"];
+    order.CancelTime=[dict safeObjectForKey:@"CancelTime"];
     order.CreateTime=[dict safeObjectForKey:@"CreateTime"];
     order.GoodsTotal=[dict safeObjectForKey:@"GoodsTotal"];
     order.OrderMoney=[dict safeObjectForKey:@"OrderMoney"];
     order.OrderStatus=[dict safeObjectForKey:@"OrderStatus"];
     order.MerchantID = [dict safeObjectForKey:@"MerchantID"];
     order.PayKey = [dict safeObjectForKey:@"PayKey"];
-    order.state=[dict[@"OrderStatusCode"] integerValue];
+    order.state=[[dict safeObjectForKey:@"OrderStatusCode"] integerValue];
     order.PaidMoney = [dict safeObjectForKey:@"PaidMoney"];
     order.PayMoney = [dict safeObjectForKey:@"PayMoney"];
     order.PayTime = [dict safeObjectForKey:@"PayTime"];

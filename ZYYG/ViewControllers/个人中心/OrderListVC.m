@@ -26,6 +26,7 @@
     NSString *orderState;
     NSInteger pageSize;
     NSInteger pageNum;
+    NSDictionary  *_MerchantID;
     
 }
 @property (retain, nonatomic) IBOutlet HMSegmentedControl *segmentView;
@@ -58,11 +59,6 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     [self.orderListTabelView registerNib:[UINib nibWithNibName:orderSumCell bundle:nil] forCellReuseIdentifier:orderSumCell];
     [self.orderListTabelView registerNib:[UINib nibWithNibName:orderBottomCell bundle:nil] forCellReuseIdentifier:orderBottomCell];
     
-    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
-    
-    self.orderListTabelView.delegate = self;
-    self.orderListTabelView.dataSource = self;
-    
     self.segmentView.font = [UIFont fontWithName:@"Helvetica" size:14.0];
     self.segmentView.sectionTitles = @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"];//  @"", @"0",@"20", @"30" ,@"40"
     self.segmentView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
@@ -71,7 +67,13 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     self.segmentView.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     [self.segmentView addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     
+    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+    self.orderListTabelView.delegate = self;
+    self.orderListTabelView.dataSource = self;
     [self addFootRefresh];
+    [self getMerchantID];
+    
+ 
     NSLog(@"交易订单");
     
     // Do any additional setup after loading the view.
@@ -105,13 +107,13 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     if (0==segmentedControl.selectedSegmentIndex) {
         orderState=@"";
     }else if(1==segmentedControl.selectedSegmentIndex) {
-        orderState=@"0";
+        orderState=@"1";
     }else if(2==segmentedControl.selectedSegmentIndex) {
-        orderState=@"20";
+        orderState=@"2";
     }else if(3==segmentedControl.selectedSegmentIndex) {
-        orderState=@"30";
+        orderState=@"3";
     }else if(4==segmentedControl.selectedSegmentIndex) {
-        orderState=@"40";
+        orderState=@"4";
     }else{
         orderState=@"";
     }
@@ -233,7 +235,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(indexPath.row == (order.Goods.count+2)){
         OrderListCellBottom *bottomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
         
-        bottomCell.cancelTime.text=[NSString stringWithFormat:@"订单失效时间:%@",order.CreateTime];
+        bottomCell.cancelTime.text=[NSString stringWithFormat:@"订单失效时间:%@",order.CancelTime];
         bottomCell.redLabel.numberOfLines=0;
         [self setButton:bottomCell orderMod:order];
         bottomCell.order=order;
@@ -257,8 +259,6 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
             goodsCell.marginPrice.text=[NSString stringWithFormat:@"%@(已扣除保证金)(%@)" ,order.PayMoney,order.PaidMoney];
             
         }
-
-        
         return goodsCell;
     }
     
@@ -296,29 +296,38 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //判断状态 给出按钮
 -(void)setButton:(OrderListCellBottom *)bottomCell orderMod:(OrderModel *)ord
 {
+    bottomCell.canStar.hidden=YES;
+    bottomCell.labStar.hidden=YES;
+    bottomCell.cancellButton.hidden=YES;
+    bottomCell.payButton.hidden=YES;
     if (0 == ord.state) {
         //创建状态 可支付  可取消
-        if ([_orderType intValue] ==0) {
+        if ([_orderType intValue] ==0 || 10 == ord.state) {
             bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!";
         }else{
             bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!并且会扣除您的保证金!";
         }
+        bottomCell.canStar.hidden=NO;
+        bottomCell.labStar.hidden=NO;
         bottomCell.cancellButton.hidden=NO;
         bottomCell.payButton.hidden=NO;
-    }else if(10 == ord.state){
-    }else if(20 == ord.state){
+        //创建状态 可支付  可取消
+   
     }else if(30 == ord.state){
-    }else if(40 == ord.state){
+        bottomCell.payButton.hidden=NO;
+        [bottomCell.payButton setTitle:@"确认收货" forState:UIControlStateNormal];
     }else if(50 == ord.state){
         if ([_orderType intValue] ==0) {
             bottomCell.redLabel.text=@"该订单已经被取消无法操作,您已经丢失购买此商品的机会!";
         }else{
             bottomCell.redLabel.text=@"该订单已经被取消无法操作,您已经丢失购买此商品的机会!已经扣除了您的保证金!";
         }
+        bottomCell.canStar.hidden=NO;
+        bottomCell.labStar.hidden=NO;
         bottomCell.cancellButton.hidden=YES;
         bottomCell.payButton.hidden=YES;
-    }else if(-1 == ord.state){
-        
+    }else {
+       
     }
     
 }
@@ -361,10 +370,35 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
     }
     NSString *string = [NSString stringWithFormat:@"%ld", (long)([order.OrderMoney floatValue]*100)];
-    [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:order.MerchantID key:order.PayKey] viewController:self delegate:self mode:kPayMode];
-
+    [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
 }
 
+- (void)getMerchantID {
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@GetUserInfo.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        NSLog(@"aes de %@", aesde);
+        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        if (result) {
+            if(![result[@"errno"] integerValue]){
+                _MerchantID=result;
+            }
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+    
+}
 #pragma mark - payDelegate
 - (void)APayResult:(NSString*)result
 {
