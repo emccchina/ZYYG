@@ -1029,10 +1029,13 @@
                                             <constraint firstAttribute="width" constant="65" id="iBP-2N-lX3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="确认收货">
+                                        <state key="normal" title="订单支付">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="payOrder:" destination="VHe-nZ-3Qv" eventType="touchUpInside" id="g3c-iq-mcs"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi2-RK-gbZ">
                                         <rect key="frame" x="450" y="11" width="65" height="28"/>
@@ -1040,10 +1043,13 @@
                                             <constraint firstAttribute="width" constant="65" id="fcB-Be-wmo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="查看物流">
+                                        <state key="normal" title="取消订单">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="cancelOrder:" destination="VHe-nZ-3Qv" eventType="touchUpInside" id="C5e-iz-d8K"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.90588235289999997" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

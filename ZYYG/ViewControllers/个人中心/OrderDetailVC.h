@@ -17,4 +17,6 @@
 @property (retain, nonatomic)  NSString *orderCode;
 @property (assign, nonatomic)  NSInteger orderType;
 
+- (IBAction)payOrder:(id)sender;
+- (IBAction)cancelOrder:(id)sender;
 @end

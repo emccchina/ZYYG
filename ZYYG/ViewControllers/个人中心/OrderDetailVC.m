@@ -15,6 +15,7 @@
 #import "ArtDetailVC.h"
 #import "CartCell.h"
 #import "OrderDetailCell.h"
+#import "PaaCreater.h"
 
 @interface OrderDetailVC ()
 {
@@ -22,7 +23,7 @@
     OrderModel *order;
     AdressModel *addr;
     InvoiceModel *invoice;
-    
+    NSDictionary  *_MerchantID;
 }
 @end
 
@@ -54,6 +55,7 @@ static NSString *ODCell = @"OrderDetailCell";
     self.checkDelivery.hidden=YES;
     
     [self requestLetterList:self.orderCode];
+    [self getMerchantID];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -118,6 +120,7 @@ static NSString *ODCell = @"OrderDetailCell";
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=NO;
         [self.checkDelivery setTitle:@"确认收货" forState:UIControlStateNormal];
+        
     }else {
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=YES;
@@ -319,4 +322,71 @@ static NSString *ODCell = @"OrderDetailCell";
 }
 */
 
+- (IBAction)payOrder:(id)sender {
+    //创建状态 可支付  可取消
+    if (0 == order.state || 10 == order.state) {
+        NSMutableString *names = [NSMutableString string];
+        for (GoodsModel *name in order.Goods) {
+            [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
+        }
+        NSString *string = [NSString stringWithFormat:@"%ld", (long)([order.OrderMoney floatValue]*100)];
+        [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
+    }else if(30 == order.state){
+        NSLog(@"确认收货确认收货确认收货");
+    }else {
+        NSLog(@"错误操作错误操作");
+    }
+
+}
+
+- (IBAction)cancelOrder:(id)sender {
+    if (0 == order.state || 10 == order.state) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        NSString *url = [NSString stringWithFormat:@"%@DeleteOrder.ashx",kServerDomain];
+        NSLog(@"url %@", url);
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",order.OrderCode, @"order_id"  ,nil];
+        [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+            id result = [self parseResults:responseObject];
+            if (result) {
+                NSLog(@"%@",result);
+                [self requestLetterList:self.orderCode];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",error] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alertView show];
+        }];
+    }else {
+        NSLog(@"错误操作错误操作");
+    }
+
+}
+
+- (void)getMerchantID {
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@GetUserInfo.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self requestFinished];
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        NSLog(@"aes de %@", aesde);
+        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        if (result) {
+            if(![result[@"errno"] integerValue]){
+                _MerchantID=result;
+            }
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+    }];
+    
+}
 @end

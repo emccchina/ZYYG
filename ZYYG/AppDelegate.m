@@ -26,11 +26,6 @@
     
     [[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTintColor:[UIColor whiteColor]];
 
-    NSString *s = @"150104154949454615012014000000010141219171423192emcc!@#";
-    NSString *e = [s AES256EncryptWithKey:@"0123456789012345"];
-    NSLog(@"e is %@,     ,%@", e,[Utities md5AndBase:s]);
-    NSString *e2 = [e AES256DecryptWithKey:@"0123456789012345"];
-    NSLog(@"e2 is %@", e2);
     return YES;
 }
 

@@ -438,10 +438,11 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     NSString *url = [NSString stringWithFormat:@"%@BidEntrustPrice.ashx",kServerDomain];
     NSLog(@"url %@", url);
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"GoodsCode",[UserInfo shareUserInfo].userKey,@"key",self.auctionCode,@"AuctionCode",_marginView1.inputTF.text,@"Price",@"1",@"type", nil];
-    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    MutableOrderedDictionary *newDict=[self priceWithAES:dict];
+    [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
+        id result = [self parseResults:responseObject];
         if (result) {
             
         }
@@ -739,7 +740,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 }
 
 
-//加密
+//保证金加密
 -(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
 {
     NSMutableString *lStr=[NSMutableString string];
@@ -759,8 +760,31 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }
+//我要出价加密
+-(MutableOrderedDictionary *)priceWithAES:(NSDictionary *)oDict
+{
+    NSMutableString *lStr=[NSMutableString string];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"key"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"AuctionCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"GoodsCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"Price"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"type"] aes:NO]];
+    [lStr appendString:kAESKey];
+    NSLog(@"123 %@",lStr);
+    MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"key"] aes:NO] forKey:@"key" atIndex:0];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"AuctionCode"] aes:NO] forKey:@"AuctionCode" atIndex:1];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"GoodsCode"] aes:NO] forKey:@"GoodsCode" atIndex:2];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"Price"] aes:YES] forKey:@"Price" atIndex:3];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"type"] aes:NO] forKey:@"type" atIndex:4];
+    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:5];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:6];
+    NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
+    return orderArr;
+}
 
-//加密
+
+//添加购物车加密
 -(MutableOrderedDictionary *)addWithAES:(NSDictionary *)oDict
 {
     NSMutableString *lStr=[NSMutableString string];
