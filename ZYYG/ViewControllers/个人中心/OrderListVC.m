@@ -300,9 +300,9 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     bottomCell.labStar.hidden=YES;
     bottomCell.cancellButton.hidden=YES;
     bottomCell.payButton.hidden=YES;
-    if (0 == ord.state) {
+    if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
-        if ([_orderType intValue] ==0 || 10 == ord.state) {
+        if ([_orderType intValue] ==0 ) {
             bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!";
         }else{
             bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!并且会扣除您的保证金!";

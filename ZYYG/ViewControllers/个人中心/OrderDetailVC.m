@@ -107,21 +107,19 @@ static NSString *ODCell = @"OrderDetailCell";
 
 -(void)setButton:(OrderModel *)ord
 {
-    if (0 == ord.state) {
+    if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
-        
-        self.confirmDelivery.hidden=NO;
         self.checkDelivery.hidden=NO;
-    }else if(10 == ord.state){
-    }else if(20 == ord.state){
+        [self.checkDelivery setTitle:@"取消订单" forState:UIControlStateNormal];
+        self.confirmDelivery.hidden=NO;
+        [self.confirmDelivery setTitle:@"支付订单" forState:UIControlStateNormal];
     }else if(30 == ord.state){
-    }else if(40 == ord.state){
-    }else if(50 == ord.state){
+        self.confirmDelivery.hidden=YES;
+        self.checkDelivery.hidden=NO;
+        [self.checkDelivery setTitle:@"确认收货" forState:UIControlStateNormal];
+    }else {
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=YES;
-        
-    }else if(-1 == ord.state){
-        
     }
 
 }
@@ -206,9 +204,9 @@ static NSString *ODCell = @"OrderDetailCell";
             }else if(indexPath.row == (order.Goods.count+1)){
                 OrderDetailCell *orCell=(OrderDetailCell*)[tableView dequeueReusableCellWithIdentifier:ODCell forIndexPath:indexPath];
                 orCell.createTime.text=order.CreateTime;
-                orCell.cancellTime.text=order.CreateTime;
+                orCell.cancellTime.text=order.RemainingTime;
                 orCell.redLab.numberOfLines=0;
-                orCell.redLab.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!并且会扣除您的保证金!";
+                orCell.redLab.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!如果有保证金会扣除您的保证金!";
                 return orCell;
 
             }else{
