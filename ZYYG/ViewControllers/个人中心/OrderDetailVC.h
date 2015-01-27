@@ -11,6 +11,7 @@
 @interface OrderDetailVC : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *orderDetailTableView;
+@property (weak, nonatomic) IBOutlet UILabel *orderMoney;
 @property (weak, nonatomic) IBOutlet UIButton *checkDelivery;
 @property (weak, nonatomic) IBOutlet UIButton *confirmDelivery;
 @property (retain, nonatomic)  NSString *orderCode;

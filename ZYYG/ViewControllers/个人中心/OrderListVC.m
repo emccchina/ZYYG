@@ -300,6 +300,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     bottomCell.labStar.hidden=YES;
     bottomCell.cancellButton.hidden=YES;
     bottomCell.payButton.hidden=YES;
+    bottomCell.redLabel.text=@"";
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         if ([_orderType intValue] ==0 ) {

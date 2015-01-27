@@ -107,6 +107,7 @@ static NSString *ODCell = @"OrderDetailCell";
 
 -(void)setButton:(OrderModel *)ord
 {
+    self.orderMoney.text=[NSString stringWithFormat:@"￥%@",ord.PayMoney];
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         self.checkDelivery.hidden=NO;
