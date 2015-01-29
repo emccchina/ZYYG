@@ -128,7 +128,11 @@
 //上拉刷新
 - (void)addFootRefresh
 {
-    [goodsArray removeAllObjects];
+    [self.talkBuyTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        [goodsArray removeAllObjects];
+        pageNum = 1;
+        [self requestTalkBuy:pageNum artistName:artistName];
+    }];
     [self.talkBuyTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestTalkBuy:pageNum artistName:artistName];
@@ -171,6 +175,7 @@
 {
     [self dismissIndicatorView];
     [self.talkBuyTableView footerEndRefreshing];
+    [self.talkBuyTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 #pragma -mark tableView

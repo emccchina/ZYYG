@@ -106,6 +106,10 @@ static NSString *goodsCell = @"GoodsCell";
 
 - (void)addheadRefresh
 {
+    [self.resultTB addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        refreshFooter    = NO;
+        [self requestForResult];
+    }];
     [self.resultTB addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         refreshFooter = YES;
         [self requestForResult];
@@ -122,12 +126,10 @@ static NSString *goodsCell = @"GoodsCell";
 
 - (void)requestFinished
 {
-    if (!refreshFooter) {
-        [self.resultTB setContentOffset:CGPointZero];
-    }
     refreshFooter = NO;
     [self dismissIndicatorView];
     [self.resultTB footerEndRefreshing];
+    [self.resultTB headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {

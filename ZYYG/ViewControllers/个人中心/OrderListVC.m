@@ -93,6 +93,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 - (void)addFootRefresh
 {
     [orderArray removeAllObjects];
+    [self.orderListTabelView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        [orderArray removeAllObjects];
+        pageNum = 1;
+        [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+    }];
     [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
@@ -167,7 +172,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 {
     [self dismissIndicatorView];
     [self.orderListTabelView footerEndRefreshing];
-
+    [self.orderListTabelView headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 

@@ -59,7 +59,11 @@
 
 - (void)addFootRefresh
 {
-    [recordArray removeAllObjects];
+    [self.competeTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        [recordArray removeAllObjects];
+        pageNum = 1;
+        [self requestRecordList:status page:pageSize panum:pageNum];
+    }];
     [self.competeTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
          [self requestRecordList:status page:pageSize panum:pageNum];
@@ -126,7 +130,7 @@
 {
     [self dismissIndicatorView];
     [self.competeTableView footerEndRefreshing];
-    
+    [self.competeTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 

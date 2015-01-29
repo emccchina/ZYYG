@@ -106,6 +106,10 @@ static NSString * auctionCell = @"auctionCell";
 
 - (void)addheadRefresh
 {
+    [self.auctionTB addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        refreshFooter = NO;
+        [self requestForResult];
+    }];
     [self.auctionTB addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         refreshFooter = YES;
         [self requestForResult];
@@ -157,12 +161,13 @@ static NSString * auctionCell = @"auctionCell";
 
 - (void)requestFinished
 {
-    if (!refreshFooter) {
-        [self.auctionTB setContentOffset:CGPointZero];
-    }
+//    if (!refreshFooter) {
+//        [self.auctionTB setContentOffset:CGPointZero];
+//    }
     refreshFooter = NO;
     [self dismissIndicatorView];
     [self.auctionTB footerEndRefreshing];
+    [self.auctionTB headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 

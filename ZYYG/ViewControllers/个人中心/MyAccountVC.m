@@ -67,7 +67,11 @@
 //刷新
 - (void)addFootRefresh
 {
-    [accountArray removeAllObjects];
+    [self.marginMoneyTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        [accountArray removeAllObjects];
+        pageNum = 1;
+        [self requestAccountList:segNum pageNumber:pageNum];
+    }];
     [self.marginMoneyTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestAccountList:segNum pageNumber:pageNum];
@@ -141,6 +145,7 @@
 {
     [self dismissIndicatorView];
     [self.marginMoneyTableView footerEndRefreshing];
+    [self.marginMoneyTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 #pragma mark -tableView

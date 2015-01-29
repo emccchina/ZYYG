@@ -50,7 +50,11 @@
 }
 - (void)addFootRefresh
 {
-    [marginArray removeAllObjects];
+    [self.marginTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        pageNum = 1;
+        [marginArray removeAllObjects];
+        [self requestMarginList:pageSize pageNum:pageNum];
+    }];
     [self.marginTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestMarginList:pageSize pageNum:pageNum];
@@ -100,6 +104,7 @@
 {
     [self dismissIndicatorView];
     [self.marginTableView footerEndRefreshing];
+    [self.marginTableView    headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 #pragma mark -tableView

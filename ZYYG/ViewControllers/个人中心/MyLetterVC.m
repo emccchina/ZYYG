@@ -68,6 +68,13 @@ static NSString *letterCell = @"letterCell";
 - (void)addFootRefresh
 {
     [letterArray removeAllObjects];
+    [self.myLetterTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        [letterArray removeAllObjects];
+        pageNum=1;
+        NSInteger letterState = state ==YES ? 1:0;
+        [self requestLetterList:letterState pageNumber:pageNum];
+        
+    }];
     [self.myLetterTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         NSInteger letterState = state ==YES ? 1:0;
@@ -119,6 +126,7 @@ static NSString *letterCell = @"letterCell";
 {
     [self dismissIndicatorView];
     [self.myLetterTableView footerEndRefreshing];
+    [self.myLetterTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 #pragma mark -tableView
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

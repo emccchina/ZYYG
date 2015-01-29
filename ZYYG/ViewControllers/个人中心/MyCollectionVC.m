@@ -61,7 +61,11 @@
 
 - (void)addFootRefresh
 {
-    [collections removeAllObjects];
+    [self.myCollectionTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        [collections removeAllObjects];
+        pageNum=1;
+        [self requestCollections:pageNum];
+    }];
     [self.myCollectionTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestCollections:pageNum];
@@ -110,6 +114,7 @@
 {
     [self dismissIndicatorView];
     [self.myCollectionTableView footerEndRefreshing];
+    [self.myCollectionTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
 }
 
 
