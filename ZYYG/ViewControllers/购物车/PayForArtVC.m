@@ -19,7 +19,7 @@
 @interface PayForArtVC ()
 <UITableViewDataSource, UITableViewDelegate, APayDelegate>
 {
-    NSInteger       _toPresentType;//转场页面标志  1 支付， 2 配送
+    NSInteger       _toPresentType;//转场页面标志  1 支付， 2 配送 3 包装
     NSMutableArray         *_adressArr;//
     NSMutableDictionary  *_orderDict;
     NSMutableDictionary     *_defualtAddressDict;//默认地址
@@ -230,14 +230,14 @@ static NSString *cartCell = @"CartCell";
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 3) {
+    if (section == 4) {
         return 2;
-    }else if (section == 4){
+    }else if (section == 5){
         return self.products.count+1;
     }
     return 1;
@@ -248,9 +248,9 @@ static NSString *cartCell = @"CartCell";
     switch (indexPath.section) {
         case 0:
             return 100;
-        case 3:
-            return indexPath.row == 0 ? 44 : 75;
         case 4:
+            return indexPath.row == 0 ? 44 : 75;
+        case 5:
             return indexPath.row == 0 ? 44 : 123;
         default:
             return 44;
@@ -302,10 +302,8 @@ static NSString *cartCell = @"CartCell";
             
         case 1:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
-            NSString *title = @"";
-            NSString *detail = @"";
-            title = @"支付方式";
-            detail = @"在线支付";
+            NSString *title = @"支付方式";
+            NSString *detail = @"在线支付";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -315,18 +313,27 @@ static NSString *cartCell = @"CartCell";
             
         case 2:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
-            NSString *title = @"";
-            NSString *detail = @"";
-            title = @"配送方式";
-            detail = @"快递";
+            NSString *title = @"配送方式";
+            NSString *detail = @"快递";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.accessoryType = UITableViewCellAccessoryNone;
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
+        
+        case 3:{
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
+            NSString *title = @"作品包装";
+            NSString *detail = @"123";
+            cell.textLabel.text = title;
+            cell.detailTextLabel.text = detail;
+            //            cell.accessoryType = UITableViewCellAccessoryNone;
+            //            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
             
-        case 3:{
+        case 4:{
             if (indexPath.row == 0) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
                 cell.textLabel.text = @"发票信息";
@@ -346,7 +353,7 @@ static NSString *cartCell = @"CartCell";
                 return cell;
             }
            
-        }case 4:{
+        }case 5:{
             if (indexPath.row == 0) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
                 cell.textLabel.text = @"商品清单";
@@ -386,14 +393,15 @@ static NSString *cartCell = @"CartCell";
             break;
         case 1://选择页面
             break;
-        case 2:{
-//            _toPresentType = indexPath.section;
-//            [self presentChooseVC];
+        case 2:
+        case 3:{
+            _toPresentType = indexPath.section;
+            [self presentChooseVC];
         }break;
-        case 3:{//发票信息
+        case 4:{//发票信息
             [self presentInvoiceVC];
         }break;
-        case 4:{//商品详情
+        case 5:{//商品详情
             
         }
         default:

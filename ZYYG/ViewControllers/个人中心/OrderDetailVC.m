@@ -18,6 +18,7 @@
 #import "PaaCreater.h"
 
 @interface OrderDetailVC ()
+<APayDelegate>
 {
     UserInfo *user;
     OrderModel *order;
@@ -128,6 +129,10 @@ static NSString *ODCell = @"OrderDetailCell";
 
 }
 
+- (void)APayResult:(NSString *)result
+{
+    
+}
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

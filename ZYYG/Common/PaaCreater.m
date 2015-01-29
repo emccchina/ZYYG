@@ -30,7 +30,7 @@ static int count = 0;
                          @"0", @"orderCurrency",
                          timeStr, @"orderDatetime",
                          name, @"productName",
-                         @"0", @"payType",
+                         @"27", @"payType",
                          shopKey, @"key",
                          ];
     

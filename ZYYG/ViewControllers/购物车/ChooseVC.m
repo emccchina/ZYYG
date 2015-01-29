@@ -11,8 +11,9 @@
 @interface ChooseVC ()
 <UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *payType;
-    NSArray *delivery;
+    NSArray *payType;//支付
+    NSArray *delivery;//配送数组
+    NSArray *packageArr;//包装
     NSInteger _selectState;//选择那种方式
 }
 @property (weak, nonatomic) IBOutlet UITableView *chooseTB;
@@ -24,9 +25,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    NSArray *titles = @[@"保证金支付方式", @"支付方式", @"配送方式", @"发票信息"];
+    NSArray *titles = @[@"保证金支付方式", @"支付方式", @"配送方式", @"包装方式"];
     payType = @[@"银行卡", @"支付宝"];
-    delivery = @[@"快递", @"上门自提"];
+    delivery = @[@[@"纸本艺术品物流",@"￥50.00(适用于中国画版画书法摄影等艺术品)"],@[@"油画雕塑艺术品物流",@"￥300(适用于油画雕塑等艺术品)"], @[@"上门自提",@"免费"]];
+    packageArr = @[@[@"锦盒话筒起泡纸本",@"免费"],@[@"木箱面寻找",@"￥300"]];
     self.title = titles[self.typeChoose];
     self.chooseTB.delegate = self;
     self.chooseTB.dataSource = self;
@@ -68,7 +70,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.typeChoose == 2 ? delivery.count : payType.count;
+    switch (self.typeChoose) {
+        case 1:
+            return payType.count;
+        case 2:
+            return delivery.count;
+        case 3:
+            return packageArr.count;
+            
+        default:
+            break;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -78,7 +91,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 70;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -94,7 +107,29 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chooseCell" forIndexPath:indexPath];
-    cell.textLabel.text = (self.typeChoose == 2 ? delivery[indexPath.row] : payType[indexPath.row]);
+    NSString *title = nil;
+    NSString *detail = nil;
+    switch (self.typeChoose) {
+        case 1:
+            title = payType[indexPath.row][0];
+            detail = payType[indexPath.row ][1];
+            break;
+        case 2:
+            title = delivery[indexPath.row][0];
+            detail = delivery[indexPath.row][1];
+            break;
+        case 3:
+            title = packageArr[indexPath.row][0];
+            detail = packageArr[indexPath.row][1];
+            break;
+            
+        default:
+            break;
+    }
+    cell.textLabel.font = [UIFont systemFontOfSize:20];
+    cell.textLabel.text = title;
+    cell.detailTextLabel.text = detail;
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
     cell.accessoryType = (_selectState == indexPath.row ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone);
     return cell;
 }
@@ -103,10 +138,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     _selectState = indexPath.row;
-    if (self.typeChoose == 1 || self.typeChoose == 2) {
-        [self doRightBut:nil];
-        return;
-    }
+    [self doRightBut:nil];
 }
 
 @end

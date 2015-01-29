@@ -82,7 +82,6 @@
     NSLog(@"url %@", url);
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",self.auctionCode, @"AuctionCode",self.goods.GoodsCode, @"GoodsCode", @"60" , @"PaymentType",nil];
-//    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",@"1501080937178720", @"AuctionCode",@"1412191714231983", @"GoodsCode", @"60" , @"PaymentType",nil];
     MutableOrderedDictionary *newDict=[self dictWithAES:dict];
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
