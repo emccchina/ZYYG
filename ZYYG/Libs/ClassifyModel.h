@@ -13,7 +13,11 @@
 @property (nonatomic, assign) NSInteger         index;
 @property (nonatomic, strong) NSString          *code;
 @property (nonatomic, strong) NSString          *name;
+@property (nonatomic, strong) NSString          *desc;
 @property (nonatomic, strong) NSString          *price;
 - (void)classifyModelFromDict:(NSDictionary*)dict;
+
+- (void)deliveryFromDict:(NSDictionary*)dict;
+- (void)packingFromDict:(NSDictionary*)dict;
 
 @end

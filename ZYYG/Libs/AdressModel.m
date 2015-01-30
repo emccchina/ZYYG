@@ -28,17 +28,17 @@
 - (void)setModel:(NSDictionary *)dict
 {
     self.name = [dict safeObjectForKey:@"Linkman"];
+    self.adressCode = [dict safeObjectForKey:@"AddrCode"];
+    self.detailAdress = [dict safeObjectForKey:@"Address"];
+    self.townID = [dict safeObjectForKey:@"AreaCode"];
     self.defaultAdress = [dict safeObjectForKey:@"DefaultAddr"];
     self.provinceName = [dict safeObjectForKey:@"ProvinceName"];
     self.provinceID = [dict safeObjectForKey:@"ProvinceCode"];;
     self.cityName = [dict safeObjectForKey:@"CityName"];
     self.cityID = [dict safeObjectForKey:@"CityCode"];
     self.townName =[dict safeObjectForKey:@"AreaName"];
-    self.townID = [dict safeObjectForKey:@"AreaCode"];
     self.mobile = [dict safeObjectForKey:@"Mobile"];
     self.telPhone = [dict safeObjectForKey:@"Telephone"];
-    self.detailAdress = [dict safeObjectForKey:@"Address"];
-    self.adressCode = [dict safeObjectForKey:@"AddrCode"];
     self.zipCode = [dict safeObjectForKey:@"Postcode"];
 }
 

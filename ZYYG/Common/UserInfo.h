@@ -33,6 +33,11 @@
 @property (nonatomic, strong) NSMutableArray    *cartsArr;//购物车数组
 @property (nonatomic, assign) NSInteger         cartCount;//购物车数量
 @property (nonatomic, assign) NSInteger         letterCount;//站内信数量
+
+@property (nonatomic, strong) NSMutableArray    *deliveryList;  // 配送方式
+@property (nonatomic, strong) NSMutableArray    *packingList;  // 包装方式
+
+
 - (BOOL)isLogin;//是否登录
 
 - (void)loginOut;//登出
@@ -42,4 +47,8 @@
 - (void)parseAddressArr:(NSArray*)arr; //地址分析
 - (void)parseCartArr:(NSArray*)arr; //购物车分析
 - (void)parseCount:(NSDictionary*)dict;//解析个人中心数量
+- (void)parseDeliveryList:(NSArray*)arr; //配送方式分析
+- (void)parsePackingList:(NSArray*)arr; //包装方式分析
+
+
 @end

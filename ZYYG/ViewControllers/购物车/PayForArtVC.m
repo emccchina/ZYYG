@@ -15,6 +15,7 @@
 #import "InvoiceVC.h"
 #import "PaaCreater.h"
 #import "OrderedDictionary.h"
+#import "ClassifyModel.h"
 
 @interface PayForArtVC ()
 <UITableViewDataSource, UITableViewDelegate, APayDelegate>
@@ -26,6 +27,9 @@
     NSDictionary            *_invoiceRequest;//发票的提交信息
     NSDictionary            *_resultDict;
     NSDictionary            *_MerchantID;
+    NSString            *payWay;
+    NSString            *deliverWay;
+    NSString            *bagWay;
 }
 @property (weak, nonatomic) IBOutlet UITableView *orderTB;
 @property (weak, nonatomic) IBOutlet UIButton *submitBut;
@@ -43,12 +47,15 @@ static NSString *cartCell = @"CartCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    self.orderTB.delegate = self;
-    self.orderTB.dataSource = self;
+    payWay=@"在线支付";
     [self.orderTB registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
+    
 
     self.submitBut.layer.cornerRadius = 3;
     self.submitBut.layer.backgroundColor = kRedColor.CGColor;
+    self.orderTB.delegate = self;
+    self.orderTB.dataSource = self;
+
     self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice];
     _orderDict = [[NSMutableDictionary alloc] init];
     [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
@@ -112,16 +119,25 @@ static NSString *cartCell = @"CartCell";
 
 - (void)chooseFinished:(NSInteger)type content:(id) content
 {
+    ClassifyModel *sendContent = content;
     switch (type) {
         case 0:{
             
         }
-            break;
+        break;
         case 1:{
-            
+            payWay=sendContent.name;
+            [self.orderTB reloadData];
         }break;
         case 2:{
-            
+            deliverWay=sendContent.name;
+            [_orderDict setObject:sendContent.code forKey:@"DeliveryCode"];
+            [self.orderTB reloadData];
+        }break;
+        case 3:{
+            [_orderDict setObject:sendContent.code forKey:@"PackingCode"];
+            bagWay=sendContent.name;
+            [self.orderTB reloadData];
         }break;
         default:
             break;
@@ -136,18 +152,22 @@ static NSString *cartCell = @"CartCell";
 
 - (void)requestForAddressList
 {
+    UserInfo *userInfo = [UserInfo shareUserInfo];
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@addressList.ashx",kServerDomain];
+    NSString *url = [NSString stringWithFormat:@"%@AddressList.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
         [self dismissIndicatorView];
-        id result = [self parseResults:responseObject];
+        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
-            [self setDefaultAdress:result[@"data"]];
+            [self setDefaultAdress:result[@"AddressList"]];
+            [userInfo parseDeliveryList:result[@"DeliveryList"]];
+            [userInfo parsePackingList:result[@"PackingList"]];
             [self.orderTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -303,7 +323,7 @@ static NSString *cartCell = @"CartCell";
         case 1:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"支付方式";
-            NSString *detail = @"在线支付";
+            NSString *detail = payWay;
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
             cell.accessoryType = UITableViewCellAccessoryNone;
@@ -314,7 +334,7 @@ static NSString *cartCell = @"CartCell";
         case 2:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"配送方式";
-            NSString *detail = @"快递";
+            NSString *detail = deliverWay;
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
 //            cell.accessoryType = UITableViewCellAccessoryNone;
@@ -325,7 +345,7 @@ static NSString *cartCell = @"CartCell";
         case 3:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"作品包装";
-            NSString *detail = @"123";
+            NSString *detail = bagWay;
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
             //            cell.accessoryType = UITableViewCellAccessoryNone;
@@ -438,6 +458,8 @@ static NSString *cartCell = @"CartCell";
     [lStr appendString:[self aeskeyOrNot:oDict[@"RegPhone"] aes:YES]];
     [lStr appendString:[self aeskeyOrNot:oDict[@"InvoiceTaxNo"] aes:NO]];
     [lStr appendString:[self aeskeyOrNot:oDict[@"product_id"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"DeliveryCode"] aes:NO]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"PackingCode"] aes:NO]];
     [lStr appendString:kAESKey];
     NSLog(@"123 %@",lStr);
     MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
@@ -451,8 +473,10 @@ static NSString *cartCell = @"CartCell";
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"RegPhone"] aes:YES] forKey:@"RegPhone" atIndex:7];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"InvoiceTaxNo"] aes:NO] forKey:@"InvoiceTaxNo" atIndex:8];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"product_id"] aes:NO] forKey:@"product_id" atIndex:9];
-    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:10];
-    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:11];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"DeliveryCode"] aes:NO] forKey:@"DeliveryCode" atIndex:10];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"PackingCode"] aes:NO] forKey:@"PackingCode" atIndex:11];
+    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:12];
+    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:13];
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }

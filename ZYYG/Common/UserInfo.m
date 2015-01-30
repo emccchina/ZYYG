@@ -8,6 +8,7 @@
 
 #import "UserInfo.h"
 #import "GoodsModel.h"
+#import "ClassifyModel.h"
 
 @implementation UserInfo
 
@@ -45,6 +46,8 @@
     self.zipCode = nil;
     self.addressManager = nil;
     self.cartsArr = nil;
+    self.cartCount=0;
+    self.letterCount=0;
 }
 
 -(UserInfo *)setParams:(UserInfo *)user parmas:(NSDictionary *)dict
@@ -109,6 +112,27 @@
 {
     self.cartCount = [dict[@"CartCount"] integerValue];
     self.letterCount = [dict[@"MessageCount"] integerValue];
+}
+
+- (void)parseDeliveryList:(NSArray *)arr
+{   NSMutableArray* array = [NSMutableArray array];
+    for (NSDictionary* dict in arr) {
+        ClassifyModel *model = [[ClassifyModel alloc] init];
+        [model deliveryFromDict:dict];
+        [array addObject:model];
+    }
+    self.deliveryList=array;
+}
+- (void)parsePackingList:(NSArray *)arr
+{
+    NSMutableArray* array = [NSMutableArray array];
+    for (NSDictionary* dict in arr) {
+        ClassifyModel *model = [[ClassifyModel alloc] init];
+        [model packingFromDict:dict];
+        [array addObject:model];
+    }
+    self.packingList=array;
+
 }
 
 @end

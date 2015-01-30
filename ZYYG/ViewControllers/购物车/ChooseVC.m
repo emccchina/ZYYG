@@ -7,6 +7,8 @@
 //
 
 #import "ChooseVC.h"
+#import "ClassifyModel.h"
+
 
 @interface ChooseVC ()
 <UITableViewDataSource, UITableViewDelegate>
@@ -15,6 +17,8 @@
     NSArray *delivery;//配送数组
     NSArray *packageArr;//包装
     NSInteger _selectState;//选择那种方式
+    NSString *selectCode;
+    ClassifyModel *model;
 }
 @property (weak, nonatomic) IBOutlet UITableView *chooseTB;
 @end
@@ -25,10 +29,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
+     UserInfo *userInfo = [UserInfo shareUserInfo];
     NSArray *titles = @[@"保证金支付方式", @"支付方式", @"配送方式", @"包装方式"];
     payType = @[@"银行卡", @"支付宝"];
-    delivery = @[@[@"纸本艺术品物流",@"￥50.00(适用于中国画版画书法摄影等艺术品)"],@[@"油画雕塑艺术品物流",@"￥300(适用于油画雕塑等艺术品)"], @[@"上门自提",@"免费"]];
-    packageArr = @[@[@"锦盒话筒起泡纸本",@"免费"],@[@"木箱面寻找",@"￥300"]];
+    delivery =userInfo.deliveryList;
+//  @[@[@"纸本艺术品物流",@"￥50.00(适用于中国画版画书法摄影等艺术品)"],@[@"油画雕塑艺术品物流",@"￥300(适用于油画雕塑等艺术品)"], @[@"上门自提",@"免费"]];
+    packageArr =userInfo.packingList;
+//    @[@[@"锦盒话筒起泡纸本",@"免费"],@[@"木箱面寻找",@"￥300"]];
     self.title = titles[self.typeChoose];
     self.chooseTB.delegate = self;
     self.chooseTB.dataSource = self;
@@ -39,8 +46,21 @@
 
 - (void)doRightBut:(UIBarButtonItem*)item
 {
+    ClassifyModel *sendContent;
     if (self.chooseFinished) {
-        id sendContent = @(_selectState);
+        switch (self.typeChoose) {
+            case 1:
+                sendContent = [[ClassifyModel alloc] init];
+                break;
+            case 2:
+                sendContent = delivery[_selectState];
+                break;
+            case 3:
+                sendContent = packageArr[_selectState];
+                break;
+            default:
+                break;
+        }
         self.chooseFinished(self.typeChoose, sendContent);
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -107,6 +127,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chooseCell" forIndexPath:indexPath];
+    
     NSString *title = nil;
     NSString *detail = nil;
     switch (self.typeChoose) {
@@ -115,14 +136,15 @@
             detail = payType[indexPath.row ][1];
             break;
         case 2:
-            title = delivery[indexPath.row][0];
-            detail = delivery[indexPath.row][1];
+            model=delivery[indexPath.row];
+            title = model.name;
+            detail = [NSString stringWithFormat:@"(￥%@)%@",model.price,model.desc] ;
             break;
         case 3:
-            title = packageArr[indexPath.row][0];
-            detail = packageArr[indexPath.row][1];
+            model=packageArr[indexPath.row];
+            title = model.name;
+            detail = [NSString stringWithFormat:@"(￥%@)%@",model.price,model.desc] ;
             break;
-            
         default:
             break;
     }

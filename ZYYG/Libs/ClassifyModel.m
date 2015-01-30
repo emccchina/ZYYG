@@ -17,4 +17,21 @@
     self.name   = dict[@"Name"];
 }
 
+- (void)deliveryFromDict:(NSDictionary*)dict
+{
+    self.code=[dict safeObjectForKey:@"DeliveryCode"];
+    self.name=[dict safeObjectForKey:@"DeliveryName"];
+    self.desc=[dict safeObjectForKey:@"DeliveryDesc"];
+    self.price=[dict safeObjectForKey:@"Price"];
+    
+    
+}
+- (void)packingFromDict:(NSDictionary*)dict
+{
+    self.code=[dict safeObjectForKey:@"PackingCode"];
+    self.name=[dict safeObjectForKey:@"PackingName"];
+    self.desc=[dict safeObjectForKey:@"PackingDesc"];
+    self.price=[dict safeObjectForKey:@"Price"];
+    
+}
 @end
