@@ -91,7 +91,7 @@
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-            id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
+            id result = [self parseResults:responseObject];
         if (result) {
             [self showAlertView:@"修改成功,请重新登录"];
 //            user=nil;

@@ -108,7 +108,7 @@
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        id result = [self parseResults:[responseObject dataUsingEncoding:NSUTF8StringEncoding]];
+        id result = [self parseResults:responseObject];
         if (result) {
             NSArray *array = self.navigationController.viewControllers;
             for (UIViewController* vc in array) {
