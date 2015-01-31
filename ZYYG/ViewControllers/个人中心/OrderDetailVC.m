@@ -88,7 +88,8 @@ static NSString *ODCell = @"OrderDetailCell";
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        id result = [self parseResults:responseObject];
+        NSString *aesResult = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        id result = [self parseResults:[aesResult dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [addr addressFromOrder:result[@"Addr"]];
             invoice =[InvoiceModel invoiceWithDict:result[@"Invoice"]];
@@ -98,6 +99,7 @@ static NSString *ODCell = @"OrderDetailCell";
             [self.orderDetailTableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
         [self requestFinished];
         [self showAlertView:kNetworkNotConnect];
     }];
