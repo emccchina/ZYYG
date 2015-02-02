@@ -36,6 +36,7 @@
 
 @property (nonatomic, strong) NSMutableArray    *deliveryList;  // 配送方式
 @property (nonatomic, strong) NSMutableArray    *packingList;  // 包装方式
+@property (nonatomic, assign) CGFloat         taxPercend;//站内信数量
 
 
 - (BOOL)isLogin;//是否登录

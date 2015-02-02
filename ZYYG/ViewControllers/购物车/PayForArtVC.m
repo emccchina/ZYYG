@@ -17,13 +17,7 @@
 #import "OrderedDictionary.h"
 #import "ClassifyModel.h"
 
-/* 选择普通发票时:
- * 1.发票抬头可写。
- * 2.税费 = (商品总额 + 包装费 + 配送费 - 立减金额 - 其他优惠) * 税点。
- * 3.订单总额 = 商品总额 + 包装费 + 配送费 + 税费。
- * 4.实收总额 = 订单总额 - 立减金额 - 其他优惠。
- * 5.应付总额 = 实收总额 - 已付总额。
- */
+
 
 @interface PayForArtVC ()
 <UITableViewDataSource, UITableViewDelegate, APayDelegate>
@@ -35,9 +29,9 @@
     NSDictionary            *_invoiceRequest;//发票的提交信息
     NSDictionary            *_resultDict;
     NSDictionary            *_MerchantID;
-    NSString            *payWay;
-    NSString            *deliverWay;
-    NSString            *bagWay;
+    NSString                *payWay;
+    NSString                *deliverWay;
+    NSString                *bagWay;
 }
 @property (weak, nonatomic) IBOutlet UITableView *orderTB;
 @property (weak, nonatomic) IBOutlet UIButton *submitBut;
@@ -141,14 +135,16 @@ static NSString *cartCell = @"CartCell";
             [_orderDict setObject:sendContent.code forKey:@"DeliveryCode"];
             deliverWay=sendContent.name;
             self.delivPrice=[sendContent.price floatValue];
-            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice+self.packPrice+self.delivPrice+self.taxPrice];
+            [self calculatePrice];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
             [self.orderTB reloadData];
         }break;
         case 3:{
             [_orderDict setObject:sendContent.code forKey:@"PackingCode"];
             bagWay=sendContent.name;
             self.packPrice=[sendContent.price floatValue];
-            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice+self.packPrice+self.delivPrice+self.taxPrice];
+            [self calculatePrice];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
             [self.orderTB reloadData];
         }break;
         default:
@@ -161,6 +157,24 @@ static NSString *cartCell = @"CartCell";
     UserInfo *userInfo = [UserInfo shareUserInfo];
     [userInfo parseAddressArr:arr];
 }
+/* 选择普通发票时:
+ * 1.发票抬头可写。
+ * 2.税费 = (商品总额 + 包装费 + 配送费 - 立减金额 - 其他优惠) * 税点。
+ * 3.订单总额 = 商品总额 + 包装费 + 配送费 + 税费。
+ * 4.实收总额 = 订单总额 - 立减金额 - 其他优惠。
+ * 5.应付总额 = 实收总额 - 已付总额。
+ */
+
+- (void)calculatePrice
+{
+    if(_orderDict[@"InvoiceType"]){
+    UserInfo *userInfo = [UserInfo shareUserInfo];
+    self.taxPrice=(self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice)*userInfo.taxPercend;
+    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+    }else{
+    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+    }
+}
 
 - (void)requestForAddressList
 {
@@ -168,18 +182,21 @@ static NSString *cartCell = @"CartCell";
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@AddressList.ashx",kServerDomain];
+    NSString *url = [NSString stringWithFormat:@"%@OrderBasicInfoList.ashx",kServerDomain];
     NSLog(@"url %@", url);
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        NSLog(@"aesde %@", aesde);
         [self dismissIndicatorView];
         id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        
         if (result) {
             [self setDefaultAdress:result[@"AddressList"]];
             [userInfo parseDeliveryList:result[@"DeliveryList"]];
             [userInfo parsePackingList:result[@"PackingList"]];
+            userInfo.taxPercend=[result[@"Tax"] floatValue];
             [self.orderTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
