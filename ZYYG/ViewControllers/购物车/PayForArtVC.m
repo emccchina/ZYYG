@@ -169,12 +169,11 @@ static NSString *cartCell = @"CartCell";
 
 - (void)calculatePrice
 {
-    if(_orderDict[@"InvoiceType"]){
+    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+    if([_orderDict[@"InvoiceType"] integerValue]){
         UserInfo *userInfo = [UserInfo shareUserInfo];
-        self.taxPrice=(self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice)*userInfo.taxPercend;
-        self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
-    }else{
-        self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+        self.taxPrice = self.dealPrice*userInfo.taxPercend;
+        self.dealPrice += self.taxPrice;
     }
 }
 
