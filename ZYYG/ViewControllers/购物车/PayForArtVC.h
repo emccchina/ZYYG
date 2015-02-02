@@ -13,4 +13,7 @@
 
 @property (nonatomic, strong) NSArray *products;
 @property (nonatomic, assign) CGFloat   totalPrice;
+@property (nonatomic, assign) CGFloat   packPrice;
+@property (nonatomic, assign) CGFloat   delivPrice;
+@property (nonatomic, assign) CGFloat   taxPrice;
 @end

@@ -17,12 +17,20 @@
 #import "OrderedDictionary.h"
 #import "ClassifyModel.h"
 
+/* 选择普通发票时:
+ * 1.发票抬头可写。
+ * 2.税费 = (商品总额 + 包装费 + 配送费 - 立减金额 - 其他优惠) * 税点。
+ * 3.订单总额 = 商品总额 + 包装费 + 配送费 + 税费。
+ * 4.实收总额 = 订单总额 - 立减金额 - 其他优惠。
+ * 5.应付总额 = 实收总额 - 已付总额。
+ */
+
 @interface PayForArtVC ()
 <UITableViewDataSource, UITableViewDelegate, APayDelegate>
 {
     NSInteger       _toPresentType;//转场页面标志  1 支付， 2 配送 3 包装
-    NSMutableArray         *_adressArr;//
-    NSMutableDictionary  *_orderDict;
+    NSMutableArray          *_adressArr;//
+    NSMutableDictionary     *_orderDict;
     NSMutableDictionary     *_defualtAddressDict;//默认地址
     NSDictionary            *_invoiceRequest;//发票的提交信息
     NSDictionary            *_resultDict;
@@ -56,7 +64,7 @@ static NSString *cartCell = @"CartCell";
     self.orderTB.delegate = self;
     self.orderTB.dataSource = self;
 
-    self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice];
+    self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice+self.packPrice+self.delivPrice+self.taxPrice];
     _orderDict = [[NSMutableDictionary alloc] init];
     [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
     [_orderDict setObject:@"0" forKey:@"InvoiceType"];//0不开发票  10 普通发票， 20 增值税发票
@@ -130,13 +138,17 @@ static NSString *cartCell = @"CartCell";
             [self.orderTB reloadData];
         }break;
         case 2:{
-            deliverWay=sendContent.name;
             [_orderDict setObject:sendContent.code forKey:@"DeliveryCode"];
+            deliverWay=sendContent.name;
+            self.delivPrice=[sendContent.price floatValue];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice+self.packPrice+self.delivPrice+self.taxPrice];
             [self.orderTB reloadData];
         }break;
         case 3:{
             [_orderDict setObject:sendContent.code forKey:@"PackingCode"];
             bagWay=sendContent.name;
+            self.packPrice=[sendContent.price floatValue];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice+self.packPrice+self.delivPrice+self.taxPrice];
             [self.orderTB reloadData];
         }break;
         default:
@@ -182,7 +194,15 @@ static NSString *cartCell = @"CartCell";
 {
     UserInfo *userInfo = [UserInfo shareUserInfo];
     if (!userInfo.addressManager) {
-        [self showAlertView:@"请输入地址"];
+        [self showAlertView:@"请输入地址!"];
+        return;
+    }
+    if(!_orderDict[@"DeliveryCode"]){
+        [self showAlertView:@"请选择配送方式!"];
+        return;
+    }
+    if(!_orderDict[@"PackingCode"]){
+        [self showAlertView:@"请选择包装方式!"];
         return;
     }
     [_orderDict setObject:userInfo.addressManager.defaultAddressCode forKey:@"address_id"];
