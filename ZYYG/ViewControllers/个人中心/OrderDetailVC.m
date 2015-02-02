@@ -16,7 +16,7 @@
 #import "CartCell.h"
 #import "OrderDetailCell.h"
 #import "PaaCreater.h"
-
+#import "ClassifyModel.h"
 @interface OrderDetailVC ()
 <APayDelegate>
 {
@@ -24,6 +24,8 @@
     OrderModel *order;
     AdressModel *addr;
     InvoiceModel *invoice;
+    ClassifyModel *delivery;//配送
+    ClassifyModel *package;//包装
     NSDictionary  *_MerchantID;
 }
 @end
@@ -42,10 +44,9 @@ static NSString *ODCell = @"OrderDetailCell";
     addr=[[AdressModel alloc] init];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    self.orderDetailTableView.delegate = self;
-    self.orderDetailTableView.dataSource = self;
-    [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
-    [self.orderDetailTableView registerNib:[UINib nibWithNibName:ODCell bundle:nil] forCellReuseIdentifier:ODCell];
+    delivery = [[ClassifyModel alloc] init];
+    
+    
     
     self.confirmDelivery.layer.backgroundColor = kRedColor.CGColor;
     self.confirmDelivery.layer.cornerRadius = 3;
@@ -89,13 +90,22 @@ static NSString *ODCell = @"OrderDetailCell";
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSString *aesResult = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        NSLog(@"%@", aesResult);
         id result = [self parseResults:[aesResult dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [addr addressFromOrder:result[@"Addr"]];
             invoice =[InvoiceModel invoiceWithDict:result[@"Invoice"]];
             order = [OrderModel orderModelWithDict:result];
+            
+            [delivery deliveryFromDict:result[@"Delivery"]];
+            package = [[ClassifyModel alloc] init];
+            [package packingFromDict:result[@"Packing"]];
             [self setButton:order];
             NSLog(@"订单商品解析完成");
+            self.orderDetailTableView.delegate = self;
+            self.orderDetailTableView.dataSource = self;
+            [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
+            [self.orderDetailTableView registerNib:[UINib nibWithNibName:ODCell bundle:nil] forCellReuseIdentifier:ODCell];
             [self.orderDetailTableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -139,13 +149,13 @@ static NSString *ODCell = @"OrderDetailCell";
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 2)        return order.Goods.count+2;
-    else if(section ==5)     return 2;
+    else if(section ==6)     return 2;
     return 1;
 }
 
@@ -158,7 +168,7 @@ static NSString *ODCell = @"OrderDetailCell";
         case 2:
             return indexPath.row == 0 ? 44 : 125;
             break;
-        case 5:
+        case 6:
             return indexPath.row ? 100 : 44;
             break;
         default:
@@ -253,18 +263,23 @@ static NSString *ODCell = @"OrderDetailCell";
             break;
         case 4:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
-            NSString *title = @"";
-            NSString *detail = @"";
-            title = @"配送方式";
-            detail = @"快递";
-            cell.textLabel.text = title;
-            cell.detailTextLabel.text = detail;
+            cell.textLabel.text = @"配送方式";
+            cell.detailTextLabel.text = delivery.name;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
             return cell;
         }
             break;
         case 5:{
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
+            cell.textLabel.text = @"包装方式";
+            cell.detailTextLabel.text = package.name;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            return cell;
+        }
+            break;
+        case 6:{
             if (indexPath.row == 0) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
                 cell.textLabel.text = @"发票信息";
