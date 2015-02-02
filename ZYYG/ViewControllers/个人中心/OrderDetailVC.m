@@ -63,7 +63,7 @@ static NSString *ODCell = @"OrderDetailCell";
     
     
     [self getMerchantID];
-    
+    [self requestLetterList:self.orderCode];
     if (![UserInfo shareUserInfo].addressManager) {
         [self requestForAddressList];
     }
@@ -89,7 +89,7 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)requestForAddressList
 {
     UserInfo *userInfo = [UserInfo shareUserInfo];
-    [self showIndicatorView:kNetworkConnecting];
+//    [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@OrderBasicInfoList.ashx",kServerDomain];
@@ -107,7 +107,7 @@ static NSString *ODCell = @"OrderDetailCell";
             [userInfo parseDeliveryList:result[@"DeliveryList"]];
             [userInfo parsePackingList:result[@"PackingList"]];
             userInfo.taxPercend=[result[@"Tax"] floatValue];
-            [self requestLetterList:self.orderCode];
+            [self.orderDetailTableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
