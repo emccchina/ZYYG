@@ -71,9 +71,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     self.bottomView.hidden = self.hiddenBottom;
     goods = [[GoodsModel alloc] init];
     if (self.type == 2) {
-        TBBottom = 85;
+        TBBottom = self.hiddenBottom ? 0 : 85;
         self.bottomView.hidden = YES;
-        _marginView.hidden = NO;
+        _marginView.hidden = self.hiddenBottom;
     }
     historyArr = [[NSMutableArray alloc] init];
     _heightArt = 0;
@@ -320,6 +320,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
         [self dismissIndicatorView];
         [self showAlertView:kNetworkNotConnect];
     }];
@@ -624,7 +625,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     if (cell.LFifthLabel.countDownTimer) {
                         [_timerArr addObject:cell.LFifthLabel.countDownTimer];
                     }
-                    NSLog(@",,,,%p,,,,,,%p",cell.LFifthLabel, cell.LFifthLabel.countDownTimer);
+//                    NSLog(@",,,,%p,,,,,,%p",cell.LFifthLabel, cell.LFifthLabel.countDownTimer);
                     return cell;
                 }else{
                     CollectCell *cell = (CollectCell*)[tableView dequeueReusableCellWithIdentifier:collectCell forIndexPath:indexPath];

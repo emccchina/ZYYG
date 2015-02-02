@@ -60,6 +60,7 @@
 
 -(void)addressFromOrder:(NSDictionary *)dict
 {
+    self.isExist = YES;
     self.name = [dict safeObjectForKey:@"Consignee"];
     self.defaultAdress = [dict safeObjectForKey:@"Address"];
     self.zipCode = [dict safeObjectForKey:@"Postcode"];

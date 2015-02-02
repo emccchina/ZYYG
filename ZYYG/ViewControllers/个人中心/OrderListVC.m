@@ -92,7 +92,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //上拉刷新
 - (void)addFootRefresh
 {
-    [orderArray removeAllObjects];
+    
     [self.orderListTabelView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         [orderArray removeAllObjects];
         pageNum = 1;
@@ -122,7 +122,8 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else{
         orderState=@"";
     }
-    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
+    [orderArray removeAllObjects];
+    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
 
 }
 //订单列表请求
@@ -288,6 +289,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         if ([detailVC isKindOfClass:[OrderDetailVC class]]) {
             OrderDetailVC *vc = (OrderDetailVC*)detailVC;
             [vc setOrderCode:orderCode];
+            
             if ([_orderType intValue] ==0) {
                 [vc setOrderType:0];
             }else{
@@ -422,6 +424,8 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 {
     NSLog(@"%@",result);
     [self showAlertView:[Utities doWithPayList:result]];
+    [orderArray removeAllObjects];
+    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
 }
 
 /*

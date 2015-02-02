@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSString          *OrderStatus;//订单状态
 @property (nonatomic, strong) NSString          *OrderType;//订单类型
 @property (nonatomic, strong) NSString          *OrderMoney;//订单金额
-@property (nonatomic, assign) NSInteger          state;//状态编号
+@property (nonatomic, assign) NSInteger          state;//状态编号  订单状态 20 支付 30已发货 40已签收 50已取消 -1删除 10审核 0创建
 @property (nonatomic, strong) NSMutableArray    *Goods;//订单商品(多个)
 @property (nonatomic, strong) NSString          *MerchantID;//商户id
 @property (nonatomic, strong) NSString          *PayKey;//商户key

@@ -78,6 +78,7 @@
 		F7983F0A1A5E7B2100A68AA2 /* AuctionDetialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7983F091A5E7B2100A68AA2 /* AuctionDetialVC.m */; };
 		F7BBA58F1A2806F9009DF9F2 /* CartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BBA58D1A2806F9009DF9F2 /* CartCell.m */; };
 		F7BBA5901A2806F9009DF9F2 /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */; };
+		F7BC41131A7F7D0700EFA40B /* OrderSubmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BC41121A7F7D0700EFA40B /* OrderSubmitModel.m */; };
 		F7BE243A1A3144EE001EA855 /* CustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE24391A3144EE001EA855 /* CustomVC.m */; };
 		F7BE243D1A314538001EA855 /* TalkBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE243C1A314538001EA855 /* TalkBuyVC.m */; };
 		F7BE80DA1A3E6DDF0053C5CA /* AdressTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */; };
@@ -770,6 +771,8 @@
 		F7BBA58C1A2806F9009DF9F2 /* CartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartCell.h; sourceTree = "<group>"; };
 		F7BBA58D1A2806F9009DF9F2 /* CartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartCell.m; sourceTree = "<group>"; };
 		F7BBA58E1A2806F9009DF9F2 /* CartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
+		F7BC41111A7F7D0700EFA40B /* OrderSubmitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSubmitModel.h; sourceTree = "<group>"; };
+		F7BC41121A7F7D0700EFA40B /* OrderSubmitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSubmitModel.m; sourceTree = "<group>"; };
 		F7BE24381A3144EE001EA855 /* CustomVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomVC.h; sourceTree = "<group>"; };
 		F7BE24391A3144EE001EA855 /* CustomVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVC.m; sourceTree = "<group>"; };
 		F7BE243B1A314538001EA855 /* TalkBuyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkBuyVC.h; sourceTree = "<group>"; };
@@ -2583,6 +2586,8 @@
 				F996B8481A4AB26F00D38473 /* SettingModel.m */,
 				F7EF4BB61A5E56880073BD1F /* AuctionModel.h */,
 				F7EF4BB71A5E56880073BD1F /* AuctionModel.m */,
+				F7BC41111A7F7D0700EFA40B /* OrderSubmitModel.h */,
+				F7BC41121A7F7D0700EFA40B /* OrderSubmitModel.m */,
 			);
 			name = MyModel;
 			path = ZYYG/Libs;
@@ -3207,6 +3212,7 @@
 				F7BE80DA1A3E6DDF0053C5CA /* AdressTextField.m in Sources */,
 				940178551A21CCE400697D14 /* Utities.m in Sources */,
 				F99C89241A665BEF00EC87DF /* OrderDetailCell.m in Sources */,
+				F7BC41131A7F7D0700EFA40B /* OrderSubmitModel.m in Sources */,
 				F996B8491A4AB26F00D38473 /* AccountModel.m in Sources */,
 				940178541A21CCE400697D14 /* UserInfo.m in Sources */,
 				940178001A21CBEA00697D14 /* AppDelegate.m in Sources */,

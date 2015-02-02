@@ -90,6 +90,7 @@
     }else{
         segNum =-1;
     }
+    [accountArray removeAllObjects];
     [self requestAccountList:segNum pageNumber:pageNum ];
     
 }

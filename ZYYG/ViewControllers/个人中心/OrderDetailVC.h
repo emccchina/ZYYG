@@ -9,13 +9,16 @@
 #import "BaseViewController.h"
 //订单详情
 @interface OrderDetailVC : BaseViewController<UITableViewDataSource,UITableViewDelegate>
-
+{
+    
+}
 @property (weak, nonatomic) IBOutlet UITableView *orderDetailTableView;
 @property (weak, nonatomic) IBOutlet UILabel *orderMoney;
 @property (weak, nonatomic) IBOutlet UIButton *checkDelivery;
 @property (weak, nonatomic) IBOutlet UIButton *confirmDelivery;
 @property (retain, nonatomic)  NSString *orderCode;
-@property (assign, nonatomic)  NSInteger orderType;
+@property (retain, nonatomic)  NSString *auctionCode;
+@property (assign, nonatomic)  NSInteger orderType;//0平价详情    1竞价详情
 
 - (IBAction)payOrder:(id)sender;
 - (IBAction)cancelOrder:(id)sender;

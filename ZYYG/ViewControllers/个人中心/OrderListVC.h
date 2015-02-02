@@ -13,7 +13,7 @@
 @interface OrderListVC : BaseViewController
 <UITableViewDataSource,UITableViewDelegate,APayDelegate>
 
-@property (retain, nonatomic)  NSString *orderType;
+@property (retain, nonatomic)  NSString *orderType;//0平价   1竞价
 
 @property (weak, nonatomic) IBOutlet UITableView *orderListTabelView;
 - (void)requestFinished;

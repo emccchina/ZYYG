@@ -23,7 +23,7 @@
 @property (nonatomic, strong) NSString      *telPhone;//电话
 @property (nonatomic, strong) NSString      *adressCode;//地址编号
 @property (nonatomic, strong) NSString      *zipCode;//邮编
-
+@property (nonatomic, assign) BOOL          isExist;//是否可用  竞价订单详情用
 - (void)setModelFromAddressModel:(AdressModel*)model;
 
 - (void)setModel:(NSDictionary*)dict;

@@ -82,7 +82,8 @@
     }else{
         status=0;
     }
-    [self requestRecordList:status page:pageSize panum:pageNum];
+    [recordArray removeAllObjects];
+    [self requestRecordList:status page:pageSize panum:1];
     
 }
 -(void)requestRecordList:(NSInteger)Austatus  page:(NSInteger )size  panum:(NSInteger )num

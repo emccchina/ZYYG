@@ -25,7 +25,6 @@
     NSInteger       _toPresentType;//转场页面标志  1 支付， 2 配送 3 包装
     NSMutableArray          *_adressArr;//
     NSMutableDictionary     *_orderDict;
-    NSMutableDictionary     *_defualtAddressDict;//默认地址
     NSDictionary            *_invoiceRequest;//发票的提交信息
     NSDictionary            *_resultDict;
     NSDictionary            *_MerchantID;
@@ -105,7 +104,7 @@ static NSString *cartCell = @"CartCell";
         }];
     }else if ([destVC isKindOfClass:[AdressVC class]]){
         [(AdressVC*)destVC setChange:^(BOOL change){
-            [self requestForAddressList];
+
         }];
     }else if ([destVC isKindOfClass:[InvoiceVC class]]){
         if (_invoiceRequest) {

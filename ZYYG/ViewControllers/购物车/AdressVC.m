@@ -54,6 +54,9 @@
 
 - (void)doRightBut:(UIBarButtonItem*)item
 {
+    if (self.change) {
+        self.change(YES);
+    }
     if (_selectedIndex != [UserInfo shareUserInfo].addressManager.defaultAddressIndex) {
         [self requestUploadAdress];//默认地址变动
         return;
@@ -84,6 +87,7 @@
         id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [UserInfo shareUserInfo].addressManager.defaultAddressIndex = _selectedIndex;
+            
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
