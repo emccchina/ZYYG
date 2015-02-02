@@ -113,7 +113,9 @@ static NSString *cartCell = @"CartCell";
         }
         [(InvoiceVC*)destVC setFinished:^(NSDictionary* invoiceD){
             [_orderDict setValuesForKeysWithDictionary:invoiceD];
+            [self calculatePrice];
             _invoiceRequest = [[NSDictionary alloc] initWithDictionary:invoiceD];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
             [self.orderTB reloadData];
         }];
     }
@@ -168,11 +170,11 @@ static NSString *cartCell = @"CartCell";
 - (void)calculatePrice
 {
     if(_orderDict[@"InvoiceType"]){
-    UserInfo *userInfo = [UserInfo shareUserInfo];
-    self.taxPrice=(self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice)*userInfo.taxPercend;
-    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+        UserInfo *userInfo = [UserInfo shareUserInfo];
+        self.taxPrice=(self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice)*userInfo.taxPercend;
+        self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
     }else{
-    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+        self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
     }
 }
 
