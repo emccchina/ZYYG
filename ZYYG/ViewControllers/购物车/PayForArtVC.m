@@ -16,7 +16,7 @@
 #import "PaaCreater.h"
 #import "OrderedDictionary.h"
 #import "ClassifyModel.h"
-
+#import "OrderSubmitModel.h"
 
 
 @interface PayForArtVC ()
@@ -24,13 +24,12 @@
 {
     NSInteger       _toPresentType;//转场页面标志  1 支付， 2 配送 3 包装
     NSMutableArray          *_adressArr;//
-    NSMutableDictionary     *_orderDict;
+    OrderSubmitModel        *_orderModel;
     NSDictionary            *_invoiceRequest;//发票的提交信息
     NSDictionary            *_resultDict;
     NSDictionary            *_MerchantID;
     NSString                *payWay;
-    NSString                *deliverWay;
-    NSString                *bagWay;
+    BOOL                    isBack;
 }
 @property (weak, nonatomic) IBOutlet UITableView *orderTB;
 @property (weak, nonatomic) IBOutlet UIButton *submitBut;
@@ -50,7 +49,7 @@ static NSString *cartCell = @"CartCell";
     [self showBackItem];
     payWay=@"在线支付";
     [self.orderTB registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
-    
+    isBack = NO;
 
     self.submitBut.layer.cornerRadius = 3;
     self.submitBut.layer.backgroundColor = kRedColor.CGColor;
@@ -58,9 +57,7 @@ static NSString *cartCell = @"CartCell";
     self.orderTB.dataSource = self;
 
     self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice+self.packPrice+self.delivPrice+self.taxPrice];
-    _orderDict = [[NSMutableDictionary alloc] init];
-    [_orderDict setObject:[UserInfo shareUserInfo].userKey forKey:@"key"];
-    [_orderDict setObject:@"0" forKey:@"InvoiceType"];//0不开发票  10 普通发票， 20 增值税发票
+    _orderModel = [[OrderSubmitModel alloc] init];
     NSMutableString *productIDs = [NSMutableString string];
     for (GoodsModel *model in self.products) {
         if ([model isEqual:[self.products lastObject]]) {
@@ -70,7 +67,7 @@ static NSString *cartCell = @"CartCell";
         }
     }
     [self getMerchantID];
-    [_orderDict setObject:productIDs forKey:@"product_id"];
+    _orderModel.productIDs = productIDs;
     if (![UserInfo shareUserInfo].addressManager) {
         [self requestForAddressList];
     }
@@ -107,13 +104,9 @@ static NSString *cartCell = @"CartCell";
 
         }];
     }else if ([destVC isKindOfClass:[InvoiceVC class]]){
-        if (_invoiceRequest) {
-            [(InvoiceVC*)destVC setInvoice:_invoiceRequest];
-        }
         [(InvoiceVC*)destVC setFinished:^(NSDictionary* invoiceD){
-            [_orderDict setValuesForKeysWithDictionary:invoiceD];
+            _orderModel.invoiceInfo = [NSDictionary dictionaryWithDictionary:invoiceD];
             [self calculatePrice];
-            _invoiceRequest = [[NSDictionary alloc] initWithDictionary:invoiceD];
             self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
             [self.orderTB reloadData];
         }];
@@ -133,16 +126,14 @@ static NSString *cartCell = @"CartCell";
             [self.orderTB reloadData];
         }break;
         case 2:{
-            [_orderDict setObject:sendContent.code forKey:@"DeliveryCode"];
-            deliverWay=sendContent.name;
+            [_orderModel setDelivery:sendContent];
             self.delivPrice=[sendContent.price floatValue];
             [self calculatePrice];
             self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
             [self.orderTB reloadData];
         }break;
         case 3:{
-            [_orderDict setObject:sendContent.code forKey:@"PackingCode"];
-            bagWay=sendContent.name;
+            [_orderModel setPacking:sendContent];
             self.packPrice=[sendContent.price floatValue];
             [self calculatePrice];
             self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
@@ -169,7 +160,7 @@ static NSString *cartCell = @"CartCell";
 - (void)calculatePrice
 {
     self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
-    if([_orderDict[@"InvoiceType"] integerValue]){
+    if([_orderModel.invoiceInfo[@"InvoiceType"] integerValue]){
         UserInfo *userInfo = [UserInfo shareUserInfo];
         self.taxPrice = self.dealPrice*userInfo.taxPercend;
         self.dealPrice += self.taxPrice;
@@ -214,26 +205,25 @@ static NSString *cartCell = @"CartCell";
         [self showAlertView:@"请输入地址!"];
         return;
     }
-    if(!_orderDict[@"DeliveryCode"]){
+    if(!_orderModel.delivery){
         [self showAlertView:@"请选择配送方式!"];
         return;
     }
-    if(!_orderDict[@"PackingCode"]){
+    if(!_orderModel.packing){
         [self showAlertView:@"请选择包装方式!"];
         return;
     }
-    [_orderDict setObject:userInfo.addressManager.defaultAddressCode forKey:@"address_id"];
-#ifdef DEBUG
-    NSData *data = [NSJSONSerialization dataWithJSONObject:_orderDict options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", string);
-#endif
+    if (!_orderModel.invoiceInfo) {
+        [self showAlertView:@"请选择发票方式"];
+        return;
+    }
+    [_orderModel setAddressID:userInfo.addressManager.defaultAddressCode];
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@AddOrder.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    MutableOrderedDictionary *rdict=[self dictWithAES:_orderDict];
+    MutableOrderedDictionary* rdict = [_orderModel dictWithAES];
     [manager POST:url parameters:rdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
@@ -255,6 +245,9 @@ static NSString *cartCell = @"CartCell";
 
 - (void)doAlertView
 {
+    if (!isBack) {
+        return;
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -281,6 +274,7 @@ static NSString *cartCell = @"CartCell";
 - (void)APayResult:(NSString*)result
 {
     NSLog(@"%@",result);
+    isBack = YES;
     [self showAlertView:[Utities doWithPayList:result]];
 }
 
@@ -371,22 +365,18 @@ static NSString *cartCell = @"CartCell";
         case 2:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"配送方式";
-            NSString *detail = deliverWay;
+            NSString *detail = _orderModel.delivery.name?:@"";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
-//            cell.accessoryType = UITableViewCellAccessoryNone;
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         
         case 3:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"作品包装";
-            NSString *detail = bagWay;
+            NSString *detail = _orderModel.packing.name ? :@"";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
-            //            cell.accessoryType = UITableViewCellAccessoryNone;
-            //            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
             
@@ -403,10 +393,12 @@ static NSString *cartCell = @"CartCell";
                 UILabel *topLabel = (UILabel*)[cell viewWithTag:1];
                 UILabel *midLabel = (UILabel*)[cell viewWithTag:2];
                 NSArray *invoiceType = @[@"不开发票",@"普通发票",@"增值税发票"];
-                NSString *ticketsTitle = invoiceType[[_orderDict[@"InvoiceType"] integerValue]/10];
+                NSString *ticketsTitle = @"";
+                if (_orderModel.invoiceInfo) {
+                    ticketsTitle = invoiceType[[_orderModel.invoiceInfo[@"InvoiceType"] integerValue]/10];
+                }
                 topLabel.text = [NSString stringWithFormat:@"发票类型:%@", ticketsTitle];
-                midLabel.text = [NSString stringWithFormat:@"发票抬头:%@",(_orderDict[@"InvoiceTitle"] ?:@"")];
-                
+                midLabel.text = [NSString stringWithFormat:@"发票抬头:%@",(_orderModel.invoiceInfo[@"InvoiceTitle"] ?:@"")];
                 return cell;
             }
            
@@ -467,57 +459,6 @@ static NSString *cartCell = @"CartCell";
     
 }
 
-- (NSString*)aeskeyOrNot:(NSString*)value aes:(BOOL)aes
-{
-    NSString *string = nil;
-    if ([value isEqualToString:@""] || !value) {
-        return @"";
-    }else if(!aes){
-        return value;
-    }
-    else{
-        string = [value AES256EncryptWithKey:kAESKey];
-        return string;
-    }
-}
-
-//加密
--(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
-{
-    NSMutableString *lStr=[NSMutableString string];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"key"] aes:NO]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"address_id"] aes:NO]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"InvoiceType"] aes:NO]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"InvoiceTitle"] aes:NO]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"RegAccount"] aes:YES]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"RegAddress"] aes:YES]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"RegBank"] aes:YES]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"RegPhone"] aes:YES]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"InvoiceTaxNo"] aes:NO]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"product_id"] aes:NO]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"DeliveryCode"] aes:NO]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"PackingCode"] aes:NO]];
-    [lStr appendString:kAESKey];
-    NSLog(@"123 %@",lStr);
-    MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"key"] aes:NO] forKey:@"key" atIndex:0];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"address_id"] aes:NO] forKey:@"address_id" atIndex:1];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"InvoiceType"] aes:NO] forKey:@"InvoiceType" atIndex:2];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"InvoiceTitle"] aes:NO] forKey:@"InvoiceTitle" atIndex:3];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"RegAccount"] aes:YES] forKey:@"RegAccount" atIndex:4];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"RegAddress"] aes:YES] forKey:@"RegAddress" atIndex:5];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"RegBank"] aes:YES] forKey:@"RegBank" atIndex:6];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"RegPhone"] aes:YES] forKey:@"RegPhone" atIndex:7];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"InvoiceTaxNo"] aes:NO] forKey:@"InvoiceTaxNo" atIndex:8];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"product_id"] aes:NO] forKey:@"product_id" atIndex:9];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"DeliveryCode"] aes:NO] forKey:@"DeliveryCode" atIndex:10];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"PackingCode"] aes:NO] forKey:@"PackingCode" atIndex:11];
-    [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:12];
-    [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:13];
-    NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
-    return orderArr;
-}
-
 - (void)getMerchantID {
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -534,7 +475,6 @@ static NSString *cartCell = @"CartCell";
             if(![result[@"errno"] integerValue]){
                 _MerchantID=result;
             }
-            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];

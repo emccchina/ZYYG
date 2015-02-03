@@ -272,11 +272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/OrderDetailVC.m"
-            timestampString = "444561804.505632"
+            timestampString = "444622855.898195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "-requestLetterList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -288,11 +288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/OrderDetailVC.m"
-            timestampString = "444561804.505632"
+            timestampString = "444622855.898195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "-requestLetterList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -304,28 +304,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/OrderDetailVC.m"
-            timestampString = "444561804.505632"
+            timestampString = "444622855.898195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZYYG/ViewControllers/&#x8d2d;&#x7269;&#x8f66;/PayForArtVC.m"
-            timestampString = "444562753.094847"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-calculatePrice"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

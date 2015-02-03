@@ -21,6 +21,8 @@
 #import "ChooseVC.h"
 #import "InvoiceVC.h"
 #import "AdressVC.h"
+#import "OrderSubmitModel.h"
+
 @interface OrderDetailVC ()
 <APayDelegate>
 {
@@ -28,9 +30,10 @@
     OrderModel *order;
     AdressModel *addr;
     InvoiceModel *invoice;
-    ClassifyModel *delivery;//配送
-    ClassifyModel *package;//包装
+    ClassifyModel *delivery;//配送 已经存在的
+    ClassifyModel *package;//包装 已经存在的
     NSDictionary  *_MerchantID;
+    OrderSubmitModel        *_orderModel;//
     BOOL          submit;//是否是可以提交订单的地址 配送这些东西，竞价中使用
 }
 @end
@@ -50,9 +53,7 @@ static NSString *ODCell = @"OrderDetailCell";
     // Do any additional setup after loading the view.
     [self showBackItem];
     delivery = [[ClassifyModel alloc] init];
-    
-    
-    
+    _orderModel = [[OrderSubmitModel alloc] init];
     self.confirmDelivery.layer.backgroundColor = kRedColor.CGColor;
     self.confirmDelivery.layer.cornerRadius = 3;
     self.confirmDelivery.hidden=YES;
@@ -61,10 +62,9 @@ static NSString *ODCell = @"OrderDetailCell";
     self.checkDelivery.layer.cornerRadius = 3;
     self.checkDelivery.hidden=YES;
     
-    
     [self getMerchantID];
     [self requestLetterList:self.orderCode];
-    if (![UserInfo shareUserInfo].addressManager) {
+    if (![UserInfo shareUserInfo].addressManager && self.orderType == 1) {
         [self requestForAddressList];
     }
 }
@@ -89,7 +89,6 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)requestForAddressList
 {
     UserInfo *userInfo = [UserInfo shareUserInfo];
-//    [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@OrderBasicInfoList.ashx",kServerDomain];
@@ -99,9 +98,7 @@ static NSString *ODCell = @"OrderDetailCell";
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
         NSLog(@"aesde %@", aesde);
-//        [self dismissIndicatorView];
         id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
-        
         if (result) {
             [userInfo parseAddressArr:result[@"AddressList"]];
             [userInfo parseDeliveryList:result[@"DeliveryList"]];
@@ -117,6 +114,22 @@ static NSString *ODCell = @"OrderDetailCell";
     }];
 }
 
+- (void)setProductsIDForGoods:(NSArray*)goods
+{
+    if (!goods && goods.count <= 0) {
+        return;
+    }
+    NSMutableString *productIDs = [NSMutableString string];
+    for (GoodsModel *model in goods) {
+        if ([model isEqual:[goods lastObject]]) {
+            [productIDs appendString:[NSString stringWithFormat:@"%@", model.GoodsCode]];
+        }else{
+            [productIDs appendString:[NSString stringWithFormat:@"%@,", model.GoodsCode]];
+        }
+    }
+    [_orderModel setProductIDs:productIDs];
+}
+
 -(void)requestLetterList:(NSString *)orderCode
 {
     user=[UserInfo shareUserInfo];
@@ -125,7 +138,7 @@ static NSString *ODCell = @"OrderDetailCell";
         return;
     }
     
-//    [self showIndicatorView:kNetworkConnecting];
+    [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@OrderDetail.ashx",kServerDomain];
@@ -141,7 +154,7 @@ static NSString *ODCell = @"OrderDetailCell";
             [addr addressFromOrder:result[@"Addr"]];
             invoice =[InvoiceModel invoiceWithDict:result[@"Invoice"]];
             order = [OrderModel orderModelWithDict:result];
-            
+            [self setProductsIDForGoods:order.Goods];
             [delivery deliveryFromDict:result[@"Delivery"]];
             package = [[ClassifyModel alloc] init];
             [package packingFromDict:result[@"Packing"]];
@@ -219,12 +232,12 @@ static NSString *ODCell = @"OrderDetailCell";
     self.orderMoney.text=[NSString stringWithFormat:@"￥%@",ord.PayMoney];
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
+        submit = self.orderType ? YES : NO;
         self.checkDelivery.hidden=NO;
         [self.checkDelivery setTitle:@"取消订单" forState:UIControlStateNormal];
         self.confirmDelivery.hidden=NO;
         [self.confirmDelivery setTitle:@"支付订单" forState:UIControlStateNormal];
     }else if(30 == ord.state){
-        submit = YES;
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=NO;
         [self.checkDelivery setTitle:@"确认收货" forState:UIControlStateNormal];
@@ -425,6 +438,9 @@ static NSString *ODCell = @"OrderDetailCell";
         GoodsModel *goods=order.Goods[indexPath.row-1];
         [self presentDetailVC:goods];
     }
+    if (!submit) {
+        return;
+    }
     switch (indexPath.section) {
         case 1:{//地址
             [self presentInfoVC:@"AdressVC" type:-1];
@@ -446,6 +462,29 @@ static NSString *ODCell = @"OrderDetailCell";
    
 }
 
+- (void)chooseFinished:(NSInteger)type content:(id) content
+{
+    ClassifyModel *sendContent = content;
+    switch (type) {
+        case 0:{
+            
+        }
+            break;
+        case 1:{
+        }break;
+        case 2:{
+            _orderModel.delivery = sendContent;
+            [self.orderDetailTableView reloadData];
+        }break;
+        case 3:{
+            _orderModel.delivery = sendContent;
+            [self.orderDetailTableView reloadData];
+        }break;
+        default:
+            break;
+    }
+}
+
 - (void)presentInfoVC:(NSString*)segue type:(NSInteger)type
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ShopCartStoryboard" bundle:nil];
@@ -455,7 +494,7 @@ static NSString *ODCell = @"OrderDetailCell";
         [(ChooseVC*)destVC setTypeChoose:type];
         [(ChooseVC*)destVC setChooseFinished:^(NSInteger type,id conente){
             NSLog(@"choose type %ld,%@", (long)type, conente);
-//            [self chooseFinished:type content:conente];
+            [self chooseFinished:type content:conente];
         }];
     }else if ([destVC isKindOfClass:[AdressVC class]]){
         [(AdressVC*)destVC setChange:^(BOOL change){
