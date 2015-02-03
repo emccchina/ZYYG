@@ -105,7 +105,7 @@
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@addressList.ashx",kServerDomain];
+    NSString *url = [NSString stringWithFormat:@"%@OrderBasicInfoList.ashx",kServerDomain];
     NSLog(@"url %@", url);
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
