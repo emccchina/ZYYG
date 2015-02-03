@@ -37,4 +37,25 @@
 
 }
 
++ (void)requestForConfirmGoodsWithDict:(NSDictionary *)dict result:(void (^)(BOOL))successful
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@OrderBasicInfoList.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        NSLog(@"aesde %@", aesde);
+        id result = [NSJSONSerialization JSONObjectWithData:[aesde dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+        if (result) {
+            successful(YES);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        successful(NO);
+        
+    }];
+}
+
+
 @end

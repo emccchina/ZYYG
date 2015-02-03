@@ -546,15 +546,29 @@ static NSString *ODCell = @"OrderDetailCell";
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)requestForConfirmGoods:(NSString*)orderCode
+{
+    [self showIndicatorView:kNetworkConnecting];
+    UserInfo *userInfo = [UserInfo shareUserInfo];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@OrderSigning.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key",orderCode,@"OrderSigning", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        [self dismissIndicatorView];
+        if (result) {
+            [self requestLetterList:self.orderCode];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
 }
-*/
 
 - (IBAction)payOrder:(id)sender {
     //创建状态 可支付  可取消
@@ -562,6 +576,7 @@ static NSString *ODCell = @"OrderDetailCell";
         [self requestSubmitOrder];
     }else if(30 == order.state){
         NSLog(@"确认收货确认收货确认收货");
+        [self requestForConfirmGoods:self.orderCode];
     }else {
         NSLog(@"错误操作错误操作");
     }
@@ -587,6 +602,7 @@ static NSString *ODCell = @"OrderDetailCell";
             [alertView show];
         }];
     }else {
+        [self requestForConfirmGoods:self.orderCode];
         NSLog(@"错误操作错误操作");
     }
 

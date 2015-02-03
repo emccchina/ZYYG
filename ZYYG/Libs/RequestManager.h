@@ -12,4 +12,6 @@
 
 + (void)requestForAddressListInManager:(void (^)(BOOL success))successful;
 
++ (void)requestForConfirmGoodsWithDict:(NSDictionary*)dict result:(void(^)(BOOL success)) successful;
+
 @end

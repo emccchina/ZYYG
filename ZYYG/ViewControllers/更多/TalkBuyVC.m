@@ -31,8 +31,8 @@
     // Do any additional setup after loading the view.
     pageNum=1;
     artistName=@"";
-    goodsArray=[NSMutableArray array];
-    allArtist=[NSMutableArray array];
+    goodsArray=[[NSMutableArray alloc] init];
+    allArtist=[[NSMutableArray alloc] init];
     self.title = @"私人洽购";
     [self showBackItem];
     self.navigationItem.rightBarButtonItem = [Utities barButtonItemWithSomething:@"筛选" target:self action:@selector(doSelectButton:)];
@@ -128,11 +128,11 @@
 //上拉刷新
 - (void)addFootRefresh
 {
-    [self.talkBuyTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [goodsArray removeAllObjects];
-        pageNum = 1;
-        [self requestTalkBuy:pageNum artistName:artistName];
-    }];
+//    [self.talkBuyTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+//        [goodsArray removeAllObjects];
+//        pageNum = 1;
+//        [self requestTalkBuy:pageNum artistName:artistName];
+//    }];
     [self.talkBuyTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
         [self requestTalkBuy:pageNum artistName:artistName];
@@ -189,6 +189,7 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%@",indexPath);
     GoodsModel *goods=goodsArray[indexPath.row];
    MyCollectionCell *cell = (MyCollectionCell*)[tableView dequeueReusableCellWithIdentifier:@"MyCollectionCell" forIndexPath:indexPath];
     cell.Lab4.hidden=YES;

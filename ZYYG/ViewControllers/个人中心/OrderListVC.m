@@ -385,10 +385,33 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
     }else if(30 == order.state){
         NSLog(@"确认收货确认收货确认收货");
+        [self requestForConfirmGoods:order.OrderCode];
     }else {
         NSLog(@"错误操作错误操作");
     }
 
+}
+
+- (void)requestForConfirmGoods:(NSString*)orderCode
+{
+    UserInfo *userInfo = [UserInfo shareUserInfo];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@OrderSigning.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key",orderCode,@"OrderSigning", nil];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self requestFinished];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
 }
 
 - (void)getMerchantID {
