@@ -238,23 +238,6 @@
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }
-- (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes
-{
-    NSLog(@"===================%@",value);
-    NSString *string = nil;
-    if (value == nil || [value isKindOfClass:[NSNull class]] ) {
-        return @"";
-    }
-    NSString *newValue=[NSString stringWithFormat:@"%@",value ];
-    if([newValue isEqualToString:@""]){
-        return @"";
-    }else if(!aes){
-        return newValue;
-    }else{
-        string = [newValue AES256EncryptWithKey:kAESKey];
-        return string;
-    }
-}
 
 /*
 #pragma mark - Navigation

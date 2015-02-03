@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmDelivery;
 @property (retain, nonatomic)  NSString *orderCode;
 @property (retain, nonatomic)  NSString *auctionCode;
-@property (assign, nonatomic)  NSInteger orderType;//0平价详情    1竞价详情
+@property (assign, nonatomic)  NSInteger orderType;//0平价详情    2竞价详情
 
 - (IBAction)payOrder:(id)sender;
 - (IBAction)cancelOrder:(id)sender;

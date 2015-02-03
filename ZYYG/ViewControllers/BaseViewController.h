@@ -32,6 +32,7 @@
 
 - (id)parseResults:(id)resultResponds;
 
+- (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes;
 
 //打开相机
 - (void)presentCameraVC;

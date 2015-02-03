@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "OrderedDictionary.h"
 #import "ClassifyModel.h"
+#import "AdressModel.h"
 
 @interface OrderSubmitModel : NSObject
 
@@ -38,5 +39,7 @@
 @property (nonatomic, strong) NSString      *addressID;
 
 -(MutableOrderedDictionary *)dictWithAES;
+
+- (void)calculatePrice;
 
 @end

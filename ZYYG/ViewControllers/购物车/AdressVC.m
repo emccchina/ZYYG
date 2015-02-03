@@ -9,6 +9,8 @@
 #import "AdressVC.h"
 #import "MyButton.h"
 #import "AddAdressVC.h"
+#import "RequestManager.h"
+
 @interface AdressVC ()
 <UITableViewDataSource, UITableViewDelegate>
 {
@@ -223,20 +225,6 @@
     _toAddSelected = indexPath.section ? indexPath.row : -1;
     
     [self performSegueWithIdentifier:@"AddAdressSegue" sender:self];
-}
-
-- (NSString*)aeskeyOrNot:(NSString*)value aes:(BOOL)aes
-{
-    NSString *string = nil;
-    if ([value isEqualToString:@""] || !value) {
-        return @"";
-    }else if(!aes){
-        return value;
-    }
-    else{
-        string = [value AES256EncryptWithKey:kAESKey];
-        return string;
-    }
 }
 
 //加密

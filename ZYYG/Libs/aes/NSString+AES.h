@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OrderedDictionary.h"
 
 @interface NSString (AES)
 

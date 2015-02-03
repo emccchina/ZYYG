@@ -22,7 +22,7 @@
 #import "InvoiceVC.h"
 #import "AdressVC.h"
 #import "OrderSubmitModel.h"
-
+#import "RequestManager.h"
 @interface OrderDetailVC ()
 <APayDelegate>
 {
@@ -30,11 +30,11 @@
     OrderModel *order;
     AdressModel *addr;
     InvoiceModel *invoice;
-    ClassifyModel *delivery;//配送 已经存在的
-    ClassifyModel *package;//包装 已经存在的
     NSDictionary  *_MerchantID;
     OrderSubmitModel        *_orderModel;//
     BOOL          submit;//是否是可以提交订单的地址 配送这些东西，竞价中使用
+    NSDictionary *_resultDict;
+    BOOL            isBack;
 }
 @end
 
@@ -52,7 +52,6 @@ static NSString *ODCell = @"OrderDetailCell";
     addr=[[AdressModel alloc] init];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    delivery = [[ClassifyModel alloc] init];
     _orderModel = [[OrderSubmitModel alloc] init];
     self.confirmDelivery.layer.backgroundColor = kRedColor.CGColor;
     self.confirmDelivery.layer.cornerRadius = 3;
@@ -63,9 +62,11 @@ static NSString *ODCell = @"OrderDetailCell";
     self.checkDelivery.hidden=YES;
     
     [self getMerchantID];
-    [self requestLetterList:self.orderCode];
-    if (![UserInfo shareUserInfo].addressManager && self.orderType == 1) {
+    
+    if (![UserInfo shareUserInfo].addressManager && self.orderType == 2) {
         [self requestForAddressList];
+    }else{
+        [self requestLetterList:self.orderCode];
     }
 }
 
@@ -88,28 +89,15 @@ static NSString *ODCell = @"OrderDetailCell";
 
 - (void)requestForAddressList
 {
-    UserInfo *userInfo = [UserInfo shareUserInfo];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@OrderBasicInfoList.ashx",kServerDomain];
-    NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key", nil];
-    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
-        NSLog(@"aesde %@", aesde);
-        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
-        if (result) {
-            [userInfo parseAddressArr:result[@"AddressList"]];
-            [userInfo parseDeliveryList:result[@"DeliveryList"]];
-            [userInfo parsePackingList:result[@"PackingList"]];
-            userInfo.taxPercend=[result[@"Tax"] floatValue];
-            [self.orderDetailTableView reloadData];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [Utities errorPrint:error vc:self];
+    [RequestManager requestForAddressListInManager:^(BOOL success) {
         [self dismissIndicatorView];
-        [self showAlertView:kNetworkNotConnect];
+        if (success) {
+            NSLog(@"success for list");
+            [self.orderDetailTableView reloadData];
+            [self requestLetterList:self.orderCode];
+        }else{
+            [self showAlertView:kNetworkNotConnect];
+        }
         
     }];
 }
@@ -152,12 +140,15 @@ static NSString *ODCell = @"OrderDetailCell";
         id result = [self parseResults:[aesResult dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [addr addressFromOrder:result[@"Addr"]];
-            invoice =[InvoiceModel invoiceWithDict:result[@"Invoice"]];
+            _orderModel.invoiceInfo = result[@"Invoice"];
             order = [OrderModel orderModelWithDict:result];
             [self setProductsIDForGoods:order.Goods];
+            ClassifyModel *delivery = [[ClassifyModel alloc] init];
             [delivery deliveryFromDict:result[@"Delivery"]];
-            package = [[ClassifyModel alloc] init];
+            _orderModel.delivery = delivery;
+            ClassifyModel * package = [[ClassifyModel alloc] init];
             [package packingFromDict:result[@"Packing"]];
+            _orderModel.packing = package;
             [self setButton:order];
             NSLog(@"订单商品解析完成");
             self.orderDetailTableView.delegate = self;
@@ -180,48 +171,46 @@ static NSString *ODCell = @"OrderDetailCell";
 
 - (void)requestSubmitOrder
 {
-//    UserInfo *userInfo = [UserInfo shareUserInfo];
-//    if (!userInfo.addressManager) {
-//        [self showAlertView:@"请输入地址!"];
-//        return;
-//    }
-//    if(!_orderDict[@"DeliveryCode"]){
-//        [self showAlertView:@"请选择配送方式!"];
-//        return;
-//    }
-//    if(!_orderDict[@"PackingCode"]){
-//        [self showAlertView:@"请选择包装方式!"];
-//        return;
-//    }
-//    [_orderDict setObject:userInfo.addressManager.defaultAddressCode forKey:@"address_id"];
-//#ifdef DEBUG
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:_orderDict options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    NSLog(@"%@", string);
-//#endif
-//    [self showIndicatorView:kNetworkConnecting];
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    NSString *url = [NSString stringWithFormat:@"%@AddOrder.ashx",kServerDomain];
-//    NSLog(@"url %@", url);
-//    MutableOrderedDictionary *rdict=[self dictWithAES:_orderDict];
-//    [manager POST:url parameters:rdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-//        [self dismissIndicatorView];
-//        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
-//        NSLog(@"aes de %@", aesde);
-//        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
-//        if (result) {
-//            [UserInfo shareUserInfo].cartsArr = nil;
-//            _resultDict = result;
-//            [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"OrderMoney"]] actionTitle:@"支付"];
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [Utities errorPrint:error vc:self];
-//        [self dismissIndicatorView];
-//        [self showAlertView:kNetworkNotConnect];
-//        
-//    }];
+    UserInfo *userInfo = [UserInfo shareUserInfo];
+    if (!userInfo.addressManager) {
+        [self showAlertView:@"请输入地址!"];
+        return;
+    }
+    if(!_orderModel.delivery){
+        [self showAlertView:@"请选择配送方式!"];
+        return;
+    }
+    if(!_orderModel.packing){
+        [self showAlertView:@"请选择包装方式!"];
+        return;
+    }
+    if (!_orderModel.invoiceInfo) {
+        [self showAlertView:@"请选择发票方式"];
+        return;
+    }
+    [_orderModel setAddressID:userInfo.addressManager.defaultAddressCode];
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@AddOrder.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    MutableOrderedDictionary* rdict = [_orderModel dictWithAES];
+    [manager POST:url parameters:rdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        NSLog(@"aes de %@", aesde);
+        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        if (result) {
+            _resultDict = result;
+            [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"OrderMoney"]] actionTitle:@"支付"];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
 }
 
 
@@ -230,6 +219,7 @@ static NSString *ODCell = @"OrderDetailCell";
     submit = NO;
     //订单状态 20 支付 30已发货 40已签收 50已取消 -1删除 10审核 0创建
     self.orderMoney.text=[NSString stringWithFormat:@"￥%@",ord.PayMoney];
+    _orderModel.totalPrice = [order.PayMoney floatValue];
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         submit = self.orderType ? YES : NO;
@@ -248,10 +238,30 @@ static NSString *ODCell = @"OrderDetailCell";
     }
     [self.orderDetailTableView reloadData];
 }
+- (void)doAlertView
+{
+    if (!isBack) {
+        return;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
+- (void)doAlertViewTwo
+{
+    CGFloat money = [_resultDict[@"OrderMoney"] floatValue];
+    NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
+    NSMutableString *names = [NSMutableString string];
+    for (NSString *name in _resultDict[@"GoodsNames"]) {
+        [names appendString:[NSString stringWithFormat:@"%@,",name]];
+    }
+    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:meneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
+}
 - (void)APayResult:(NSString *)result
 {
-    
+    NSLog(@"%@",result);
+    isBack = YES;
+    [self showAlertView:[Utities doWithPayList:result]];
+
 }
 
 #pragma mark - UITableView
@@ -317,7 +327,7 @@ static NSString *ODCell = @"OrderDetailCell";
             viewBG.layer.borderWidth = 10;
             UILabel *topLabel = (UILabel*)[cell viewWithTag:2];
             UILabel *bottomLabel = (UILabel*)[cell viewWithTag:3];
-            if (addr.isExist) {
+            if (!submit) {
                 topLabel.text =[NSString stringWithFormat:@"%@   %@",addr.name,addr.mobile];
                 bottomLabel.text = addr.defaultAdress;
             }else{
@@ -356,10 +366,6 @@ static NSString *ODCell = @"OrderDetailCell";
             }else{
                 GoodsModel *model=order.Goods[indexPath.row -1];
                 CartCell *cell = (CartCell*)[tableView dequeueReusableCellWithIdentifier:cartCell forIndexPath:indexPath];
-//                [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl]];
-//                cell.goodsName.text=goods.GoodsName;
-//                cell.goodsPrice.text=[NSString stringWithFormat:@"￥%.2f", goods.AppendPrice];
-//                cell.goodsCount.text=@"1";
                 [cell.iconImage setImageWithURL:[NSURL URLWithString:model.defaultImageUrl] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
                 cell.LTLab.text = model.GoodsName;
                 cell.RTLab.text = model.ArtName;
@@ -387,7 +393,7 @@ static NSString *ODCell = @"OrderDetailCell";
         case 4:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             cell.textLabel.text = @"配送方式";
-            cell.detailTextLabel.text = delivery.name;
+            cell.detailTextLabel.text = _orderModel.delivery.name;
             cell.selectionStyle = submit ? UITableViewCellSelectionStyleGray :UITableViewCellSelectionStyleNone;
             cell.accessoryType = submit ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
             return cell;
@@ -396,7 +402,7 @@ static NSString *ODCell = @"OrderDetailCell";
         case 5:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             cell.textLabel.text = @"包装方式";
-            cell.detailTextLabel.text = package.name;
+            cell.detailTextLabel.text = _orderModel.packing.name;
             cell.selectionStyle = submit ? UITableViewCellSelectionStyleGray :UITableViewCellSelectionStyleNone;
             cell.accessoryType = submit ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
             return cell;
@@ -415,9 +421,14 @@ static NSString *ODCell = @"OrderDetailCell";
                 UILabel *topLabel = (UILabel*)[cell viewWithTag:1];
                 UILabel *midLabel = (UILabel*)[cell viewWithTag:2];
                 UILabel *botLabel = (UILabel*)[cell viewWithTag:3];
-                topLabel.text = [NSString stringWithFormat:@"发票类型：%@",invoice.InvoiceType];
-                midLabel.text = [NSString stringWithFormat:@"发票抬头：%@",invoice.InvoiceTitle];
-                botLabel.text = [NSString stringWithFormat:@"发票内容：%@",invoice.InvoiceTaxNo];
+                NSArray *invoiceType = @[@"不开发票",@"普通发票",@"增值税发票"];
+                NSString *ticketsTitle = @"";
+                if (_orderModel.invoiceInfo) {
+                    ticketsTitle = invoiceType[[_orderModel.invoiceInfo[@"InvoiceType"] integerValue]/10];
+                }
+                topLabel.text = [NSString stringWithFormat:@"发票类型:%@", ticketsTitle];
+                midLabel.text = [NSString stringWithFormat:@"发票抬头:%@",(_orderModel.invoiceInfo[@"InvoiceTitle"] ?:@"")];
+                botLabel.text = @"";
                 cell.selectionStyle = submit ? UITableViewCellSelectionStyleGray :UITableViewCellSelectionStyleNone;
                 cell.accessoryType = submit ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
                 return cell;
@@ -474,10 +485,16 @@ static NSString *ODCell = @"OrderDetailCell";
         }break;
         case 2:{
             _orderModel.delivery = sendContent;
+            _orderModel.delivPrice=[sendContent.price floatValue];
+            [_orderModel calculatePrice];
+            self.orderMoney.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
             [self.orderDetailTableView reloadData];
         }break;
         case 3:{
-            _orderModel.delivery = sendContent;
+            _orderModel.packing = sendContent;
+            _orderModel.packPrice=[sendContent.price floatValue];
+            [_orderModel calculatePrice];
+            self.orderMoney.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
             [self.orderDetailTableView reloadData];
         }break;
         default:
@@ -503,16 +520,12 @@ static NSString *ODCell = @"OrderDetailCell";
             }
         }];
     }else if ([destVC isKindOfClass:[InvoiceVC class]]){
-//        if (_invoiceRequest) {
-//            [(InvoiceVC*)destVC setInvoice:_invoiceRequest];
-//        }
-//        [(InvoiceVC*)destVC setFinished:^(NSDictionary* invoiceD){
-//            [_orderDict setValuesForKeysWithDictionary:invoiceD];
-//            [self calculatePrice];
-//            _invoiceRequest = [[NSDictionary alloc] initWithDictionary:invoiceD];
-//            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
-//            [self.orderTB reloadData];
-//        }];
+        [(InvoiceVC*)destVC setFinished:^(NSDictionary* invoiceD){
+            _orderModel.invoiceInfo = [NSDictionary dictionaryWithDictionary:invoiceD];
+            [_orderModel calculatePrice];
+            self.orderMoney.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
+            [self.orderDetailTableView reloadData];
+        }];
     }
     
 }
@@ -546,12 +559,7 @@ static NSString *ODCell = @"OrderDetailCell";
 - (IBAction)payOrder:(id)sender {
     //创建状态 可支付  可取消
     if (0 == order.state || 10 == order.state) {
-        NSMutableString *names = [NSMutableString string];
-        for (GoodsModel *name in order.Goods) {
-            [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
-        }
-        NSString *string = [NSString stringWithFormat:@"%ld", (long)([order.OrderMoney floatValue]*100)];
-        [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
+        [self requestSubmitOrder];
     }else if(30 == order.state){
         NSLog(@"确认收货确认收货确认收货");
     }else {

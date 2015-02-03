@@ -163,7 +163,7 @@
     NSString *url = [NSString stringWithFormat:@"%@AddressAdd.ashx",kServerDomain];
     NSLog(@"url %@", url);
     NSDictionary *dict = [addressMode getDict:YES];
-        MutableOrderedDictionary *newDict =[self dictWithAES:dict];
+    MutableOrderedDictionary *newDict =[self dictWithAES:dict];
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
@@ -429,23 +429,7 @@
     NSLog(@"aes dict is %@   -----   %@", orderArr, oDict);
     return orderArr;
 }
-- (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes
-{
-    NSLog(@"===================%@",value);
-    NSString *string = nil;
-    if (value == nil || [value isKindOfClass:[NSNull class]] ) {
-        return @"";
-    }
-    NSString *newValue=[NSString stringWithFormat:@"%@",value ];
-    if([newValue isEqualToString:@""]){
-        return @"";
-    }else if(!aes){
-        return newValue;
-    }else{
-        string = [newValue AES256EncryptWithKey:kAESKey];
-        return string;
-    }
-}
+
 
 
 

@@ -67,6 +67,7 @@
 		F71DC88C1A43CF9900CF74E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71DC88B1A43CF9900CF74E4 /* StoreKit.framework */; };
 		F729B0191A36C55C0001FD39 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F729B0181A36C55C0001FD39 /* MyButton.m */; };
 		F73CE7991A4A6E7300B8012A /* MyWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F73CE7981A4A6E7300B8012A /* MyWebView.m */; };
+		F74E1C201A807A7300BAFA64 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F74E1C1F1A807A7300BAFA64 /* RequestManager.m */; };
 		F7675C351A2DBE450008C220 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C341A2DBE440008C220 /* LoginVC.m */; };
 		F7675C381A2DBE610008C220 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F7675C371A2DBE610008C220 /* RegisterVC.m */; };
 		F76A4DEB1A2C2F120005FF46 /* AdressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F76A4DEA1A2C2F120005FF46 /* AdressVC.m */; };
@@ -750,6 +751,8 @@
 		F729B0181A36C55C0001FD39 /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
 		F73CE7971A4A6E7300B8012A /* MyWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyWebView.h; path = ZYYG/ViewControllers/MyWebView.h; sourceTree = SOURCE_ROOT; };
 		F73CE7981A4A6E7300B8012A /* MyWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyWebView.m; path = ZYYG/ViewControllers/MyWebView.m; sourceTree = SOURCE_ROOT; };
+		F74E1C1E1A807A7300BAFA64 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
+		F74E1C1F1A807A7300BAFA64 /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
 		F7675C331A2DBE440008C220 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = ZYYG/ViewControllers/LoginVC.h; sourceTree = SOURCE_ROOT; };
 		F7675C341A2DBE440008C220 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = ZYYG/ViewControllers/LoginVC.m; sourceTree = SOURCE_ROOT; };
 		F7675C361A2DBE610008C220 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterVC.h; path = ZYYG/ViewControllers/RegisterVC.h; sourceTree = SOURCE_ROOT; };
@@ -2588,6 +2591,8 @@
 				F7EF4BB71A5E56880073BD1F /* AuctionModel.m */,
 				F7BC41111A7F7D0700EFA40B /* OrderSubmitModel.h */,
 				F7BC41121A7F7D0700EFA40B /* OrderSubmitModel.m */,
+				F74E1C1E1A807A7300BAFA64 /* RequestManager.h */,
+				F74E1C1F1A807A7300BAFA64 /* RequestManager.m */,
 			);
 			name = MyModel;
 			path = ZYYG/Libs;
@@ -3281,6 +3286,7 @@
 				F7EC68C81A2BF5DA000B289D /* JHRefreshHeaderView.m in Sources */,
 				F7F71D5A1A2861AF00AEE6BA /* ChooseVC.m in Sources */,
 				940178611A21CCE400697D14 /* MyNavigationController.m in Sources */,
+				F74E1C201A807A7300BAFA64 /* RequestManager.m in Sources */,
 				F7FEC12A1A4955CB00CFE9D4 /* MyTextField.m in Sources */,
 				940178601A21CCE400697D14 /* MybarButItem.m in Sources */,
 				F7983F0A1A5E7B2100A68AA2 /* AuctionDetialVC.m in Sources */,

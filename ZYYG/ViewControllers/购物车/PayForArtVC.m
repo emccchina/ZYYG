@@ -28,7 +28,6 @@
     NSDictionary            *_invoiceRequest;//发票的提交信息
     NSDictionary            *_resultDict;
     NSDictionary            *_MerchantID;
-    NSString                *payWay;
     BOOL                    isBack;
 }
 @property (weak, nonatomic) IBOutlet UITableView *orderTB;
@@ -47,7 +46,6 @@ static NSString *cartCell = @"CartCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self showBackItem];
-    payWay=@"在线支付";
     [self.orderTB registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
     isBack = NO;
 
@@ -56,8 +54,9 @@ static NSString *cartCell = @"CartCell";
     self.orderTB.delegate = self;
     self.orderTB.dataSource = self;
 
-    self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice+self.packPrice+self.delivPrice+self.taxPrice];
+    self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.totalPrice];
     _orderModel = [[OrderSubmitModel alloc] init];
+    _orderModel.totalPrice = self.totalPrice;
     NSMutableString *productIDs = [NSMutableString string];
     for (GoodsModel *model in self.products) {
         if ([model isEqual:[self.products lastObject]]) {
@@ -106,8 +105,8 @@ static NSString *cartCell = @"CartCell";
     }else if ([destVC isKindOfClass:[InvoiceVC class]]){
         [(InvoiceVC*)destVC setFinished:^(NSDictionary* invoiceD){
             _orderModel.invoiceInfo = [NSDictionary dictionaryWithDictionary:invoiceD];
-            [self calculatePrice];
-            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
+            [_orderModel calculatePrice];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
             [self.orderTB reloadData];
         }];
     }
@@ -122,21 +121,19 @@ static NSString *cartCell = @"CartCell";
         }
         break;
         case 1:{
-            payWay=sendContent.name;
-            [self.orderTB reloadData];
         }break;
         case 2:{
             [_orderModel setDelivery:sendContent];
-            self.delivPrice=[sendContent.price floatValue];
-            [self calculatePrice];
-            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
+            _orderModel.delivPrice=[sendContent.price floatValue];
+            [_orderModel calculatePrice];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
             [self.orderTB reloadData];
         }break;
         case 3:{
             [_orderModel setPacking:sendContent];
-            self.packPrice=[sendContent.price floatValue];
-            [self calculatePrice];
-            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", self.dealPrice];
+            _orderModel.packPrice=[sendContent.price floatValue];
+            [_orderModel calculatePrice];
+            self.countPayLab.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
             [self.orderTB reloadData];
         }break;
         default:
@@ -149,52 +146,20 @@ static NSString *cartCell = @"CartCell";
     UserInfo *userInfo = [UserInfo shareUserInfo];
     [userInfo parseAddressArr:arr];
 }
-/* 选择普通发票时:
- * 1.发票抬头可写。
- * 2.税费 = (商品总额 + 包装费 + 配送费 - 立减金额 - 其他优惠) * 税点。
- * 3.订单总额 = 商品总额 + 包装费 + 配送费 + 税费。
- * 4.实收总额 = 订单总额 - 立减金额 - 其他优惠。
- * 5.应付总额 = 实收总额 - 已付总额。
- */
 
-- (void)calculatePrice
-{
-    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
-    if([_orderModel.invoiceInfo[@"InvoiceType"] integerValue]){
-        UserInfo *userInfo = [UserInfo shareUserInfo];
-        self.taxPrice = self.dealPrice*userInfo.taxPercend;
-        self.dealPrice += self.taxPrice;
-    }
-}
 
 - (void)requestForAddressList
 {
-    UserInfo *userInfo = [UserInfo shareUserInfo];
+    NSLog(@"request for list");
     [self showIndicatorView:kNetworkConnecting];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@OrderBasicInfoList.ashx",kServerDomain];
-    NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key", nil];
-    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
-        NSLog(@"aesde %@", aesde);
-        [self dismissIndicatorView];
-        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        if (result) {
-            [self setDefaultAdress:result[@"AddressList"]];
-            [userInfo parseDeliveryList:result[@"DeliveryList"]];
-            [userInfo parsePackingList:result[@"PackingList"]];
-            userInfo.taxPercend=[result[@"Tax"] floatValue];
+    [RequestManager requestForAddressListInManager:^(BOOL success) {
+        if (success) {
+            NSLog(@"success for list");
             [self.orderTB reloadData];
+        }else{
+            [self showAlertView:kNetworkNotConnect];
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [Utities errorPrint:error vc:self];
         [self dismissIndicatorView];
-        [self showAlertView:kNetworkNotConnect];
-        
     }];
 }
 
@@ -354,7 +319,7 @@ static NSString *cartCell = @"CartCell";
         case 1:{
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nomalCell forIndexPath:indexPath];
             NSString *title = @"支付方式";
-            NSString *detail = payWay;
+            NSString *detail = @"在线支付";
             cell.textLabel.text = title;
             cell.detailTextLabel.text = detail;
             cell.accessoryType = UITableViewCellAccessoryNone;

@@ -21,16 +21,37 @@
     return self;
 }
 
-- (NSString*)aeskeyOrNot:(NSString*)value aes:(BOOL)aes
+/* 选择普通发票时:
+ * 1.发票抬头可写。
+ * 2.税费 = (商品总额 + 包装费 + 配送费 - 立减金额 - 其他优惠) * 税点。
+ * 3.订单总额 = 商品总额 + 包装费 + 配送费 + 税费。
+ * 4.实收总额 = 订单总额 - 立减金额 - 其他优惠。
+ * 5.应付总额 = 实收总额 - 已付总额。
+ */
+
+- (void)calculatePrice
+{
+    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+    if([self.invoiceInfo[@"InvoiceType"] integerValue]){
+        UserInfo *userInfo = [UserInfo shareUserInfo];
+        self.taxPrice = self.dealPrice*userInfo.taxPercend;
+        self.dealPrice += self.taxPrice;
+    }
+}
+
+- (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes
 {
     NSString *string = nil;
-    if ([value isEqualToString:@""] || !value) {
+    if (value == nil || [value isKindOfClass:[NSNull class]] ) {
+        return @"";
+    }
+    NSString *newValue=[NSString stringWithFormat:@"%@",value ];
+    if([newValue isEqualToString:@""]){
         return @"";
     }else if(!aes){
-        return value;
-    }
-    else{
-        string = [value AES256EncryptWithKey:kAESKey];
+        return newValue;
+    }else{
+        string = [newValue AES256EncryptWithKey:kAESKey];
         return string;
     }
 }
@@ -53,7 +74,6 @@
     [lStr appendString:[self aeskeyOrNot:self.delivery.code aes:NO]];
     [lStr appendString:[self aeskeyOrNot:self.packing.code aes:NO]];
     [lStr appendString:kAESKey];
-    NSLog(@"123 %@",lStr);
     MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
     [orderArr insertObject:[self aeskeyOrNot:self.userKey aes:NO] forKey:@"key" atIndex:0];
     [orderArr insertObject:[self aeskeyOrNot:self.addressID aes:NO] forKey:@"address_id" atIndex:1];
@@ -69,7 +89,6 @@
     [orderArr insertObject:[self aeskeyOrNot:self.packing.code aes:NO] forKey:@"PackingCode" atIndex:11];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:12];
     [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:13];
-    NSLog(@"aes dict is %@-----", orderArr);
     return orderArr;
 }
 
