@@ -17,7 +17,7 @@ static int count = 0;
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    [dateFormatter setDateFormat: @"yyyy/MM/dd HH:mm:ss"];
+    [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
     dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"];
     NSDate *destDate= [dateFormatter dateFromString:timeString];
     

@@ -5,12 +5,6 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>使用帮助</string>
-			<key>segueString</key>
-			<string>help</string>
-		</dict>
-		<dict>
-			<key>title</key>
 			<string>检测更新</string>
 			<key>segueString</key>
 			<string>checkUpdate</string>
