@@ -223,9 +223,9 @@ static NSString *ODCell = @"OrderDetailCell";
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         submit = self.orderType ? YES : NO;
-        self.checkDelivery.hidden=NO;
+        self.checkDelivery.hidden= !self.orderType;
         [self.checkDelivery setTitle:@"取消订单" forState:UIControlStateNormal];
-        self.confirmDelivery.hidden=NO;
+        self.confirmDelivery.hidden=!self.orderType;
         [self.confirmDelivery setTitle:@"支付订单" forState:UIControlStateNormal];
     }else if(30 == ord.state){
         self.confirmDelivery.hidden=YES;
@@ -254,7 +254,7 @@ static NSString *ODCell = @"OrderDetailCell";
     for (NSString *name in _resultDict[@"GoodsNames"]) {
         [names appendString:[NSString stringWithFormat:@"%@,",name]];
     }
-    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:meneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
+    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:meneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:_resultDict[@"CreatTime"]] viewController:self delegate:self mode:kPayMode];
 }
 - (void)APayResult:(NSString *)result
 {
@@ -609,7 +609,7 @@ static NSString *ODCell = @"OrderDetailCell";
 }
 
 - (void)getMerchantID {
-    [self showIndicatorView:kNetworkConnecting];
+//    [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@GetUserInfo.ashx",kServerDomain];

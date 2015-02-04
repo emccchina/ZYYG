@@ -352,13 +352,6 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-//            if([@"0" isEqualToString:result[@"errno"]]){
-//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"订单取消成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//                [alertView show];
-//            }else{
-//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",result[@"msg"]] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//                [alertView show];
-//            }
             NSLog(@"%@",result);
             [orderArray removeAllObjects];
             [self requestOrderList:_orderType ordState:orderState ordSize:5 ordNum:1];
@@ -377,12 +370,17 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 -(void)payOrder:(OrderModel *)order
 {   //创建状态 可支付  可取消
     if (0 == order.state || 10 == order.state) {
-        NSMutableString *names = [NSMutableString string];
-        for (GoodsModel *name in order.Goods) {
-            [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
+        if (self.orderType) {
+            currentOrder = order;
+            [self performSegueWithIdentifier:@"OrderDetail" sender:self];
+        }else{
+            NSMutableString *names = [NSMutableString string];
+            for (GoodsModel *name in order.Goods) {
+                [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
+            }
+            NSString *string = [NSString stringWithFormat:@"%ld", (long)([order.OrderMoney floatValue]*100)];
+            [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:order.CreateTime] viewController:self delegate:self mode:kPayMode];
         }
-        NSString *string = [NSString stringWithFormat:@"%ld", (long)([order.OrderMoney floatValue]*100)];
-        [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"]] viewController:self delegate:self mode:kPayMode];
     }else if(30 == order.state){
         NSLog(@"确认收货确认收货确认收货");
         [self requestForConfirmGoods:order.OrderCode];
