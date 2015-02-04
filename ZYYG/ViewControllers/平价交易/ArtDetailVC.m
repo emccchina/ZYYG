@@ -600,7 +600,6 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     cell.LFourthLabel.text = goods.securityDeposit;
                     cell.RSLabel.text = goods.appendMoney;
                     cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld",(long)goods.delayMinute];
-//                    [cell.LFifthLabel.countDownTimer invalidate];
                     if (goods.biddingStatus == 20) {
                         cell.LFifthLabel.text = @"已流拍";
                     }else if (goods.biddingStatus == 10){
