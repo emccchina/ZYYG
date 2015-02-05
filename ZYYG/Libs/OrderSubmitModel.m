@@ -37,6 +37,12 @@
         self.taxPrice = self.dealPrice*userInfo.taxPercend;
         self.dealPrice += self.taxPrice;
     }
+    CGFloat price = self.dealPrice*100;
+    NSInteger intDeal = (NSInteger)price;
+    if (price-intDeal >0) {
+        price += 1;
+    }
+    self.dealPrice = price/100;
 }
 
 - (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes

@@ -81,7 +81,7 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self.orderDetailTableView reloadData];
+    [self.orderDetailTableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
