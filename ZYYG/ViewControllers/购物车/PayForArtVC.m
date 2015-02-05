@@ -198,7 +198,7 @@ static NSString *cartCell = @"CartCell";
         if (result) {
             [UserInfo shareUserInfo].cartsArr = nil;
             _resultDict = result;
-            [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"OrderMoney"]] actionTitle:@"支付"];
+            [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"PayMoney"]] actionTitle:@"支付"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
