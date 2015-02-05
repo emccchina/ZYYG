@@ -31,11 +31,12 @@
 
 - (void)calculatePrice
 {
-    self.dealPrice=self.totalPrice+[self.packing.price floatValue]+[self.delivery.price floatValue]-self.cutPrice -self.favoPrice-self.paidPrice;
+    self.dealPrice=self.totalPrice+[self.packing.price floatValue]+[self.delivery.price floatValue]-self.cutPrice -self.favoPrice;
     if([self.invoiceInfo[@"InvoiceType"] integerValue]){
         UserInfo *userInfo = [UserInfo shareUserInfo];
         self.taxPrice = self.dealPrice*userInfo.taxPercend;
         self.dealPrice += self.taxPrice;
+        self.dealPrice-=self.paidPrice;
     }
     CGFloat price = self.dealPrice*100;
     NSInteger intDeal = (NSInteger)price;
