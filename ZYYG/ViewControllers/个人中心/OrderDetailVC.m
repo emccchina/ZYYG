@@ -50,6 +50,10 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     addr=[[AdressModel alloc] init];
+    [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
+    [self.orderDetailTableView registerNib:[UINib nibWithNibName:ODCell bundle:nil] forCellReuseIdentifier:ODCell];
+    self.orderDetailTableView.delegate = self;
+    self.orderDetailTableView.dataSource = self;
     // Do any additional setup after loading the view.
     [self showBackItem];
     _orderModel = [[OrderSubmitModel alloc] init];
@@ -68,6 +72,8 @@ static NSString *ODCell = @"OrderDetailCell";
     }else{
         [self requestLetterList:self.orderCode];
     }
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -151,10 +157,6 @@ static NSString *ODCell = @"OrderDetailCell";
             _orderModel.packing = package;
             [self setButton:order];
             NSLog(@"订单商品解析完成");
-            self.orderDetailTableView.delegate = self;
-            self.orderDetailTableView.dataSource = self;
-            [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
-            [self.orderDetailTableView registerNib:[UINib nibWithNibName:ODCell bundle:nil] forCellReuseIdentifier:ODCell];
             [self.orderDetailTableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -199,7 +201,9 @@ static NSString *ODCell = @"OrderDetailCell";
     [manager POST:url parameters:rdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        id result = [self parseResults:responseObject];
+        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
+        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"result %@", result);
         if (result) {
             _resultDict = result;
             [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"PayMoney"]] actionTitle:@"支付"];
@@ -225,7 +229,7 @@ static NSString *ODCell = @"OrderDetailCell";
         self.checkDelivery.hidden= !self.orderType;
         [self.checkDelivery setTitle:@"取消订单" forState:UIControlStateNormal];
         self.confirmDelivery.hidden=!self.orderType;
-        [self.confirmDelivery setTitle:@"支付订单" forState:UIControlStateNormal];
+        [self.confirmDelivery setTitle:@"确认订单" forState:UIControlStateNormal];
     }else if(30 == ord.state){
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=NO;
@@ -235,7 +239,6 @@ static NSString *ODCell = @"OrderDetailCell";
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=YES;
     }
-    [self.orderDetailTableView reloadData];
 }
 - (void)doAlertView
 {
@@ -420,7 +423,7 @@ static NSString *ODCell = @"OrderDetailCell";
                 UILabel *topLabel = (UILabel*)[cell viewWithTag:1];
                 UILabel *midLabel = (UILabel*)[cell viewWithTag:2];
                 UILabel *botLabel = (UILabel*)[cell viewWithTag:3];
-                NSArray *invoiceType = @[@"不开发票",@"普通发票",@"增值税发票"];
+                NSArray *invoiceType = @[@"不开发票",@"普通发票"];
                 NSString *ticketsTitle = @"";
                 if (_orderModel.invoiceInfo) {
                     ticketsTitle = invoiceType[[_orderModel.invoiceInfo[@"InvoiceType"] integerValue]/10];
