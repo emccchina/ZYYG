@@ -179,7 +179,7 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)requestSubmitOrder
 {
     UserInfo *userInfo = [UserInfo shareUserInfo];
-    if (!userInfo.addressManager) {
+    if (!userInfo.addressManager || userInfo.addressManager.defaultAddressIndex < 0) {
         [self showAlertView:@"请输入地址!"];
         return;
     }
