@@ -41,8 +41,7 @@
 #define kAccountKey                         @"account"
 #define kAccountPassword                    @"accountPassword"
 #define kRememberAccount                    @"rememberAccount"
-#define kServerDomain                       @"http://192.168.66.121:8088/mobile/"
-                                             //@"http://test.zaixianchuangxin.com/mobile/"
+#define kServerDomain                       @"http://test.zaixianchuangxin.com/mobile/"
                                             //@"http://www.zemcc.com/mobile/"
 #define kReceiveURLForPay                   @"http://test.zaixianchuangxin.com/pay/receive.aspx"
 

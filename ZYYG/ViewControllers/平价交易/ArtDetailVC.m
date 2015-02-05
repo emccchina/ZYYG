@@ -476,6 +476,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
+            [self showAlertView:@"出价成功"];
             [self setBottomState];
             isCompare = NO;
             [self requestForHistory];
@@ -654,8 +655,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             cell.left3Lab.text = goods.LimitedSale;
             cell.left4Lab.text =  goods.GoodsCode;
             cell.R1Lab.text =  [state12 integerValue] ? @"待售" : @"已售";
-            cell.R2Lab.text = goods.CreationStyle;
-            cell.R3Lab.text = goods.SpecDesc;
+            cell.R2Lab.text = goods.SpecDesc;
             return cell;
         }
         case 2:{

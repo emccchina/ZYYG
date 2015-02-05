@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -74,8 +74,8 @@ CFJlZmVyZW5jZVZpZXc
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创作风格:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZA-bq-OuW" userLabel="rl2Label">
-                        <rect key="frame" x="302" y="39" width="73" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尺寸:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZA-bq-OuW" userLabel="rl2Label">
+                        <rect key="frame" x="302" y="39" width="39" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -87,21 +87,9 @@ CFJlZmVyZW5jZVZpZXc
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWv-Aq-Kxn" userLabel="rr2Label">
-                        <rect key="frame" x="378" y="38" width="42" height="21"/>
+                        <rect key="frame" x="344" y="38" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尺寸:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ih-4L-gvP">
-                        <rect key="frame" x="302" y="65" width="39" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCz-hO-SZn">
-                        <rect key="frame" x="344" y="64" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LM-8n-BT1" userLabel="lr3Lab">
@@ -113,14 +101,11 @@ CFJlZmVyZW5jZVZpZXc
                 <constraints>
                     <constraint firstItem="MZA-bq-OuW" firstAttribute="top" secondItem="5kG-3E-UH7" secondAttribute="bottom" constant="5" id="1xt-jM-yck"/>
                     <constraint firstItem="DEv-ju-5Sj" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="33U-od-Gl4"/>
-                    <constraint firstItem="uCz-hO-SZn" firstAttribute="top" secondItem="JWv-Aq-Kxn" secondAttribute="bottom" constant="5" id="3ba-Fi-gwT"/>
                     <constraint firstItem="vyH-LC-pih" firstAttribute="top" secondItem="Kx3-rp-BPC" secondAttribute="top" id="4Lv-5d-ww5"/>
-                    <constraint firstItem="3ih-4L-gvP" firstAttribute="top" secondItem="MZA-bq-OuW" secondAttribute="bottom" constant="5" id="57a-PH-Ps1"/>
                     <constraint firstItem="muC-7o-q3d" firstAttribute="leading" secondItem="ZHf-Gc-PQF" secondAttribute="trailing" constant="2" id="Dni-0g-nTh"/>
                     <constraint firstItem="JWv-Aq-Kxn" firstAttribute="top" secondItem="OrG-f0-ULt" secondAttribute="bottom" constant="5" id="DwO-x8-1dk"/>
                     <constraint firstItem="AEK-5c-QeD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="E7G-WI-El4"/>
                     <constraint firstItem="ZHf-Gc-PQF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="FEt-R4-F07"/>
-                    <constraint firstItem="3ih-4L-gvP" firstAttribute="top" secondItem="uCz-hO-SZn" secondAttribute="top" constant="1" id="HUP-UT-IUg"/>
                     <constraint firstAttribute="bottom" secondItem="DEv-ju-5Sj" secondAttribute="bottom" id="Itu-0F-f5Q"/>
                     <constraint firstItem="wz1-G1-3gb" firstAttribute="top" secondItem="8LM-8n-BT1" secondAttribute="top" id="K01-CW-oWG"/>
                     <constraint firstItem="vyH-LC-pih" firstAttribute="top" secondItem="AEK-5c-QeD" secondAttribute="bottom" constant="5" id="KdY-nF-2i9"/>
@@ -138,9 +123,7 @@ CFJlZmVyZW5jZVZpZXc
                     <constraint firstItem="muC-7o-q3d" firstAttribute="top" secondItem="ZHf-Gc-PQF" secondAttribute="top" constant="-1" id="dUn-CJ-dho"/>
                     <constraint firstItem="muC-7o-q3d" firstAttribute="top" secondItem="8LM-8n-BT1" secondAttribute="bottom" constant="5" id="dXl-Qi-EyP"/>
                     <constraint firstItem="AEK-5c-QeD" firstAttribute="top" secondItem="ewm-Te-T9j" secondAttribute="top" id="f5k-28-JsD"/>
-                    <constraint firstItem="3ih-4L-gvP" firstAttribute="leading" secondItem="DEv-ju-5Sj" secondAttribute="trailing" constant="1" id="g6D-gt-rut"/>
                     <constraint firstItem="DEv-ju-5Sj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="i6Z-4i-5vL"/>
-                    <constraint firstItem="uCz-hO-SZn" firstAttribute="leading" secondItem="3ih-4L-gvP" secondAttribute="trailing" constant="3" id="jui-6n-VLF"/>
                     <constraint firstItem="ZHf-Gc-PQF" firstAttribute="top" secondItem="wz1-G1-3gb" secondAttribute="bottom" constant="5" id="kOS-IX-2pb"/>
                     <constraint firstItem="JWv-Aq-Kxn" firstAttribute="leading" secondItem="MZA-bq-OuW" secondAttribute="trailing" constant="3" id="khT-CL-eKV"/>
                     <constraint firstItem="Kx3-rp-BPC" firstAttribute="top" secondItem="ewm-Te-T9j" secondAttribute="bottom" constant="5" id="lWO-AS-1yM"/>
@@ -157,7 +140,6 @@ CFJlZmVyZW5jZVZpZXc
                         <exclude reference="o4J-f9-6Dc"/>
                         <exclude reference="dXl-Qi-EyP"/>
                         <exclude reference="YfH-7c-Ite"/>
-                        <exclude reference="3ba-Fi-gwT"/>
                         <exclude reference="DwO-x8-1dk"/>
                     </mask>
                 </variation>
@@ -165,7 +147,6 @@ CFJlZmVyZW5jZVZpZXc
             <connections>
                 <outlet property="R1Lab" destination="OrG-f0-ULt" id="8RJ-Wi-lZh"/>
                 <outlet property="R2Lab" destination="JWv-Aq-Kxn" id="df7-L8-vTl"/>
-                <outlet property="R3Lab" destination="uCz-hO-SZn" id="S9W-Dl-lSj"/>
                 <outlet property="left1Lab" destination="ewm-Te-T9j" id="BMK-eh-1Ov"/>
                 <outlet property="left2Lab" destination="Kx3-rp-BPC" id="yPB-3i-en7"/>
                 <outlet property="left3Lab" destination="8LM-8n-BT1" id="8Z4-ed-GnR"/>
