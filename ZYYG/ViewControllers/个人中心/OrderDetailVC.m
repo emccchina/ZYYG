@@ -188,22 +188,21 @@ static NSString *ODCell = @"OrderDetailCell";
         [self showAlertView:@"请选择发票方式"];
         return;
     }
+     _orderModel.orderCode=order.OrderCode;
     [_orderModel setAddressID:userInfo.addressManager.defaultAddressCode];
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *url = [NSString stringWithFormat:@"%@AddOrder.ashx",kServerDomain];
+    NSString *url = [NSString stringWithFormat:@"%@UpdateOrder.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    MutableOrderedDictionary* rdict = [_orderModel dictWithAES];
+    MutableOrderedDictionary* rdict = [_orderModel updatedictWithAES];
     [manager POST:url parameters:rdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
-        NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
-        NSLog(@"aes de %@", aesde);
-        id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        id result = [self parseResults:responseObject];
         if (result) {
             _resultDict = result;
-            [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"OrderMoney"]] actionTitle:@"支付"];
+            [self showAlertViewTwoBut:@"提交成功" message:[NSString stringWithFormat:@"订单号:%@\n应付总额:%@",_resultDict[@"OrderCode"], _resultDict[@"PayMoney"]] actionTitle:@"支付"];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];

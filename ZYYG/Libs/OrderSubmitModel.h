@@ -32,6 +32,7 @@
 
 @property (nonatomic, strong) NSString      *invoiceType;//发票 0 不要票；10 普通发票；20 增值税发票
 @property (nonatomic, strong) NSString      *userKey;
+@property (nonatomic, strong) NSString      *orderCode;
 @property (nonatomic, strong) NSString      *productIDs;//产品id 组合 成字符串
 @property (nonatomic, strong) ClassifyModel      *delivery;//配送code
 @property (nonatomic, strong) ClassifyModel      *packing;//包装code
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) NSString      *addressID;
 
 -(MutableOrderedDictionary *)dictWithAES;
+-(MutableOrderedDictionary *)updatedictWithAES;
 
 - (void)calculatePrice;
 
