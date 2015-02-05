@@ -31,7 +31,7 @@
 
 - (void)calculatePrice
 {
-    self.dealPrice=self.totalPrice+self.packPrice+self.delivPrice-self.cutPrice -self.favoPrice-self.paidPrice;
+    self.dealPrice=self.totalPrice+[self.packing.price floatValue]+[self.delivery.price floatValue]-self.cutPrice -self.favoPrice-self.paidPrice;
     if([self.invoiceInfo[@"InvoiceType"] integerValue]){
         UserInfo *userInfo = [UserInfo shareUserInfo];
         self.taxPrice = self.dealPrice*userInfo.taxPercend;

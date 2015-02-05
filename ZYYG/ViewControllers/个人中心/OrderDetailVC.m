@@ -52,8 +52,7 @@ static NSString *ODCell = @"OrderDetailCell";
     addr=[[AdressModel alloc] init];
     [self.orderDetailTableView registerNib:[UINib nibWithNibName:@"CartCell" bundle:nil] forCellReuseIdentifier:cartCell];
     [self.orderDetailTableView registerNib:[UINib nibWithNibName:ODCell bundle:nil] forCellReuseIdentifier:ODCell];
-    self.orderDetailTableView.delegate = self;
-    self.orderDetailTableView.dataSource = self;
+    
     // Do any additional setup after loading the view.
     [self showBackItem];
     _orderModel = [[OrderSubmitModel alloc] init];
@@ -82,7 +81,7 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.orderDetailTableView reloadData];
+//    [self.orderDetailTableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -147,6 +146,8 @@ static NSString *ODCell = @"OrderDetailCell";
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         NSString *aesResult = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
         NSLog(@"%@", aesResult);
+        self.orderDetailTableView.delegate = self;
+        self.orderDetailTableView.dataSource = self;
         id result = [self parseResults:[aesResult dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
             [addr addressFromOrder:result[@"Addr"]];
@@ -225,8 +226,18 @@ static NSString *ODCell = @"OrderDetailCell";
 {
     submit = NO;
     //订单状态 20 支付 30已发货 40已签收 50已取消 -1删除 10审核 0创建
-    self.orderMoney.text=[NSString stringWithFormat:@"￥%@",ord.PayMoney];
-    _orderModel.totalPrice = [order.PayMoney floatValue];
+    if (!self.orderType) {
+        self.orderMoney.text=[NSString stringWithFormat:@"￥%@",ord.PayMoney];
+    }else{
+        CGFloat price = 0;
+        for (GoodsModel *model in order.Goods) {
+            price += model.AppendPrice;
+        }
+        price -= [order.PaidMoney floatValue];
+        _orderModel.totalPrice = price;
+        [_orderModel calculatePrice];
+        self.orderMoney.text = [NSString stringWithFormat:@"%.2f", _orderModel.dealPrice];
+    }
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         submit = self.orderType ? YES : NO;
@@ -491,14 +502,14 @@ static NSString *ODCell = @"OrderDetailCell";
         }break;
         case 2:{
             _orderModel.delivery = sendContent;
-            _orderModel.delivPrice=[sendContent.price floatValue];
+//            _orderModel.delivPrice=[sendContent.price floatValue];
             [_orderModel calculatePrice];
             self.orderMoney.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
             [self.orderDetailTableView reloadData];
         }break;
         case 3:{
             _orderModel.packing = sendContent;
-            _orderModel.packPrice=[sendContent.price floatValue];
+//            _orderModel.packPrice=[sendContent.price floatValue];
             [_orderModel calculatePrice];
             self.orderMoney.text = [NSString stringWithFormat:@"￥%.2f", _orderModel.dealPrice];
             [self.orderDetailTableView reloadData];
