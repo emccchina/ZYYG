@@ -19,7 +19,7 @@
    
     NSMutableArray    *allArtist;//筛选作者名 是否已经存在， 不存在请求
     NSString      *artistName;//已经选择的艺术家名,显示在chooseview 上的
-
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 
 @end
@@ -128,13 +128,14 @@
 //上拉刷新
 - (void)addFootRefresh
 {
-//    [self.talkBuyTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-//        [goodsArray removeAllObjects];
-//        pageNum = 1;
-//        [self requestTalkBuy:pageNum artistName:artistName];
-//    }];
+    [self.talkBuyTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        refreshFooter = NO;
+        pageNum = 1;
+        [self requestTalkBuy:pageNum artistName:artistName];
+    }];
     [self.talkBuyTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
+        refreshFooter = YES;
         [self requestTalkBuy:pageNum artistName:artistName];
     }];
 }
@@ -157,6 +158,9 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }else{
+                if (!refreshFooter) {
+                    [goodsArray removeAllObjects];
+                }
                 for (int i=0; i<carray.count; i++) {
                     GoodsModel *model=[[GoodsModel alloc] init];
                     [model goodsModelFromSearch:carray[i]];
@@ -173,6 +177,7 @@
 
 - (void)requestFinished
 {
+    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.talkBuyTableView footerEndRefreshing];
     [self.talkBuyTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];

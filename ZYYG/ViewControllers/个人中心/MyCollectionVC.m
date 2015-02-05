@@ -19,6 +19,7 @@
     NSMutableArray *collections;
     UserInfo *user;
     NSInteger pageNum;
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 
 
@@ -62,12 +63,13 @@
 - (void)addFootRefresh
 {
     [self.myCollectionTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [collections removeAllObjects];
+        refreshFooter = NO;
         pageNum=1;
         [self requestCollections:pageNum];
     }];
     [self.myCollectionTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
+        refreshFooter = YES;
         [self requestCollections:pageNum];
     }];
 }
@@ -96,6 +98,9 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }else{
+                if (!refreshFooter) {
+                    [collections removeAllObjects];
+                }
                 for (int i=0; i<carray.count; i++) {
                     GoodsModel *model=[[GoodsModel alloc] init];
                     [model goodsModelFromCollect:carray[i]];
@@ -112,6 +117,7 @@
 
 - (void)requestFinished
 {
+    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.myCollectionTableView footerEndRefreshing];
     [self.myCollectionTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];

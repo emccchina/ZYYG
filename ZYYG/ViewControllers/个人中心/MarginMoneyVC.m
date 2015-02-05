@@ -16,7 +16,7 @@
     UserInfo *user;
     NSInteger pageSize;
     NSInteger pageNum;
-    
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 
 @end
@@ -52,11 +52,12 @@
 {
     [self.marginTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum = 1;
-        [marginArray removeAllObjects];
+        refreshFooter = NO;
         [self requestMarginList:pageSize pageNum:pageNum];
     }];
     [self.marginTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
+        refreshFooter = YES;
         [self requestMarginList:pageSize pageNum:pageNum];
     }];
 }
@@ -86,6 +87,9 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }else{
+                if (!refreshFooter) {
+                    [marginArray removeAllObjects];
+                }
                 for (int i=0; i<marginList.count; i++) {
                     GoodsModel *mar=[[GoodsModel alloc] init];
                     [mar goodsModelFromMarginList:marginList[i]];
@@ -102,6 +106,7 @@
 
 - (void)requestFinished
 {
+    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.marginTableView footerEndRefreshing];
     [self.marginTableView    headerEndRefreshingWithResult:JHRefreshResultSuccess];

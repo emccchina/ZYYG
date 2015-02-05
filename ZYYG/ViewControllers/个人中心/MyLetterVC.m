@@ -19,6 +19,7 @@
     NSInteger selectedIndex; //选中的行
     BOOL state; // 已读未读 标示
     NSInteger pageNum; //页数
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 
 @end
@@ -69,7 +70,7 @@ static NSString *letterCell = @"letterCell";
 {
     [letterArray removeAllObjects];
     [self.myLetterTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [letterArray removeAllObjects];
+        refreshFooter = NO;
         pageNum=1;
         NSInteger letterState = state ==YES ? 1:0;
         [self requestLetterList:letterState pageNumber:pageNum];
@@ -77,6 +78,7 @@ static NSString *letterCell = @"letterCell";
     }];
     [self.myLetterTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
+        refreshFooter = YES;
         NSInteger letterState = state ==YES ? 1:0;
         [self requestLetterList:letterState pageNumber:pageNum];
     }];
@@ -108,6 +110,9 @@ static NSString *letterCell = @"letterCell";
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新内容!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }else {
+                if (!refreshFooter) {
+                    [letterArray removeAllObjects];
+                }
                 for (int i=0; i<letters.count; i++) {
                     LetterModel *letter =[LetterModel letterFromDict:letters[i]];
                     [letterArray addObject:letter];
@@ -124,6 +129,7 @@ static NSString *letterCell = @"letterCell";
 
 - (void)requestFinished
 {
+    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.myLetterTableView footerEndRefreshing];
     [self.myLetterTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];

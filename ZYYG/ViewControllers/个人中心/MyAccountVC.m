@@ -17,7 +17,7 @@
     UserInfo *user;
     NSInteger segNum;
     NSInteger pageNum;
-    
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 
 @end
@@ -68,12 +68,13 @@
 - (void)addFootRefresh
 {
     [self.marginMoneyTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [accountArray removeAllObjects];
+        refreshFooter = NO;
         pageNum = 1;
         [self requestAccountList:segNum pageNumber:pageNum];
     }];
     [self.marginMoneyTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
+        refreshFooter = YES;
         [self requestAccountList:segNum pageNumber:pageNum];
     }];
 }
@@ -128,6 +129,9 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新账单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }else{
+                if (!refreshFooter) {
+                    [accountArray removeAllObjects];
+                }
                 for (int i=0; i<accounts.count; i++) {
                     AccountModel *account =[AccountModel accountWithDict:accounts[i]];
                     [accountArray addObject:account];
@@ -144,6 +148,7 @@
 
 - (void)requestFinished
 {
+    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.marginMoneyTableView footerEndRefreshing];
     [self.marginMoneyTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];

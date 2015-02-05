@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/MarginMoneyVC.m"
-            timestampString = "444216605.023847"
+            timestampString = "444792281.927563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-requestMarginList:pageNum:"
             landmarkType = "5">
          </BreakpointContent>
@@ -310,22 +310,6 @@
             startingLineNumber = "575"
             endingLineNumber = "575"
             landmarkName = "-payOrder:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZYYG/ViewControllers/&#x7ebf;&#x4e0a;&#x7ade;&#x4ef7;/PayMarginVC.m"
-            timestampString = "444706436.303203"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-pressPay:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

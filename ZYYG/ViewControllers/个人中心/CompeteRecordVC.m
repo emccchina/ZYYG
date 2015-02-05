@@ -18,6 +18,7 @@
     NSInteger pageSize;
     NSInteger status;
     UserInfo *user;
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 
 @end
@@ -60,11 +61,12 @@
 - (void)addFootRefresh
 {
     [self.competeTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [recordArray removeAllObjects];
+        refreshFooter = NO;
         pageNum = 1;
         [self requestRecordList:status page:pageSize panum:pageNum];
     }];
     [self.competeTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        refreshFooter = YES;
         pageNum=pageNum+1;
          [self requestRecordList:status page:pageSize panum:pageNum];
     }];
@@ -113,6 +115,9 @@
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }else{
+                if (!refreshFooter) {
+                    [recordArray removeAllObjects];
+                }
                 for (int i=0; i<records.count; i++) {
                     GoodsModel *rgoods=[[GoodsModel alloc]init ];
                     [rgoods  goodsModelFromRecordList:records[i]];
@@ -129,6 +134,7 @@
 
 - (void)requestFinished
 {
+    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.competeTableView footerEndRefreshing];
     [self.competeTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];

@@ -161,9 +161,6 @@ static NSString * auctionCell = @"auctionCell";
 
 - (void)requestFinished
 {
-//    if (!refreshFooter) {
-//        [self.auctionTB setContentOffset:CGPointZero];
-//    }
     refreshFooter = NO;
     [self dismissIndicatorView];
     [self.auctionTB footerEndRefreshing];

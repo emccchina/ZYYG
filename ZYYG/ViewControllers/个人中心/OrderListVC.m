@@ -27,7 +27,7 @@
     NSInteger pageSize;
     NSInteger pageNum;
     NSDictionary  *_MerchantID;
-    
+    BOOL                refreshFooter;//是否是上拉刷新
 }
 @property (retain, nonatomic) IBOutlet HMSegmentedControl *segmentView;
 @end
@@ -94,12 +94,13 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 {
     
     [self.orderListTabelView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        [orderArray removeAllObjects];
+        refreshFooter = NO;
         pageNum = 1;
         [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     }];
     [self.orderListTabelView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         pageNum=pageNum+1;
+        refreshFooter = YES;
         [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     }];
 }
@@ -156,6 +157,9 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新订单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alertView show];
             }else{
+                if (!refreshFooter) {
+                    [orderArray removeAllObjects];
+                }
                 for (int i=0; i<orders.count; i++) {
                     OrderModel *order=[OrderModel orderModelWithDict:orders[i]];
                     [orderArray addObject:order];
@@ -171,6 +175,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 
 - (void)requestFinished
 {
+    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.orderListTabelView footerEndRefreshing];
     [self.orderListTabelView headerEndRefreshingWithResult:JHRefreshResultSuccess];
