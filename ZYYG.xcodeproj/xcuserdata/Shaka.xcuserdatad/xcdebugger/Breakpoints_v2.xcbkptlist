@@ -272,11 +272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/OrderDetailVC.m"
-            timestampString = "444631838.191038"
+            timestampString = "444814366.049006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "-requestLetterList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -288,28 +288,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/OrderDetailVC.m"
-            timestampString = "444631838.191038"
+            timestampString = "444814366.049006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "-requestLetterList:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZYYG/ViewControllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/OrderDetailVC.m"
-            timestampString = "444643204.912161"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575"
-            landmarkName = "-payOrder:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

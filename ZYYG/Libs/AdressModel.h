@@ -38,7 +38,7 @@
 @interface AddressManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray  *addresses;
-@property (nonatomic, assign) NSUInteger      defaultAddressIndex;
+@property (nonatomic, assign) NSInteger      defaultAddressIndex;//-1 时候无默认地址
 @property (nonatomic, strong) NSString        *defaultAddressCode;
 @property (nonatomic, assign) BOOL            updata;
 

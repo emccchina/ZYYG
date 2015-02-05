@@ -72,7 +72,7 @@
 
 - (void)parseAddressArr:(NSArray*)arr
 {
-    if (!arr.count) {
+    if ( !arr || [arr isKindOfClass:[NSNull class]] || !arr.count) {
         return;
     }
     AddressManager *manager = [[AddressManager alloc] init];
