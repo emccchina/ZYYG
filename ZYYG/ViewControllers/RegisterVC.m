@@ -104,6 +104,7 @@
     if (self.typeVC) {
       url = [NSString stringWithFormat:@"%@SendEmailPass.ashx",kServerDomain];
     }
+      NSLog(@"url is  %@", url);
     NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"mobile", nil];
     [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
@@ -111,7 +112,7 @@
         id result = [self parseResults:responseObject];
         if (result) {
             if([@"0" isEqual:result[@"errno"]]){
-                [self showAlertView:@"注册成功,请激活邮件后登录"];
+                [self showAlertView:@"已成功发送验证码"];
             }else{
                 [self showAlertView:result[@"msg"]];
             }
@@ -222,7 +223,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@reg.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
-//    NSLog(@"url %@, %@, %d", url, password, password.length);
+    NSLog(@"url %@, %@", url, password);
     NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"mobile",password, @"pass", self.verifyTF.text, @"checkCode", nil];
     MutableOrderedDictionary *newDict=[self dictWithAES:regsiterDict];
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -231,7 +232,7 @@
         NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
         id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
         if (result) {
-            [self showAlertView:@"注册成功,请激活邮件后登录"];
+            [self showAlertView:@"注册成功,请登录"];
             registerSuccessuful = YES;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

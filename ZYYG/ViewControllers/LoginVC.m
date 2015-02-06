@@ -146,10 +146,11 @@
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.accoutTF.text, @"email",password, @"pass", nil];
    MutableOrderedDictionary *orderdict=[self dictWithAES:dict];
     [manager POST:url parameters:orderdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        NSLog(@"result is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
         id result = [self parseResults:[aesde dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"result is %@",result);
         if (result) {
             UserInfo *userInfo = [UserInfo shareUserInfo];
             [userInfo setParams:userInfo parmas:result];
