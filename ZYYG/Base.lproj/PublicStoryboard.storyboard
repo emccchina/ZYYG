@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--LoginVC-->
@@ -188,7 +188,7 @@
                         <outlet property="registerBut" destination="ATe-0r-Svt" id="IAU-Wt-oAS"/>
                         <outlet property="rememberBut" destination="Gcc-d0-6rx" id="Gsp-R7-Bts"/>
                         <outlet property="sinaLoginBut" destination="JiM-br-jYT" id="bLX-iJ-Col"/>
-                        <segue destination="aiS-55-0uz" kind="show" identifier="RegistForget" id="1F1-pU-1tA"/>
+                        <segue destination="aiS-55-0uz" kind="custom" identifier="RegistForget" customClass="CustomModel" id="1F1-pU-1tA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Mz-Gc-TDL" userLabel="First Responder" sceneMemberID="firstResponder"/>
