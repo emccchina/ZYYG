@@ -159,6 +159,7 @@
             [self.dataTB reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
         [self requestFinished];
         [self showAlertView:kNetworkNotConnect];
     }];

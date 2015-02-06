@@ -33,9 +33,7 @@
     NSArray *titles = @[@"保证金支付方式", @"支付方式", @"配送方式", @"包装方式"];
     payType = @[@"银行卡", @"支付宝"];
     delivery =userInfo.deliveryList;
-//  @[@[@"纸本艺术品物流",@"￥50.00(适用于中国画版画书法摄影等艺术品)"],@[@"油画雕塑艺术品物流",@"￥300(适用于油画雕塑等艺术品)"], @[@"上门自提",@"免费"]];
     packageArr =userInfo.packingList;
-//    @[@[@"锦盒话筒起泡纸本",@"免费"],@[@"木箱面寻找",@"￥300"]];
     self.title = titles[self.typeChoose];
     self.chooseTB.delegate = self;
     self.chooseTB.dataSource = self;
