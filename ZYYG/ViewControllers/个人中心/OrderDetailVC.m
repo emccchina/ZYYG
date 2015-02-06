@@ -268,8 +268,8 @@ static NSString *ODCell = @"OrderDetailCell";
     CGFloat money = [_resultDict[@"PayMoney"] floatValue];
     NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
     NSMutableString *names = [NSMutableString string];
-    for (NSString *name in _resultDict[@"GoodsNames"]) {
-        [names appendString:[NSString stringWithFormat:@"%@,",name]];
+    for (GoodsModel *name in order.Goods) {
+        [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
     }
     [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:meneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:_resultDict[@"CreateTime"]] viewController:self delegate:self mode:kPayMode];
 }
