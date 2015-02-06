@@ -112,8 +112,7 @@
             //            NSLog(@"%@",result);
             NSMutableArray *records=result[@"BiddingList"];
             if (!records ||[records isKindOfClass:[NSNull class]]|| records.count<1) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
+                [self showAlertView:@"无新数据!"];
             }else{
                 if (!refreshFooter) {
                     [recordArray removeAllObjects];

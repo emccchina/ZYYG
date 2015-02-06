@@ -84,8 +84,7 @@
             //            NSLog(@"%@",result);
             NSMutableArray *marginList=result[@"DepositList"];
             if (!marginList ||[marginList isKindOfClass:[NSNull class]]|| marginList.count<1) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新数据!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
+                [self showAlertView:@"无新数据!"];
             }else{
                 if (!refreshFooter) {
                     [marginArray removeAllObjects];

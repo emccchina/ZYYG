@@ -126,8 +126,7 @@
             self.frozen.text=[NSString stringWithFormat:@"￥%@元",Frozen];
             NSArray *accounts=result[@"data"];
             if (!accounts ||[accounts isKindOfClass:[NSNull class]]||accounts.count<1) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新账单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
+                [self showAlertView:@"无新账单!"];
             }else{
                 if (!refreshFooter) {
                     [accountArray removeAllObjects];

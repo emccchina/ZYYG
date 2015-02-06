@@ -154,8 +154,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //            NSLog(@"%@",result);
             NSMutableArray *orders=result[@"Orders"];
             if (!orders ||[orders isKindOfClass:[NSNull class]]|| orders.count<1) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新订单!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
+                [self showAlertView:@"无新订单!"];
             }else{
                 if (!refreshFooter) {
                     [orderArray removeAllObjects];
@@ -362,8 +361,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
             [self requestOrderList:_orderType ordState:orderState ordSize:5 ordNum:1];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",error] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
+        [self showAlertView:[NSString stringWithFormat:@"取消订单出错! %@",error]];
     }];
     }else {
       NSLog(@"错误操作错误操作");
@@ -407,13 +405,8 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
-            if( [@"0" isEqual:result[@"errno"]] ){
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认收货成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
-            }else{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认收货失败!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
-            }
+            NSString *message = [@"0" isEqual:result[@"errno"]] ? @"确认收货成功!" : @"确认收货失败!";
+            [self showAlertView:message];
             [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

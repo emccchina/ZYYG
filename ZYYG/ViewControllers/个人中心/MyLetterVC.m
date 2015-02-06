@@ -107,8 +107,7 @@ static NSString *letterCell = @"letterCell";
         if (result) {
             NSArray *letters=result[@"data"];
             if (!letters ||[letters isKindOfClass:[NSNull class]]||letters.count<1) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"无新内容!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alertView show];
+                [self showAlertView:@"无新内容!"];
             }else {
                 if (!refreshFooter) {
                     [letterArray removeAllObjects];

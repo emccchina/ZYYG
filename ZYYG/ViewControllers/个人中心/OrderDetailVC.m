@@ -577,6 +577,8 @@ static NSString *ODCell = @"OrderDetailCell";
         id result = [self parseResults:responseObject];
         [self dismissIndicatorView];
         if (result) {
+            NSString *message = [@"0" isEqual:result[@"errno"]] ? @"确认收货成功!" : @"确认收货失败!";
+            [self showAlertView:message];
             [self requestLetterList:self.orderCode];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -615,8 +617,7 @@ static NSString *ODCell = @"OrderDetailCell";
                 [self requestLetterList:self.orderCode];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"取消订单出错! %@",error] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alertView show];
+            [self showAlertView:[NSString stringWithFormat:@"取消订单出错! %@",error]];
         }];
     }else {
         [self requestForConfirmGoods:self.orderCode];
