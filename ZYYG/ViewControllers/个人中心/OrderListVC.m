@@ -402,11 +402,18 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@OrderSigning.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key",orderCode,@"OrderSigning", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.userKey, @"key",orderCode,@"OrderCode", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
+            if( [@"0" isEqual:result[@"errno"]] ){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认收货成功!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }else{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认收货失败!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+            }
             [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
