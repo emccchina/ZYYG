@@ -8,11 +8,14 @@
 
 #import "LoginVC.h"
 #import "OrderedDictionary.h"
+#import "RegisterVC.h"
+
 
 @interface LoginVC ()
 <UITextFieldDelegate>
 {
     BOOL        rememberAccount;
+    BOOL       VCType;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *BGImage;
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
@@ -106,10 +109,23 @@
     [self requestLogin];
 }
 - (IBAction)doRegisterBut:(id)sender {
+    VCType=NO;
+    [self performSegueWithIdentifier:@"RegistForget" sender:self];
 }
 - (IBAction)doForgetBut:(id)sender {
-//    [self.navigationController popViewControllerAnimated:YES];
+    VCType=YES;
+    [self performSegueWithIdentifier:@"RegistForget" sender:self];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController *vc = segue.destinationViewController;
+    vc.hidesBottomBarWhenPushed = YES;
+    if ([(RegisterVC *)vc respondsToSelector:@selector(setTypeVC:)]) {
+        ((RegisterVC *)vc).typeVC=VCType;
+    }
+}
+
 - (IBAction)doSinaBut:(id)sender {
 }
 - (IBAction)doQQBut:(id)sender {

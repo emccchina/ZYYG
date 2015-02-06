@@ -12,4 +12,6 @@
 
 @property (nonatomic, assign) BOOL  typeVC;//0注册   1找回密码
 
+- (IBAction)getVerification:(id)sender;
+
 @end
