@@ -16,6 +16,7 @@
     self = [super init];
     if (self) {
         self.invoiceType = @"0";
+        self.invoiceInfo = @{@"InvoiceType":@"0"};
         self.userKey = [NSString stringWithFormat:@"%@", [UserInfo shareUserInfo].userKey];
     }
     return self;

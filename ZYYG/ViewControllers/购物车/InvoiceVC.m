@@ -174,7 +174,6 @@
 {
     NSLog(@"%@", button.mark);
     selectedIndex = [button.mark integerValue];
-//    [invoiceDict removeAllObjects];
     [self.invoiceTB reloadData];
 }
 
