@@ -265,13 +265,13 @@ static NSString *ODCell = @"OrderDetailCell";
 
 - (void)doAlertViewTwo
 {
-    CGFloat money = [_resultDict[@"OrderMoney"] floatValue];
+    CGFloat money = [_resultDict[@"PayMoney"] floatValue];
     NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
     NSMutableString *names = [NSMutableString string];
     for (NSString *name in _resultDict[@"GoodsNames"]) {
         [names appendString:[NSString stringWithFormat:@"%@,",name]];
     }
-    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:meneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:_resultDict[@"CreatTime"]] viewController:self delegate:self mode:kPayMode];
+    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:meneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:_resultDict[@"CreateTime"]] viewController:self delegate:self mode:kPayMode];
 }
 - (void)APayResult:(NSString *)result
 {

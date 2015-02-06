@@ -14,16 +14,22 @@ static int count = 0;
 
 + (NSString *)createrWithOrderNo:(NSString*)orderNo productName:(NSString*)name money:(NSString*)money type:(NSInteger)type shopNum:(NSString *)shopNum key:(NSString *)shopKey time:(NSString*)timeString
 {
+    NSString * timeStr = nil;
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    if (timeString) {
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+        [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+        dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"];
+        NSDate *destDate= [dateFormatter dateFromString:timeString];
+        
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+        timeStr = [dateFormatter stringFromDate:destDate];
+    }else{
+        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+        NSDate * workDate = [NSDate dateWithTimeIntervalSinceReferenceDate:[NSDate timeIntervalSinceReferenceDate]];
+        timeStr = [dateFormatter stringFromDate:workDate];
+    }
     
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
-    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"];
-    NSDate *destDate= [dateFormatter dateFromString:timeString];
-    
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-//    NSDate * workDate = [NSDate dateWithTimeIntervalSinceReferenceDate:[NSDate timeIntervalSinceReferenceDate]];
-    NSString * timeStr = [dateFormatter stringFromDate:destDate];
     NSString *receiveURL = [NSString stringWithFormat:@"%@?type=%ld&member=%@&source=iOS", kReceiveURLForPay,(long)type,[UserInfo shareUserInfo].userKey];
     NSArray * paaDic = @[
                          @"1", @"inputCharset",
@@ -42,7 +48,7 @@ static int count = 0;
     
     NSString *paaStr = [self formatPaa:paaDic];
     count++;
-    
+    NSLog(@"%@", paaStr);
     return paaStr;
 }
 

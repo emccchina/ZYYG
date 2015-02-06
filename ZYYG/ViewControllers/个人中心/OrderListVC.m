@@ -375,7 +375,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 -(void)payOrder:(OrderModel *)order
 {   //创建状态 可支付  可取消
     if (0 == order.state || 10 == order.state) {
-        if (self.orderType) {
+        if ([self.orderType intValue]) {
             currentOrder = order;
             [self performSegueWithIdentifier:@"OrderDetail" sender:self];
         }else{
