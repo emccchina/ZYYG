@@ -218,7 +218,7 @@ static NSString *cartCell = @"CartCell";
 
 - (void)doAlertViewTwo
 {
-    CGFloat money = [_resultDict[@"OrderMoney"] floatValue];
+    CGFloat money = [_resultDict[@"PayMoney"] floatValue];
     NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
     NSMutableString *names = [NSMutableString string];
     for (NSString *name in _resultDict[@"GoodsNames"]) {
