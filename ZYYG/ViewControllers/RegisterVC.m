@@ -101,26 +101,25 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@RegSendSMS.ashx",kServerDomain];
-//    @"%@SendEmailPass.ashx"
+    if (self.typeVC) {
+      url = [NSString stringWithFormat:@"%@SendEmailPass.ashx",kServerDomain];
+    }
     NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"mobile", nil];
     [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-            NSArray *array = self.navigationController.viewControllers;
-            for (UIViewController* vc in array) {
-                if ([vc isKindOfClass:[LoginVC class]]) {
-                    [self.navigationController popToViewController:vc animated:YES];
-                    return;
-                }
+            if([@"0" isEqual:result[@"errno"]]){
+                [self showAlertView:@"注册成功,请激活邮件后登录"];
+            }else{
+                [self showAlertView:result[@"msg"]];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
         [self dismissIndicatorView];
         [self showAlertView:kNetworkNotConnect];
-        
     }];
 
 }
