@@ -226,7 +226,7 @@
     
     UILabel *label = (UILabel*)[view viewWithTag:1];
     if (!label) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 100, 30)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 300, 30)];
     }
     label.textColor = kGrayColor;
     NSArray *keys = [(NSDictionary*)(sectionTitles[section]) allKeys];
