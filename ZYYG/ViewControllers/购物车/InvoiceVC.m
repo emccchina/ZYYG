@@ -37,7 +37,7 @@
     }
     selectedIndex = [invoiceDict[@"InvoiceType"] integerValue]/10;
     NSDictionary *section0 = @{@"不开具发票":@[]};
-    NSDictionary *section1 = @{@"普通发票":@[@"发票抬头"]};
+    NSDictionary *section1 = @{@"普通发票(税率 3.00%)":@[@"发票抬头"]};
 //    NSDictionary *section2 = @{@"增值税发票":@[@"发票抬头",@"纳税人识别号",@"注册地址",@"开户银行",@"银行帐号",@"注册电话"]};
     requestKeys = @[@"InvoiceTitle",@"InvoiceTaxNo",@"RegAddress",@"RegBank",@"RegAccount",@"RegPhone"];
     sectionTitles = @[section0, section1];

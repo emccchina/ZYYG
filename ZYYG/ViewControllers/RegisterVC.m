@@ -33,7 +33,6 @@
     // Do any additional setup after loading the view.
     [self showBackItem];
     [self setInitState];
-    [self startTime];
     self.userNameTF.delegate = self;
     self.verifyTF.delegate = self;
     self.passwordTF.delegate = self;
@@ -96,7 +95,6 @@
         [self showAlertView:@"请填写手机号码"];
         return;
     }
-    [self startTime];
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -105,7 +103,7 @@
       url = [NSString stringWithFormat:@"%@SendEmailPass.ashx",kServerDomain];
     }
       NSLog(@"url is  %@", url);
-    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"mobile", nil];
+    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"LoginName", nil];
     [manager POST:url parameters:regsiterDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
@@ -113,6 +111,7 @@
         if (result) {
             if([@"0" isEqual:result[@"errno"]]){
                 [self showAlertView:@"已成功发送验证码"];
+                [self startTime];
             }else{
                 [self showAlertView:result[@"msg"]];
             }
@@ -126,7 +125,7 @@
 }
 
 -(void)startTime{
-    __block int timeout=30; //倒计时时间
+    __block int timeout=60; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
@@ -135,7 +134,7 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                [self.getVerifiBut setTitle:@"发送验证码" forState:UIControlStateNormal];
+                [self.getVerifiBut setTitle:@"获取验证码" forState:UIControlStateNormal];
                 self.getVerifiBut.userInteractionEnabled = YES;
             });
         }else{
@@ -144,7 +143,7 @@
             NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                [self.getVerifiBut setTitle:[NSString stringWithFormat:@"%@秒后重新发送",strTime] forState:UIControlStateNormal];
+                [self.getVerifiBut setTitle:[NSString stringWithFormat:@"%@秒",strTime] forState:UIControlStateNormal];
                 self.getVerifiBut.userInteractionEnabled = NO;
                 
             });
@@ -176,19 +175,16 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@RetakePassWord.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
-    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"mobile",password, @"pass", self.verifyTF.text, @"checkCode", nil];
+    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"LoginName",password, @"PassWord", self.verifyTF.text, @"checkCode", nil];
     MutableOrderedDictionary *newDict= [self dictWithAES:regsiterDict];
+     NSLog(@"url is  %@ %@",url,regsiterDict);
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-            NSArray *array = self.navigationController.viewControllers;
-            for (UIViewController* vc in array) {
-                if ([vc isKindOfClass:[LoginVC class]]) {
-                    [self.navigationController popToViewController:vc animated:YES];
-                    return;
-                }
+            if([@"0" isEqual:result[@"errno"]]){
+                [self showAlertView:@"密码找回成功,请登录!"];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -224,7 +220,7 @@
     NSString *url = [NSString stringWithFormat:@"%@reg.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
     NSLog(@"url %@, %@", url, password);
-    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"mobile",password, @"pass", self.verifyTF.text, @"checkCode", nil];
+    NSDictionary *regsiterDict = [NSDictionary dictionaryWithObjectsAndKeys:self.userNameTF.text, @"LoginName",password, @"PassWord", self.verifyTF.text, @"checkCode", nil];
     MutableOrderedDictionary *newDict=[self dictWithAES:regsiterDict];
     [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
@@ -281,14 +277,14 @@
 {
  
     NSMutableString *lStr=[NSMutableString string];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"mobile"] aes:YES]];
-    [lStr appendString:[self aeskeyOrNot:oDict[@"pass"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"LoginName"] aes:YES]];
+    [lStr appendString:[self aeskeyOrNot:oDict[@"PassWord"] aes:YES]];
     [lStr appendString:[self aeskeyOrNot:oDict[@"checkCode"] aes:YES]];
     [lStr appendString:kAESKey];
     NSLog(@"123 %@",lStr);
     MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"mobile"] aes:YES] forKey:@"mobile" atIndex:0];
-    [orderArr insertObject:[self aeskeyOrNot:oDict[@"pass"] aes:YES] forKey:@"pass" atIndex:1];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"LoginName"] aes:YES] forKey:@"LoginName" atIndex:0];
+    [orderArr insertObject:[self aeskeyOrNot:oDict[@"PassWord"] aes:YES] forKey:@"PassWord" atIndex:1];
     [orderArr insertObject:[self aeskeyOrNot:oDict[@"checkCode"] aes:YES] forKey:@"checkCode" atIndex:2];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:3];
     [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:4];

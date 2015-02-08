@@ -143,7 +143,7 @@
     NSString *url = [NSString stringWithFormat:@"%@login.ashx",kServerDomain];
     NSString *password = [Utities md5AndBase:self.passwordTF.text];
     NSLog(@"url %@, %@", url, password);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.accoutTF.text, @"email",password, @"pass", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.accoutTF.text, @"LoginName",password, @"PassWord", nil];
    MutableOrderedDictionary *orderdict=[self dictWithAES:dict];
     [manager POST:url parameters:orderdict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"result is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
@@ -197,13 +197,13 @@
 -(MutableOrderedDictionary *)dictWithAES:(NSDictionary *)oDict
 {
     NSMutableString *lStr=[NSMutableString string];
-    [lStr appendString:[[oDict[@"email"] cleanString:oDict[@"email"] ] AES256EncryptWithKey:kAESKey]];
-    [lStr appendString:[[oDict[@"pass"] cleanString:oDict[@"pass"] ] AES256EncryptWithKey:kAESKey]];
+    [lStr appendString:[[oDict[@"LoginName"] cleanString:oDict[@"LoginName"] ] AES256EncryptWithKey:kAESKey]];
+    [lStr appendString:[[oDict[@"PassWord"] cleanString:oDict[@"PassWord"] ] AES256EncryptWithKey:kAESKey]];
     [lStr appendString:kAESKey];
 //    NSString *ostr=[NSString stringWithFormat:@"%@%@%@" ,[oDict[@"email"] AES256EncryptWithKey:kAESKey],[oDict[@"pass"] AES256EncryptWithKey:kAESKey],kAESKey];
     MutableOrderedDictionary *orderArr= [MutableOrderedDictionary dictionary];
-    [orderArr insertObject:[oDict[@"email"] AES256EncryptWithKey:kAESKey] forKey:@"email" atIndex:0];
-    [orderArr insertObject:[oDict[@"pass"] AES256EncryptWithKey:kAESKey] forKey:@"pass" atIndex:1];
+    [orderArr insertObject:[oDict[@"LoginName"] AES256EncryptWithKey:kAESKey] forKey:@"LoginName" atIndex:0];
+    [orderArr insertObject:[oDict[@"PassWord"] AES256EncryptWithKey:kAESKey] forKey:@"PassWord" atIndex:1];
     [orderArr insertObject:[Utities md5AndBase:lStr] forKey:@"m" atIndex:2];
     [orderArr insertObject:ARC4RANDOM_MAX forKey:@"t" atIndex:3];
     NSLog(@"aes dict is %@", orderArr);

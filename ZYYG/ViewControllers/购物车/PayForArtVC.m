@@ -355,7 +355,7 @@ static NSString *cartCell = @"CartCell";
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ticketCell forIndexPath:indexPath];
                 UILabel *topLabel = (UILabel*)[cell viewWithTag:1];
                 UILabel *midLabel = (UILabel*)[cell viewWithTag:2];
-                NSArray *invoiceType = @[@"不开发票",@"普通发票",@"增值税发票"];
+                NSArray *invoiceType = @[@"不开发票",@"普通发票"];
                 NSString *ticketsTitle = @"";
                 if (_orderModel.invoiceInfo) {
                     ticketsTitle = invoiceType[[_orderModel.invoiceInfo[@"InvoiceType"] integerValue]/10];
