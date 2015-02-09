@@ -107,7 +107,6 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //状态标签按钮
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-    [orderArray removeAllObjects];
    //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
     pageNum=1;
     if (0==segmentedControl.selectedSegmentIndex) {

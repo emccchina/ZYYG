@@ -18,7 +18,8 @@
 //    HMSegmentedControl *segmentView;// table view title
     NSMutableArray *collections;
     UserInfo *user;
-    NSInteger pageNum;
+    NSInteger pageN;
+    NSInteger pageS;
     BOOL                refreshFooter;//是否是上拉刷新
 }
 
@@ -32,8 +33,9 @@
     [super viewDidLoad];
     [self.myCollectionTableView registerNib:[UINib nibWithNibName:@"MyCollectionCell" bundle:nil] forCellReuseIdentifier:@"MyCollectionCell"];
     collections=[NSMutableArray array];
-    pageNum=1;
-    [self requestCollections:pageNum];
+    pageN=1;
+    pageS=5;
+    [self requestCollections:pageN pageSize:pageS];
     [self showBackItem];
     self.myCollectionTableView.delegate=self;
     self.myCollectionTableView.dataSource=self;
@@ -64,18 +66,18 @@
 {
     [self.myCollectionTableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
         refreshFooter = NO;
-        pageNum=1;
-        [self requestCollections:pageNum];
+        pageN=1;
+        [self requestCollections:pageN pageSize:pageS];
     }];
     [self.myCollectionTableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
-        pageNum=pageNum+1;
+        pageN=pageN+1;
         refreshFooter = YES;
-        [self requestCollections:pageNum];
+        [self requestCollections:pageN pageSize:pageS];
     }];
 }
 
 
--(void)requestCollections:(NSInteger)page
+-(void)requestCollections:(NSInteger)page pageSize:(NSInteger)num
 {
     user=[UserInfo shareUserInfo];
     if (![user isLogin]) {
@@ -87,7 +89,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@favoriteList.ashx",kServerDomain];
     NSLog(@"url   %@", url);
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user.userKey, @"key",[NSString stringWithFormat:@"%ld",(long)page],@"num", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user.userKey, @"key", [NSString stringWithFormat:@"%ld",(long)num],@"num",[NSString stringWithFormat:@"%ld",(long)page], @"page", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
@@ -116,7 +118,6 @@
 
 - (void)requestFinished
 {
-    refreshFooter = NO;
     [self dismissIndicatorView];
     [self.myCollectionTableView footerEndRefreshing];
     [self.myCollectionTableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
