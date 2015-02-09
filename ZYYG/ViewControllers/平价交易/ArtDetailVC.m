@@ -117,8 +117,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     [weakSelf requestForUpLoadMyPrice];
                 }
             }break;
-            case 3:
-                break;
+            case 5:{
+                [weakSelf requestForHightestPrice];
+            }break;
             default:
                 break;
         }
@@ -274,6 +275,8 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     }else{
         if (goods.isBidEntrustPrice) {
             _marginView1.type = 5;
+            _marginView1.appendMoney = [goods.appendMoney doubleValue];
+            _marginView1.minMoney = [goods.maxMoney doubleValue];
             return;
         }
         if (goods.isSecurityDeposit == 10) {
