@@ -68,46 +68,46 @@
 
 - (void)start
 {
-//    if (!_countDownTimer) {
-//        _countDownTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(countDown)];
-//        _countDownTimer.frameInterval = 60;//CADisplayLink 默认每秒运行60次，将它的frameInterval属性设置为60 CADisplayLink每隔60帧运行一次
-//        [_countDownTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-//    }
-//    if (_timer) {
-//        return;
-//    }
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-    dispatch_source_set_event_handler(_timer, ^{
-        if(endCount<=0){ //倒计时结束，关闭
-            dispatch_source_cancel(_timer);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //设置界面的按钮显示 根据自己需求设置
-                self.status = 2;
-                self.timeCount = @"已结束";
-                self.text = self.timeCount;
-            });
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //设置界面的按钮显示 根据自己需求设置
-//                NSLog(@"dddd %f, %f", endCount, startCount);
-                if (startCount > 0) {
-                    self.status = 0;
-                    self.timeCount = [NSString stringWithFormat:@"距开始:%@", [self HHMMSSFromCount:startCount]];
-                    self.text = self.timeCount;
-                }else{
-                    self.status = 1;
-                    self.timeCount = [NSString stringWithFormat:@"距结束:%@", [self HHMMSSFromCount:endCount]];
-                    self.text = self.timeCount;
-                }
-            });
-            endCount -= 1;
-            startCount -= 1;
-            
-        }
-    });
-    dispatch_resume(_timer);
+    if (!_countDownTimer) {
+        _countDownTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(countDown)];
+        _countDownTimer.frameInterval = 60;//CADisplayLink 默认每秒运行60次，将它的frameInterval属性设置为60 CADisplayLink每隔60帧运行一次
+        [_countDownTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    }
+    if (_timer) {
+        return;
+    }
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+//    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+//    dispatch_source_set_event_handler(_timer, ^{
+//        if(endCount<=0){ //倒计时结束，关闭
+//            dispatch_source_cancel(_timer);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                //设置界面的按钮显示 根据自己需求设置
+//                self.status = 2;
+//                self.timeCount = @"已结束";
+//                self.text = self.timeCount;
+//            });
+//        }else{
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                //设置界面的按钮显示 根据自己需求设置
+////                NSLog(@"dddd %f, %f", endCount, startCount);
+//                if (startCount > 0) {
+//                    self.status = 0;
+//                    self.timeCount = [NSString stringWithFormat:@"距开始:%@", [self HHMMSSFromCount:startCount]];
+//                    self.text = self.timeCount;
+//                }else{
+//                    self.status = 1;
+//                    self.timeCount = [NSString stringWithFormat:@"距结束:%@", [self HHMMSSFromCount:endCount]];
+//                    self.text = self.timeCount;
+//                }
+//            });
+//            endCount -= 1;
+//            startCount -= 1;
+//            
+//        }
+//    });
+//    dispatch_resume(_timer);
 }
 
 - (void)countDown
