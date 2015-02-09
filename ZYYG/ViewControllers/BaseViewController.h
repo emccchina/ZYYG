@@ -11,7 +11,7 @@
 #import "NSString+AES.h"
 
 #define kNetworkNotConnect    @"网络不给力,请稍候再试"
-#define kNetworkConnecting    @"玩命加载中..."
+#define kNetworkConnecting    @"加载中..."
 @interface BaseViewController : UIViewController
 
 @property (nonatomic, assign) NSInteger   index;//测试customModel 转场数据

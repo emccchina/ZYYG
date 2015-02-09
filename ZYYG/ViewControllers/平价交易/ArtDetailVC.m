@@ -223,7 +223,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [self requestAddCart];
 }
 - (IBAction)goToCartPressed:(id)sender {
-    [self.tabBarController setSelectedIndex:3];
+    [self.tabBarController setSelectedIndex:2];
 }
 
 - (void)reloadTableViewSection:(NSInteger)section spread:(BOOL)spread

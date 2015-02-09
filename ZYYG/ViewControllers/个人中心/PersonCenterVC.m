@@ -257,7 +257,7 @@ static NSString *listCell = @"listCell";
         [self performSegueWithIdentifier:@"OrderList" sender:self];
         return;
     }else if([model.segueString isEqualToString:@"ShoppingCart"]) {
-        [self.tabBarController setSelectedIndex:3];
+        [self.tabBarController setSelectedIndex:2];
         return;
     }
     [self performSegueWithIdentifier:model.segueString sender:self];

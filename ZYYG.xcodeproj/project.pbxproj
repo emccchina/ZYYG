@@ -781,7 +781,7 @@
 		F7BE243B1A314538001EA855 /* TalkBuyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkBuyVC.h; sourceTree = "<group>"; };
 		F7BE243C1A314538001EA855 /* TalkBuyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkBuyVC.m; sourceTree = "<group>"; };
 		F7BE80D81A3E6DDF0053C5CA /* AdressTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdressTextField.h; sourceTree = "<group>"; };
-		F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdressTextField.m; sourceTree = "<group>"; };
+		F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdressTextField.m; path = ../MyView/AdressTextField.m; sourceTree = "<group>"; };
 		F7BE80DC1A3EE5610053C5CA /* KDPreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDPreView.h; sourceTree = "<group>"; };
 		F7BE80DD1A3EE5610053C5CA /* KDPreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDPreView.m; sourceTree = "<group>"; };
 		F7C095B91A382D280077EB47 /* adress.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = adress.db; sourceTree = "<group>"; };
@@ -1593,7 +1593,6 @@
 				F7DF47CE1A259785006EB419 /* CustomModel.h */,
 				F7DF47CF1A259785006EB419 /* CustomModel.m */,
 				F7BE80D81A3E6DDF0053C5CA /* AdressTextField.h */,
-				F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */,
 				F7EC68CC1A2BF97E000B289D /* PopView.h */,
 				F7EC68CD1A2BF97E000B289D /* PopView.m */,
 				F7C215FA1A2EB80200C011AE /* ChooseView.h */,
@@ -2563,6 +2562,7 @@
 		F93099301A2DB2EC0054FFC1 /* MyModel */ = {
 			isa = PBXGroup;
 			children = (
+				F7BE80D91A3E6DDF0053C5CA /* AdressTextField.m */,
 				F996B8311A4AB26F00D38473 /* AccountModel.h */,
 				F996B8321A4AB26F00D38473 /* AccountModel.m */,
 				F996B8331A4AB26F00D38473 /* AdressModel.h */,
