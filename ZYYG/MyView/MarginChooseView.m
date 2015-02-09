@@ -132,7 +132,7 @@
         case 5:{
             [self.marignBut setTitle:@"已代理" forState:UIControlStateNormal];
             [self setHightestButState:YES];
-            [self setButState:NO];
+            [self setButState:YES];
         }break;
         default:
             break;
