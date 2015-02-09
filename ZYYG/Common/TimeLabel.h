@@ -14,6 +14,7 @@
     CADisplayLink           *_countDownTimer;
     NSTimeInterval          startCount;
     NSTimeInterval          endCount;
+    dispatch_source_t _timer;
 }
 
 @property (nonatomic, strong) NSString *startTime;
