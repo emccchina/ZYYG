@@ -71,6 +71,8 @@
 {
     UIImage *image = hightest ? [UIImage imageNamed:@"accountSelected"] : [UIImage imageNamed:@"accountUnselected"];
     [self.hightestBut setImage:image forState:UIControlStateNormal];
+    NSString *title = hightest ? @"代理出价" : @"我要出价";
+    [self.marignBut setTitle:title forState:UIControlStateNormal];
 }
 - (IBAction)doHightestBut:(id)sender {
     self.hightest = !self.hightest;
@@ -130,7 +132,7 @@
             [self setButState:NO];
         }break;
         case 5:{
-            [self.marignBut setTitle:@"已代理" forState:UIControlStateNormal];
+            [self.marignBut setTitle:@"代理出价" forState:UIControlStateNormal];
             [self setHightestButState:YES];
             [self setButState:YES];
         }break;

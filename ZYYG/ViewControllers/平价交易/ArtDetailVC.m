@@ -110,15 +110,13 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                 break;
             case 1:
                 break;
-            case 2:{
+            case 2:
+            case 5:{
                 if (hightest) {
                     [weakSelf requestForHightestPrice];
                 }else{
                     [weakSelf requestForUpLoadMyPrice];
                 }
-            }break;
-            case 5:{
-                [weakSelf requestForHightestPrice];
             }break;
             default:
                 break;
