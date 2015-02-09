@@ -26,41 +26,24 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="失效剩余时间:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YR0-nn-XD2">
-                        <rect key="frame" x="10" y="34" width="89" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ay9-y8-sln">
-                        <rect key="frame" x="101" y="34" width="36" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRK-If-Vfm">
-                        <rect key="frame" x="10" y="59" width="572" height="17"/>
+                        <rect key="frame" x="10" y="32" width="572" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="YR0-nn-XD2" firstAttribute="top" secondItem="TRT-1Q-rGn" secondAttribute="bottom" constant="7" id="0jt-8J-pYO"/>
-                    <constraint firstItem="LRK-If-Vfm" firstAttribute="top" secondItem="YR0-nn-XD2" secondAttribute="bottom" constant="8" id="3sA-GF-rbW"/>
                     <constraint firstItem="LRK-If-Vfm" firstAttribute="leading" secondItem="26k-DH-x0P" secondAttribute="leadingMargin" constant="2" id="A0M-Hu-EOn"/>
-                    <constraint firstItem="ay9-y8-sln" firstAttribute="leading" secondItem="YR0-nn-XD2" secondAttribute="trailing" constant="2" id="Be0-il-cjc"/>
+                    <constraint firstItem="ARC-BE-scR" firstAttribute="leading" secondItem="TRT-1Q-rGn" secondAttribute="trailing" constant="2" id="CyE-BO-LZT"/>
                     <constraint firstItem="ARC-BE-scR" firstAttribute="top" secondItem="26k-DH-x0P" secondAttribute="topMargin" constant="2" id="Hcd-Ol-C1z"/>
                     <constraint firstItem="TRT-1Q-rGn" firstAttribute="leading" secondItem="26k-DH-x0P" secondAttribute="leadingMargin" constant="2" id="PRj-k9-ezO"/>
-                    <constraint firstItem="ay9-y8-sln" firstAttribute="top" secondItem="ARC-BE-scR" secondAttribute="bottom" constant="7" id="euK-0a-1MU"/>
-                    <constraint firstItem="ARC-BE-scR" firstAttribute="leading" secondItem="TRT-1Q-rGn" secondAttribute="trailing" constant="2" id="fyN-EW-Wu0"/>
-                    <constraint firstItem="YR0-nn-XD2" firstAttribute="leading" secondItem="26k-DH-x0P" secondAttribute="leadingMargin" constant="2" id="nhU-JC-khL"/>
+                    <constraint firstItem="LRK-If-Vfm" firstAttribute="top" secondItem="ARC-BE-scR" secondAttribute="bottom" constant="5" id="mvf-4O-Aco"/>
                     <constraint firstAttribute="trailingMargin" secondItem="LRK-If-Vfm" secondAttribute="trailing" constant="10" id="oSP-Bf-Lae"/>
                     <constraint firstItem="TRT-1Q-rGn" firstAttribute="top" secondItem="26k-DH-x0P" secondAttribute="topMargin" constant="2" id="sba-5E-jwE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="cancellTime" destination="ay9-y8-sln" id="I87-WZ-2tf"/>
                 <outlet property="createTime" destination="ARC-BE-scR" id="WhT-gN-Ody"/>
                 <outlet property="redLab" destination="LRK-If-Vfm" id="pW2-Un-Jxl"/>
             </connections>

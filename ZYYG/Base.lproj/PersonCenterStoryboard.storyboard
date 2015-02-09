@@ -947,7 +947,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXW-xF-3Pb">
-                                                            <rect key="frame" x="20" y="48" width="42" height="21"/>
+                                                            <rect key="frame" x="20" y="48" width="550" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -958,6 +958,7 @@
                                                         <constraint firstItem="3gF-D5-5JG" firstAttribute="leading" secondItem="WFs-6s-TdE" secondAttribute="leading" constant="20" id="Act-dR-0Is"/>
                                                         <constraint firstItem="3gF-D5-5JG" firstAttribute="top" secondItem="WFs-6s-TdE" secondAttribute="top" constant="17" id="Q1R-Il-UvE"/>
                                                         <constraint firstItem="BXW-xF-3Pb" firstAttribute="leading" secondItem="3gF-D5-5JG" secondAttribute="leading" id="Ypg-V7-L84"/>
+                                                        <constraint firstAttribute="trailing" secondItem="BXW-xF-3Pb" secondAttribute="trailing" constant="20" id="sTv-m3-2Pw"/>
                                                         <constraint firstItem="BXW-xF-3Pb" firstAttribute="top" secondItem="3gF-D5-5JG" secondAttribute="bottom" constant="10" id="sxf-Uk-OYr"/>
                                                     </constraints>
                                                 </view>
@@ -1018,7 +1019,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkb-Kg-5JF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkb-Kg-5JF">
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.89411764709999997" green="0.22352941179999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

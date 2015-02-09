@@ -241,15 +241,18 @@ static NSString *ODCell = @"OrderDetailCell";
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         submit = self.orderType ? YES : NO;
-        self.checkDelivery.hidden= !self.orderType;
+        self.checkDelivery.hidden= NO;
         [self.checkDelivery setTitle:@"取消订单" forState:UIControlStateNormal];
-        self.confirmDelivery.hidden=!self.orderType;
+        self.confirmDelivery.hidden=NO;
+        if(submit){
         [self.confirmDelivery setTitle:@"确认订单" forState:UIControlStateNormal];
+        }else{
+            [self.confirmDelivery setTitle:@"支付订单" forState:UIControlStateNormal];
+        }
     }else if(30 == ord.state){
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=NO;
         [self.checkDelivery setTitle:@"确认收货" forState:UIControlStateNormal];
-        
     }else {
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=YES;
@@ -318,10 +321,14 @@ static NSString *ODCell = @"OrderDetailCell";
     switch (section) {
         case 0:
             return 0.5;
+            break;
         default:
             return 5;
             break;
     }
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.5;
 }
 
 
@@ -375,9 +382,27 @@ static NSString *ODCell = @"OrderDetailCell";
             }else if(indexPath.row == (order.Goods.count+1)){
                 OrderDetailCell *orCell=(OrderDetailCell*)[tableView dequeueReusableCellWithIdentifier:ODCell forIndexPath:indexPath];
                 orCell.createTime.text=order.CreateTime;
-                orCell.cancellTime.text=order.RemainingTime;
                 orCell.redLab.numberOfLines=0;
-                orCell.redLab.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!如果有保证金会扣除您的保证金!";
+                if (0 == order.state || 10 == order.state) {
+                    //创建状态 可支付  可取消
+                    if(self.orderType ==0){
+                        orCell.redLab.text=@"提醒:请您在自订单生成后的45分钟内进行付款!否则本次交易订单会自动取消!";
+                    }else{
+                        orCell.redLab.text=@"提醒:请您在自订单生成后的72小时内进行付款!否则本次交易订单会自动取消!并会扣除您的保证金!";
+                    }
+                }else if(20 ==order.state){
+                    orCell.redLab.text=@"恭喜您已经购买到了此艺术品!我们会尽快为你装配并发货!";
+                }else if(30 == order.state){
+                    orCell.redLab.text=@"恭喜您已经购买到了此艺术品!艺术品已经发往您填写的接收地址!如果有疑问可以查看物流信息或者联系我们!";
+                }else if(50 == order.state){
+                    if (self.orderType ==0) {
+                        orCell.redLab.text=@"该订单已经被取消无法继续操作,而且您已经丢失本次购买此商品的机会!";
+                    }else{
+                        orCell.redLab.text=@"该订单已经被取消无法继续操作,而且您已经丢失本次购买此商品的机会!已经扣除了您的保证金!";
+                    }
+                }else {
+                    
+                }
                 return orCell;
 
             }else{

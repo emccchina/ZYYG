@@ -11,6 +11,5 @@
 @interface OrderDetailCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *createTime;
-@property (weak, nonatomic) IBOutlet UILabel *cancellTime;
 @property (weak, nonatomic) IBOutlet UILabel *redLab;
 @end

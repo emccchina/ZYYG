@@ -245,7 +245,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     }else if(indexPath.row == (order.Goods.count+2)){
         OrderListCellBottom *bottomCell=(OrderListCellBottom*)[tableView dequeueReusableCellWithIdentifier:orderBottomCell forIndexPath:indexPath];
         
-        bottomCell.cancelTime.text=[NSString stringWithFormat:@"订单失效时间:%@",order.CancelTime];
+        bottomCell.cancelTime.text=[NSString stringWithFormat:@"订单生成时间:%@",order.CreateTime];
         bottomCell.redLabel.numberOfLines=0;
         [self setButton:bottomCell orderMod:order];
         bottomCell.order=order;
@@ -278,7 +278,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     currentOrder=orderArray[indexPath.section];
-    if (indexPath.row != 0 && indexPath.row != currentOrder.Goods.count+1 && indexPath.row != currentOrder.Goods.count+2) {
+    if (indexPath.row != 0  && indexPath.row != currentOrder.Goods.count+2) {
         [self performSegueWithIdentifier:@"OrderDetail" sender:self];
     }
 }
@@ -307,32 +307,32 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 //判断状态 给出按钮
 -(void)setButton:(OrderListCellBottom *)bottomCell orderMod:(OrderModel *)ord
 {
-    bottomCell.canStar.hidden=YES;
-    bottomCell.labStar.hidden=YES;
+    bottomCell.canStar.hidden=NO;
+    bottomCell.labStar.hidden=NO;
     bottomCell.cancellButton.hidden=YES;
     bottomCell.payButton.hidden=YES;
     bottomCell.redLabel.text=@"";
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         if ([_orderType intValue] ==0 ) {
-            bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!";
+            bottomCell.redLabel.text=@"提醒:请您在自订单生成后的45分钟内进行付款!否则本次交易订单会自动取消!";
         }else{
-            bottomCell.redLabel.text=@"请在订单失效之前付款否则交易将自动取消,并且您会丢失购买此商品的机会!并且会扣除您的保证金!";
+            bottomCell.redLabel.text=@"提醒:请您在自订单生成后的72小时内进行付款!否则本次交易订单会自动取消!并会扣除您的保证金!";
         }
-        bottomCell.canStar.hidden=NO;
-        bottomCell.labStar.hidden=NO;
         bottomCell.cancellButton.hidden=NO;
         bottomCell.payButton.hidden=NO;
         //创建状态 可支付  可取消
-   
+    }else if(20 ==ord.state){
+        bottomCell.redLabel.text=@"恭喜您已经购买到了此艺术品!我们会尽快为你装配并发货!";
     }else if(30 == ord.state){
+        bottomCell.redLabel.text=@"恭喜您已经购买到了此艺术品!艺术品已经发往您填写的接收地址!如果有疑问可以查看物流信息或者联系我们!";
         bottomCell.payButton.hidden=NO;
         [bottomCell.payButton setTitle:@"确认收货" forState:UIControlStateNormal];
     }else if(50 == ord.state){
         if ([_orderType intValue] ==0) {
-            bottomCell.redLabel.text=@"该订单已经被取消无法操作,您已经丢失购买此商品的机会!";
+            bottomCell.redLabel.text=@"该订单已经被取消无法继续操作,而且您已经丢失本次购买此商品的机会!";
         }else{
-            bottomCell.redLabel.text=@"该订单已经被取消无法操作,您已经丢失购买此商品的机会!已经扣除了您的保证金!";
+            bottomCell.redLabel.text=@"该订单已经被取消无法继续操作,而且您已经丢失本次购买此商品的机会!已经扣除了您的保证金!";
         }
         bottomCell.canStar.hidden=NO;
         bottomCell.labStar.hidden=NO;
