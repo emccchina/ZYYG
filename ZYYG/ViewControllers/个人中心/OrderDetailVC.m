@@ -241,14 +241,14 @@ static NSString *ODCell = @"OrderDetailCell";
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         submit = self.orderType ? YES : NO;
-        self.checkDelivery.hidden= NO;
+        self.checkDelivery.hidden= !self.orderType;
         [self.checkDelivery setTitle:@"取消订单" forState:UIControlStateNormal];
-        self.confirmDelivery.hidden=NO;
-        if(submit){
-        [self.confirmDelivery setTitle:@"确认订单" forState:UIControlStateNormal];
-        }else{
-            [self.confirmDelivery setTitle:@"支付订单" forState:UIControlStateNormal];
-        }
+        self.confirmDelivery.hidden=!self.orderType;
+//        if(submit){
+//        [self.confirmDelivery setTitle:@"确认订单" forState:UIControlStateNormal];
+//        }else{
+//            [self.confirmDelivery setTitle:@"支付订单" forState:UIControlStateNormal];
+//        }
     }else if(30 == ord.state){
         self.confirmDelivery.hidden=YES;
         self.checkDelivery.hidden=NO;
