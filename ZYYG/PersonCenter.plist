@@ -19,26 +19,26 @@
 			<key>segueString</key>
 			<string>NormalOrderList</string>
 		</dict>
-<!--		<dict>-->
-<!--			<key>headerImage</key>-->
-<!--			<string>competeOrder.png</string>-->
-<!--			<key>title</key>-->
-<!--			<string>竞价订单</string>-->
-<!--			<key>footerImage</key>-->
-<!--			<string>left.png</string>-->
-<!--			<key>segueString</key>-->
-<!--			<string>CompeteOrderList</string>-->
-<!--		</dict>-->
-<!--		<dict>-->
-<!--			<key>headerImage</key>-->
-<!--			<string>compete.png</string>-->
-<!--			<key>title</key>-->
-<!--			<string>竞价记录</string>-->
-<!--			<key>footerImage</key>-->
-<!--			<string>left.png</string>-->
-<!--			<key>segueString</key>-->
-<!--			<string>BiddingRecord</string>-->
-<!--		</dict>-->
+		<dict>
+			<key>headerImage</key>
+			<string>competeOrder.png</string>
+			<key>title</key>
+			<string>竞价订单</string>
+			<key>footerImage</key>
+			<string>left.png</string>
+			<key>segueString</key>
+			<string>CompeteOrderList</string>
+		</dict>
+		<dict>
+			<key>headerImage</key>
+			<string>compete.png</string>
+			<key>title</key>
+			<string>竞价记录</string>
+			<key>footerImage</key>
+			<string>left.png</string>
+			<key>segueString</key>
+			<string>BiddingRecord</string>
+		</dict>
 		<dict>
 			<key>headerImage</key>
 			<string>shoppingCart.png</string>
@@ -49,16 +49,16 @@
 			<key>segueString</key>
 			<string>ShoppingCart</string>
 		</dict>
-<!--		<dict>-->
-<!--			<key>headerImage</key>-->
-<!--			<string>marginMoney.png</string>-->
-<!--			<key>title</key>-->
-<!--			<string>保证金</string>-->
-<!--			<key>footerImage</key>-->
-<!--			<string>left.png</string>-->
-<!--			<key>segueString</key>-->
-<!--			<string>MarginMoney</string>-->
-<!--		</dict>-->
+		<dict>
+			<key>headerImage</key>
+			<string>marginMoney.png</string>
+			<key>title</key>
+			<string>保证金</string>
+			<key>footerImage</key>
+			<string>left.png</string>
+			<key>segueString</key>
+			<string>MarginMoney</string>
+		</dict>
 	</array>
 	<array>
 		<dict>
