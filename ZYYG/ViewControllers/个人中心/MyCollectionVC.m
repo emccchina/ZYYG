@@ -173,18 +173,22 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GoodsModel *goods=collections[indexPath.row];
-    [self presentDetailVC:goods.GoodsCode];
+    [self presentDetailVC:goods];
 }
 
-- (void)presentDetailVC:(id)info
+- (void)presentDetailVC:(GoodsModel*)info
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
     if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
-        [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+        BOOL hidden = NO;
+        if ([info.SaleChannel isEqualToString:@"私人洽购"] || [info.SaleChannel isEqualToString:@"私人定制"]) {
+            hidden = YES;
+        }
+        [detailVC setValue:@(hidden) forKey:@"hiddenBottom"];
     }
     if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
-        [detailVC setValue:(NSString*)info forKey:@"productID"];
+        [detailVC setValue:info.GoodsCode forKey:@"productID"];
     }
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
