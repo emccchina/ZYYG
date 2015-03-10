@@ -221,13 +221,14 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)addToCartPressed:(id)sender {
-    if (![UserInfo shareUserInfo].isLogin) {
+    if (self.type == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", goods.telephone]]];
+        return;
+    }else{
+        if (![UserInfo shareUserInfo].isLogin) {
         [Utities presentLoginVC:self];
         return;
-    }
-    if (self.type == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
-    }else{
+        }
         [self requestAddCart];
     }
 }
