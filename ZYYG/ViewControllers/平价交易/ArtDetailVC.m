@@ -327,7 +327,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                 [self requestForHistory];
             }
             if (self.type == 1) {
-                [self.addCartBut setTitle:@"dianhuan" forState:UIControlStateNormal];
+                [self.addCartBut setTitle:goods.telephone forState:UIControlStateNormal];
             }
             [self.detailTB reloadData];
             
@@ -652,7 +652,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     cell.collectState = [colloct integerValue];
                     cell.topLab.text =goods.GoodsName;
                     cell.botLab.text = @"价格:";
-                    cell.botRightLab.text = goods.typeForGoods ? @"面议" : [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
+                    cell.botRightLab.text = goods.typeForGoods ? @"洽谈" : [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
                     cell.colloct = ^(BOOL collect11){
                         [self requestForCollect:collect11];
                     };

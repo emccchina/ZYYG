@@ -38,6 +38,7 @@
     self.delayMinute = [[dict safeObjectForKey:@"DelayMinute"] integerValue];
     self.isBidEntrustPrice = [dict[@"IsEntrustPrice"] integerValue];
     self.BidEntrustPrice = [dict safeObjectForKey:@"EntrustPrice"];
+    self.telephone = [dict safeObjectForKey:@"Tel"];
 }
 
 - (void)goodsForBidHistroy:(NSDictionary *)dict
