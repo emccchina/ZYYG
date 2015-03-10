@@ -93,7 +93,12 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     [self.detailTB registerNib:[UINib nibWithNibName:@"BiddingInfoCell" bundle:nil] forCellReuseIdentifier:biddingInfoCell];
     self.addCartBut.layer.cornerRadius = 3;
     self.addCartBut.layer.backgroundColor = kRedColor.CGColor;
-    
+    if (self.type == 1) {
+        self.cartBut.hidden = YES;
+        [self.addCartBut setTitle:@"Tel" forState:UIControlStateNormal];
+    }else{
+        self.cartBut.hidden = NO;
+    }
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MarginChooseView" owner:_marginView options:nil];
     UIView *view = nib[0];
     _marginView1 = (MarginChooseView*)view;
@@ -220,7 +225,11 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [Utities presentLoginVC:self];
         return;
     }
-    [self requestAddCart];
+    if (self.type == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
+    }else{
+        [self requestAddCart];
+    }
 }
 - (IBAction)goToCartPressed:(id)sender {
     [self.tabBarController setSelectedIndex:3];
@@ -316,6 +325,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             if (self.type == 2) {
                 [self setBottomState];
                 [self requestForHistory];
+            }
+            if (self.type == 1) {
+                [self.addCartBut setTitle:@"dianhuan" forState:UIControlStateNormal];
             }
             [self.detailTB reloadData];
             
@@ -639,8 +651,8 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     }
                     cell.collectState = [colloct integerValue];
                     cell.topLab.text =goods.GoodsName;
-                    cell.botLab.text = goods.typeForGoods ? @"电话:" : @"价格:";
-                    cell.botRightLab.text = goods.typeForGoods ? @"123456789" : [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
+                    cell.botLab.text = @"价格:";
+                    cell.botRightLab.text = goods.typeForGoods ? @"面议" : [NSString stringWithFormat:@"￥%.2f",goods.AppendPrice];
                     cell.colloct = ^(BOOL collect11){
                         [self requestForCollect:collect11];
                     };
@@ -736,9 +748,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0 && indexPath.row == 1 && self.type == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
-    }
+//    if (indexPath.section == 0 && indexPath.row == 1 && self.type == 1) { 
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
+//    }
 }
 
 

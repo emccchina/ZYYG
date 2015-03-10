@@ -182,8 +182,10 @@
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
     if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
         BOOL hidden = NO;
-        if ([info.SaleChannel isEqualToString:@"私人洽购"] || [info.SaleChannel isEqualToString:@"私人定制"]) {
+        if ([info.SaleChannel isEqualToString:@"私人定制"]) {
             hidden = YES;
+        }else if ([info.SaleChannel isEqualToString:@"私人洽购"]){
+            [detailVC setValue:@(1) forKey:@"type"];
         }
         [detailVC setValue:@(hidden) forKey:@"hiddenBottom"];
     }

@@ -219,7 +219,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
     if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
-        [detailVC setValue:@(1) forKey:@"hiddenBottom"];
+        [detailVC setValue:@(0) forKey:@"hiddenBottom"];
     }
     if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
         [detailVC setValue:(NSString*)info forKey:@"productID"];
