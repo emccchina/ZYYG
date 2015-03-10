@@ -681,6 +681,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             cell.titleLab.text = @"艺术家简介";
             if (goods.AuthorIntro && ![goods.AuthorIntro isKindOfClass:[NSNull class]]) {
                 [cell.detailWebView loadHTMLString:goods.AuthorIntro baseURL:nil];
+                [cell.detailWebView setScalesPageToFit:NO];
             }
             
             cell.spreadState = _spreadArtist;
@@ -696,6 +697,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             cell.titleLab.text = @"作品简介";
             if (goods.GoodsIntro && ![goods.GoodsIntro isKindOfClass:[NSNull class]]) {
                 [cell.detailWebView loadHTMLString:goods.GoodsIntro baseURL:nil];
+                [cell.detailWebView setScalesPageToFit:NO];
             }
             cell.spreadState = _spreadArt;
             cell.reloadHeight = ^(BOOL spread, CGFloat height){
@@ -710,6 +712,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             cell.titleLab.text = @"布罗德根艺术指数证书";
             if (goods.centificateIntro && ![goods.centificateIntro isKindOfClass:[NSNull class]]) {
                 [cell.detailWebView loadHTMLString:goods.centificateIntro baseURL:nil];
+                [cell.detailWebView setScalesPageToFit:NO];
             }
             cell.spreadState = _spreadCertification;
             cell.reloadHeight = ^(BOOL spread, CGFloat height){
