@@ -753,11 +753,6 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
-    if ([cell isKindOfClass:[SpreadCell class]]) {
-        [(SpreadCell*)cell doCell];
-    }
-
 }
 
 

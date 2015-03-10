@@ -28,8 +28,10 @@
 
 - (void)doCell
 {
-    [self spreadButtonPressed:nil];
+//    [self spreadButtonPressed:nil];
 }
+
+
 - (IBAction)spreadButtonPressed:(id)sender {
     if (self.detailWebView.isLoading) {
        [Utities showMessageOnWindow:@"正在加载中,请稍候"];

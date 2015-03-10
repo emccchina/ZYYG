@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -21,8 +21,8 @@
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNd-Ej-dZV">
-                        <rect key="frame" x="562" y="10" width="30" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNd-Ej-dZV">
+                        <rect key="frame" x="10" y="10" width="582" height="30"/>
                         <state key="normal" image="left">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -30,7 +30,7 @@
                             <action selector="spreadButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xhp-Rh-hSc"/>
                         </connections>
                     </button>
-                    <webView hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tec-TK-VQK">
+                    <webView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tec-TK-VQK">
                         <rect key="frame" x="0.0" y="45" width="600" height="554"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>
@@ -39,6 +39,7 @@
                     <constraint firstItem="HNd-Ej-dZV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="AXi-Ib-WET"/>
                     <constraint firstItem="Tec-TK-VQK" firstAttribute="top" secondItem="HNd-Ej-dZV" secondAttribute="bottom" constant="5" id="IBL-Rq-huL"/>
                     <constraint firstItem="BbA-JA-4ff" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="MvN-SN-7fa"/>
+                    <constraint firstItem="HNd-Ej-dZV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="Rgf-mM-6fV"/>
                     <constraint firstItem="BbA-JA-4ff" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="e89-hg-jcM"/>
                     <constraint firstAttribute="trailing" secondItem="Tec-TK-VQK" secondAttribute="trailing" id="j23-1D-Vom"/>
                     <constraint firstItem="Tec-TK-VQK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="km3-ae-3Jc"/>
