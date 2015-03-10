@@ -26,4 +26,7 @@ typedef void (^ReloadCellHeight) (BOOL spread12, CGFloat height);
 @property (nonatomic, assign) CGFloat   webViewHeight;
 @property (copy, nonatomic) ReloadCellHeight reloadHeight;
 @property (assign, nonatomic) BOOL   spreadState;//是否展开
+
+- (void)doCell;
+
 @end

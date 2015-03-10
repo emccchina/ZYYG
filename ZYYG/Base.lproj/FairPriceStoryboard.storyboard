@@ -456,9 +456,9 @@
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7W-MB-5GM">
-                                        <rect key="frame" x="480" y="10" width="95" height="30"/>
+                                        <rect key="frame" x="425" y="10" width="150" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="95" id="57f-wJ-Egv"/>
+                                            <constraint firstAttribute="width" constant="150" placeholder="YES" id="57f-wJ-Egv"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="加入购物车">

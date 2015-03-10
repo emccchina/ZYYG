@@ -75,13 +75,16 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         self.bottomView.hidden = YES;
         _marginView.hidden = self.hiddenBottom;
     }
+    CGFloat addButWidth = (self.type == 1 ? 150 : 95);
+    [self.addCartBut addConstraint:[NSLayoutConstraint constraintWithItem:self.addCartBut attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1 constant:addButWidth]];
+    
     historyArr = [[NSMutableArray alloc] init];
     _heightArt = 0;
     _heightArtist = 0;
     isCompare = NO;
     _timerArr = [[NSMutableArray alloc] init];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.detailTB attribute:NSLayoutAttributeBottom multiplier:1 constant:TBBottom]];
-
+    
     
     
     self.detailTB.delegate = self;
@@ -95,7 +98,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     self.addCartBut.layer.backgroundColor = kRedColor.CGColor;
     if (self.type == 1) {
         self.cartBut.hidden = YES;
-        [self.addCartBut setTitle:@"Tel" forState:UIControlStateNormal];
+        [self.addCartBut setTitle:@"致电:" forState:UIControlStateNormal];
     }else{
         self.cartBut.hidden = NO;
     }
@@ -328,7 +331,8 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                 [self requestForHistory];
             }
             if (self.type == 1) {
-                [self.addCartBut setTitle:goods.telephone forState:UIControlStateNormal];
+                NSString *telTitle = [NSString stringWithFormat:@"致电:%@",goods.telephone];//goods.telephone;
+                [self.addCartBut setTitle:telTitle forState:UIControlStateNormal];
             }
             [self.detailTB reloadData];
             
@@ -749,9 +753,11 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if (indexPath.section == 0 && indexPath.row == 1 && self.type == 1) { 
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"123456"]];
-//    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:spreadCell forIndexPath:indexPath];
+    if ([cell isKindOfClass:[SpreadCell class]]) {
+        [(SpreadCell*)cell doCell];
+    }
+
 }
 
 
