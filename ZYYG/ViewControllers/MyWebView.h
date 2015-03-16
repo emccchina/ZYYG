@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 
 @interface MyWebView : BaseViewController
-
+<UIWebViewDelegate>
 @property (nonatomic, strong) NSString *webViewURL;
-
+@property (nonatomic, strong) NSString *myTitle;
 @end

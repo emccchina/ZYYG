@@ -9,6 +9,7 @@
 #import "SettingsVC.h"
 #import "SettingModel.h"
 #import <StoreKit/StoreKit.h>
+#import "MyWebView.h"
 @interface SettingsVC ()
 <SKStoreProductViewControllerDelegate>
 {
@@ -96,6 +97,17 @@
         [self dismissIndicatorView];
         [self showAlertView:kNetworkNotConnect];
     }];
+}
+
+- (void)showProtocolsView
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"PublicStoryboard" bundle:nil];
+    MyWebView* vc = (MyWebView*)[storyboard instantiateViewControllerWithIdentifier:@"webView"];
+    vc.webViewURL = @"http://www.chinart500.com/user/RegProtocol.html";
+    vc.myTitle = @"用户协议";
+    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController.view.layer addAnimation:[Utities getAnimation:5] forKey:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)doAlertViewTwo
@@ -219,8 +231,7 @@
         cell.textLabel.font = [UIFont systemFontOfSize:17];
         return cell;
     }
-    
-    
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -233,12 +244,17 @@
     SettingModel *model=settingDataArray[indexPath.section][indexPath.row];
     if ([model.segueString isEqualToString:@"updatePassword"]) {
         [self performSegueWithIdentifier:model.segueString sender:self];
-    }else if ([model.segueString isEqualToString:@"checkUpdate"]){
-        [self requestForVersion];
-    }else if ([model.segueString isEqualToString:@"scaleMark"]){
+    }
+    else if ([model.segueString isEqualToString:@"protocols"]){
+        [self showProtocolsView];
+    }
+    else if ([model.segueString isEqualToString:@"scaleMark"]){
         [self evaluate];
     }else if ([model.segueString isEqualToString:@"clearCache"]){
         [self deleteFile];
+    }else if ([model.segueString isEqualToString:@"aboutUs"]){
+        NSString *tel = @"4000255151";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", tel]]];
     }
 }
 

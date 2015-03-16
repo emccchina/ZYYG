@@ -17,7 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = self.myTitle;
+    [self showBackItem];
+    self.myWebView.delegate = self;
     // Do any additional setup after loading the view.
+    [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.webViewURL]]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,6 +29,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    return YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self dismissIndicatorView];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self dismissIndicatorView];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self showIndicatorView:kNetworkConnecting];
+}
 /*
 #pragma mark - Navigation
 

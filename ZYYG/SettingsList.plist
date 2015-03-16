@@ -5,15 +5,9 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>检测更新</string>
+			<string>用户协议</string>
 			<key>segueString</key>
-			<string>checkUpdate</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>关于我们</string>
-			<key>segueString</key>
-			<string>aboutUs</string>
+			<string>protocols</string>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -21,6 +15,7 @@
 			<key>segueString</key>
 			<string>scaleMark</string>
 		</dict>
+        
 	</array>
 	<array>
 		<dict>
@@ -36,5 +31,13 @@
 			<string>clearCache</string>
 		</dict>
 	</array>
+    <array>
+        <dict>
+            <key>title</key>
+            <string>联系电话:400-025-5151</string>
+            <key>segueString</key>
+            <string>aboutUs</string>
+        </dict>
+    </array>
 </array>
 </plist>
