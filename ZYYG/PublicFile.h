@@ -33,4 +33,6 @@
 #import "Utities.h"
 #import "UserInfo.h"
 #import "NSDictionary+safeObjectForKey.h"
+#import "ServerFile.h"
+
 #endif
