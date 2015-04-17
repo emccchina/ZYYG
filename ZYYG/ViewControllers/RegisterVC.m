@@ -43,8 +43,6 @@
     self.getVerifiBut.layer.backgroundColor = kRedColor.CGColor;
     self.registerBut.layer.cornerRadius = 3;
     self.registerBut.layer.backgroundColor = kRedColor.CGColor;
-    
-    
 }
 
 - (void)setInitState
@@ -183,7 +181,8 @@
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-            if([@"0" isEqual:result[@"errno"]]){
+            if([@"0" isEqualToString:result[@"errno"]]){
+                registerSuccessuful = YES;
                 [self showAlertView:@"密码找回成功,请登录!"];
             }
         }
@@ -230,6 +229,7 @@
         if (result) {
             [self showAlertView:@"注册成功,请登录"];
             registerSuccessuful = YES;
+            
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];

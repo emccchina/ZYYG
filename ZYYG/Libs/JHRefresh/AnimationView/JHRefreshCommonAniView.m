@@ -15,15 +15,15 @@
 @implementation JHRefreshCommonAniView
 
 NSString *const JHRefreshHeaderStatusTextNormal = @"下拉刷新";
-NSString *const JHRefreshHeaderStatusTextPulling = @"松开既可刷新 ^_^";
-NSString *const JHRefreshHeaderStatusTextRefreshing = @"正在刷新...";
-NSString *const JHRefreshHeaderStatusTextSuccess = @"刷新成功 ^_^";
+NSString *const JHRefreshHeaderStatusTextPulling = @"松开既可刷新";
+NSString *const JHRefreshHeaderStatusTextRefreshing = @"正在刷新。。。";
+NSString *const JHRefreshHeaderStatusTextSuccess = @"刷新成功";
 NSString *const JHRefreshHeaderStatusTextFailure = @"刷新失败";
 
 NSString *const JHRefreshFooterStatusTextNormal = @"上拉加载更多";
-NSString *const JHRefreshFooterStatusTextPulling = @"松开既可加载 ^_^";
-NSString *const JHRefreshFooterStatusTextRefreshing = @"正在加载...";
-NSString *const JHRefreshFooterStatusTextSuccess = @"加载成功 ^_^";
+NSString *const JHRefreshFooterStatusTextPulling = @"松开既可加载";
+NSString *const JHRefreshFooterStatusTextRefreshing = @"正在加载。。。";
+NSString *const JHRefreshFooterStatusTextSuccess = @"加载成功";
 NSString *const JHRefreshFooterStatusTextFailure = @"加载失败";
 
 - (id)initWithFrame:(CGRect)frame

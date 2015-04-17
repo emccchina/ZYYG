@@ -34,6 +34,8 @@
 
 - (NSString *)aeskeyOrNot:(NSString *)value aes:(BOOL)aes;
 
+- (void)back;
+
 //打开相机
 - (void)presentCameraVC;
 - (void)selectImageFinished:(NSData*)image;
