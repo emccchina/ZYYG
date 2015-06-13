@@ -18,7 +18,7 @@
     self.detailLab.numberOfLines = 0;
     self.detailWebView.delegate = self;
     self.webViewHeight = 0;
-    self.detailWebView.scalesPageToFit = YES;
+    self.detailWebView.scalesPageToFit = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

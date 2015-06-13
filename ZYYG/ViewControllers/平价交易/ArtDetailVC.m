@@ -614,10 +614,10 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                 if (self.type == 2) {
                     BiddingInfoCell *cell = (BiddingInfoCell*)[tableView dequeueReusableCellWithIdentifier:biddingInfoCell forIndexPath:indexPath];
                     cell.LTLabel.text = goods.GoodsName;
-                    cell.LSLabel.text = goods.startPrice;
-                    cell.LThirstLabel.text = goods.maxMoney;//@"no data";
-                    cell.LFourthLabel.text = goods.securityDeposit;
-                    cell.RSLabel.text = goods.appendMoney;
+                    cell.LSLabel.text = [NSString stringWithFormat:@"￥%@",goods.startPrice] ;
+                    cell.LThirstLabel.text = [NSString stringWithFormat:@"￥%@",goods.maxMoney];//@"no data";
+                    cell.LFourthLabel.text = [NSString stringWithFormat:@"￥%@",goods.securityDeposit];
+                    cell.RSLabel.text = [NSString stringWithFormat:@"￥%@",goods.appendMoney];
                     cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld",(long)goods.delayMinute];
                     if (goods.biddingStatus == 20) {
                         cell.LFifthLabel.text = @"已流拍";
