@@ -71,12 +71,10 @@
 {
     UIImage *image = hightest ? [UIImage imageNamed:@"accountSelected"] : [UIImage imageNamed:@"accountUnselected"];
     [self.hightestBut setImage:image forState:UIControlStateNormal];
-    NSString *title = hightest ? @"代理出价" : @"我要出价";
-    [self.marignBut setTitle:title forState:UIControlStateNormal];
 }
 - (IBAction)doHightestBut:(id)sender {
     self.hightest = !self.hightest;
-    [self setHightestButState:self.hightest];
+    [self setType:self.hightest?6:2];
     if (self.hightestPrice) {
         self.hightestPrice();
     }
@@ -112,7 +110,9 @@
         case 0:
         {
             [self.marignBut setTitle:@"交保证金" forState:UIControlStateNormal];
-            [self setButState:YES];
+            [self setButState:NO];
+            self.marignBut.enabled = YES;
+            [self.marignBut.layer setBackgroundColor:kRedColor.CGColor];
         }
             break;
         case 1:{
@@ -132,7 +132,12 @@
             [self setButState:NO];
         }break;
         case 5:{
-            [self.marignBut setTitle:@"代理出价" forState:UIControlStateNormal];
+            [self.marignBut setTitle:@"委托出价中" forState:UIControlStateNormal];
+            [self setHightestButState:YES];
+            [self setButState:YES];
+        }break;
+        case 6:{
+            [self.marignBut setTitle:@"委托出价" forState:UIControlStateNormal];
             [self setHightestButState:YES];
             [self setButState:YES];
         }break;

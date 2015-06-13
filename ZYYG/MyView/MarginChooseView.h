@@ -27,7 +27,8 @@ typedef void (^HightestPrice)(void);//选择最高价
 @property (nonatomic, copy) GoToPayMargin  gotoMargin;
 @property (nonatomic, copy) ChangeMoneyCount changeMoney;
 @property (nonatomic, copy) HightestPrice    hightestPrice;
-@property (nonatomic, assign) NSInteger type;//0交保证金  1 尚未开始   2我要出价   3已成交灰色不能点 4已流拍 5最高价格已出
+@property (nonatomic, assign) NSInteger type;//0交保证金  1 尚未开始   2我要出价   3已成交灰色不能点 4已流拍 5委托出价中 6委托出价
 @property (nonatomic, assign) double appendMoney;
 @property (nonatomic, assign) BOOL      hightest;
+- (void)setHightestButState:(BOOL)hightest;
 @end

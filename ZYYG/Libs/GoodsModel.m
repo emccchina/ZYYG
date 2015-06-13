@@ -112,6 +112,7 @@
     self.endTime = [dict safeObjectForKey:@"EndDate"];
     self.startTime = [dict safeObjectForKey:@"StartDate"];
     self.status = [dict safeObjectForKey:@"Status"];
+    self.RemainingTime = [dict safeObjectForKey:@"RemainingTime"];
 }
 - (void)goodsModelFromMarginList:(NSDictionary*)dict
 {

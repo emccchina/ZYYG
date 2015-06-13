@@ -112,6 +112,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [weakSelf doWithMoneyCount];
     };
     _marginView1.gotoMargin = ^(NSInteger state, BOOL hightest){
+        //hightest 是否代理出价
         switch (state) {
             case 0:
                 [weakSelf presentPayMarginVC];
@@ -119,7 +120,8 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             case 1:
                 break;
             case 2:
-            case 5:{
+            case 5:
+            case 6:{
                 if (hightest) {
                     [weakSelf requestForHightestPrice];
                 }else{
@@ -284,22 +286,17 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             [self showAlertView:@"您已拍下此艺术品,请在十分钟内付款"];
         }
     }else{
-        if (goods.isBidEntrustPrice) {
-            _marginView1.type = 5;
+
+        if (goods.isSecurityDeposit == 10) {
             _marginView1.appendMoney = [goods.appendMoney doubleValue];
             _marginView1.minMoney = [goods.maxMoney doubleValue];
-            return;
-        }
-        if (goods.isSecurityDeposit == 10) {
-            if (!isBegin) {
-                _marginView1.type = 1;
+            if ([goods.entrust integerValue]) {
+                _marginView1.type = 5;
             }else{
                 _marginView1.type = 2;
-                _marginView1.appendMoney = [goods.appendMoney doubleValue];
-                _marginView1.minMoney = [goods.maxMoney doubleValue];
             }
         }else{
-           _marginView1.type = 0;
+            _marginView1.type = 0;
         }
     }
     
@@ -429,6 +426,10 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             goods.maxMoney = result[@"MaxMoeny"];
             goods.bidHistory = result[@"Table"];
             goods.biddingStatus = [result[@"Status"] integerValue];
+            goods.entrust = result[@"entrust"];
+            goods.leaveTime = result[@"leaveTime"];
+            goods.nstatsName = result[@"nstatsName"];
+            
             [historyArr removeAllObjects];
             [historyArr addObjectsFromArray:result[@"data"]];
             if (self.type == 2) {
@@ -624,10 +625,16 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     }else if (goods.biddingStatus == 10){
                         cell.LFifthLabel.text = @"已成交";
                     }else{
-                        cell.LFifthLabel.startTime = goods.startTime;
-                        cell.LFifthLabel.endTime = goods.endTime;
+//                        cell.LFifthLabel.startTime = goods.startTime;
+//                        cell.LFifthLabel.endTime = goods.endTime;
+                        cell.LFifthLabel.timeCount = goods.leaveTime;
+                        cell.LFifthLabel.name = goods.nstatsName;
                         [cell.LFifthLabel start];
-                        isBegin = cell.LFifthLabel.status;
+                        cell.LFifthLabel.timeOut = ^(){
+                            [self requestForHistory];
+                        };
+//                        isBegin = cell.LFifthLabel.status;
+                        
                     }
                     cell.collectState = [goods.IsCollect integerValue];
                     cell.Lfinished = ^(){

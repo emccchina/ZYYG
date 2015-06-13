@@ -33,7 +33,10 @@
 @property (nonatomic, strong) NSString      *Nstatus;//在售状态
 @property (nonatomic, strong) NSString      *centificateIntro;//证书简介
 @property (nonatomic, strong) NSString      *telephone;//电话
-
+@property (nonatomic, strong) NSString      *RemainingTime;//
+@property (nonatomic, strong) NSString      *entrust;//是否委托 0未委托 1委托
+@property (nonatomic, strong) NSString      *leaveTime;//距离时间
+@property (nonatomic, strong) NSString      *nstatsName;//距结束  距开始 已经结束
 
 @property (nonatomic, assign) NSInteger     biddingStatus;//竞拍状态: 10已成交 20流拍  0有效
 @property (nonatomic, strong) NSString      *startPrice;
@@ -48,7 +51,7 @@
 @property (nonatomic, assign) NSInteger     isBidEntrustPrice;//是否最高价格
 @property (nonatomic, strong) NSString      *BidEntrustPrice;//最高价格
 @property (nonatomic, strong) NSString      *securityDeposit;//保证金
-@property (nonatomic, assign) NSInteger     isSecurityDeposit;//是否交保证金 -1:没有；0：待付款；10：已付款；
+@property (nonatomic, assign) NSInteger     isSecurityDeposit;//是否交保证金 -1:没有；0：待付保证金；10：已付保证金；
 @property (nonatomic, strong) NSString      *maxMoney;//当前价格
 @property (nonatomic, strong) NSString      *bidHistory;//出价历史
 @property (nonatomic, strong) NSString      *addCartCount;

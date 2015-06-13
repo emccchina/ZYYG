@@ -29,6 +29,11 @@
     endCount = [self intervalFromDateString:endTime];
 }
 
+- (void)setTimeCount:(NSString *)timeCount
+{
+    timeCountInterval = [timeCount doubleValue];
+}
+
 - (NSTimeInterval)intervalFromDateString:(NSString*)timeString
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -59,7 +64,7 @@
 
 - (NSString*)HHMMSSFromCount:(NSTimeInterval)count
 {
-    count = fabs(count);
+    count = fabs(count/1000);
     NSInteger HH = count / 60/60;
     NSInteger MM = (count - HH*60*60)/60;
     NSInteger SS = (count - HH*60*60 - MM*60);
@@ -112,27 +117,43 @@
 
 - (void)countDown
 {
-//    NSLog(@"%f，，，%p",[[NSDate date] timeIntervalSince1970], self);
-    
-    if (endCount < 0){
-        self.status = 2;
-        self.timeCount = @"已结束";
-        self.text = self.timeCount;
-        [_countDownTimer invalidate];
+    if (!self.name) {
+        self.name = @"";
+    }
+    timeCountInterval-=1000;
+    self.text = [NSString stringWithFormat:@"%@:%@",self.name,[self HHMMSSFromCount:timeCountInterval]];
+    if (timeCountInterval <= 0) {
+        if (_countDownTimer) {
+            [_countDownTimer invalidate];
+            [_countDownTimer removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        }
         _countDownTimer = nil;
-    }else{
-        if (startCount > 0) {
-            self.status = 0;
-            self.timeCount = [NSString stringWithFormat:@"距开始:%@", [self HHMMSSFromCount:startCount]];
-            self.text = self.timeCount;
-        }else{
-            self.status = 1;
-            self.timeCount = [NSString stringWithFormat:@"距结束:%@", [self HHMMSSFromCount:endCount]];
-            self.text = self.timeCount;
+        if (self.timeOut) {
+            self.timeOut();
         }
     }
-    endCount -= 1;
-    startCount -= 1;
+    
+    
+    
+//    if (endCount < 0){
+//        self.status = 2;
+//        self.timeCount = @"已结束";
+//        self.text = self.timeCount;
+//        [_countDownTimer invalidate];
+//        _countDownTimer = nil;
+//    }else{
+//        if (startCount > 0) {
+//            self.status = 0;
+//            self.timeCount = [NSString stringWithFormat:@"距开始:%@", [self HHMMSSFromCount:startCount]];
+//            self.text = self.timeCount;
+//        }else{
+//            self.status = 1;
+//            self.timeCount = [NSString stringWithFormat:@"距结束:%@", [self HHMMSSFromCount:endCount]];
+//            self.text = self.timeCount;
+//        }
+//    }
+//    endCount -= 1;
+//    startCount -= 1;
 }
 
 
