@@ -646,7 +646,6 @@
 		940178101A21CBEA00697D14 /* ZYYGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZYYGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940178151A21CBEA00697D14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		940178161A21CBEA00697D14 /* ZYYGTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZYYGTests.m; sourceTree = "<group>"; };
-		940178231A21CCE400697D14 /* PublicDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicDefine.h; sourceTree = "<group>"; };
 		940178241A21CCE400697D14 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		940178251A21CCE400697D14 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		940178261A21CCE400697D14 /* Utities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utities.h; sourceTree = "<group>"; };
@@ -1322,6 +1321,7 @@
 		F7FEC1261A49345F00CFE9D4 /* InvoiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvoiceVC.m; sourceTree = "<group>"; };
 		F7FEC1281A4955CB00CFE9D4 /* MyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextField.h; sourceTree = "<group>"; };
 		F7FEC1291A4955CB00CFE9D4 /* MyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextField.m; sourceTree = "<group>"; };
+		F9080BCC1B2BE08C00E5AE3A /* PublicDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicDefine.h; sourceTree = "<group>"; };
 		F930994A1A2DB42B0054FFC1 /* CompeteRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompeteRecordCell.h; sourceTree = "<group>"; };
 		F930994B1A2DB42B0054FFC1 /* CompeteRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompeteRecordCell.m; sourceTree = "<group>"; };
 		F930994C1A2DB42B0054FFC1 /* CompeteRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompeteRecordCell.xib; sourceTree = "<group>"; };
@@ -1526,7 +1526,6 @@
 		940178221A21CCE400697D14 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				940178231A21CCE400697D14 /* PublicDefine.h */,
 				940178241A21CCE400697D14 /* UserInfo.h */,
 				940178251A21CCE400697D14 /* UserInfo.m */,
 				940178261A21CCE400697D14 /* Utities.h */,
@@ -1546,6 +1545,7 @@
 				F7D20A621A5F743E00DE0F96 /* TimeLabel.h */,
 				F7D20A631A5F743E00DE0F96 /* TimeLabel.m */,
 				F9BF148C1AD6766300B6F2AC /* ServerFile.h */,
+				F9080BCC1B2BE08C00E5AE3A /* PublicDefine.h */,
 			);
 			name = Common;
 			path = ZYYG/Common;
