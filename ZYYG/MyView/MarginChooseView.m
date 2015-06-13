@@ -18,15 +18,15 @@
     self.inputTF.delegate = self;
     self.inputTF.returnKeyType = UIReturnKeyDone;
     self.inputTF.keyboardType = UIKeyboardTypeNumberPad;
-//    UIToolbar * topView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
-//    [topView setBarStyle:UIBarStyleDefault];
-//    
-//    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-//    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doFinish)];
-//    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace, doneButton, nil];
-//    
-//    [topView setItems:buttonsArray];
-//    [self.inputTF setInputAccessoryView:topView];
+    UIToolbar * topView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    [topView setBarStyle:UIBarStyleDefault];
+    
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doFinish)];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace, doneButton, nil];
+    
+    [topView setItems:buttonsArray];
+    [self.inputTF setInputAccessoryView:topView];
 }
 
 - (void)doFinish
@@ -92,7 +92,7 @@
     self.marignBut.enabled = enable;
     self.addBut.enabled = enable;
     self.reduceBut.enabled = enable;
-    self.inputTF.enabled = NO;
+    self.inputTF.enabled = enable;
     self.hightestBut.enabled = enable;
     if (enable) {
         [self.marignBut.layer setBackgroundColor:kRedColor.CGColor];

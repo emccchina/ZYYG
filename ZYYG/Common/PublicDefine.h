@@ -41,9 +41,7 @@ lineT.alpha = 0.3;\
 #define kAccountKey                         @"account"
 #define kAccountPassword                    @"accountPassword"
 #define kRememberAccount                    @"rememberAccount"
-#define kServerDomain                       @"http://test.zaixianchuangxin.com/mobile/"
-//@"http://www.zemcc.com/mobile/"
-#define kReceiveURLForPay                   @"http://test.zaixianchuangxin.com/pay/receive.aspx"
+
 
 #define ARC4RANDOM                          0x100000000
 
