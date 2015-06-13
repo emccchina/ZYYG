@@ -200,8 +200,7 @@
     [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     cell.goodsName.text=goods.GoodsName;
     cell.Lab1.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
-    cell.Lab2.text=[NSString stringWithFormat:@"商品编码:%@",goods.GoodsCode];
-    cell.Lab3.hidden=YES;
+    cell.Lab3.text=[NSString stringWithFormat:@"商品编码:%@",goods.GoodsCode];
 //    [cell.collectButton setTitle:@"收藏" forState:UIControlStateNormal];
 //    [cell.collectButton setTitle:@"收藏" forState:UIControlStateHighlighted];
     return cell;

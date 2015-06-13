@@ -1244,7 +1244,6 @@
 		F7DF47D21A25AF6F006EB419 /* ArtDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtDetailVC.m; sourceTree = "<group>"; };
 		F7DF47D81A25C567006EB419 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		F7DF47D91A25C567006EB419 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
-		F7E49F001AC39D350039FEBA /* ServerFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerFile.h; sourceTree = "<group>"; };
 		F7E905EB1A26B683001117EE /* ClassifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyCell.h; sourceTree = "<group>"; };
 		F7E905EC1A26B683001117EE /* ClassifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyCell.m; sourceTree = "<group>"; };
 		F7E905ED1A26B683001117EE /* ClassifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassifyCell.xib; sourceTree = "<group>"; };
@@ -1403,6 +1402,7 @@
 		F9BC26A71A2EE92F006894C6 /* OrderListCellSum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCellSum.m; sourceTree = "<group>"; };
 		F9BC26A91A2EE945006894C6 /* OrderListCellBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCellBottom.h; sourceTree = "<group>"; };
 		F9BC26AA1A2EE945006894C6 /* OrderListCellBottom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCellBottom.m; sourceTree = "<group>"; };
+		F9BF148C1AD6766300B6F2AC /* ServerFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerFile.h; sourceTree = "<group>"; };
 		F9C280871A5FB7E900FAC045 /* PayMarginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayMarginVC.h; sourceTree = "<group>"; };
 		F9C280881A5FB7E900FAC045 /* PayMarginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayMarginVC.m; sourceTree = "<group>"; };
 		F9C280891A5FB7E900FAC045 /* PaySuccessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySuccessVC.h; sourceTree = "<group>"; };
@@ -1531,7 +1531,6 @@
 				940178251A21CCE400697D14 /* UserInfo.m */,
 				940178261A21CCE400697D14 /* Utities.h */,
 				940178271A21CCE400697D14 /* Utities.m */,
-				F7E49F001AC39D350039FEBA /* ServerFile.h */,
 				F7F928DF1A354917000BAE49 /* NSDictionary+safeObjectForKey.h */,
 				F7F928E01A354917000BAE49 /* NSDictionary+safeObjectForKey.m */,
 				F729B0171A36C55C0001FD39 /* MyButton.h */,
@@ -1546,6 +1545,7 @@
 				F77AD84E1A4BBD30004662E2 /* PaaCreater.m */,
 				F7D20A621A5F743E00DE0F96 /* TimeLabel.h */,
 				F7D20A631A5F743E00DE0F96 /* TimeLabel.m */,
+				F9BF148C1AD6766300B6F2AC /* ServerFile.h */,
 			);
 			name = Common;
 			path = ZYYG/Common;

@@ -157,7 +157,7 @@
     if (indexPath.row == 0) {
         return 25;
     }
-    return 160;
+    return 130;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -165,28 +165,16 @@
     if (indexPath.row == 0) {
         CompeteRecordCellTop *topCell = (CompeteRecordCellTop *)[tableView dequeueReusableCellWithIdentifier:@"CompeteRecordCellTop" forIndexPath:indexPath];
         topCell.orderType.text = goods.status;
-        topCell.startPrice.text = [NSString stringWithFormat:@"起拍价:%@" ,goods.startPrice];
-        topCell.startPrice.hidden=YES;
+        topCell.startPrice.text = [NSString stringWithFormat:@"保证金:%@" ,goods.securityDeposit];
         return topCell;
     }else{
         CompeteRecordCell *cell = (CompeteRecordCell *)[tableView dequeueReusableCellWithIdentifier:@"CompeteRecordCell" forIndexPath:indexPath];
         [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
         cell.goodsName.text=goods.GoodsName;
-        cell.yourPrice.text=goods.maxMoney;
-        cell.highestPrice.text=goods.startPrice;
+        cell.yourPrice.text=[NSString stringWithFormat: @"￥%@",goods.maxMoney];
+        cell.highestPrice.text=[NSString stringWithFormat: @"￥%@",goods.startPrice];
         cell.beginTime.text=goods.startTime;
         cell.endTime.text=goods.endTime;
-        
-        if (status==0) {
-            cell.redLab.hidden=YES;
-            [cell.bidButton setTitle:@"出价" forState:UIControlStateNormal];
-            cell.bidButton.hidden=NO;
-        }else{
-            cell.redLab.hidden=NO;
-            cell.redLab.numberOfLines=0;
-            cell.redLab.text=@"请在竞价订单中查看结果或者付款!";
-            cell.bidButton.hidden=YES;
-        }
         return cell;
     }
     

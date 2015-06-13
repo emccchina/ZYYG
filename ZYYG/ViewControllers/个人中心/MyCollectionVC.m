@@ -162,8 +162,7 @@
    [cell.goodsImage setImageWithURL:[NSURL URLWithString:goods.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
     cell.goodsName.text=goods.GoodsName;
     cell.Lab1.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
-    cell.Lab2.text=[NSString stringWithFormat:@"停售日期:%@",goods.UpShelfTime];
-    cell.Lab3.text=[NSString stringWithFormat:@"交易模式:%@",goods.SaleChannel];
+        cell.Lab3.text=[NSString stringWithFormat:@"模式:%@",goods.SaleChannel];
     cell.Lab4.text=[NSString stringWithFormat:@"状态:%@",goods.Nstatus];
     return cell;
    

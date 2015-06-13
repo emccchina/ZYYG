@@ -17,10 +17,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *highestPrice;
 @property (weak, nonatomic) IBOutlet UILabel *beginTime;
 @property (weak, nonatomic) IBOutlet UILabel *endTime;
-@property (weak, nonatomic) IBOutlet UIButton *bidButton;
-@property (weak, nonatomic) IBOutlet UILabel *redLab;
-
-- (IBAction)bidPrice:(id)sender;
-
 
 @end

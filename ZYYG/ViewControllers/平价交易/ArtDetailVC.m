@@ -586,7 +586,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             return 50+(_spreadCertification?_heightCertification:0);
         }
         case 5:{
-            return 50+(_spreadHistory?_heightHistory:0);
+            return 50+(_spreadHistory?240:0);
         }
         default:
             return 44;
