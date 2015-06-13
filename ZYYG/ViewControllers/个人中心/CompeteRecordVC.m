@@ -188,7 +188,7 @@
     
     if ([detailVC isKindOfClass:[ArtDetailVC class]]) {
         ArtDetailVC *vc = (ArtDetailVC*)detailVC;
-        [vc setHiddenBottom:YES];
+        [vc setHiddenBottom:NO];
         [vc setProductID:goods.GoodsCode];
         [vc setAuctionCode:goods.auctionCode];
         [vc setType:2];
