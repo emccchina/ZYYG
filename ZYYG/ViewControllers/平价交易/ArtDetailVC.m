@@ -469,8 +469,8 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                                  _marginView1.inputTF.text,@"EntrustMoney",
                                  goods.maxMoney?:@"",@"MaxMoney",
                                  nil];
-    MutableOrderedDictionary *newDict=[self priceWithAES:dict];
-    [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//    MutableOrderedDictionary *newDict=[self priceWithAES:dict];
+    [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
