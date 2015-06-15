@@ -28,6 +28,7 @@
     NSInteger pageNum;
     NSDictionary  *_MerchantID;
     BOOL                refreshFooter;//是否是上拉刷新
+    NSArray         *titles;//顶部titles
 }
 @property (retain, nonatomic) IBOutlet HMSegmentedControl *segmentView;
 @end
@@ -60,7 +61,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     [self.orderListTabelView registerNib:[UINib nibWithNibName:orderBottomCell bundle:nil] forCellReuseIdentifier:orderBottomCell];
     
     self.segmentView.font = [UIFont fontWithName:@"Helvetica" size:14.0];
-    self.segmentView.sectionTitles = @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"];//  @"", @"0",@"20", @"30" ,@"40"
+//    self.segmentView.sectionTitles = @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"];//  @"", @"0",@"20", @"30" ,@"40"
     self.segmentView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     self.segmentView.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
     self.segmentView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
@@ -72,12 +73,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     self.orderListTabelView.dataSource = self;
     [self addFootRefresh];
     [self getMerchantID];
-    
- 
     NSLog(@"交易订单");
     
     // Do any additional setup after loading the view.
 }
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -109,21 +109,22 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
    //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
     pageNum=1;
-    if (0==segmentedControl.selectedSegmentIndex) {
-        orderState=@"";
-    }else if(1==segmentedControl.selectedSegmentIndex) {
-        orderState=@"1";
-    }else if(2==segmentedControl.selectedSegmentIndex) {
-        orderState=@"2";
-    }else if(3==segmentedControl.selectedSegmentIndex) {
-        orderState=@"3";
-    }else if(4==segmentedControl.selectedSegmentIndex) {
-        orderState=@"4";
-    }else{
-        orderState=@"";
-    }
+//    if (0==segmentedControl.selectedSegmentIndex) {
+//        orderState=@"";
+//    }else if(1==segmentedControl.selectedSegmentIndex) {
+//        orderState=@"1";
+//    }else if(2==segmentedControl.selectedSegmentIndex) {
+//        orderState=@"2";
+//    }else if(3==segmentedControl.selectedSegmentIndex) {
+//        orderState=@"3";
+//    }else if(4==segmentedControl.selectedSegmentIndex) {
+//        orderState=@"4";
+//    }else{
+//        orderState=@"";
+//    }
     [orderArray removeAllObjects];
-    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
+    NSDictionary *d = titles[segmentedControl.selectedSegmentIndex];
+    [self requestOrderList:_orderType ordState:d[@"Key"] ordSize:pageSize ordNum:1];
 
 }
 //订单列表请求
@@ -145,6 +146,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     NSString *url = [NSString stringWithFormat:@"%@OrderList.ashx",kServerDomain];
     NSLog(@"url %@", url);
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",ortype, @"type",orstate, @"status",[NSString stringWithFormat:@"%ld",(long)size] , @"num", [NSString stringWithFormat:@"%ld",(long)num] , @"page" ,nil];
+    NSLog(@"dict %@", dict);
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self requestFinished];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
@@ -163,12 +165,27 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
                     [orderArray addObject:order];
                 }
             }
+            NSArray *titlesTmp = result[@"OrderStatus"];
+            titles = [titlesTmp sortedArrayUsingFunction:soredArray2 context:NULL];
+            NSMutableArray *sections = [NSMutableArray array];
+            [titles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                NSDictionary *d = (NSDictionary*)obj;
+                [sections addObject:d[@"Value"]];
+            }];
+            self.segmentView.sectionTitles = sections;
+            [self.segmentView setNeedsDisplay];
             [self.orderListTabelView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self requestFinished];
         [self showAlertView:kNetworkNotConnect];
     }];
+}
+NSInteger soredArray2(id model1, id model2, void *context)
+{
+    NSDictionary *d1 = (NSDictionary*)model1;
+    NSDictionary *d2 = (NSDictionary*)model2;
+    return ([d2[@"Key"] integerValue] < [d1[@"Key"] integerValue]);
 }
 
 - (void)requestFinished

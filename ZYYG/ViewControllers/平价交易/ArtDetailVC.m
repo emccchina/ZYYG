@@ -111,8 +111,12 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     _marginView1.changeMoney = ^(BOOL add){
         [weakSelf doWithMoneyCount];
     };
+    _marginView1.hightestPrice = ^(BOOL heiest){
+        [weakSelf requestForAgency:heiest];
+    };
+    
     _marginView1.gotoMargin = ^(NSInteger state, BOOL hightest){
-        //hightest 是否代理出价
+        //hightest 是否代理出价 后期改动但是名字没改，前期是最高价格
         switch (state) {
             case 0:
                 [weakSelf presentPayMarginVC];
@@ -287,12 +291,12 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         }
     }else{
 
-        if (goods.isSecurityDeposit == 10) {
+        if (goods.isSecurityDeposit == 10) {//保证金已经付了
             _marginView1.appendMoney = [goods.appendMoney doubleValue];
             _marginView1.minMoney = [goods.maxMoney doubleValue];
-            if ([goods.entrust integerValue]) {
+            if ([goods.entrust integerValue]) {//委托出价中
                 _marginView1.type = 5;
-            }else{
+            }else{//没有委托
                 _marginView1.type = 2;
             }
         }else{
@@ -444,6 +448,42 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [self showAlertView:kNetworkNotConnect];
     }];
 
+}
+
+//取消 或者 加入代理模式
+- (void)requestForAgency:(BOOL)addAgency //(0委托，1取消)，
+{
+    if (![UserInfo shareUserInfo].isLogin) {
+        [Utities presentLoginVC:self];
+        return;
+    }
+    [self showIndicatorView:kNetworkConnecting];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = [NSString stringWithFormat:@"%@AutoSendPrice.ashx",kServerDomain];
+    NSLog(@"url %@", url);
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d",addAgency],@"give",
+                                 [UserInfo shareUserInfo].userKey,@"key",
+                                 self.auctionCode,@"AuctionCode",
+                                 self.productID,@"GoodsCode",
+                                 _marginView1.inputTF.text,@"EntrustMoney",
+                                 goods.maxMoney?:@"",@"MaxMoney",
+                                 nil];
+    MutableOrderedDictionary *newDict=[self priceWithAES:dict];
+    [manager POST:url parameters:newDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        [self dismissIndicatorView];
+        id result = [self parseResults:responseObject];
+        if (result) {
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+        [self dismissIndicatorView];
+        [self showAlertView:kNetworkNotConnect];
+        
+    }];
 }
 
 - (void)requestForHightestPrice
@@ -627,12 +667,15 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     }else{
 //                        cell.LFifthLabel.startTime = goods.startTime;
 //                        cell.LFifthLabel.endTime = goods.endTime;
-                        cell.LFifthLabel.timeCount = goods.leaveTime;
-                        cell.LFifthLabel.name = goods.nstatsName;
-                        [cell.LFifthLabel start];
-                        cell.LFifthLabel.timeOut = ^(){
-                            [self requestForHistory];
-                        };
+                        if (goods.leaveTime) {
+                            cell.LFifthLabel.timeCount = goods.leaveTime;
+                            cell.LFifthLabel.name = goods.nstatsName;
+                            [cell.LFifthLabel start];
+                            cell.LFifthLabel.timeOut = ^(){
+                                NSLog(@"time out leave time %@", goods.leaveTime);
+                                [self requestForHistory];
+                            };
+                        }
 //                        isBegin = cell.LFifthLabel.status;
                         
                     }

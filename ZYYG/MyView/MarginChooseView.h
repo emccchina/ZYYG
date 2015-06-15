@@ -10,7 +10,7 @@
 #import "MyTextField.h"
 typedef void (^GoToPayMargin)(NSInteger state, BOOL hightest);//去付款
 typedef void (^ChangeMoneyCount)(BOOL addMoney);//no reduce    yes add
-typedef void (^HightestPrice)(void);//选择最高价
+typedef void (^HightestPrice)(BOOL height);//改动前 选择最高价  改动后是否代理
 @interface MarginChooseView : UIView
 <UITextFieldDelegate>
 {

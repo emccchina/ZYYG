@@ -76,7 +76,7 @@
     self.hightest = !self.hightest;
     [self setType:self.hightest?6:2];
     if (self.hightestPrice) {
-        self.hightestPrice();
+        self.hightestPrice(self.hightest);
     }
 }
 - (IBAction)doMarginBut:(id)sender {
@@ -133,6 +133,7 @@
         }break;
         case 5:{
             [self.marignBut setTitle:@"委托出价中" forState:UIControlStateNormal];
+            self.hightest = YES;
             [self setHightestButState:YES];
             [self setButState:YES];
         }break;
