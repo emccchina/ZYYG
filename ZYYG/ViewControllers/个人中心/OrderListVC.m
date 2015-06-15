@@ -165,8 +165,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
                     [orderArray addObject:order];
                 }
             }
-            NSArray *titlesTmp = result[@"OrderStatus"];
-            titles = [titlesTmp sortedArrayUsingFunction:soredArray2 context:NULL];
+            titles = result[@"StatusDic"];
             NSMutableArray *sections = [NSMutableArray array];
             [titles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 NSDictionary *d = (NSDictionary*)obj;
