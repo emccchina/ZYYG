@@ -470,6 +470,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                                  goods.maxMoney?:@"",@"MaxMoney",
                                  nil];
 //    MutableOrderedDictionary *newDict=[self priceWithAES:dict];
+    NSLog(@"dict %@", dict);
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
