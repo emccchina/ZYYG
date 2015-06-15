@@ -157,7 +157,7 @@
     if (indexPath.row == 0) {
         return 25;
     }
-    return 130;
+    return 150;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -175,6 +175,8 @@
         cell.highestPrice.text=[NSString stringWithFormat: @"￥%@",goods.startPrice];
         cell.beginTime.text=goods.startTime;
         cell.endTime.text=goods.endTime;
+        cell.proxyPrice.text=[NSString stringWithFormat: @"￥%@",goods.BidEntrustPrice];
+        
         return cell;
     }
     

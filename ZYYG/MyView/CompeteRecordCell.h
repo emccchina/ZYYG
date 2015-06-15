@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *highestPrice;
 @property (weak, nonatomic) IBOutlet UILabel *beginTime;
 @property (weak, nonatomic) IBOutlet UILabel *endTime;
+@property (weak, nonatomic) IBOutlet UILabel *proxyPrice;
 
 @end

@@ -680,7 +680,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             cell.left3Lab.text = goods.LimitedSale;
             cell.left4Lab.text =  goods.GoodsCode;
             cell.R1Lab.text =  [state12 integerValue] ? @"待售" : @"已售";
-            cell.R2Lab.text = [NSString stringWithFormat:@"%@ cm",goods.SpecDesc];
+            cell.R2Lab.text = [NSString stringWithFormat:@"%@ ",goods.SpecDesc];
             return cell;
         }
         case 2:{

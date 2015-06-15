@@ -141,6 +141,7 @@
     self.startTime = [dict safeObjectForKey:@"BeginTime"];
     self.endTime = [dict safeObjectForKey:@"ReminingTime"];
     self.status = [dict safeObjectForKey:@"Status"];
+    self.BidEntrustPrice = [dict safeObjectForKey:@"ENTRUSTMONEY"];
 }
 
 @end
