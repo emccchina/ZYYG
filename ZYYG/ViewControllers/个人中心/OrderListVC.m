@@ -273,8 +273,8 @@ NSInteger soredArray2(id model1, id model2, void *context)
         OrderListCellGoods   *goodsCell=(OrderListCellGoods*)[tableView dequeueReusableCellWithIdentifier:orderGoodsCell forIndexPath:indexPath];
         [goodsCell.goodsImage setImageWithURL:[NSURL URLWithString:goods.defaultImageUrl] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
         goodsCell.goodsName.text=goods.GoodsName;
+        goodsCell.goodsPrice.text=[NSString stringWithFormat:@"￥%.2f" ,goods.AppendPrice];
         goodsCell.goodsCount.text=@"1";
-        goodsCell.goodsPrice.text=[NSString stringWithFormat:@"%.2f" ,goods.AppendPrice];
         if ([_orderType intValue] ==0) {
             goodsCell.marginLab.hidden=YES;
             goodsCell.marginPrice.hidden=YES;

@@ -118,10 +118,9 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z35-G1-hP0" customClass="TimeLabel">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z35-G1-hP0" customClass="TimeLabel">
                         <rect key="frame" x="10" y="114" width="80" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="2gw-3V-SqE"/>
                             <constraint firstAttribute="height" constant="21" id="eDk-r5-pgf"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>

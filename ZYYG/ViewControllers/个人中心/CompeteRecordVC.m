@@ -175,7 +175,7 @@
         cell.highestPrice.text=[NSString stringWithFormat: @"￥%@",goods.startPrice];
         cell.beginTime.text=goods.startTime;
         cell.endTime.text=goods.endTime;
-        cell.proxyPrice.text=[NSString stringWithFormat: @"￥%@",goods.BidEntrustPrice];
+        cell.proxyPrice.text=[NSString stringWithFormat: @"%@",goods.BidEntrustPrice];
         
         return cell;
     }
