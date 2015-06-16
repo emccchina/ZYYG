@@ -13,10 +13,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *LFLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LSLabel;
-@property (weak, nonatomic) IBOutlet UILabel *LTLabel;
-@property (weak, nonatomic) IBOutlet UILabel *LBLabel;
 @property (weak, nonatomic) IBOutlet TimeLabel *RSLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LTLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RTLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LBLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RBLabel;
 
 @end
