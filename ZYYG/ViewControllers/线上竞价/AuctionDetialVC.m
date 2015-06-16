@@ -371,8 +371,8 @@ static NSString * auctionCell = @"auctionCell";
 //    cell.RSLabel.endTime = model.endTime;
 //    cell.RSLabel.startTime = model.startTime;
 //    [cell.RSLabel start];
-    
-    cell.RSLabel.text = [model.RemainingTime substringFromIndex:4];
+    NSString *str=[model.RemainingTime substringFromIndex:4];
+    cell.RSLabel.text = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
     cell.RTLabel.text = [NSString stringWithFormat:@"￥%.2f",model.AppendPrice];
     cell.RBLabel.text = model.biddingNum;
     [cell.image setImageWithURL:[NSURL URLWithString:model.picURL] placeholderImage:[UIImage imageNamed:@"defualtImage"]];
