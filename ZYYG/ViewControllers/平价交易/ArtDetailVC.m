@@ -413,16 +413,16 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 
 - (void)requestForHistory
 {
-    
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@BidHistory.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"goodsCode", nil];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.productID,@"goodsCode",[UserInfo shareUserInfo].userKey,@"memberCode", nil];
     if (self.auctionCode) {
         [dict setObject:self.auctionCode forKey:@"auctionCode"];
     }
+    NSLog(@"dict is %@", dict);
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self dismissIndicatorView];
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);

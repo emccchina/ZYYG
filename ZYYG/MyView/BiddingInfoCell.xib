@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -82,24 +82,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOx-gr-r5W">
-                        <rect key="frame" x="20" y="140" width="80" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="O7u-kc-cFw"/>
-                            <constraint firstAttribute="width" constant="80" id="m1a-1N-xOU"/>
-                        </constraints>
-                        <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="-4" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="收藏" image="collectRed">
-                            <color key="titleColor" red="0.89411764709999997" green="0.22352941179999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="doLBut:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="luz-BW-IYX"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXx-Xr-JeW">
-                        <rect key="frame" x="321" y="140" width="80" height="30"/>
+                        <rect key="frame" x="497" y="140" width="80" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="NmO-up-C3f"/>
                             <constraint firstAttribute="width" constant="80" id="wWW-NA-36a"/>
@@ -133,6 +117,22 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BOx-gr-r5W">
+                        <rect key="frame" x="402" y="140" width="80" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="O7u-kc-cFw"/>
+                            <constraint firstAttribute="width" constant="80" id="m1a-1N-xOU"/>
+                        </constraints>
+                        <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="-4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="收藏" image="collectRed">
+                            <color key="titleColor" red="0.89411764709999997" green="0.22352941179999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="doLBut:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="luz-BW-IYX"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="KqG-SJ-eUW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="1dz-JP-wlL"/>
@@ -141,7 +141,10 @@
                     <constraint firstItem="Z35-G1-hP0" firstAttribute="top" secondItem="jfR-fg-zGa" secondAttribute="bottom" constant="5" id="402-Og-Eak"/>
                     <constraint firstItem="qXx-Xr-JeW" firstAttribute="baseline" secondItem="BOx-gr-r5W" secondAttribute="baseline" id="5QU-gh-eab"/>
                     <constraint firstItem="BOx-gr-r5W" firstAttribute="top" secondItem="Z35-G1-hP0" secondAttribute="bottom" constant="5" id="5gZ-HV-qsg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qXx-Xr-JeW" secondAttribute="trailing" constant="15" id="6Rd-ce-Su6"/>
+                    <constraint firstItem="qXx-Xr-JeW" firstAttribute="leading" secondItem="BOx-gr-r5W" secondAttribute="trailing" constant="15" id="9Ot-eN-kMX"/>
                     <constraint firstItem="vFC-bc-osz" firstAttribute="leading" secondItem="jfR-fg-zGa" secondAttribute="trailing" constant="1" id="9fb-9M-4Ed"/>
+                    <constraint firstItem="BOx-gr-r5W" firstAttribute="top" secondItem="Z35-G1-hP0" secondAttribute="bottom" constant="5" id="CTy-su-uhF"/>
                     <constraint firstItem="r3k-tE-b7Q" firstAttribute="leading" secondItem="v6S-gq-IkG" secondAttribute="trailing" constant="1" id="FuH-gH-nC8"/>
                     <constraint firstItem="wYC-Og-wfy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="HBS-NP-nSn"/>
                     <constraint firstItem="hKf-L8-IhH" firstAttribute="leading" secondItem="KqG-SJ-eUW" secondAttribute="trailing" constant="1" id="HYY-Il-TU2"/>
@@ -149,6 +152,7 @@
                     <constraint firstItem="hKf-L8-IhH" firstAttribute="top" secondItem="0Go-UN-lyT" secondAttribute="bottom" constant="5" id="Kt2-oD-cyC"/>
                     <constraint firstItem="0Go-UN-lyT" firstAttribute="top" secondItem="mTq-Gv-7JH" secondAttribute="bottom" constant="5" id="OOw-Nx-SMl"/>
                     <constraint firstItem="v6S-gq-IkG" firstAttribute="leading" secondItem="wYC-Og-wfy" secondAttribute="trailing" id="SFn-Hp-V8s"/>
+                    <constraint firstItem="wYC-Og-wfy" firstAttribute="leading" secondItem="BOx-gr-r5W" secondAttribute="trailing" constant="15" id="TBG-mI-e8c"/>
                     <constraint firstItem="jfR-fg-zGa" firstAttribute="top" secondItem="KqG-SJ-eUW" secondAttribute="bottom" constant="5" id="Tj8-VW-WLM"/>
                     <constraint firstAttribute="bottom" secondItem="wYC-Og-wfy" secondAttribute="bottom" id="UVK-uM-sM0"/>
                     <constraint firstItem="KqG-SJ-eUW" firstAttribute="top" secondItem="oh3-k8-g6q" secondAttribute="bottom" constant="5" id="V2Q-D2-CQT"/>
@@ -160,13 +164,19 @@
                     <constraint firstItem="0Go-UN-lyT" firstAttribute="leading" secondItem="oh3-k8-g6q" secondAttribute="trailing" constant="1" id="fHz-dW-oYE"/>
                     <constraint firstItem="v6S-gq-IkG" firstAttribute="top" secondItem="zUJ-1d-X5l" secondAttribute="bottom" constant="5" id="fMR-RJ-hxm"/>
                     <constraint firstItem="jfR-fg-zGa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="iBl-Q8-TRG"/>
-                    <constraint firstItem="qXx-Xr-JeW" firstAttribute="leading" secondItem="wYC-Og-wfy" secondAttribute="trailing" constant="20" id="nVm-MX-wC4"/>
                     <constraint firstItem="mTq-Gv-7JH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="p1l-f9-nc2"/>
                     <constraint firstItem="Q35-w4-Zak" firstAttribute="leading" secondItem="zUJ-1d-X5l" secondAttribute="trailing" constant="1" id="suV-HW-Yww"/>
                     <constraint firstItem="vFC-bc-osz" firstAttribute="top" secondItem="hKf-L8-IhH" secondAttribute="bottom" constant="5" id="tfh-G8-LZX"/>
                     <constraint firstItem="zUJ-1d-X5l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="28" id="wUP-jx-xv3"/>
                     <constraint firstItem="wYC-Og-wfy" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="xNV-ea-fo5"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="TBG-mI-e8c"/>
+                        <exclude reference="3E7-fs-ias"/>
+                        <exclude reference="5gZ-HV-qsg"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="LBut" destination="BOx-gr-r5W" id="GSQ-IG-GRZ"/>
