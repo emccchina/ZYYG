@@ -37,7 +37,7 @@
 - (void)setMinMoney:(double)minMoney
 {
     _minMoney = minMoney;
-    self.inputTF.text = [NSString stringWithFormat:@"%.2f", self.appendMoney+_minMoney];
+    self.inputTF.text = [NSString stringWithFormat:@"%.2f", _minMoney];//self.appendMoney+
 }
 
 - (void)changeMoney:(BOOL)state  //0 reduce    1 add
@@ -69,6 +69,7 @@
 
 - (void)setHightestButState:(BOOL)hightest
 {
+    self.hightest = hightest;
     UIImage *image = hightest ? [UIImage imageNamed:@"accountSelected"] : [UIImage imageNamed:@"accountUnselected"];
     [self.hightestBut setImage:image forState:UIControlStateNormal];
 }
@@ -121,6 +122,7 @@
         }break;
         case 2:{
             [self.marignBut setTitle:@"我要出价" forState:UIControlStateNormal];
+            [self setHightestButState:NO];
             [self setButState:YES];
         }break;
         case 3:{

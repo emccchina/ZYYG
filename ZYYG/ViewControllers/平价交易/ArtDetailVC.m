@@ -111,8 +111,10 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     _marginView1.changeMoney = ^(BOOL add){
         [weakSelf doWithMoneyCount];
     };
-    _marginView1.hightestPrice = ^(BOOL heiest){
-        [weakSelf requestForAgency:heiest];
+    _marginView1.hightestPrice = ^(BOOL heiest){//1委托 0取消
+        if (!heiest) {
+            [weakSelf requestForAgency:heiest];
+        }
     };
     
     _marginView1.gotoMargin = ^(NSInteger state, BOOL hightest){
@@ -127,7 +129,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             case 5:
             case 6:{
                 if (hightest) {
-                    [weakSelf requestForHightestPrice];
+                    [weakSelf requestForAgency:hightest];
                 }else{
                     [weakSelf requestForUpLoadMyPrice];
                 }
@@ -451,7 +453,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 }
 
 //取消 或者 加入代理模式
-- (void)requestForAgency:(BOOL)addAgency //(0委托，1取消)，
+- (void)requestForAgency:(BOOL)addAgency //(1委托，0取消)，
 {
     if (![UserInfo shareUserInfo].isLogin) {
         [Utities presentLoginVC:self];
