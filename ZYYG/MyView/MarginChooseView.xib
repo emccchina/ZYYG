@@ -67,10 +67,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XD-6K-4A2">
-                    <rect key="frame" x="510" y="50" width="70" height="27"/>
+                    <rect key="frame" x="500" y="50" width="80" height="27"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="27" id="ip7-i9-VpV"/>
-                        <constraint firstAttribute="width" constant="70" id="yNQ-cq-ObZ"/>
+                        <constraint firstAttribute="width" constant="80" id="yNQ-cq-ObZ"/>
                     </constraints>
                     <state key="normal" title="保证金">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -37,6 +37,7 @@
 @property (nonatomic, strong) NSString      *entrust;//是否委托 0未委托 1委托
 @property (nonatomic, strong) NSString      *leaveTime;//距离时间
 @property (nonatomic, strong) NSString      *nstatsName;//距结束  距开始 已经结束
+@property (nonatomic, strong) NSString      *entrustMoney;//最高委托价格
 
 @property (nonatomic, assign) NSInteger     biddingStatus;//竞拍状态: 10已成交 20流拍  0有效
 @property (nonatomic, strong) NSString      *startPrice;

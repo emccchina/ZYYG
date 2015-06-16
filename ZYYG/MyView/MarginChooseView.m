@@ -32,6 +32,11 @@
 - (void)doFinish
 {
     [self.inputTF resignFirstResponder];
+    if ([self.inputTF.text doubleValue] < _minMoney+self.appendMoney) {
+        if (self.showalert) {
+            self.showalert(@"出价有误，您的竞拍金额不能小于其它出价金额加加价幅度!");
+        }
+    }
 }
 
 - (void)setMinMoney:(double)minMoney
@@ -137,12 +142,14 @@
             [self.marignBut setTitle:@"委托出价中" forState:UIControlStateNormal];
             self.hightest = YES;
             [self setHightestButState:YES];
-            [self setButState:YES];
+            [self setButState:NO];
+            self.hightestBut.enabled = YES;
         }break;
         case 6:{
             [self.marignBut setTitle:@"委托出价" forState:UIControlStateNormal];
             [self setHightestButState:YES];
             [self setButState:YES];
+            
         }break;
         default:
             break;

@@ -11,6 +11,7 @@
 typedef void (^GoToPayMargin)(NSInteger state, BOOL hightest);//去付款
 typedef void (^ChangeMoneyCount)(BOOL addMoney);//no reduce    yes add
 typedef void (^HightestPrice)(BOOL height);//改动前 选择最高价  改动后是否代理
+typedef void (^AlterShow)(NSString* string);
 @interface MarginChooseView : UIView
 <UITextFieldDelegate>
 {
@@ -31,4 +32,5 @@ typedef void (^HightestPrice)(BOOL height);//改动前 选择最高价  改动�
 @property (nonatomic, assign) double appendMoney;
 @property (nonatomic, assign) BOOL      hightest;
 - (void)setHightestButState:(BOOL)hightest;
+@property (nonatomic, copy) AlterShow showalert;
 @end

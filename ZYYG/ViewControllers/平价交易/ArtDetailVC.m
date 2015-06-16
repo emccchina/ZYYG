@@ -116,7 +116,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             [weakSelf requestForAgency:heiest];
         }
     };
-    
+    _marginView1.showalert = ^(NSString*string){
+        [weakSelf showAlertView:string];
+    };
     _marginView1.gotoMargin = ^(NSInteger state, BOOL hightest){
         //hightest 是否代理出价 后期改动但是名字没改，前期是最高价格
         switch (state) {
@@ -295,10 +297,12 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 
         if (goods.isSecurityDeposit == 10) {//保证金已经付了
             _marginView1.appendMoney = [goods.appendMoney doubleValue];
-            _marginView1.minMoney = [goods.maxMoney doubleValue];
+            
             if ([goods.entrust integerValue]) {//委托出价中
+                _marginView1.minMoney = [goods.entrustMoney doubleValue];
                 _marginView1.type = 5;
             }else{//没有委托
+                _marginView1.minMoney = [goods.maxMoney doubleValue];
                 _marginView1.type = 2;
             }
         }else{
@@ -435,7 +439,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             goods.entrust = result[@"entrust"];
             goods.leaveTime = result[@"leaveTime"];
             goods.nstatsName = result[@"nstatsName"];
-            
+            goods.entrustMoney = result[@"entrustMoney"];
             [historyArr removeAllObjects];
             [historyArr addObjectsFromArray:result[@"data"]];
             if (self.type == 2) {
@@ -478,7 +482,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         [self dismissIndicatorView];
         id result = [self parseResults:responseObject];
         if (result) {
-            
+            _marginView1.type = addAgency ? 5 : 2;
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
