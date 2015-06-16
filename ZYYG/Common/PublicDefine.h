@@ -56,5 +56,5 @@ lineT.alpha = 0.3;\
 #ifdef DEBUG
 #define kPayMode                             @"01"
 #else
-#define kPayMode                             @"00"
+#define kPayMode                             @"01"
 #endif

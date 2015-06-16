@@ -109,22 +109,13 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
    //  @[@"全部", @"未付款",@"待发货",@"待收货",@"已完成"]; @"", @"0",@"20", @"30" ,@"40"
     pageNum=1;
-//    if (0==segmentedControl.selectedSegmentIndex) {
-//        orderState=@"";
-//    }else if(1==segmentedControl.selectedSegmentIndex) {
-//        orderState=@"1";
-//    }else if(2==segmentedControl.selectedSegmentIndex) {
-//        orderState=@"2";
-//    }else if(3==segmentedControl.selectedSegmentIndex) {
-//        orderState=@"3";
-//    }else if(4==segmentedControl.selectedSegmentIndex) {
-//        orderState=@"4";
-//    }else{
-//        orderState=@"";
-//    }
+    if (0==segmentedControl.selectedSegmentIndex) {
+        orderState=@"";
+    }else{
+        orderState=[NSString stringWithFormat:@"%ld",segmentedControl.selectedSegmentIndex];
+    }
     [orderArray removeAllObjects];
-    NSDictionary *d = titles[segmentedControl.selectedSegmentIndex];
-    [self requestOrderList:_orderType ordState:d[@"Key"] ordSize:pageSize ordNum:1];
+    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
 
 }
 //订单列表请求
