@@ -291,7 +291,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
     }else if(goods.biddingStatus == 10){
         _marginView1.type = 3;
         if ([self artOwn:historyArr]) {
-            [self showAlertView:@"您已拍下此艺术品,请在十分钟内付款"];
+            [self showAlertView:@"您已拍下此艺术品!"];
         }
     }else{
 
@@ -621,9 +621,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 {
     switch (indexPath.section) {
         case 0:
-            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : (self.type == 2 ? 210 : 75);
+            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : (self.type == 2 ? 215 : 75);
         case 1:
-            return 120;
+            return 100;
         case 2:{
             return  50+(_spreadArtist?_heightArtist:0);
         }
@@ -727,11 +727,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
         case 1:{
             ArtInfoCell *cell = (ArtInfoCell*)[tableView dequeueReusableCellWithIdentifier:artInfoCell forIndexPath:indexPath];
             cell.left1Lab.text = goods.ArtName;
-            NSNumber *state12 = goods.GoodsNum;
             cell.left2Lab.text = goods.CategoryName;
-            cell.left3Lab.text = goods.LimitedSale;
             cell.left4Lab.text =  goods.GoodsCode;
-            cell.R1Lab.text =  [state12 integerValue] ? @"待售" : @"已售";
+            cell.R1Lab.text =  goods.CreationStyle;
             cell.R2Lab.text = [NSString stringWithFormat:@"%@ ",goods.SpecDesc];
             return cell;
         }
