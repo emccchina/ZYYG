@@ -356,8 +356,12 @@ static NSString * auctionCell = @"auctionCell";
     GoodsModel *model = results[indexPath.row];
     AuctionArtCell *cell = (AuctionArtCell*)[tableView dequeueReusableCellWithIdentifier:auctionCell forIndexPath:indexPath];
     cell.LFLabel.text = model.GoodsName;
-    
-    cell.LSLabel.text =[model.RemainingTime substringToIndex:4];
+    bool has=[model.RemainingTime hasPrefix:@"竞价"];
+     NSUInteger index=4;
+    if(has){
+        index=5;
+    }
+    cell.LSLabel.text =[model.RemainingTime substringToIndex:index];
 //    if (indexPath.row == 0) {
 //        cell.RSLabel.endTime = @"2015/01/09 17:30:00";//model.endTime;
 //        cell.RSLabel.startTime = @"2015/01/09 16:32:00";//model.startTime;
@@ -371,7 +375,7 @@ static NSString * auctionCell = @"auctionCell";
 //    cell.RSLabel.endTime = model.endTime;
 //    cell.RSLabel.startTime = model.startTime;
 //    [cell.RSLabel start];
-    NSString *str=[model.RemainingTime substringFromIndex:4];
+    NSString *str=[model.RemainingTime substringFromIndex:index];
     cell.RSLabel.text = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
     cell.RTLabel.text = [NSString stringWithFormat:@"￥%.2f",model.AppendPrice];
     cell.RBLabel.text = model.biddingNum;

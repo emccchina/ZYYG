@@ -440,6 +440,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             goods.leaveTime = result[@"leaveTime"];
             goods.nstatsName = result[@"nstatsName"];
             goods.entrustMoney = result[@"entrustMoney"];
+            goods.biddingNum=result[@"AuctionCount"] ;
             [historyArr removeAllObjects];
             [historyArr addObjectsFromArray:result[@"data"]];
             if (self.type == 2) {
@@ -620,7 +621,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
 {
     switch (indexPath.section) {
         case 0:
-            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : (self.type == 2 ? 185 : 75);
+            return (indexPath.row == 0) ? (CGRectGetWidth(tableView.frame) / 2) : (self.type == 2 ? 210 : 75);
         case 1:
             return 120;
         case 2:{
@@ -667,6 +668,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     cell.LFourthLabel.text = [NSString stringWithFormat:@"￥%@",goods.securityDeposit];
                     cell.RSLabel.text = [NSString stringWithFormat:@"￥%@",goods.appendMoney];
                     cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld",(long)goods.delayMinute];
+                    cell.LXLabel.text=[NSString stringWithFormat:@"竞价次数: %@ 次",goods.biddingNum];
                     if (goods.biddingStatus == 20) {
                         cell.LFifthLabel.text = @"已流拍";
                     }else if (goods.biddingStatus == 10){

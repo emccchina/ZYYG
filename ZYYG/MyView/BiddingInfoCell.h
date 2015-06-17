@@ -18,9 +18,12 @@ typedef void (^doRightButFinished)();
 
 @property (weak, nonatomic) IBOutlet UILabel *LTLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LSLabel;
-@property (weak, nonatomic) IBOutlet UILabel *LThirstLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *LFourthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LThirstLabel;
 @property (weak, nonatomic) IBOutlet TimeLabel *LFifthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LXLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *RSLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RThirstLabel;
 @property (weak, nonatomic) IBOutlet UIButton *LBut;
