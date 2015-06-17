@@ -671,8 +671,14 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     cell.LXLabel.text=[NSString stringWithFormat:@"竞价次数: %@ 次",goods.biddingNum];
                     if (goods.biddingStatus == 20) {
                         cell.LFifthLabel.text = @"已流拍";
+                        [cell.RBut setTitle:@"已流拍" forState:UIControlStateNormal];
+                        [cell.RBut.layer setBackgroundColor:kGrayColor.CGColor];
+                        [cell.RBut setEnabled:NO];
                     }else if (goods.biddingStatus == 10){
                         cell.LFifthLabel.text = @"已成交";
+                        [cell.RBut.layer setBackgroundColor:kRedColor.CGColor];
+                        [cell.RBut setTitle:@"已成交" forState:UIControlStateNormal];
+                        [cell.RBut setEnabled:NO];
                     }else{
 //                        cell.LFifthLabel.startTime = goods.startTime;
 //                        cell.LFifthLabel.endTime = goods.endTime;
@@ -685,6 +691,9 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                                 [self requestForHistory];
                             };
                         }
+                        [cell.RBut setEnabled:YES];
+                        [cell.RBut.layer setBackgroundColor:kRedColor.CGColor];
+                        [cell.RBut setTitle:@"刷新" forState:UIControlStateNormal];
 //                        isBegin = cell.LFifthLabel.status;
                         
                     }
