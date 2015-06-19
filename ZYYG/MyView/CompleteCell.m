@@ -26,17 +26,12 @@
 
 - (void)setType:(NSInteger)type
 {
-    self.LSLabel.hidden = !type;
-    self.RSLabel.hidden = !type;
-    self.RTLabel.hidden = !type;
-    self.LFoLabel.hidden = type;
-    self.RFLabel.hidden = !type;
 }
 
 //红色否
 - (void)setFourLableState:(BOOL)fourLableState
 {
-    self.LFoLabel.textColor = fourLableState ? kRedColor : kBlackColor;
+    self.LTLabel.textColor = fourLableState ? kRedColor : kBlackColor;
 }
 
 @end

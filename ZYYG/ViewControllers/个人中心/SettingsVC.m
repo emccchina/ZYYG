@@ -220,9 +220,7 @@
 {
     if (indexPath.section == settingDataArray.count) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCell" forIndexPath:indexPath];
-//        UIButton *logoutBut= (UIButton*)[cell viewWithTag:1];
-//        logoutBut.layer.cornerRadius = 5;
-//        logoutBut.layer.backgroundColor = kRedColor.CGColor;
+        cell.contentView.layer.backgroundColor=kRedColor.CGColor;
         return cell;
     }else{
         SettingModel *model=settingDataArray[indexPath.section][indexPath.row];

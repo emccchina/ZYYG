@@ -16,17 +16,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWy-uK-vZk" userLabel="TopLab">
-                        <rect key="frame" x="18" y="13" width="34" height="25"/>
+                        <rect key="frame" x="18" y="13" width="38" height="23"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="0Ww-CS-k9f"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0Ww-CS-k9f"/>
+                            </mask>
+                        </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cb2-CZ-NnU" userLabel="BotRightLab">
-                        <rect key="frame" x="65" y="41" width="49" height="24"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <rect key="frame" x="61" y="41" width="38" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.89411764709999997" green="0.22352941179999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,8 +50,8 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmS-k6-EsW" userLabel="BotLab">
-                        <rect key="frame" x="18" y="43" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="18" y="41" width="38" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -54,6 +59,7 @@
                 <constraints>
                     <constraint firstItem="UWy-uK-vZk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="4s8-90-PK1"/>
                     <constraint firstItem="xgV-ow-WIu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="AqK-we-IDM"/>
+                    <constraint firstItem="Cb2-CZ-NnU" firstAttribute="top" secondItem="qmS-k6-EsW" secondAttribute="top" id="KcS-8E-BWV"/>
                     <constraint firstItem="Cb2-CZ-NnU" firstAttribute="top" secondItem="qmS-k6-EsW" secondAttribute="top" constant="-2" id="MeQ-ei-Eq5"/>
                     <constraint firstItem="UWy-uK-vZk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="b9h-t3-KSH"/>
                     <constraint firstAttribute="trailingMargin" secondItem="xgV-ow-WIu" secondAttribute="trailing" constant="10" id="fzG-A4-A6q"/>
@@ -61,6 +67,11 @@
                     <constraint firstItem="Cb2-CZ-NnU" firstAttribute="leading" secondItem="qmS-k6-EsW" secondAttribute="trailing" constant="5" id="w1O-K0-QQZ"/>
                     <constraint firstItem="qmS-k6-EsW" firstAttribute="top" secondItem="UWy-uK-vZk" secondAttribute="bottom" constant="5" id="yJK-oe-hWI"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="MeQ-ei-Eq5"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="botLab" destination="qmS-k6-EsW" id="c2K-5M-sUP"/>

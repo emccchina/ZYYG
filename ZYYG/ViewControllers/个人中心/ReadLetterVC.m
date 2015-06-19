@@ -35,9 +35,9 @@
 
 -(void)readLetter:(LetterModel*)letter
 {
-    self.letterFrom.text=letter.SendName;
+    self.letterFrom.text=[NSString stringWithFormat:@"发件人: %@",letter.SendName];
     self.letterTitle.text=letter.Title;
-    self.letterCreateTime.text=letter.AuditTime;
+    self.letterCreateTime.text=[NSString stringWithFormat:@"发送时间: %@",letter.AuditTime];
     self.letterCode=letter.LetterCode;
     [self.letterContent loadHTMLString:letter.LetterContent baseURL:[NSURL fileURLWithPath: [[NSBundle mainBundle]  bundlePath]]];
 }

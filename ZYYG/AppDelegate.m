@@ -78,7 +78,7 @@
 
 - (void)showPopView
 {
-    NSArray *titles = @[@"私人定制", @"私人洽购"];
+    NSArray *titles = @[@"私人洽购",@"私人定制"];
     UITabBarController *VC = (UITabBarController*)self.window.rootViewController;
     NSLog(@"tabbar.frame %@, %f, %f", NSStringFromCGRect(VC.tabBar.frame), VC.tabBar.itemWidth, VC.tabBar.itemSpacing);
     CGRect rect = VC.tabBar.frame;
@@ -100,7 +100,7 @@
     popView.selectedFinsied = ^(NSInteger row){
         NSLog(@"%ld", (long)row);
         [popoverController dismissPopoverAnimatd:YES];
-        NSArray *indentifiers = @[@"CustomVC", @"TalkBuyVC"];
+        NSArray *indentifiers = @[@"TalkBuyVC",@"CustomVC"];
         [self presentMoreGroup:indentifiers[row]];
     };
 }

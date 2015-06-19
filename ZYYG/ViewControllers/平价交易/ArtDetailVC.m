@@ -667,7 +667,7 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
                     cell.LThirstLabel.text = [NSString stringWithFormat:@"￥%@",goods.maxMoney];//@"no data";
                     cell.LFourthLabel.text = [NSString stringWithFormat:@"￥%@",goods.securityDeposit];
                     cell.RSLabel.text = [NSString stringWithFormat:@"￥%@",goods.appendMoney];
-                    cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld",(long)goods.delayMinute];
+                    cell.RThirstLabel.text = [NSString stringWithFormat:@"%ld 分钟/次",(long)goods.delayMinute];
                     cell.LXLabel.text=[NSString stringWithFormat:@"竞价次数: %@ 次",goods.biddingNum];
                     if (goods.biddingStatus == 20) {
                         cell.LFifthLabel.text = @"已流拍";

@@ -187,7 +187,7 @@ static NSString *listCell = @"listCell";
         }
 //        self.navigationItem.rightBarButtonItem = ([user isLogin] ? [Utities barButtonItemWithSomething:@"编辑" target:self action:@selector(doEditButton)] : nil);
         nameLabel.text = user.nickName;
-        levelLabel.text = user.realName;
+        levelLabel.text = user.mobile;
         emailLabel.text = user.email;
         nameLabel.hidden = ![user isLogin];
         levelLabel.hidden = ![user isLogin];
