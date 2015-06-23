@@ -77,7 +77,7 @@
     NSLog(@"url %@", url);
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",[NSString stringWithFormat:@"%ld",(long)size] , @"num", [NSString stringWithFormat:@"%ld",(long)num] , @"page" ,nil];
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self requestFinished];
+        
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
@@ -95,6 +95,7 @@
                     [marginArray addObject:mar];
                 }
             }
+            [self requestFinished];
             [self.marginTableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
