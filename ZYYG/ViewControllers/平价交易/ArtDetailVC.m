@@ -294,23 +294,23 @@ static NSString *biddingInfoCell = @"biddingInfoCell";
             [self showAlertView:@"您已拍下此艺术品!"];
         }
     }else{
-
         if (goods.isSecurityDeposit == 10) {//保证金已经付了
             _marginView1.appendMoney = [goods.appendMoney doubleValue];
-            
-            if ([goods.entrust integerValue]) {//委托出价中
-                _marginView1.minMoney = [goods.entrustMoney doubleValue];
-                _marginView1.type = 5;
-            }else{//没有委托
-                _marginView1.minMoney = [goods.maxMoney doubleValue];
-                _marginView1.type = 2;
+            if([goods.nstatsName hasPrefix:@"距开始"]){
+                _marginView1.type = 1;
+            }else{
+                if ([goods.entrust integerValue]) {//委托出价中
+                    _marginView1.minMoney = [goods.entrustMoney doubleValue];
+                    _marginView1.type = 5;
+                }else{//没有委托
+                    _marginView1.minMoney = [goods.maxMoney doubleValue];
+                    _marginView1.type = 2;
+                }
             }
         }else{
             _marginView1.type = 0;
         }
     }
-    
-    
 }
 
 - (void)requestDetialInfo

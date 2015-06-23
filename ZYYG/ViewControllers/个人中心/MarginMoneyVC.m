@@ -27,7 +27,7 @@
     [super viewDidLoad];
     [self showBackItem];
     marginArray= [[NSMutableArray alloc] init];
-    pageSize=10;
+    pageSize=5;
     pageNum=1;
     [self requestMarginList:pageSize pageNum:pageNum];
     [self.marginTableView registerNib:[UINib nibWithNibName:@"MarginMoneyCell" bundle:nil] forCellReuseIdentifier:@"MarginMoneyCell"];

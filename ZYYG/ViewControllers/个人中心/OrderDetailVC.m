@@ -339,7 +339,7 @@ static NSString *ODCell = @"OrderDetailCell";
         case 0:{
             UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:topCell];
             cell.textLabel.text=order.OrderStatus;
-            cell.detailTextLabel.text=order.OrderCode;
+            cell.detailTextLabel.text=order.OrderNo;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             break;
@@ -386,9 +386,9 @@ static NSString *ODCell = @"OrderDetailCell";
                 if (0 == order.state || 10 == order.state) {
                     //创建状态 可支付  可取消
                     if(self.orderType ==0){
-                        orCell.redLab.text=@"提醒:请您在自订单生成后的45分钟内进行付款!否则本次交易订单会自动取消!";
+                        orCell.redLab.text=[NSString stringWithFormat:@"提醒:请您在%@分钟内完成支付,否则订单将自动取消",order.TimeSpan];
                     }else{
-                        orCell.redLab.text=@"提醒:请您在自订单生成后的72小时内进行付款!否则本次交易订单会自动取消!并会扣除您的保证金!";
+                        orCell.redLab.text=[NSString stringWithFormat:@"提醒:请您在%@小时内完成支付,否则订单将自动取消,并扣除您的保证金!",order.TimeSpan];
                     }
                 }else if(20 ==order.state){
                     orCell.redLab.text=@"恭喜您已经购买到了此艺术品!我们会尽快为你装配并发货!";

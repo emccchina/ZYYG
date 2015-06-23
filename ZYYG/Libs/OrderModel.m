@@ -16,6 +16,7 @@
     OrderModel *order =[[OrderModel alloc] init];
     order.Goods=[NSMutableArray array];
     order.OrderCode=[dict safeObjectForKey:@"OrderCode"];
+    order.OrderNo=[dict safeObjectForKey:@"OrderNo"];
     order.OrderType=[dict safeObjectForKey:@"OrderType"];
     order.CancelTime=[dict safeObjectForKey:@"CancelTime"];
     order.CreateTime=[dict safeObjectForKey:@"CreateTime"];

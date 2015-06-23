@@ -11,6 +11,7 @@
 @interface OrderModel : NSObject
 
 @property (nonatomic, strong) NSString          *OrderCode;//订单编号
+@property (nonatomic, strong) NSString          *OrderNo;//订单显示
 @property (nonatomic, strong) NSString          *CancelTime;//失效时间
 @property (nonatomic, strong) NSString          *CreateTime;//生成时间
 @property (nonatomic, assign) NSString          *GoodsTotal;//商品数量
