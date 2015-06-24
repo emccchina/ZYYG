@@ -12,9 +12,7 @@
 //订单列表 4 底部cell
 @interface OrderListCellBottom : UITableViewCell<UIAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *canStar;
 @property (weak, nonatomic) IBOutlet UILabel *cancelTime;
-@property (weak, nonatomic) IBOutlet UILabel *labStar;
 @property (weak, nonatomic) IBOutlet UILabel *redLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *cancellButton;

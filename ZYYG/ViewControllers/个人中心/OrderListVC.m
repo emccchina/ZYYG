@@ -143,7 +143,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",ortype, @"type",orstate, @"status",[NSString stringWithFormat:@"%ld",(long)size] , @"num", [NSString stringWithFormat:@"%ld",(long)num] , @"page" ,nil];
     NSLog(@"dict %@", dict);
     [manager GET:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self requestFinished];
+        
         NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         id result = [self parseResults:responseObject];
         if (result) {
@@ -170,6 +170,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
             [self.segmentView setNeedsDisplay];
             [self.orderListTabelView reloadData];
         }
+        [self requestFinished];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self requestFinished];
         [self showAlertView:kNetworkNotConnect];
@@ -317,8 +318,6 @@ NSInteger soredArray2(id model1, id model2, void *context)
 //判断状态 给出按钮
 -(void)setButton:(OrderListCellBottom *)bottomCell orderMod:(OrderModel *)ord
 {
-    bottomCell.canStar.hidden=NO;
-    bottomCell.labStar.hidden=NO;
     bottomCell.cancellButton.hidden=YES;
     bottomCell.payButton.hidden=YES;
     bottomCell.redLabel.text=@"";
@@ -334,19 +333,13 @@ NSInteger soredArray2(id model1, id model2, void *context)
         bottomCell.payButton.hidden=NO;
         //创建状态 可支付  可取消
     }else if(20 ==ord.state){
-        
+         bottomCell.redLabel.text=@"";
     }else if(30 == ord.state){
-       
+         bottomCell.redLabel.text=@"";
         bottomCell.payButton.hidden=NO;
         [bottomCell.payButton setTitle:@"确认收货" forState:UIControlStateNormal];
     }else if(50 == ord.state){
-        if ([_orderType intValue] ==0) {
-            bottomCell.redLabel.text=@"该订单已经被取消无法继续操作,而且您已经丢失本次购买此商品的机会!";
-        }else{
-            bottomCell.redLabel.text=@"该订单已经被取消无法继续操作,而且您已经丢失本次购买此商品的机会!已经扣除了您的保证金!";
-        }
-        bottomCell.canStar.hidden=NO;
-        bottomCell.labStar.hidden=NO;
+        bottomCell.redLabel.text=@"";
         bottomCell.cancellButton.hidden=YES;
         bottomCell.payButton.hidden=YES;
     }else {
@@ -435,7 +428,6 @@ NSInteger soredArray2(id model1, id model2, void *context)
     NSString *url = [NSString stringWithFormat:@"%@GetUserInfo.ashx",kServerDomain];
     NSLog(@"url %@", url);
     [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self requestFinished];
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self dismissIndicatorView];
         NSString *aesde = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] AES256DecryptWithKey:kAESKey];
@@ -447,6 +439,7 @@ NSInteger soredArray2(id model1, id model2, void *context)
             }
             
         }
+        [self requestFinished];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
 //        [self requestFinished];
