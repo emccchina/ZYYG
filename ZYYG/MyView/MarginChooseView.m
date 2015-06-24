@@ -124,6 +124,7 @@
         case 1:{
             [self.marignBut setTitle:@"尚未开始" forState:UIControlStateNormal];
             [self setButState:NO];
+            [self.marignBut.layer setBackgroundColor:kRedColor.CGColor];
         }break;
         case 2:{
             [self.marignBut setTitle:@"我要出价" forState:UIControlStateNormal];
