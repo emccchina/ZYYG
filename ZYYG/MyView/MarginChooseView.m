@@ -133,6 +133,7 @@
         case 3:{
             [self.marignBut setTitle:@"已成交" forState:UIControlStateNormal];
             [self setButState:NO];
+            [self.marignBut.layer setBackgroundColor:kRedColor.CGColor];
         }break;
         case 4:{
             [self.marignBut setTitle:@"已流拍" forState:UIControlStateNormal];
