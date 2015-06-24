@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -14,32 +14,20 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hOY-KL-ZyL" id="S7A-5Z-Mq0">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk0-ez-3xv">
-                        <rect key="frame" x="10" y="8" width="5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykr-Ro-v5m">
-                        <rect key="frame" x="10" y="30" width="5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ths-SW-49C">
-                        <rect key="frame" x="17" y="8" width="82" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ths-SW-49C">
+                        <rect key="frame" x="18" y="11" width="564" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87e-mj-HjQ">
-                        <rect key="frame" x="17" y="30" width="573" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="时间提醒" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87e-mj-HjQ">
+                        <rect key="frame" x="18" y="32" width="564" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWv-lP-vHm">
-                        <rect key="frame" x="500" y="75" width="70" height="30"/>
+                        <rect key="frame" x="500" y="68" width="70" height="30"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="4Yp-VN-iWn"/>
@@ -57,7 +45,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRW-i0-eTp">
-                        <rect key="frame" x="30" y="75" width="70" height="30"/>
+                        <rect key="frame" x="30" y="68" width="70" height="30"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="2yK-4o-h6X"/>
@@ -73,26 +61,21 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ths-SW-49C" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="topMargin" id="0lb-i8-1Ws"/>
-                    <constraint firstItem="aWv-lP-vHm" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="top" constant="75" id="2BE-iV-MOg"/>
-                    <constraint firstItem="dk0-ez-3xv" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="2" id="4tE-Sk-BU5"/>
-                    <constraint firstItem="QRW-i0-eTp" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="top" constant="75" id="4yD-P4-sN8"/>
+                    <constraint firstItem="ths-SW-49C" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="topMargin" constant="3" id="0lb-i8-1Ws"/>
+                    <constraint firstItem="87e-mj-HjQ" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="10" id="54k-sQ-DWg"/>
+                    <constraint firstItem="QRW-i0-eTp" firstAttribute="top" secondItem="aWv-lP-vHm" secondAttribute="top" id="BYl-70-tac"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="87e-mj-HjQ" secondAttribute="trailing" constant="10" id="Hy5-4g-pBR"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aWv-lP-vHm" secondAttribute="trailing" constant="22" id="S09-Kt-4cO"/>
+                    <constraint firstItem="QRW-i0-eTp" firstAttribute="top" secondItem="87e-mj-HjQ" secondAttribute="bottom" constant="20" id="UIR-Wv-HXh"/>
                     <constraint firstItem="QRW-i0-eTp" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="22" id="auS-go-m3Q"/>
-                    <constraint firstItem="87e-mj-HjQ" firstAttribute="leading" secondItem="ykr-Ro-v5m" secondAttribute="trailing" constant="2" id="bsy-Ac-XSQ"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="87e-mj-HjQ" secondAttribute="trailing" constant="2" id="cVq-Rr-gmd"/>
-                    <constraint firstItem="ykr-Ro-v5m" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="2" id="kMf-ff-Dvi"/>
-                    <constraint firstItem="ths-SW-49C" firstAttribute="leading" secondItem="dk0-ez-3xv" secondAttribute="trailing" constant="2" id="l7r-FX-jPc"/>
-                    <constraint firstItem="ykr-Ro-v5m" firstAttribute="top" secondItem="dk0-ez-3xv" secondAttribute="bottom" constant="6" id="mYV-Rd-2SL"/>
-                    <constraint firstItem="87e-mj-HjQ" firstAttribute="top" secondItem="ths-SW-49C" secondAttribute="bottom" constant="6" id="nIc-FA-ssZ"/>
-                    <constraint firstItem="dk0-ez-3xv" firstAttribute="top" secondItem="S7A-5Z-Mq0" secondAttribute="topMargin" id="r61-Kw-bkz"/>
+                    <constraint firstItem="ths-SW-49C" firstAttribute="leading" secondItem="S7A-5Z-Mq0" secondAttribute="leadingMargin" constant="10" id="lpp-2u-XUy"/>
+                    <constraint firstItem="87e-mj-HjQ" firstAttribute="top" secondItem="ths-SW-49C" secondAttribute="bottom" constant="5" id="nIc-FA-ssZ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ths-SW-49C" secondAttribute="trailing" constant="10" id="uLy-sc-39p"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="canStar" destination="dk0-ez-3xv" id="cZh-EY-TcW"/>
                 <outlet property="cancelTime" destination="ths-SW-49C" id="BfW-Z0-pz0"/>
                 <outlet property="cancellButton" destination="QRW-i0-eTp" id="Ugm-2m-UJO"/>
-                <outlet property="labStar" destination="ykr-Ro-v5m" id="ecj-KZ-EpO"/>
                 <outlet property="payButton" destination="aWv-lP-vHm" id="m1Q-n7-8nz"/>
                 <outlet property="redLabel" destination="87e-mj-HjQ" id="i6A-4M-sok"/>
             </connections>
