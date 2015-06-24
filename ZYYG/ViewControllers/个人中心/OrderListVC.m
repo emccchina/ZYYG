@@ -68,7 +68,6 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     self.segmentView.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     [self.segmentView addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     
-    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
     self.orderListTabelView.delegate = self;
     self.orderListTabelView.dataSource = self;
     [self addFootRefresh];
@@ -83,6 +82,11 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:pageNum];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,7 +116,7 @@ static NSString *orderBottomCell = @"OrderListBottomCell";
     if (0==segmentedControl.selectedSegmentIndex) {
         orderState=@"";
     }else{
-        orderState=[NSString stringWithFormat:@"%ld",segmentedControl.selectedSegmentIndex];
+        orderState=[NSString stringWithFormat:@"%ld",(long)segmentedControl.selectedSegmentIndex];
     }
     [orderArray removeAllObjects];
     [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
@@ -326,6 +330,7 @@ NSInteger soredArray2(id model1, id model2, void *context)
         }else{
             bottomCell.redLabel.text=[NSString stringWithFormat:@"提醒:请您在%@小时内完成支付,否则订单将自动取消,并扣除您的保证金!",ord.TimeSpan];
         }
+        [bottomCell.payButton setTitle:@"支付" forState:UIControlStateNormal];
         bottomCell.cancellButton.hidden=NO;
         bottomCell.payButton.hidden=NO;
         //创建状态 可支付  可取消
@@ -425,7 +430,7 @@ NSInteger soredArray2(id model1, id model2, void *context)
 }
 
 - (void)getMerchantID {
-    [self showIndicatorView:kNetworkConnecting];
+//    [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@GetUserInfo.ashx",kServerDomain];
@@ -445,7 +450,7 @@ NSInteger soredArray2(id model1, id model2, void *context)
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
-        [self requestFinished];
+//        [self requestFinished];
         [self showAlertView:kNetworkNotConnect];
     }];
     

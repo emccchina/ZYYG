@@ -179,10 +179,6 @@ static NSString *ODCell = @"OrderDetailCell";
 - (void)requestSubmitOrder
 {
     UserInfo *userInfo = [UserInfo shareUserInfo];
-    if (!userInfo.addressManager || userInfo.addressManager.defaultAddressIndex < 0) {
-        [self showAlertView:@"请输入地址!"];
-        return;
-    }
     if(!_orderModel.delivery){
         [self showAlertView:@"请选择配送方式!"];
         return;
@@ -241,9 +237,9 @@ static NSString *ODCell = @"OrderDetailCell";
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         submit = self.orderType ? YES : NO;
-        self.checkDelivery.hidden= !self.orderType;
+        self.checkDelivery.hidden= NO;//!self.orderType;
         [self.checkDelivery setTitle:@"取消订单" forState:UIControlStateNormal];
-        self.confirmDelivery.hidden=!self.orderType;
+        self.confirmDelivery.hidden=NO;//!self.orderType;
 //        if(submit){
 //        [self.confirmDelivery setTitle:@"确认订单" forState:UIControlStateNormal];
 //        }else{
