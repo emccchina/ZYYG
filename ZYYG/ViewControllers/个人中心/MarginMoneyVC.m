@@ -19,6 +19,7 @@
     NSInteger pageSize;
     NSInteger pageNum;
     BOOL                refreshFooter;//是否是上拉刷新
+    NSString        *totalMoney;//冻结自己总数
 }
 
 @end
@@ -84,6 +85,7 @@
         id result = [self parseResults:responseObject];
         if (result) {
             //            NSLog(@"%@",result);
+            totalMoney = result[@"Frozen"];
             NSMutableArray *marginList=result[@"DepositList"];
             if (!marginList ||[marginList isKindOfClass:[NSNull class]]|| marginList.count<1) {
                 [self showAlertView:@"无新数据!"];
@@ -96,6 +98,7 @@
                     [mar goodsModelFromMarginList:marginList[i]];
                     [marginArray addObject:mar];
                 }
+                
             }
             [self requestFinished];
             [self.marginTableView reloadData];
@@ -118,6 +121,16 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return marginArray.count;
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *money = [NSString stringWithFormat:@"冻结资金:￥%@", (totalMoney?:@"")];
+    return money;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
