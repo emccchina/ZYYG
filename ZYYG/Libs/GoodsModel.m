@@ -57,6 +57,8 @@
     self.CreateTime = [dict safeObjectForKey:@"CreateTime"];
     self.UpShelfTime = [dict safeObjectForKey:@"UpShelfTime"];
     self.Nstatus = [dict safeObjectForKey:@"Nstatus"];
+    self.auctionCode = [dict safeObjectForKey:@"AuctionCode"];
+    self.auctionName = [dict safeObjectForKey:@"AuctionName"];
     
 }
 
@@ -118,14 +120,14 @@
 {
     self.GoodsCode = [dict safeObjectForKey:@"GoodsCode"];
     self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
-    self.auctionName = [dict safeObjectForKey:@"ActionName"];
+    self.auctionName = [dict safeObjectForKey:@"AuctionName"];
     self.picURL = [dict safeObjectForKey:@"ImageUrl"];
     self.securityDeposit=[dict safeObjectForKey:@"SecurtyDeposit"];
     self.status = [dict safeObjectForKey:@"Status"];
     self.startTime = [dict safeObjectForKey:@"ReceiveTime"];
     self.endTime = [dict safeObjectForKey:@"RefundTime"];
     self.CreateTime = [dict safeObjectForKey:@"DealTime"];
-    self.auctionCode = [dict safeObjectForKey:@"ActionCode"];
+    self.auctionCode = [dict safeObjectForKey:@"AuctionCode"];
 }
 - (void)goodsModelFromRecordList:(NSDictionary*)dict
 {
@@ -133,7 +135,7 @@
     self.GoodsName = [dict safeObjectForKey:@"GoodsName"];
     self.ArtName = [dict safeObjectForKey:@"ArtName"];
     self.auctionCode =[dict safeObjectForKey:@"AuctionCode"];
-    self.auctionName = [dict safeObjectForKey:@"ActionName"];
+    self.auctionName = [dict safeObjectForKey:@"AuctionName"];
     self.picURL = [dict safeObjectForKey:@"ImageUrl"];
     self.securityDeposit=[dict safeObjectForKey:@"SecurtyDeposit"];
     self.startPrice =[dict safeObjectForKey:@"CurrentPrice"];

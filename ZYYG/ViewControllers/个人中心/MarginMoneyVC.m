@@ -9,6 +9,8 @@
 #import "MarginMoneyVC.h"
 #import "MarginMoneyCell.h"
 #import "GoodsModel.h"
+#import "ArtDetailVC.h"
+
 
 @interface MarginMoneyVC ()
 {
@@ -140,8 +142,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    GoodsModel *goods=marginArray[indexPath.row];
+    [self presentDetailVC:goods];
 }
 
+- (void)presentDetailVC:(GoodsModel*)info
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
+    UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
+        [detailVC setValue:@(2) forKey:@"type"];
+        [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+        [detailVC setValue:info.auctionCode forKey:@"auctionCode"];
+        [detailVC setValue:info.GoodsCode forKey:@"productID"];
+        detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
 /*
 #pragma mark - Navigation
 

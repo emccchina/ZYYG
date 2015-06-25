@@ -135,7 +135,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section==3) {
-        return manages.count;
+        return 0;
     }
     return 1;
 }
@@ -158,7 +158,7 @@
     }else if (section ==2) {
         return @"定制方法二:";
     }else if (section ==3) {
-        return @"销售经理人列表:";
+        return @"联系电话:4000255151";
     }
     return @"";
 }

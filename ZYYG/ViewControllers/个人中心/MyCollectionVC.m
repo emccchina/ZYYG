@@ -163,7 +163,7 @@
     cell.goodsName.text=goods.GoodsName;
     cell.Lab1.text=[NSString stringWithFormat:@"作者:%@",goods.ArtName];
         cell.Lab3.text=[NSString stringWithFormat:@"模式:%@",goods.SaleChannel];
-    cell.Lab4.text=[NSString stringWithFormat:@"状态:%@",goods.Nstatus];
+//    cell.Lab4.text=[NSString stringWithFormat:@"状态:%@",goods.Nstatus];
     return cell;
    
     
@@ -179,18 +179,18 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
-        BOOL hidden = NO;
-        if ([info.SaleChannel isEqualToString:@"私人定制"]) {
-            hidden = YES;
-        }else if ([info.SaleChannel isEqualToString:@"私人洽购"]){
-            [detailVC setValue:@(1) forKey:@"type"];
-        }
-        [detailVC setValue:@(hidden) forKey:@"hiddenBottom"];
-    }
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
-        [detailVC setValue:info.GoodsCode forKey:@"productID"];
-    }
+     if ([info.SaleChannel isEqualToString:@"拍卖"]) {
+         [detailVC setValue:@(2) forKey:@"type"];
+         [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+     }else if([info.SaleChannel isEqualToString:@"私人洽购"]){
+         [detailVC setValue:@(1) forKey:@"type"];
+         [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+     }else{
+         [detailVC setValue:@(0) forKey:@"type"];
+         [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+     }
+    [detailVC setValue:info.auctionCode forKey:@"auctionCode"];
+    [detailVC setValue:info.GoodsCode forKey:@"productID"];
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

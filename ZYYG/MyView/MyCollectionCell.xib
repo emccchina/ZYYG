@@ -22,26 +22,20 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4o-Pa-B0r" userLabel="名称">
-                        <rect key="frame" x="128" y="13" width="34" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="128" y="23" width="36" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXw-4X-e9b" userLabel="作者">
-                        <rect key="frame" x="128" y="39" width="26" height="16"/>
+                        <rect key="frame" x="128" y="55" width="26" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模式" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZJ-58-Vmp" userLabel="模式:">
-                        <rect key="frame" x="128" y="63" width="26" height="16"/>
+                        <rect key="frame" x="128" y="81" width="26" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TxX-52-SxG" userLabel="状态">
-                        <rect key="frame" x="128" y="87" width="26" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="1" green="0.1836497742" blue="0.23803602600000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -49,19 +43,16 @@
                     <constraint firstItem="d4o-Pa-B0r" firstAttribute="leading" secondItem="ldu-x8-wWE" secondAttribute="trailing" constant="10" id="2D3-v8-9C3"/>
                     <constraint firstItem="ldu-x8-wWE" firstAttribute="leading" secondItem="jfz-3v-acF" secondAttribute="leadingMargin" constant="10" id="NbY-ez-k5h"/>
                     <constraint firstItem="RZJ-58-Vmp" firstAttribute="leading" secondItem="ldu-x8-wWE" secondAttribute="trailing" constant="10" id="eXe-j1-F2p"/>
-                    <constraint firstItem="aXw-4X-e9b" firstAttribute="top" secondItem="d4o-Pa-B0r" secondAttribute="bottom" constant="5" id="exy-4k-hFa"/>
+                    <constraint firstItem="aXw-4X-e9b" firstAttribute="top" secondItem="d4o-Pa-B0r" secondAttribute="bottom" constant="10" id="exy-4k-hFa"/>
                     <constraint firstItem="ldu-x8-wWE" firstAttribute="top" secondItem="jfz-3v-acF" secondAttribute="topMargin" constant="5" id="lSX-el-lkR"/>
                     <constraint firstItem="aXw-4X-e9b" firstAttribute="leading" secondItem="ldu-x8-wWE" secondAttribute="trailing" constant="10" id="nSo-OP-bNy"/>
-                    <constraint firstItem="RZJ-58-Vmp" firstAttribute="top" secondItem="aXw-4X-e9b" secondAttribute="bottom" constant="8" id="pXv-so-Px2"/>
-                    <constraint firstItem="TxX-52-SxG" firstAttribute="top" secondItem="RZJ-58-Vmp" secondAttribute="bottom" constant="8" id="umQ-Yl-4Kh"/>
-                    <constraint firstItem="TxX-52-SxG" firstAttribute="leading" secondItem="ldu-x8-wWE" secondAttribute="trailing" constant="10" id="vOn-v0-5DY"/>
-                    <constraint firstItem="d4o-Pa-B0r" firstAttribute="top" secondItem="jfz-3v-acF" secondAttribute="topMargin" constant="5" id="vxP-hu-cnY"/>
+                    <constraint firstItem="RZJ-58-Vmp" firstAttribute="top" secondItem="aXw-4X-e9b" secondAttribute="bottom" constant="10" id="pXv-so-Px2"/>
+                    <constraint firstItem="d4o-Pa-B0r" firstAttribute="top" secondItem="jfz-3v-acF" secondAttribute="topMargin" constant="15" id="vxP-hu-cnY"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="Lab1" destination="aXw-4X-e9b" id="7FP-G0-6oh"/>
                 <outlet property="Lab3" destination="RZJ-58-Vmp" id="Zih-aC-xKW"/>
-                <outlet property="Lab4" destination="TxX-52-SxG" id="qd8-dO-rG0"/>
                 <outlet property="goodsImage" destination="ldu-x8-wWE" id="yo2-CM-wSy"/>
                 <outlet property="goodsName" destination="d4o-Pa-B0r" id="foT-Ud-bee"/>
             </connections>
