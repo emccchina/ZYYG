@@ -179,20 +179,31 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
-     if ([info.SaleChannel isEqualToString:@"拍卖"]) {
+     if ([info.SaleChannel isEqualToString:@"拍卖"]||[info.SaleChannel isEqualToString:@"线上竞价"]) {
          [detailVC setValue:@(2) forKey:@"type"];
          [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+         [detailVC setValue:info.auctionCode forKey:@"auctionCode"];
+         [detailVC setValue:info.GoodsCode forKey:@"productID"];
+         detailVC.hidesBottomBarWhenPushed = YES;
+         [self.navigationController pushViewController:detailVC animated:YES];
      }else if([info.SaleChannel isEqualToString:@"私人洽购"]){
          [detailVC setValue:@(1) forKey:@"type"];
          [detailVC setValue:@(0) forKey:@"hiddenBottom"];
-     }else{
+         [detailVC setValue:info.auctionCode forKey:@"auctionCode"];
+         [detailVC setValue:info.GoodsCode forKey:@"productID"];
+         detailVC.hidesBottomBarWhenPushed = YES;
+         [self.navigationController pushViewController:detailVC animated:YES];
+     }else if([info.SaleChannel isEqualToString:@"平价交易"]){
          [detailVC setValue:@(0) forKey:@"type"];
          [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+         [detailVC setValue:info.auctionCode forKey:@"auctionCode"];
+         [detailVC setValue:info.GoodsCode forKey:@"productID"];
+         detailVC.hidesBottomBarWhenPushed = YES;
+         [self.navigationController pushViewController:detailVC animated:YES];
+     }else{
+         [self showAlertView:@"手机APP暂不支持,对该类型数据的跳转!"];
      }
-    [detailVC setValue:info.auctionCode forKey:@"auctionCode"];
-    [detailVC setValue:info.GoodsCode forKey:@"productID"];
-    detailVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
