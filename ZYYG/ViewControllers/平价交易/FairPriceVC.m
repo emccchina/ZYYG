@@ -15,9 +15,10 @@
 #import "GoodsModel.h"
 #import "FMDatabase.h"
 #import "SearchFrameVC.h"
-
+#import <StoreKit/StoreKit.h>
+#import "AppDelegate.h"
 @interface FairPriceVC()
-<GoodsShowCellDelegate, UIActionSheetDelegate>
+<GoodsShowCellDelegate, UIActionSheetDelegate, SKStoreProductViewControllerDelegate>
 {
     UIImage         *selectedImage;
 //    BOOL    _refreshDirection;//0下拉   1上拉
@@ -50,62 +51,11 @@
     goods = [[NSMutableArray alloc] init];
     [self addheadRefresh];
     [self requestForHotSearch];
+    [self requestForVersion];
 //    [self writeArr];
 }
 
-//- (void)writeArr
-//{
-//    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString *dbPath   = [docsPath stringByAppendingPathComponent:@"adress.db"];
-//    FMDatabase *db     = [FMDatabase databaseWithPath:dbPath];
-//    [db open];
-////    BOOL success = [db open];
-//    NSString *sql = [NSString stringWithFormat:@"create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text);"
-//                     "create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text, %@_zipCode text, %@_id text);"
-//                     "create table %@ (id integer primary key autoincrement, %@_id integer, %@_name text, %@_id text);"
-//                     , kProvinceAdress, kProvinceAdress, kProvinceAdress, kCityAdress, kCityAdress,kCityAdress, kCityAdress, kProvinceAdress, kTownAdress, kTownAdress, kTownAdress, kCityAdress];
-//    BOOL success = [db executeStatements:sql];
-//    
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"erp_province_code" ofType:@"json"];
-//    NSString *s = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-//    id ss = [NSJSONSerialization JSONObjectWithData:[s dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-//    NSArray *provinces = ss[@"RECORDS"];
-//    
-//    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"erp_city_code" ofType:@"json"];
-//    NSString *s1 = [NSString stringWithContentsOfFile:path1 encoding:NSUTF8StringEncoding error:nil];
-//    id ss1 = [NSJSONSerialization JSONObjectWithData:[s1 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-//    NSArray *provinces1 = ss1[@"RECORDS"];
-//    
-//    NSString *path2 = [[NSBundle mainBundle] pathForResource:@"erp_district_code" ofType:@"json"];
-//    NSString *s2 = [NSString stringWithContentsOfFile:path2 encoding:NSUTF8StringEncoding error:nil];
-//    id ss2 = [NSJSONSerialization JSONObjectWithData:[s2 dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-//    NSArray *provinces2 = ss2[@"RECORDS"];
-//    
-//    if (success) {
-//        int i = 0;
-//        for (NSDictionary *dict in provinces) {
-//            
-//            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name) values ('%d', '%@');", kProvinceAdress, kProvinceAdress, kProvinceAdress, [dict[@"PROVINCE_ID"] integerValue], dict[@"PROVINCE_NAME"]];
-//            [db executeStatements:string withResultBlock:^int(NSDictionary *resultsDictionary) {
-//                NSLog(@"%d", [resultsDictionary[@"count"] integerValue]);
-//                return NO;
-//            }];
-//        }
-//       
-//        for (NSDictionary *dict in provinces1) {
-//            i++;
-//            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name, %@_zipCode, %@_id) values ('%d', '%@', '%@', '%d');", kCityAdress, kCityAdress, kCityAdress, kCityAdress,kProvinceAdress, [dict[@"CITY_ID"] integerValue], dict[@"CITY_NAME"], dict[@"ZIPCODE"], [dict[@"PROVINCE_ID"] integerValue]];
-//            [db executeStatements:string];
-//        }
-//        
-//        for (NSDictionary *dict in provinces2) {
-//            NSString *string = [NSString stringWithFormat:@"insert into %@ (%@_id, %@_name, %@_id) values ('%d', '%@', '%d');", kTownAdress, kTownAdress, kTownAdress, kCityAdress, [dict[@"DISTRICT_ID"] integerValue], dict[@"DISTRICT_NAME"], [dict[@"CITY_ID"] integerValue]];
-//            [db executeStatements:string];
-//        }
-//         NSLog(@"%ld", (long)i);
-//    }
-//    
-//}
+
 
 - (void)viewDidLayoutSubviews
 {
@@ -138,6 +88,55 @@
 {
     [self dismissIndicatorView];
     [self.dataTB headerEndRefreshingWithResult:JHRefreshResultSuccess];
+}
+- (BOOL)compareVersions:(NSDictionary*)dict
+{
+    NSArray *infoArray = [dict objectForKey:@"results"];
+    if (infoArray.count) {
+        NSDictionary *releaseInfo = [infoArray objectAtIndex:0];
+        NSString *latestVersion = [releaseInfo objectForKey:@"version"];
+        
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        
+        NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+
+        NSLog(@"%@,%@，，，，，%@,,, %f,,, %f", appVersion, latestVersion, infoDic, [appVersion floatValue],[latestVersion floatValue]);
+        
+        if ([appVersion floatValue] < [latestVersion floatValue]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+- (void)requestForVersion
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *url = APP_URL;
+    NSLog(@"url %@", url);
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"request is %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        id result = [self parseResults:responseObject];
+        if (result) {
+            if ([self compareVersions:result]) {
+                [self showAlertView:@"有新版本,请更新"];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Utities errorPrint:error vc:self];
+    }];
+}
+
+- (void)doAlertView
+{
+    [self evaluate];
+    exit(0);
+}
+
+- (void)evaluate{
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/zhong-yi-yi-gou/id952611536?l=zh&ls=1&mt=8"]];
+    
 }
 
 - (void)requestGoods:(NSInteger)number

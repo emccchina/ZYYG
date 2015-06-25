@@ -19,8 +19,7 @@
 @end
 
 @implementation SettingsVC
-#define kAppID  @"952611536"
-#define APP_URL @"http://itunes.apple.com/lookup?id="kAppID
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
