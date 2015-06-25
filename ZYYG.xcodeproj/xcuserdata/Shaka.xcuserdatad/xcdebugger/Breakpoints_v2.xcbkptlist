@@ -451,5 +451,133 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZYYG/ViewControllers/&#x8d2d;&#x7269;&#x8f66;/ShopingCartVC.m"
+            timestampString = "456896608.573042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "-selectedGoodsButPressed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZYYG/ViewControllers/&#x8d2d;&#x7269;&#x8f66;/ShopingCartVC.m"
+            timestampString = "456896358.969745"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-requestDeleteCart"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ShopingCartVC requestDeleteCart]"
+                  moduleName = "ZYYG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Shaka/Pictures/ZYYG/ZYYG/ViewControllers/%E8%B4%AD%E7%89%A9%E8%BD%A6/ShopingCartVC.m"
+                  timestampString = "456896359.023784"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "1022">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__34-[ShopingCartVC requestDeleteCart]_block_invoke"
+                  moduleName = "ZYYG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Shaka/Pictures/ZYYG/ZYYG/ViewControllers/%E8%B4%AD%E7%89%A9%E8%BD%A6/ShopingCartVC.m"
+                  timestampString = "456896359.023908"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "82">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZYYG/ViewControllers/&#x8d2d;&#x7269;&#x8f66;/ShopingCartVC.m"
+            timestampString = "456896608.573042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZYYG/ViewControllers/&#x8d2d;&#x7269;&#x8f66;/ShopingCartVC.m"
+            timestampString = "456896608.573042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "-requestForCheckCart"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ShopingCartVC requestForCheckCart]"
+                  moduleName = "ZYYG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Shaka/Pictures/ZYYG/ZYYG/ViewControllers/%E8%B4%AD%E7%89%A9%E8%BD%A6/ShopingCartVC.m"
+                  timestampString = "456896844.960977"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "252"
+                  endingLineNumber = "252"
+                  offsetFromSymbolStart = "914">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__36-[ShopingCartVC requestForCheckCart]_block_invoke"
+                  moduleName = "ZYYG"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Shaka/Pictures/ZYYG/ZYYG/ViewControllers/%E8%B4%AD%E7%89%A9%E8%BD%A6/ShopingCartVC.m"
+                  timestampString = "456896844.961097"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "252"
+                  endingLineNumber = "252"
+                  offsetFromSymbolStart = "82">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

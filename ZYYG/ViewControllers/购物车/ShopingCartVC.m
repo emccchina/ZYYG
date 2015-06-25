@@ -160,25 +160,42 @@ static NSString *cartCell = @"CartCell";
         
     }];
 }
-
+- (NSString*)getGoodsCodes
+{
+    NSMutableString *productString = [NSMutableString string];
+    NSArray *selectKey = [_selectDict allKeys];
+    NSMutableArray *goodsCodes = [NSMutableArray array];
+    for (NSNumber *number in selectKey) {
+        if (![_selectDict[number] integerValue]) {
+            continue;
+        }
+        GoodsModel*model = _shopCart[[number integerValue]];
+        [goodsCodes addObject:model.GoodsCode];
+    }
+    NSLog(@"product string %@", productString);
+    if (!goodsCodes.count) {
+        return nil;
+    }
+    for (NSString *code in goodsCodes) {
+        if ([code isEqual:[goodsCodes lastObject]]) {
+            [productString appendString:[NSString stringWithFormat:@"%@", code]];
+        }else{
+            [productString appendString:[NSString stringWithFormat:@"%@,", code]];
+        }
+    }
+    return productString;
+}
 - (void)requestDeleteCart
 {
     if (!_selectDict.count) {
         [self showAlertView:@"请选择"];
         return;
     }
-    NSMutableString *productString = [NSMutableString string];
-    NSArray *selectKey = [_selectDict allKeys];
-    for (NSNumber *number in selectKey) {
-         GoodsModel*model = _shopCart[[number integerValue]];
-        if ([number isEqual:[selectKey lastObject]]) {
-            [productString appendString:[NSString stringWithFormat:@"%@", model.GoodsCode]];
-        }else{
-            [productString appendString:[NSString stringWithFormat:@"%@,", model.GoodsCode]];
-        }
+    NSString *productString = [self getGoodsCodes];
+    if (!productString) {
+        [self showAlertView:@"请选择艺术品"];
+        return;
     }
-    NSLog(@"product string %@", productString);
-    
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -205,6 +222,9 @@ static NSString *cartCell = @"CartCell";
     NSArray *selectKey = [_selectDict allKeys];
     NSMutableArray *selectArray = [NSMutableArray array];
     for (NSNumber *number in selectKey) {
+        if ([_selectDict[number] integerValue]) {
+            continue;
+        }
         [selectArray addObject:(_shopCart[[number integerValue]])];
     }
     
@@ -218,22 +238,17 @@ static NSString *cartCell = @"CartCell";
 
 - (void)requestForCheckCart
 {
+    NSString *productString = [self getGoodsCodes];
+    if (!productString) {
+        [self showAlertView:@"请选择艺术品"];
+        return;
+    }
     [self showIndicatorView:kNetworkConnecting];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *url = [NSString stringWithFormat:@"%@CheckCart.ashx",kServerDomain];
     NSLog(@"url %@", url);
-    NSMutableString* products = [NSMutableString string];
-    NSArray *keys = [_selectDict allKeys];
-    for (NSNumber *number in keys) {
-        GoodsModel *model = _shopCart[[number integerValue]];
-        if ([number isEqual:[keys lastObject]]) {
-            [products appendString:[NSString stringWithFormat:@"%@", model.GoodsCode]];
-        }else{
-            [products appendString:[NSString stringWithFormat:@"%@,", model.GoodsCode]];
-        }
-    }
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",products,@"SelectGoods", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UserInfo shareUserInfo].userKey, @"key",productString,@"SelectGoods", nil];
     [manager POST:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"request is  %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
         [self requestFinished];
