@@ -411,8 +411,8 @@ NSInteger soredArray2(id model1, id model2, void *context)
         if (result) {
             NSString *message = [@"0" isEqual:result[@"errno"]] ? @"确认收货成功!" : @"确认收货失败!";
             [self showAlertView:message];
-            [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
         }
+        [self requestOrderList:_orderType ordState:orderState ordSize:pageSize ordNum:1];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Utities errorPrint:error vc:self];
         [self requestFinished];
