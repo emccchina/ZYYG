@@ -350,16 +350,15 @@ static NSString *cartCell = @"CartCell";
     }
 }
 
-- (void)presentDetailVC:(id)info
+- (void)presentDetailVC:(GoodsModel *)info
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"FairPriceStoryboard" bundle:nil];
     UIViewController* detailVC = [storyboard instantiateViewControllerWithIdentifier:@"ArtDetailVC"];
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setHiddenBottom:)]) {
-        [detailVC setValue:@(1) forKey:@"hiddenBottom"];
-    }
-    if ([(ArtDetailVC*)detailVC respondsToSelector:@selector(setProductID:)]) {
-        [detailVC setValue:selectProductID forKey:@"productID"];
-    }
+    
+    [detailVC setValue:@(0) forKey:@"type"];
+    [detailVC setValue:@(0) forKey:@"hiddenBottom"];
+    [detailVC setValue:info.auctionCode forKey:@"auctionCode"];
+    [detailVC setValue:info.GoodsCode forKey:@"productID"];
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
@@ -429,7 +428,7 @@ static NSString *cartCell = @"CartCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     GoodsModel*model = _shopCart[indexPath.row];
     selectProductID = model.GoodsCode;
-    [self presentDetailVC:nil];
+    [self presentDetailVC:model];
     
 }
 
