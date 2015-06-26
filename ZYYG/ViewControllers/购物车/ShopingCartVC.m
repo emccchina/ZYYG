@@ -223,9 +223,8 @@ static NSString *cartCell = @"CartCell";
     NSMutableArray *selectArray = [NSMutableArray array];
     for (NSNumber *number in selectKey) {
         if ([_selectDict[number] integerValue]) {
-            continue;
+            [selectArray addObject:(_shopCart[[number integerValue]])];
         }
-        [selectArray addObject:(_shopCart[[number integerValue]])];
     }
     
     [_shopCart removeObjectsInArray:selectArray];
