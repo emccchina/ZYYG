@@ -216,13 +216,14 @@ static NSString *cartCell = @"CartCell";
 
 - (void)doAlertViewTwo
 {
-    CGFloat money = [_resultDict[@"PayMoney"] floatValue];
-    NSString *meneyString = [NSString stringWithFormat:@"%ld",(long)(money*100)];//换成分
+    NSDecimalNumber *money = [NSDecimalNumber decimalNumberWithString:_resultDict[@"PayMoney"]];
+    NSDecimalNumber *hun = [NSDecimalNumber decimalNumberWithString:@"100"];
+    NSString *moneyString = [NSString stringWithFormat:@"%@",[money decimalNumberByMultiplyingBy:hun]];//换成分
     NSMutableString *names = [NSMutableString string];
     for (NSString *name in _resultDict[@"GoodsNames"]) {
         [names appendString:[NSString stringWithFormat:@"%@,",name]];
     }
-    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:meneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:_resultDict[@"CreateTime"]] viewController:self delegate:self mode:kPayMode];
+    [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"OrderCode"] productName:names money:moneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:_resultDict[@"CreateTime"]] viewController:self delegate:self mode:kPayMode];
 }
 
 - (IBAction)submitOrder:(id)sender {

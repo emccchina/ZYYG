@@ -385,8 +385,10 @@ NSInteger soredArray2(id model1, id model2, void *context)
             for (GoodsModel *name in order.Goods) {
                 [names appendString:[NSString stringWithFormat:@"%@,",name.GoodsName]];
             }
-            NSString *string = [NSString stringWithFormat:@"%ld", (long)([order.OrderMoney floatValue]*100)];
-            [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:string type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:order.CreateTime] viewController:self delegate:self mode:kPayMode];
+            NSDecimalNumber *money = [NSDecimalNumber decimalNumberWithString:order.OrderMoney];
+            NSDecimalNumber *hun = [NSDecimalNumber decimalNumberWithString:@"100"];
+            NSString *moneyString = [NSString stringWithFormat:@"%@",[money decimalNumberByMultiplyingBy:hun]];//换成分
+            [APay startPay:[PaaCreater createrWithOrderNo:order.OrderCode productName:names money:moneyString type:1 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:order.CreateTime] viewController:self delegate:self mode:kPayMode];
         }
     }else if(30 == order.state){
         NSLog(@"确认收货确认收货确认收货");

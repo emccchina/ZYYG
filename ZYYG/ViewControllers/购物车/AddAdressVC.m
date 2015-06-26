@@ -153,7 +153,7 @@
 - (void)requestUploadAdress
 {
     if (![self continueRequest]) {
-        [self showAlertView:@"请输入信息"];
+        [self showAlertView:@"请输入完整信息"];
         return;
     }
     

@@ -91,8 +91,9 @@
         if (result) {
             if(![result[@"errno"] integerValue]){
                 _resultDict=result;
-                NSInteger money = (NSInteger)([_resultDict[@"SecurtyDeposit"] floatValue]*100);
-                NSString *moneyString = [NSString stringWithFormat:@"%ld",(long)money];
+                NSDecimalNumber *money = [NSDecimalNumber decimalNumberWithString:_resultDict[@"SecurtyDeposit"] ];
+                NSDecimalNumber *hun = [NSDecimalNumber decimalNumberWithString:@"100"];
+                NSString *moneyString = [NSString stringWithFormat:@"%@",[money decimalNumberByMultiplyingBy:hun]];//换成分
                 [APay startPay:[PaaCreater createrWithOrderNo:_resultDict[@"SecurtyDepositCode"] productName:_resultDict[@"GoodsName"] money:moneyString type:2 shopNum:_MerchantID[@"MerchantID"] key:_MerchantID[@"PayKey"] time:_resultDict[@"CreateTime"]] viewController:self delegate:self mode:kPayMode];
             }
            
