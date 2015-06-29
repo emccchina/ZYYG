@@ -34,7 +34,7 @@
     [self.inputTF resignFirstResponder];
     if ([self.inputTF.text doubleValue] < _minMoney+self.appendMoney) {
         if (self.showalert) {
-            self.showalert(@"出价有误，您的竞拍金额不能小于当前价+加价幅度!");
+            self.showalert(@"出价有误，您的竞拍金额不能小于(当前价+加价幅度)!");
         }
     }
 }
