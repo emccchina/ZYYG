@@ -227,9 +227,9 @@ static NSString *ODCell = @"OrderDetailCell";
 {
     submit = NO;
     //订单状态 20 支付 30已发货 40已签收 50已取消 -1删除 10审核 0创建
-    if (!self.orderType) {
-        self.orderMoney.text=[NSString stringWithFormat:@"￥%@",ord.PayMoney];
-    }else{
+//    if (!self.orderType) {
+//        self.orderMoney.text=[NSString stringWithFormat:@"￥%@",ord.PayMoney];
+//    }else{
         CGFloat price = 0;
         for (GoodsModel *model in order.Goods) {
             price += model.AppendPrice;
@@ -238,7 +238,7 @@ static NSString *ODCell = @"OrderDetailCell";
         _orderModel.totalPrice = price;
         [_orderModel calculatePrice];
         self.orderMoney.text = [NSString stringWithFormat:@"%.2f", _orderModel.dealPrice];
-    }
+//    }
     if (0 == ord.state || 10 == ord.state) {
         //创建状态 可支付  可取消
         submit = YES;//self.orderType ? YES : NO;
