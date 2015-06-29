@@ -54,7 +54,7 @@ lineT.alpha = 0.3;\
 #define kAESKey                             @"emcc!@#$%^!@#$%^"
 
 #ifdef DEBUG
-#define kPayMode                             @"01"
+#define kPayMode                             @"00"
 #else
-#define kPayMode                             @"01"
+#define kPayMode                             @"00"
 #endif
