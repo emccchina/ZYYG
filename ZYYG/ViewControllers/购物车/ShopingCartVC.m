@@ -68,6 +68,13 @@ static NSString *cartCell = @"CartCell";
 {
     [super viewDidAppear:animated];
     [self requestshopCart];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
 - (void)doRightItem:(UIBarButtonItem*)item

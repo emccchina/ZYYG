@@ -25,6 +25,7 @@
     NSMutableArray  *images;//图片
     NSMutableArray  *goods;//商品
     NSString        *selectedProductID;//选择的id
+    BOOL            turnToAppStroe;
 }
 @end
 
@@ -42,6 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    turnToAppStroe = NO;
     self.dataTB.delegate = self;
     self.dataTB.dataSource = self;
     [self.dataTB registerNib:[UINib nibWithNibName:@"ImageScrollCell" bundle:nil] forCellReuseIdentifier:@"scrollCell"];
@@ -63,7 +65,17 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
 
 - (void)addheadRefresh
 {
@@ -119,6 +131,7 @@
         id result = [self parseResults:responseObject];
         if (result) {
             if ([self compareVersions:result]) {
+                turnToAppStroe = YES;
                 [self showAlertView:@"有新版本,请更新"];
             }
         }
@@ -129,6 +142,9 @@
 
 - (void)doAlertView
 {
+    if (!turnToAppStroe) {
+        return;
+    }
     [self evaluate];
     exit(0);
 }
@@ -190,11 +206,6 @@
     [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIViewController *vc = segue.destinationViewController;

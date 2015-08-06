@@ -55,6 +55,12 @@ static NSString *listCell = @"listCell";
     [self.PersonTableView reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
 //获取用户信息
 - (void)requestPersonCenter:(NSInteger)number
 {
