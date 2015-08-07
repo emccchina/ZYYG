@@ -146,6 +146,7 @@
         return;
     }
     [self evaluate];
+    turnToAppStroe = NO;
     exit(0);
 }
 
